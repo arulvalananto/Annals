@@ -1,0 +1,181 @@
+.signin {
+    display: flex;
+
+    &__left {
+        flex: 0.4;
+        background: #010a24;
+        background-image: url("../../assets/signin__cover.jpg");
+        background-position: top;
+        background-size: cover;
+        object-fit: contain;
+        display: flex;
+        height: 100vh;
+
+        @media (max-width: 1000px) {
+            display: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: #010a24;
+            align-self: flex-start;
+            padding: 1.5rem;
+
+            .signin__leftHeader {
+                padding: 0.3rem 0.6rem;
+                border: 4px solid #010a24;
+                font-weight: bold;
+                font-size: 18px;
+            }
+        }
+    }
+    &__right {
+        flex: 0.6;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+
+        @media (max-width: 1000px) {
+            flex: 1;
+        }
+
+        .signin__rightHeader {
+            display: flex;
+            align-self: flex-end;
+            padding: 1.5rem;
+            align-items: center;
+
+            p {
+                font-weight: 500;
+            }
+            .signin__rightHeaderButton {
+                border: 1px solid black;
+                outline: none;
+                font-size: 16px;
+                font-weight: 600;
+                position: relative;
+                padding: 0.4rem 0.8rem;
+                transition: padding 0.2ms ease-in;
+                box-shadow: 5px 5px 0px 0px #010a24;
+                margin-left: 1rem;
+                cursor: pointer;
+                color: #010a24;
+
+                &:active {
+                    box-shadow: 1px 1px 0px 0px #010a24;
+                    transform: translateY(2px);
+                }
+            }
+        }
+        .signin__rightFooter {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 5rem;
+
+            &Title {
+                font-size: 35px;
+                text-transform: uppercase;
+            }
+            &Form {
+                margin-top: 3rem;
+                width: 350px;
+                max-width: 300px;
+
+                .signup__rightFooterInput {
+                    font-size: 18px;
+                    padding: 0.7rem 1rem;
+                    width: 100%;
+                    background: #fafafa;
+                    transition: all 0.5ms ease-in;
+                }
+            }
+
+            .spinner {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                margin: 2rem 0;
+            }
+
+            .signup__rightFooterButton {
+                width: 100%;
+                background: #010a24;
+                color: #fff;
+                padding: 1rem;
+                font-size: 16px;
+                font-weight: 600;
+                margin-top: 1rem;
+                cursor: pointer;
+
+                &:last-child {
+                    margin-top: 0.2rem;
+                }
+            }
+            .signup__rightFooterButton:focus,
+            .signup__rightFooterButton:active,
+            .signup__rightFooterButton:hover {
+                background: #010614;
+            }
+        }
+        a {
+            text-decoration: none;
+
+            .signin__rightFooterForgotPassword {
+                width: 100%;
+                color: #010a24;
+                text-align: right;
+                margin-bottom: 0.5rem;
+                font-weight: 600;
+            }
+            .signin__rightFooterForgotPassword:hover {
+                text-decoration: underline;
+            }
+        }
+        .signin__splitter {
+            margin: 2rem 0;
+            position: relative;
+            background: #fff;
+            padding: 0 0.6rem;
+            font-weight: 600;
+
+            &::before {
+                content: "";
+                width: 300px;
+                color: red;
+                position: absolute;
+                left: -50%;
+                top: 55%;
+                transform: translateX(-10%);
+                z-index: -1;
+                border-bottom: 1px solid #dedede;
+            }
+        }
+        .signin__rightFooterButtonContainer {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100px;
+
+            .signin__facebookButton,
+            .signin__googleButton {
+                border: none;
+                background: #ffff;
+                font-size: 20px;
+                border-radius: 50%;
+                padding: 0.5rem;
+                padding-bottom: 0.2rem;
+                cursor: pointer;
+            }
+            .signin__googleButton {
+                border: 1px solid black;
+            }
+            .signin__facebookButton {
+                background: #3c5a9a;
+                color: #fff;
+            }
+        }
+    }
+}

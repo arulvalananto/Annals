@@ -1,0 +1,84 @@
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const { promisify } = require("util");
+
+const AppError = require("../utils/AppError");
+const User = require("../models/User");
+
+const signToken = require("../utils/jwt");
+
+exports.register = async (req, res, next) => {
+    try {
+        const { fullname, email, password } = req.body;
+
+        if (!password) {
+            return next(new AppError("Password is Required", 400));
+        }
+
+        const formattedPassword = await bcrypt.hash(password, 12);
+
+        const user = User({
+            fullname,
+            email,
+            password: formattedPassword,
+        });
+        await user.save();
+
+        user.password = undefined;
+
+        const token = signToken(user.id);
+
+        if (!token) {
+            return next(
+                new AppError(
+                    "Something wrong with token.. Please try again",
+                    400
+                )
+            );
+        }
+        req.session.token = token;
+
+        res.status(201).json({
+            message: "Success",
+            loggedIn: true,
+        });
+    } catch (e) {
+        console.log(e);
+        return next(new AppError(e.message, 400));
+    }
+};
+
+exports.getCurrentUser = async (req, res, next) => {
+    if (req.session.token) {
+        const decoded = await promisify(jwt.verify)(
+            req.session.token,
+            process.env.jWT_SECRET
+        );
+
+        const currentUser = await User.findById(decoded.id);
+        if (!currentUser) {
+            return next(
+                new AppError(
+                    "The user belonging to this token does no longer exist.",
+                    401
+                )
+            );
+        }
+
+        req.session.user = currentUser;
+
+        res.send({ loggedIn: true, user: req.session.user });
+    } else {
+        res.send({ loggedIn: false });
+    }
+};
+
+exports.logout = async (req, res) => {
+    if (req.session) {
+        req.session.destroy();
+    }
+
+    res.clearCookie("token");
+
+    res.redirect("http://localhost:3000/signin");
+};
