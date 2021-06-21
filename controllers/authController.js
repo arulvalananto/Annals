@@ -49,10 +49,11 @@ exports.register = async (req, res, next) => {
 };
 
 exports.getCurrentUser = async (req, res, next) => {
-    if (req.session.token) {
+    try {
+        if (req.session.token) {
         const decoded = await promisify(jwt.verify)(
             req.session.token,
-            process.env.jWT_SECRET
+            process.env.JWT_SECRET
         );
 
         const currentUser = await User.findById(decoded.id);
@@ -71,6 +72,11 @@ exports.getCurrentUser = async (req, res, next) => {
     } else {
         res.send({ loggedIn: false });
     }
+    } catch (err) {
+        console.log("Error Occurred:", err.message)
+        console.log("Error Stack", err.stack)
+    }
+    
 };
 
 exports.logout = async (req, res) => {

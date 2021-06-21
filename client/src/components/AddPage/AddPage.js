@@ -11,7 +11,7 @@ import Button from "../Button/Button";
 
 import axios from "../../axios";
 
-import { fetchUser } from "../../features/authSlice";
+import { fetchUser } from "../../redux/reducers/authSlice";
 import { useDispatch } from "react-redux";
 
 const date = new Date(Date.now());
@@ -21,63 +21,65 @@ const day = date.getDate();
 const year = date.getFullYear();
 
 const AddPage = () => {
-    const history = useHistory();
-    const dispatch = useDispatch();
+  const history = useHistory();
+  const dispatch = useDispatch();
 
-    const [content, setContent] = useState("");
+  const [content, setContent] = useState("");
 
-    const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-    const changeHandler = (val) => {
-        setContent(val);
-    };
+  const changeHandler = (val) => {
+    setContent(val);
+  };
 
-    const handleSubmit = async () => {
-        setLoading(true);
-        try {
-            const response = await axios.post("/api/v1/add-timeline", {
-                content,
-            });
+  const handleSubmit = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.post("/api/v1/add-timeline", {
+        content,
+      });
 
-            if (response.data) {
-                dispatch(fetchUser(response.data));
-            }
-            setLoading(false);
-            history.push("/diary");
-        } catch (err) {
-            if (err.response) {
-                alert(err.response?.data.message);
-                history.push("/diary");
-            }
-            setLoading(false);
-        }
-    };
+      if (response.data) {
+        dispatch(fetchUser(response.data));
+      }
+      setLoading(false);
+      history.push("/diary");
+    } catch (err) {
+      if (err.response) {
+        alert(err.response?.data.message);
+        history.push("/diary");
+      }
+      setLoading(false);
+    }
+  };
 
-    return (
-        <div className="addPage">
-            <div className="addPage__top">
-                <button
-                    className="addPage__topButton addPage__topBackButton"
-                    onClick={() => history.goBack()}
-                    disabled={loading}
-                >
-                    Back
-                </button>
-                <p className="addPage__topDate">
-                    {week}, {day} {month} {year}
-                </p>
-                <Button
-                    className="addPage__topButton"
-                    loading={loading}
-                    disabled={loading}
-                    onClick={handleSubmit}
-                >
-                    Save
-                </Button>
-            </div>
-            <TextEditor body={content} changeHandler={changeHandler} />
-        </div>
-    );
+  return (
+    <div className="addPage">
+      <div className="addPage__top">
+        <button
+          type="button"
+          className="addPage__topButton addPage__topBackButton"
+          onClick={() => history.goBack()}
+          disabled={loading}
+        >
+          Back
+        </button>
+        <p className="addPage__topDate">
+          {week}, {day} {month} {year}
+        </p>
+        <Button
+          type="button"
+          className="addPage__topButton"
+          loading={loading}
+          disabled={loading}
+          onClick={handleSubmit}
+        >
+          Save
+        </Button>
+      </div>
+      <TextEditor body={content} changeHandler={changeHandler} />
+    </div>
+  );
 };
 
 export default AddPage;

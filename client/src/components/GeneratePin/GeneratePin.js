@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./GeneratePin.scss";
 
 import axios from "../../axios";
-import { fetchUser } from "../../features/authSlice";
+import { fetchUser } from "../../redux/reducers/authSlice";
 import { useDispatch } from "react-redux";
 import Model from "../Model/Model";
 
@@ -59,6 +59,7 @@ const GeneratePin = () => {
                     click here
                 </p>
                 <button
+                    type="button"
                     className="password__generateButton"
                     onClick={toggleModal}
                 >

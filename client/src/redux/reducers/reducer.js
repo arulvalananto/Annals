@@ -1,7 +1,7 @@
 import { combineReducers } from "@reduxjs/toolkit";
 
-import authReducer from "../features/authSlice";
-import messageReducer from "../features/messageSlice";
+import authReducer from "./authSlice";
+import messageReducer from "./messageSlice";
 
 export default combineReducers({
     auth: authReducer,

@@ -1,178 +1,177 @@
 .diary {
-    color: #f1f1f1;
-    margin-top: 2rem;
-    position: relative;
+  color: #f1f1f1;
+  margin-top: 2rem;
+  position: relative;
 }
 .diary__top {
-    height: 50px;
+  height: 50px;
+  display: flex;
+  // flex-direction: column;
+  padding: 0 3rem;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  .diary__addButton {
+    border: none;
+    outline: none;
+    padding: 0.4rem 1.6rem;
+    font-size: 16px;
+    background: #a9ded8;
+    margin-top: 0.5rem;
     display: flex;
-    // flex-direction: column;
-    padding: 0 3rem;
     align-items: center;
     justify-content: space-between;
+    margin-right: 1rem;
+    text-decoration: none;
+    color: #000;
+
+    &:active,
+    &:hover {
+      background: #9edfd7;
+    }
+  }
+
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
+    .diary__topInput {
+      font-size: 16px;
+      padding: 0.5rem 1rem;
+      background: #ffffff31;
+      color: white;
+      border: none;
+      outline: none;
+      flex: 0.4;
+      margin-top: 0.5rem;
 
-    .diary__addButton {
-        border: none;
-        outline: none;
-        padding: 0.4rem 1.6rem;
-        font-size: 16px;
-        background: #a9ded8;
-        margin-top: 0.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-right: 1rem;
-        text-decoration: none;
-        color: #000;
-
-        &:active,
-        &:hover {
-            background: #9edfd7;
-        }
+      &:focus {
+        // border: 1px solid #cdcdcd;
+        box-shadow: 0 0 2px rgba(255, 255, 255, 0.4);
+      }
     }
+    .diary__topButton {
+      border: none;
+      outline: none;
+      padding: 0.5rem 1rem;
+      font-size: 16px;
+      background: rgba(255, 192, 203, 0.9);
+      margin-top: 0.5rem;
 
-    div {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-wrap: wrap;
-        .diary__topInput {
-            font-size: 16px;
-            padding: 0.5rem 1rem;
-            background: #ffffff31;
-            color: white;
-            border: none;
-            outline: none;
-            flex: 0.4;
-            margin-top: 0.5rem;
-
-            &:focus {
-                // border: 1px solid #cdcdcd;
-                box-shadow: 0 0 2px rgba(255, 255, 255, 0.4);
-            }
-        }
-        .diary__topButton {
-            border: none;
-            outline: none;
-            padding: 0.5rem 1rem;
-            font-size: 16px;
-            background: rgba(255, 192, 203, 0.9);
-            margin-top: 0.5rem;
-
-            &:active,
-            &:hover {
-                background: pink;
-            }
-        }
-        .diary__topDate {
-            font-size: 1rem;
-            height: 35px;
-            margin: 0 1rem;
-            padding: 0 0.5rem;
-            font-family: "Courier New", Courier, monospace;
-            background: #ffffff31;
-            color: #ffff;
-            border: none;
-            text-transform: uppercase;
-            border-radius: 0;
-            margin-top: 0.5rem;
-
-            &::-webkit-calendar-picker-indicator {
-                background: url("../../../assets/calender.png") center/80%
-                    no-repeat;
-                width: 15px;
-            }
-        }
-        .diary__topDateSelect {
-            font-size: 1rem;
-            margin-right: 1rem;
-            height: 35px;
-            color: black;
-            padding: 0 0.5rem;
-            border: none;
-            margin-top: 0.5rem;
-        }
+      &:active,
+      &:hover {
+        background: pink;
+      }
     }
+    .diary__topDate {
+      font-size: 1rem;
+      height: 35px;
+      margin: 0 1rem;
+      padding: 0 0.5rem;
+      font-family: "Courier New", Courier, monospace;
+      background: #ffffff31;
+      color: #ffff;
+      border: none;
+      text-transform: uppercase;
+      border-radius: 0;
+      margin-top: 0.5rem;
+
+      &::-webkit-calendar-picker-indicator {
+        background: url("../../../assets/calender.png") center/80% no-repeat;
+        width: 15px;
+      }
+    }
+    .diary__topDateSelect {
+      font-size: 1rem;
+      margin-right: 1rem;
+      height: 35px;
+      color: black;
+      padding: 0 0.5rem;
+      border: none;
+      margin-top: 0.5rem;
+    }
+  }
 }
 .diary__bottom {
-    margin-top: 3rem;
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  
+  &Nothing {
+    font-size: 32px;
+    color: lightgray;
+    align-self: center;
+  }
+
+  &Lists {
     display: flex;
-    flex-direction: column;
-    // align-items: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    padding: 1rem;
 
-    &Nothing {
-        font-size: 32px;
-        color: lightgray;
-    }
+    .diary__bottomList {
+      background: #ffffff24;
+      width: 250px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      border-radius: 5px;
+      position: relative;
+      margin: 1rem;
+      text-decoration: none;
+      color: #ffff;
 
-    &Lists {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        margin-top: 2rem;
+      &:hover {
+        color: black;
+        background: #a9ded8;
+      }
+      &:hover .diary__dateYear {
+        color: black;
+      }
+      &:hover .diary__datePrefix {
+        border-right: 1px solid black;
+      }
+      &:hover .diary__dateSuffix {
+        color: #000;
+      }
+      .diary__datePrefix {
+        text-transform: uppercase;
+        font-weight: 600;
+        flex: 0.4;
+        font-size: 2rem;
         padding: 1rem;
+        border-right: 2px solid lightgray;
 
-        .diary__bottomList {
-            background: #ffffff24;
-            width: 250px;
-            height: 100px;
-            display: flex;
-            align-items: center;
-            border-radius: 5px;
-            position: relative;
-            margin: 1rem;
-            text-decoration: none;
-            color: #ffff;
-
-            &:hover {
-                color: black;
-                background: #a9ded8;
-            }
-            &:hover .diary__dateYear {
-                color: black;
-            }
-            &:hover .diary__datePrefix {
-                border-right: 1px solid black;
-            }
-            &:hover .diary__dateSuffix {
-                color: #000;
-            }
-            .diary__datePrefix {
-                text-transform: uppercase;
-                font-weight: 600;
-                flex: 0.4;
-                font-size: 2rem;
-                padding: 1rem;
-                border-right: 2px solid lightgray;
-
-                &:hover {
-                    border-right: 1px solid black;
-                }
-            }
-            .diary__dateSuffix {
-                font-weight: 400;
-                flex: 0.1;
-                padding: 1rem;
-                font-size: 1.5rem;
-                color: lightgray;
-
-                &:hover {
-                    color: black;
-                }
-            }
-            .diary__dateEnd {
-                font-size: 2rem;
-                flex: 0.4rem;
-            }
-            .diary__dateYear {
-                position: absolute;
-                bottom: 0;
-                right: 0;
-                color: lightgray;
-                padding: 0 0.5rem 0.5rem 0;
-                font-size: 12px;
-            }
+        &:hover {
+          border-right: 1px solid black;
         }
+      }
+      .diary__dateSuffix {
+        font-weight: 400;
+        flex: 0.1;
+        padding: 1rem;
+        font-size: 1.5rem;
+        color: lightgray;
+
+        &:hover {
+          color: black;
+        }
+      }
+      .diary__dateEnd {
+        font-size: 2rem;
+        flex: 0.4rem;
+      }
+      .diary__dateYear {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        color: lightgray;
+        padding: 0 0.5rem 0.5rem 0;
+        font-size: 12px;
+      }
     }
+  }
 }
