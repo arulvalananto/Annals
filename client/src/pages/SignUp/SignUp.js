@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import "./Signup.scss";
 // React Router
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 // Axios
 import axios from "../../axios";
 // React Redux
@@ -18,7 +18,7 @@ const SignUp = () => {
   const dispatch = useDispatch();
 
   const initialState = {
-    fullname: "",
+    fullName: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -26,6 +26,8 @@ const SignUp = () => {
   const [credentials, setCredentials] = useState(initialState);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+
+  const history = useHistory();
 
   const changeHandler = useCallback(
     (data) => {
@@ -36,17 +38,17 @@ const SignUp = () => {
   );
 
   const validateForm = () => {
-    const { fullname, email, password, confirmPassword } = credentials;
+    const { fullName, email, password, confirmPassword } = credentials;
     const re =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-    let fullnameError = "";
+    let fullNameError = "";
     let passwordError = "";
     let emailError = "";
     let confirmPasswordError = "";
 
-    if (fullname.trim().length === 0 || !/[a-zA-Z0-9]/g.test(fullname)) {
-      fullnameError =
+    if (fullName.trim().length === 0 || !/[a-zA-Z0-9]/g.test(fullName)) {
+      fullNameError =
         "Please enter valid input. it accepts alphabets and numbers only";
     }
     if (!re.test(email)) {
@@ -59,11 +61,11 @@ const SignUp = () => {
       confirmPasswordError = "Password does not match";
     }
 
-    if (fullnameError || emailError || passwordError || confirmPasswordError) {
+    if (fullNameError || emailError || passwordError || confirmPasswordError) {
       setErrors({
         ...errors,
         email: emailError,
-        fullname: fullnameError,
+        fullName: fullNameError,
         password: passwordError,
         confirmPassword: confirmPasswordError,
       });
@@ -79,9 +81,9 @@ const SignUp = () => {
       setLoading(true);
       try {
         const response = await axios.post("/api/v1/register", credentials);
-
         dispatch(fetchUser(response.data));
         setLoading(false);
+        history.replace("/");
       } catch (err) {
         if (err.response) {
           alert(err.response.data.message);
@@ -118,11 +120,11 @@ const SignUp = () => {
               className="signup__rightFooterInput"
               type="text"
               placeholder="Full Name"
-              name="fullname"
+              name="fullName"
               handleChange={changeHandler}
               autoComplete="off"
-              value={credentials.fullname}
-              error={errors?.fullname}
+              value={credentials.fullName}
+              error={errors?.fullName}
             />
             <FormInput
               className="signup__rightFooterInput"

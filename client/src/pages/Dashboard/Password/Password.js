@@ -40,10 +40,9 @@ const Password = () => {
       const response = await axios.get("/api/v1/password/change-pin");
       setLoading(false);
       setIsOpenChangeModel(false);
-      console.log(response.data.message);
     } catch (err) {
       if (err.response) {
-        console.log(err.response.data.message);
+        alert(err.response.data.message);
       }
       setLoading(false);
     }

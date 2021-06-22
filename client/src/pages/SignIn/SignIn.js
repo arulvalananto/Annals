@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import "./SignIn.scss";
 // React Router
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 // React Icons
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebookF } from "react-icons/fa";
@@ -24,6 +24,8 @@ const SignIn = () => {
   const [credentials, setCredentials] = useState(initialState);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+
+  const history = useHistory();
 
   const emailRef = useRef();
 
@@ -63,7 +65,6 @@ const SignIn = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(credentials);
     const isValid = validateForm();
     if (isValid) {
       setLoading(true);
@@ -73,6 +74,7 @@ const SignIn = () => {
           dispatch(fetchUser(response.data));
         }
         setLoading(false);
+        history.replace("/");
       } catch (err) {
         if (err.response) {
           alert(err.response?.data.message);
@@ -141,7 +143,7 @@ const SignIn = () => {
           </form>
           <p className="signin__splitter">or signin with</p>
           <div className="signin__rightFooterButtonContainer">
-            <a href="http://localhost:5000/auth/google" >
+            <a href="http://localhost:5000/auth/google">
               <button type="button" className="signin__googleButton">
                 <FcGoogle />
               </button>

@@ -67,7 +67,7 @@ const AddPassword = ({ toggleDetails }) => {
           setLoading(false);
         }
       } catch (err) {
-        console.log(err.response);
+        alert(err.response?.data.message);
         setLoading(false);
       }
     }
