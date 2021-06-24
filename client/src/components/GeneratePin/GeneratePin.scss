@@ -1,31 +1,30 @@
-.password__generateButtonContainer {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        align-items: center;
-        justify-content: center;
-        margin-top: 5rem;
+@import "../../App.scss";
 
-        .password__generateText {
-            font-size: 18px;
-            margin-bottom: 1rem;
-        }
-        .password__generateButton {
-            border: none;
-            outline: none;
-            padding: 0.4rem 1.6rem;
-            font-size: 16px;
-            background: #a9ded8;
-            margin-top: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            text-decoration: none;
-            color: #000;
+.generatePin {
+  @include flexColumn();
+  width: $percentage;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5rem;
 
-            &:active,
-            &:hover {
-                background: #9edfd7;
-            }
-        }
+  &__info {
+    font-size: $font-x-large;
+    margin-bottom: $rem;
+  }
+  &__button {
+    @include buttonWithoutBorder();
+    padding: 0.4rem 1.6rem;
+    font-size: $font-normal;
+    background: $button-primary-color;
+    margin-top: 0.5rem;
+    @include flexRow();
+    justify-content: space-between;
+    text-decoration: none;
+    color: $dark-theme;
+
+    &:active,
+    &:hover {
+      background: $button-primary-touch-color;
     }
+  }
+}

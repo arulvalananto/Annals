@@ -1,83 +1,75 @@
+@import "../../App.scss";
+
 .viewPage {
-    width: 100%;
-    height: 500px;
-    padding: 3rem;
-    &__top {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 1.5rem;
-
-        &Date {
-            font-size: 24px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-        &Button {
-            border: none;
-            outline: none;
-            padding: 0.4rem 1.6rem;
-            font-size: 16px;
-            background: #a9ded8;
-            margin-top: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            text-decoration: none;
-            color: #000;
-
-            &:active,
-            &:hover {
-                background: #9edfd7;
-            }
-        }
-
-        .viewPage__topBackButton {
-            background: rgba(255, 192, 203, 0.9);
-            &:active,
-            &:hover {
-                background: pink;
-            }
-        }
-    }
-    &__bottom {
-        height: 500px;
-
-        &Content {
-            width: 100%;
-            height: 100%;
-            color: #ffff;
-            background: #ffffff10;
-            font-size: 14px;
-            padding: 1rem;
-            font-family: inherit;
-            word-wrap: break-word;
-            word-break: keep-all;
-            resize: none;
-            margin-right: 1rem;
-
-            &::-webkit-scrollbar {
-                width: 10px;
-                height: 10px;
-                background: #ccf6ed;
-            }
-            &::-webkit-scrollbar-thumb {
-                background: #21bb9a;
-                border-radius: 10px;
-            }
-        }
-    }
-}
-.viewPage__topButtonContainer {
-    display: flex;
+  width: $percentage;
+  height: 500px;
+  padding: 3rem;
+  &__top {
+    @include flexRow();
     justify-content: space-between;
-}
-.viewPage__topCancelButton {
-    margin-right: 1rem;
-    background: rgba(255, 192, 203, 0.9);
-    color: black;
+    margin-bottom: 1.5rem;
 
-    &:hover {
-        background: pink;
+    &Date {
+      font-size: 24px;
+      font-weight: $font-weight-bold;
+      text-transform: uppercase;
     }
+    &Button {
+      @include flexRow();
+      justify-content: space-between;
+      @include buttonWithoutBorder();
+      padding: 0.4rem 1.6rem;
+      font-size: $font-normal;
+      background: $button-primary-color;
+      margin-top: 0.5rem;
+      text-decoration: none;
+      color: $dark-theme;
+
+      &:active,
+      &:hover {
+        background: $button-primary-touch-color;
+      }
+    }
+
+    .viewPage__topButton--back {
+      background: $button-secondary-color;
+      &:active,
+      &:hover {
+        background: $button-secondary-touch-color;
+      }
+    }
+    .viewPage__topButtonContainer {
+      display: flex;
+      justify-content: space-between;
+
+      .viewPage__topButton--cancel {
+        margin-right: 1rem;
+        background: $button-secondary-color;
+        color: $dark-theme;
+
+        &:hover {
+          background: $button-secondary-touch-color;
+        }
+      }
+    }
+  }
+  &__bottom {
+    height: 500px;
+
+    &Content {
+      width: $percentage;
+      height: $percentage;
+      color: $light-theme;
+      background: $light-theme-with-opacity;
+      font-size: $font-small;
+      padding: 1rem;
+      font-family: inherit;
+      word-wrap: break-word;
+      word-break: keep-all;
+      resize: none;
+      margin-right: 1rem;
+
+      @include scroll();
+    }
+  }
 }

@@ -12,6 +12,7 @@ import {
 } from "react-icons/md";
 import { fetchUser } from "../../redux/reducers/authSlice";
 import { useDispatch } from "react-redux";
+import YesOrNoModel from "../YesOrNoModel/YesOrNoModel";
 
 const INPUT_DATA = ["title", "link", "username", "password"];
 
@@ -29,25 +30,20 @@ const ViewPassword = ({ passwordDetails, toggleDetails }) => {
 
   const [verifiedPassword, setVerifiedPassword] = useState("");
   const [verify, setVerify] = useState(false);
+
   const [isVisible, setIsVisible] = useState(false);
-  const [isOpenModel, setIsOpenModel] = useState(false);
-  const [isOpenDeleteModel, setIsOpenDeleteModel] = useState(false);
+  const [isModel, setIsModel] = useState(false);
+  const [isDeleteModel, setIsDeleteModel] = useState(false);
 
   const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
 
-  const toggleModel = () => {
-    setIsOpenModel((prevState) => !prevState);
-  };
+  const toggleModel = () => setIsModel(!isModel);
 
-  const toggleVisiblePassword = () => {
-    setIsVisible((prevState) => !prevState);
-  };
+  const toggleVisiblePassword = () => setIsVisible(!isVisible);
 
-  const toggleDeleteModel = () => {
-    setIsOpenDeleteModel((prevState) => !prevState);
-  };
+  const toggleDeleteModel = () => setIsDeleteModel(!isDeleteModel);
 
   useEffect(() => {
     setVerify(false);
@@ -68,9 +64,11 @@ const ViewPassword = ({ passwordDetails, toggleDetails }) => {
         password: passwordDetails.password,
         pin,
       });
-      setVerify(true);
+
       setVerifiedPassword(response.data.decryptPassword);
-      setIsOpenModel(false);
+
+      setVerify(true);
+      setIsModel(false);
       setPin("");
       setLoading(false);
     } catch (err) {
@@ -86,8 +84,10 @@ const ViewPassword = ({ passwordDetails, toggleDetails }) => {
       const response = await axios.delete(
         `/api/v1/password/delete/${passwordDetails._id}`
       );
+
       dispatch(fetchUser(response.data));
-      setIsOpenDeleteModel(false);
+
+      setIsDeleteModel(false);
       toggleDetails("", "");
       setLoading(false);
     } catch (err) {
@@ -102,12 +102,17 @@ const ViewPassword = ({ passwordDetails, toggleDetails }) => {
         <div className="viewPassword__header">
           <button
             type="button"
-            className="password__back"
+            className="viewPassword__headerButton"
             onClick={() => toggleDetails("", "")}
           >
             Back
           </button>
-          <MdDelete onClick={toggleDeleteModel} size="26" />
+          <MdDelete
+            className="viewPassword__headerDeleteButton"
+            onClick={toggleDeleteModel}
+            size="24"
+            color="inherit"
+          />
         </div>
         <h3 className="password__title">Password Details</h3>
         <form className="password__form">
@@ -153,11 +158,6 @@ const ViewPassword = ({ passwordDetails, toggleDetails }) => {
                   </p>
                 )}
               </div>
-              {/* {errors[name] && (
-                                <p className="password__error">
-                                    {errors[name]}
-                                </p>
-                            )} */}
             </div>
           ))}
           <div className="password__progressContainer">
@@ -183,13 +183,13 @@ const ViewPassword = ({ passwordDetails, toggleDetails }) => {
         </div>
       </div>
       {!verify && (
-        <div className="overlay">
+        <div className="unlockButton__overlay">
           <Button type="button" onClick={toggleModel}>
             Unlock
           </Button>
         </div>
       )}
-      {isOpenModel && (
+      {isModel && (
         <>
           <div className="model-overlay"></div>
           <div className="model">
@@ -205,32 +205,17 @@ const ViewPassword = ({ passwordDetails, toggleDetails }) => {
               <Button type="submit" loading={loading} disabled={loading}>
                 Verify
               </Button>
-              <MdClear className="clear" size="26" onClick={toggleModel} />
+              <MdClear className="clear" size={30} onClick={toggleModel} />
             </form>
           </div>
         </>
       )}
-      {isOpenDeleteModel && (
-        <>
-          <div className="model-overlay"></div>
-          <div className="model">
-            <form onSubmit={deletePassword} className="model-delete">
-              <h4 className="title">Are you sure?</h4>
-              <div className="model-button-container">
-                <Button
-                  type="button"
-                  onClick={toggleDeleteModel}
-                  disabled={loading}
-                >
-                  No
-                </Button>
-                <Button type="submit" loading={loading} disabled={loading}>
-                  Yes
-                </Button>
-              </div>
-            </form>
-          </div>
-        </>
+      {isDeleteModel && (
+        <YesOrNoModel
+          yes={deletePassword}
+          no={toggleDeleteModel}
+          loading={loading}
+        />
       )}
     </div>
   );

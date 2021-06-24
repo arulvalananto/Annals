@@ -75,11 +75,11 @@ const AddPassword = ({ toggleDetails }) => {
 
   const renderInput = () => {
     return INPUT_DATA?.map((name) => (
-      <div className="password__inputsContainer" key={name}>
-        <div className="password__inputContainer">
-          <label className="password__label">{name}</label>
+      <div className="addPassword__inputsContainer" key={name}>
+        <div className="addPassword__inputContainer">
+          <label className="addPassword__label">{name}</label>
           <input
-            className="password__input"
+            className="addPassword__input"
             type={`${
               name === "link"
                 ? "url"
@@ -100,34 +100,30 @@ const AddPassword = ({ toggleDetails }) => {
             autoComplete="off"
           />
         </div>
-        {errors[name] && <p className="password__error">{errors[name]}</p>}
+        {errors[name] && (
+          <p className="addPassword__input--error">{errors[name]}</p>
+        )}
       </div>
     ));
   };
 
   return (
     <div className="addPassword">
-      <button
+      <Button
         type="button"
-        className="password__back"
+        className="addPassword__backButton"
         onClick={() => toggleDetails("", "")}
       >
         Back
-      </button>
-      <h3 className="password__title">Add Password</h3>
-      <form className="password__form">{renderInput()}</form>
+      </Button>
+      <h3 className="addPassword__title">Add Password</h3>
+      <form className="addPassword__form">{renderInput()}</form>
       <div className="password__buttonContainer">
-        <button
-          type="button"
-          className="password__reset"
-          onClick={clearInput}
-          disabled={loading}
-        >
+        <Button type="button" inverted onClick={clearInput} disabled={loading}>
           Reset
-        </button>
+        </Button>
         <Button
           type="submit"
-          className="password__submit"
           loading={loading}
           onClick={submitHandler}
           disabled={loading}

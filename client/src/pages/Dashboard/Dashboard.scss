@@ -1,37 +1,35 @@
-// #22222C
+@import "../../App.scss";
 
 .dashboard {
-    background: #171721;
-    background: #010a24;
-    display: flex;
-    color: lightgray;
-    width: 100%;
-    height: 100%;
+  background: $primary-color;
+  display: flex;
+  color: $slight-theme;
+  width: $percentage;
+  height: $percentage;
 
-    &__right {
-        flex: 0.9995;
-        width: 100%;
-        position: relative;
-        height: 100%;
+  &__right {
+    flex: 0.9995;
+    width: $percentage;
+    position: relative;
+    height: $percentage;
 
-        &Anchor {
-            padding: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
+    &LogoContainer {
+      padding: 1rem;
+      @include flexRow();
+      justify-content: center;
+      text-decoration: none;
 
-            .dashboard__rightLogo {
-                padding: 0.3rem 0.6rem;
-                border: 4px solid #ffff;
-                font-weight: bold;
-                font-size: 18px;
-                color: #ffff;
-            }
-        }
-        &Container {
-            width: 100%;
-            height: 100%;
-        }
+      .dashboard__rightLogo {
+        padding: 0.3rem 0.6rem;
+        border: 4px solid $light-theme;
+        font-weight: $font-weight-bold;
+        font-size: $font-x-large;
+        color: $light-theme;
+      }
     }
+    &Container {
+      width: $percentage;
+      height: $percentage;
+    }
+  }
 }

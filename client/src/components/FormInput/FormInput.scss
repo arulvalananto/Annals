@@ -1,0 +1,30 @@
+@import "../../App.scss";
+
+.formInput {
+  @include flexColumn();
+
+  &--field {
+    width: 95%;
+    padding: 0.5rem 1rem;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid $slight-theme;
+
+    &:focus {
+      border-color: $dark-theme;
+    }
+  }
+  &--fieldError {
+    border: 1px solid red;
+    outline: 1px solid red;
+  }
+
+  &__inputErrorMessage {
+    color: red;
+    font-size: $font-small;
+    margin-top: 0.2rem;
+    align-self: flex-start;
+    margin-bottom: $rem;
+  }
+}

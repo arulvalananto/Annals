@@ -14,6 +14,10 @@ import { fetchUser } from "../../../redux/reducers/authSlice";
 
 import { CircularProgress } from "@material-ui/core";
 
+import YesOrNoModel from "../../../components/YesOrNoModel/YesOrNoModel";
+
+const color = randomColor();
+
 const Idea = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -52,14 +56,16 @@ const Idea = () => {
     setIsOpenModal(false);
   };
 
-  const editIdea = () => {};
+  // const editIdea = () => {};
 
-  const deleteIdea = async () => {
+  const deleteIdea = async (e) => {
+    e.preventDefault();
     try {
       setLoading(true);
       const response = await axios.delete(`/api/v1/ideas/delete/${deleteId}`);
       dispatch(fetchUser(response.data));
       cancelDelete();
+      setLoading(false);
     } catch (err) {
       alert(err.response.data.message);
       setLoading(false);
@@ -73,13 +79,13 @@ const Idea = () => {
 
   const renderIdea = useCallback(() => {
     if (ideas.length === 0) {
-      return <p className="idea-empty">No Ideas yet...</p>;
+      return <p className="idea--empty">No Ideas yet...</p>;
     }
 
     return ideas.map((idea) => (
       <div
         className="idea__footerCard"
-        style={{ borderLeft: `4px solid ${randomColor()}` }}
+        style={{ borderLeft: `4px solid ${color}` }}
         key={idea._id}
       >
         <span className="idea__footerCardContent">
@@ -98,49 +104,24 @@ const Idea = () => {
     ));
   }, [ideas]);
 
-  const renderModel = () => {
-    if (isOpenModal) {
-      return (
-        <>
-          <div className="idea__modalOverlay"></div>
-          <div className="idea__modal">
-            <div className="idea__modalContainer">
-              <h1>Are You Sure?</h1>
-              <div className="button-container">
-                <button onClick={cancelDelete}>No</button>
-                <button onClick={deleteIdea}>
-                  {loading ? (
-                    <CircularProgress size={16} color="inherit" />
-                  ) : (
-                    "Yes"
-                  )}
-                </button>
-              </div>
-            </div>
-          </div>
-        </>
-      );
-    }
-  };
-
   return (
     <div className="idea">
       <div
-        className="idea-overlay"
+        className="idea--overlay"
         style={{ display: `${title ? "block" : "none"}` }}
       ></div>
       <form onSubmit={addIdea} className="idea__header">
-        <div className="idea__headerContainer">
+        <div className="idea__headerForm">
           <input
             type="text"
             placeholder="Add Idea (Title)"
-            className="title"
+            className="idea__headerFormInput"
             onChange={(e) => setTitle(e.target.value)}
             value={title}
           />
           <button
             type="submit"
-            className="addButton"
+            className="idea__headerFormButton"
             style={{ display: `${title && content ? "block" : "none"}` }}
           >
             {loading ? (
@@ -154,14 +135,16 @@ const Idea = () => {
           style={{
             display: `${title ? "block" : "none"}`,
           }}
-          className="content"
+          className="idea__headerFormContent"
           onChange={(e) => setContent(e.target.value)}
           value={content}
           placeholder="Type Your Idea"
         />
       </form>
       <div className="idea__footer">{renderIdea()}</div>
-      {renderModel()}
+      {isOpenModal && (
+        <YesOrNoModel yes={deleteIdea} no={cancelDelete} loading={loading} />
+      )}
     </div>
   );
 };

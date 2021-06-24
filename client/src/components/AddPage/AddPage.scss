@@ -1,44 +1,43 @@
+@import "../../App.scss";
+
 .addPage {
-    width: 100%;
-    height: 500px;
-    padding: 3rem;
+  width: 100%;
+  height: 500px;
+  padding: 3rem;
 
-    &__top {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 1.5rem;
+  &__top {
+    @include flexRow();
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
 
-        &Date {
-            font-size: 24px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-        &Button {
-            border: none;
-            outline: none;
-            padding: 0.4rem 1.6rem;
-            font-size: 16px;
-            background: #a9ded8;
-            margin-top: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            text-decoration: none;
-            color: #000;
-
-            &:active,
-            &:hover {
-                background: #9edfd7;
-            }
-        }
-
-        .addPage__topBackButton {
-            background: rgba(255, 192, 203, 0.9);
-            &:active,
-            &:hover {
-                background: pink;;
-            }
-        }
+    &Date {
+      font-size: 1.5rem;
+      font-weight: $font-weight-bold;
+      text-transform: uppercase;
     }
+    &Button {
+      @include flexRow();
+      justify-content: space-between;
+      @include buttonWithoutBorder();
+      padding: 0.4rem 1.6rem;
+      font-size: $font-normal;
+      background: $button-primary-color;
+      margin-top: 0.5rem;
+      text-decoration: none;
+      color: $dark-theme;
+
+      &:active,
+      &:hover {
+        background: $button-primary-touch-color;
+      }
+    }
+
+    .addPage__topButton--back {
+      background: $button-secondary-color;
+      &:active,
+      &:hover {
+        background: $button-secondary-touch-color;
+      }
+    }
+  }
 }

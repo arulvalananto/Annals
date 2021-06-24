@@ -17,7 +17,7 @@ const Dashboard = () => {
     <div className="dashboard">
       <Sidebar />
       <div className="dashboard__right">
-        <Link to="/" className="dashboard__rightAnchor">
+        <Link to="/" className="dashboard__rightLogoContainer">
           <p className="dashboard__rightLogo">_Annals</p>
         </Link>
         <div className="dashboard__rightContainer">

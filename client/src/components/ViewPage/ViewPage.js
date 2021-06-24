@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import { fetchUser } from "../../redux/reducers/authSlice";
 import axios from "../../axios";
+import { dateString } from "../../utils/dates";
 
 const ViewPage = () => {
   const { id } = useParams();
@@ -54,20 +55,18 @@ const ViewPage = () => {
         <button
           type="button"
           disabled={loading}
-          className="viewPage__topButton viewPage__topBackButton"
+          className="viewPage__topButton viewPage__topButton--back"
           onClick={() => history.goBack()}
         >
           Back
         </button>
-        <p className="viewPage__topDate">
-          {new Date(page.writtenAt).toDateString("en-IN")}
-        </p>
+        <p className="viewPage__topDate">{dateString(page.writtenAt)}</p>
         <div className="viewPage__topButtonContainer">
           <button
-            type="but"
+            type="button"
             disabled={loading}
             className={`viewPage__topButton ${
-              isEditMode && "viewPage__topCancelButton"
+              isEditMode && "viewPage__topButton--cancel"
             }`}
             onClick={toggleEdit}
           >

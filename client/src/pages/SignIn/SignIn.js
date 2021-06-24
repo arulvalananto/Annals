@@ -89,17 +89,17 @@ const SignIn = () => {
   }, []);
 
   return (
-    <div className="signin">
-      <div className="signin__left">
+    <div className="signIn">
+      <div className="signIn__left">
         <Link to="/">
-          <p className="signin__leftHeader">_Annals</p>
+          <p className="signIn__leftLogo">_Annals</p>
         </Link>
       </div>
-      <div className="signin__right">
-        <div className="signin__rightHeader">
+      <div className="signIn__right">
+        <div className="signIn__rightHeader">
           <p>New User?</p>
           <Link to="/signup">
-            <button className="signin__rightHeaderButton">Sign Up</button>
+            <button className="signIn__rightHeaderButton">Sign Up</button>
           </Link>
         </div>
         <div className="signin__rightFooter">

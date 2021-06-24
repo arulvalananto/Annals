@@ -11,9 +11,8 @@ import ViewPassword from "../../../components/ViewPassword/ViewPassword";
 import GeneratePin from "../../../components/GeneratePin/GeneratePin";
 // Material UI
 import { Tooltip } from "@material-ui/core";
-import { ReactComponent as Secure } from "../../../assets/secure.svg";
 import axios from "../../../axios";
-import Button from "../../../components/Button/Button";
+import YesOrNoModel from "../../../components/YesOrNoModel/YesOrNoModel";
 
 const Password = () => {
   const [show, setShow] = useState("");
@@ -37,7 +36,7 @@ const Password = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.get("/api/v1/password/change-pin");
+      await axios.get("/api/v1/password/change-pin");
       setLoading(false);
       setIsOpenChangeModel(false);
     } catch (err) {
@@ -58,12 +57,6 @@ const Password = () => {
       );
     } else if (show === "add") {
       return <AddPassword toggleDetails={toggleDetails} />;
-    } else {
-      return (
-        <div className="empty-pageContainer">
-          <Secure className="empty-page" />;
-        </div>
-      );
     }
   };
 
@@ -98,17 +91,21 @@ const Password = () => {
             <div className="password__leftBottom">
               {passwords.entries?.map((password) => (
                 <div
-                  className="password__list"
+                  className="password__leftBottomPasswordList"
                   key={password._id}
                   onClick={() => {
                     setPasswordDetails(password);
                     setShow("view");
                   }}
                 >
-                  <img src="" alt="logo" />
-                  <div className="password__details">
-                    <span className="password-title">{password.title}</span>
-                    <span className="password-link">{password?.link}</span>
+                  <img
+                    className="password__leftBottomPasswordLogo"
+                    src=""
+                    alt="logo"
+                  />
+                  <div className="password__leftBottomPasswordDetails">
+                    <span className="title">{password.title}</span>
+                    <span className="link">{password?.link}</span>
                   </div>
                 </div>
               ))}
@@ -116,26 +113,11 @@ const Password = () => {
           </div>
           <div className="password__right">{showContent()}</div>
           {isOpenChangeModel && (
-            <>
-              {/* <div className="model-overlay"></div> */}
-              <div className="model">
-                <form onSubmit={changePin} className="model-delete">
-                  <h4 className="title">Are you sure?</h4>
-                  <div className="model-button-container">
-                    <Button
-                      type="button"
-                      onClick={toggleChangeModel}
-                      disabled={loading}
-                    >
-                      No
-                    </Button>
-                    <Button type="submit" loading={loading} disabled={loading}>
-                      Yes
-                    </Button>
-                  </div>
-                </form>
-              </div>
-            </>
+            <YesOrNoModel
+              yes={changePin}
+              no={toggleChangeModel}
+              loading={loading}
+            />
           )}
         </div>
       )}

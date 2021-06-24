@@ -1,5 +1,5 @@
 import React from "react";
-import "./FormInput.css";
+import "./FormInput.scss";
 
 const FormInput = ({
   label,
@@ -9,13 +9,15 @@ const FormInput = ({
   ...otherProps
 }) => {
   return (
-    <div className="form-group">
+    <div className="formInput">
       <input
-        className={`${className} input ${error && "input-error"} `}
+        className={`${className} formInput--field ${
+          error && "formInput--fieldError"
+        } `}
         onChange={(e) => handleChange(e.target)}
         {...otherProps}
       />
-      <span className="error">{error}</span>
+      <span className="formInput__inputErrorMessage">{error}</span>
     </div>
   );
 };

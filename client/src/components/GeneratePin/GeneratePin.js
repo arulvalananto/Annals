@@ -53,14 +53,14 @@ const GeneratePin = () => {
 
     return (
         <>
-            <div className="password__generateButtonContainer">
-                <p className="password__generateText">
+            <div className="generatePin">
+                <p className="generatePin__info">
                     If you are not generate a common password for all password,
                     click here
                 </p>
                 <button
                     type="button"
-                    className="password__generateButton"
+                    className="generatePin__button"
                     onClick={toggleModal}
                 >
                     Generate Pin

@@ -1,21 +1,15 @@
-.textEditor {
-    background: #ffffff10;
-    border: none;
-    width: 100%;
-    height: 500px;
-    font-size: 14px;
-    color: #ffff;
-    padding: 1rem;
-    resize: none;
-    font-family: inherit;
+@import "../../App.scss";
 
-    &::-webkit-scrollbar {
-        width: 10px;
-        height: 10px;
-        background: #ccf6ed;
-    }
-    &::-webkit-scrollbar-thumb {
-        background: #21bb9a;
-        border-radius: 10px;
-    }
+.textEditor {
+  background: $light-theme-with-opacity;
+  border: none;
+  width: $percentage;
+  height: 500px;
+  font-size: $font-small;
+  color: $light-theme;
+  padding: 1rem;
+  resize: none;
+  font-family: inherit;
+
+  @include scroll();
 }

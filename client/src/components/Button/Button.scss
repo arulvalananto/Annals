@@ -1,0 +1,22 @@
+@import "../../App.scss";
+
+.button {
+  color: $dark-theme;
+  background: $button-primary-color;
+  @include buttonWithoutBorder();
+  font-weight: $font-weight-bold;
+  padding: 0.5rem 2rem;
+  text-transform: uppercase;
+  cursor: pointer;
+
+  &:hover {
+    background: $button-primary-touch-color;
+  }
+}
+.inverted {
+  background: $button-secondary-color;
+
+  &:hover {
+    background: $button-secondary-touch-color;
+  }
+}

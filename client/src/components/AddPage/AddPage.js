@@ -3,7 +3,7 @@ import "./AddPage.scss";
 // Other Components
 import TextEditor from "../TextEditor/TextEditor";
 
-import { weeks, months } from "../../utils/dates";
+import { dateString } from "../../utils/dates";
 
 import { useHistory } from "react-router-dom";
 
@@ -13,12 +13,6 @@ import axios from "../../axios";
 
 import { fetchUser } from "../../redux/reducers/authSlice";
 import { useDispatch } from "react-redux";
-
-const date = new Date(Date.now());
-const week = weeks[date.getDay() - 1];
-const month = months[date.getMonth()];
-const day = date.getDate();
-const year = date.getFullYear();
 
 const AddPage = () => {
   const history = useHistory();
@@ -58,15 +52,13 @@ const AddPage = () => {
       <div className="addPage__top">
         <button
           type="button"
-          className="addPage__topButton addPage__topBackButton"
+          className="addPage__topButton addPage__topButton--back"
           onClick={() => history.goBack()}
           disabled={loading}
         >
           Back
         </button>
-        <p className="addPage__topDate">
-          {week}, {day} {month} {year}
-        </p>
+        <p className="addPage__topDate">{dateString(Date.now())}</p>
         <Button
           type="button"
           className="addPage__topButton"

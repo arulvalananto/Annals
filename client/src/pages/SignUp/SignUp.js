@@ -97,27 +97,27 @@ const SignUp = () => {
     <div className="signup">
       <div className="signup__left">
         <Link to="/">
-          <p className="signup__leftHeader">_Annals</p>
+          <p className="signup__leftLogo">_Annals</p>
         </Link>
-        <h2 className="signup__leftBody">Write and Read Privately</h2>
+        <h2 className="signup__leftText">Write and Read Privately</h2>
         <img
           src={SignUpCover}
           alt="Annals SignUp Cover"
-          className="signup__leftFooter"
+          className="signup__leftFooterImage"
         />
       </div>
       <div className="signup__right">
-        <div className="signup__rightHeader">
+        <div className="signup__rightHead">
           <p>Already have an account?</p>
           <Link to="/signin">
-            <button className="signup__rightHeaderButton">Sign In</button>
+            <button className="signup__rightHeadButton">Sign In</button>
           </Link>
         </div>
-        <div className="signup__rightFooter">
-          <h3 className="signup__rightFooterTitle">Sign Up Now</h3>
-          <form onSubmit={submitHandler} className="signup__rightFooterForm">
+        <div className="signup__rightTail">
+          <h3 className="signup__rightTailTitle">Sign Up Now</h3>
+          <form onSubmit={submitHandler} className="signup__rightTailForm">
             <FormInput
-              className="signup__rightFooterInput"
+              className="signup__rightTailFormInput"
               type="text"
               placeholder="Full Name"
               name="fullName"
@@ -127,7 +127,7 @@ const SignUp = () => {
               error={errors?.fullName}
             />
             <FormInput
-              className="signup__rightFooterInput"
+              className="signup__rightTailFormInput"
               type="email"
               placeholder="Email Address"
               name="email"
@@ -137,7 +137,7 @@ const SignUp = () => {
               error={errors?.email}
             />
             <FormInput
-              className="signup__rightFooterInput"
+              className="signup__rightTailFormInput"
               type="password"
               placeholder="Password"
               name="password"
@@ -147,7 +147,7 @@ const SignUp = () => {
               error={errors?.password}
             />
             <FormInput
-              className="signup__rightFooterInput"
+              className="signup__rightTailFormInput"
               type="password"
               placeholder="Confirm Password"
               name="confirmPassword"
@@ -156,29 +156,14 @@ const SignUp = () => {
               value={credentials.confirmPassword}
               error={errors?.confirmPassword}
             />
-            {loading ? (
-              <div className="button-spinner">
+            <Button className="signup__rightTailFormButton" type="submit">
+              {loading ? (
                 <CircularProgress size={26} color="inherit" />
-              </div>
-            ) : (
-              <Button className="signup__rightFooterButton" type="submit">
-                Sign In
-              </Button>
-            )}
+              ) : (
+                "Sign In"
+              )}
+            </Button>
           </form>
-          {/* <p className="signup__rightSplitter">or signup with</p>
-                    <div className="signup__rightFooterButtonContainer">
-                        <a href="http://localhost:5000/auth/google">
-                            <button className="signup__googleButton">
-                                <FcGoogle />
-                            </button>
-                        </a>
-                        <a href="http://localhost:5000/auth/facebook">
-                            <button className="signup__facebookButton">
-                                <FaFacebookF />
-                            </button>
-                        </a>
-                    </div> */}
         </div>
       </div>
     </div>
