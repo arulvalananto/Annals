@@ -7,7 +7,7 @@ import Diary from "./Diary/Diary";
 import ViewPage from "../../components/ViewPage/ViewPage";
 import AddPage from "../../components/AddPage/AddPage";
 import Password from "./Password/Password";
-import Idea from "./Idea/Idea";
+import Ideas from "./Ideas/Ideas";
 // React Router
 import { Link } from "@material-ui/core";
 import { Route } from "react-router";
@@ -27,7 +27,7 @@ const Dashboard = () => {
           <Route path="/diary/add" component={AddPage} />
           <Route path="/password-safe" component={Password} />
           <Route path="/routines">Hello Routines</Route>
-          <Route path="/ideas" component={Idea} />
+          <Route path="/ideas" component={Ideas} />
           <Route path="/todo-list">Coming Soon... (Todo List)</Route>
           <Route path="/notes">Coming Soon... (Notes)</Route>
           <Route path="/personal-info">Coming Soon... (Personal Info)</Route>

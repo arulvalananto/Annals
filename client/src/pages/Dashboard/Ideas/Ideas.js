@@ -1,13 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
-import "./Idea.scss";
-
-import randomColor from "../../../utils/randomColor";
+import "./Ideas.scss";
 
 import axios from "../../../axios";
 import { useDispatch, useSelector } from "react-redux";
 
-import { AiOutlineDelete } from "react-icons/ai";
-import { FiEdit2 } from "react-icons/fi";
 import { BsArrowRight } from "react-icons/bs";
 
 import { fetchUser } from "../../../redux/reducers/authSlice";
@@ -15,15 +11,14 @@ import { fetchUser } from "../../../redux/reducers/authSlice";
 import { CircularProgress } from "@material-ui/core";
 
 import YesOrNoModel from "../../../components/YesOrNoModel/YesOrNoModel";
+import Idea from "../../../components/Idea/Idea";
 
-const color = randomColor();
-
-const Idea = () => {
+const Ideas = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
   const [deleteId, setDeleteId] = useState("");
-  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   const [loading, setLoading] = useState(false);
 
@@ -53,10 +48,19 @@ const Idea = () => {
 
   const cancelDelete = () => {
     selectDeleteId("");
-    setIsOpenModal(false);
+    setOpenModal(false);
   };
 
-  // const editIdea = () => {};
+  const editIdea = (id, content, updateContent) => {
+    if (!updateContent) {
+      return alert("idea should not be empty!");
+    }
+    if (content === updateContent.trim()) {
+      return alert("no change happens");
+    }
+
+    console.log("updated");
+  };
 
   const deleteIdea = async (e) => {
     e.preventDefault();
@@ -74,54 +78,42 @@ const Idea = () => {
 
   const selectDeleteId = (id) => {
     setDeleteId(id);
-    setIsOpenModal(true);
+    setOpenModal(true);
   };
 
   const renderIdea = useCallback(() => {
     if (ideas.length === 0) {
-      return <p className="idea--empty">No Ideas yet...</p>;
+      return <p className="ideas--empty">No Ideas yet...</p>;
     }
 
     return ideas.map((idea) => (
-      <div
-        className="idea__footerCard"
-        style={{ borderLeft: `4px solid ${color}` }}
+      <Idea
         key={idea._id}
-      >
-        <span className="idea__footerCardContent">
-          <h4 className="title">{idea.title}</h4>
-          <p>{idea.content}</p>
-        </span>
-        <div className="idea__footerCardTools">
-          <span className="edit">
-            <FiEdit2 />
-          </span>
-          <span className="delete">
-            <AiOutlineDelete onClick={() => selectDeleteId(idea._id)} />
-          </span>
-        </div>
-      </div>
+        idea={idea}
+        editHandler={editIdea}
+        deleteHandler={selectDeleteId}
+      />
     ));
   }, [ideas]);
 
   return (
-    <div className="idea">
+    <div className="ideas">
       <div
-        className="idea--overlay"
+        className="ideas--overlay"
         style={{ display: `${title ? "block" : "none"}` }}
       ></div>
-      <form onSubmit={addIdea} className="idea__header">
-        <div className="idea__headerForm">
+      <form onSubmit={addIdea} className="ideas__header">
+        <div className="ideas__headerForm">
           <input
             type="text"
             placeholder="Add Idea (Title)"
-            className="idea__headerFormInput"
+            className="ideas__headerFormInput"
             onChange={(e) => setTitle(e.target.value)}
             value={title}
           />
           <button
             type="submit"
-            className="idea__headerFormButton"
+            className="ideas__headerFormButton"
             style={{ display: `${title && content ? "block" : "none"}` }}
           >
             {loading ? (
@@ -135,18 +127,18 @@ const Idea = () => {
           style={{
             display: `${title ? "block" : "none"}`,
           }}
-          className="idea__headerFormContent"
+          className="ideas__headerFormContent"
           onChange={(e) => setContent(e.target.value)}
           value={content}
           placeholder="Type Your Idea"
         />
       </form>
-      <div className="idea__footer">{renderIdea()}</div>
-      {isOpenModal && (
+      <div className="ideas__footer">{renderIdea()}</div>
+      {openModal && (
         <YesOrNoModel yes={deleteIdea} no={cancelDelete} loading={loading} />
       )}
     </div>
   );
 };
 
-export default Idea;
+export default Ideas;

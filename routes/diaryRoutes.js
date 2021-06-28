@@ -1,14 +1,15 @@
 const express = require("express");
 
 const isAuthenticated = require("../middlewares/isAuthenticated");
-const diaryController = require("../controllers/diaryController");
+
+const { addPage, updatePage } = require("../controllers/diaryController");
 
 const router = express.Router();
 
 router.use(isAuthenticated);
 
-router.post("/add-timeline", diaryController.addPage);
+router.post("/add-timeline", addPage);
 
-router.patch("/update-timeline/:id", diaryController.updatePage);
+router.patch("/update-timeline/:id", updatePage);
 
 module.exports = router;

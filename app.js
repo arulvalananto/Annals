@@ -9,14 +9,14 @@ const authRoutes = require("./routes/authRoutes");
 const diaryRoutes = require("./routes/diaryRoutes");
 const passwordRoutes = require("./routes/passwordRoutes");
 const ideaRoutes = require("./routes/ideaRoutes");
+const logoRoutes = require("./routes/logoRoutes");
 
 require("./utils/passport");
 
 const app = express();
 
-// Middlewares
-
 app.use(express.json());
+app.use("/uploads", express.static("uploads"));
 app.use(
   cors({
     origin: ["http://localhost:3000"],
@@ -48,6 +48,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // API End-Points
+
+app.use("/api/v1/logos", logoRoutes);
 
 app.use("/", authRoutes);
 app.use("/api/v1", diaryRoutes);

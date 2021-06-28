@@ -48,6 +48,13 @@
       &:first-child {
         background: $light-theme;
         color: $dark-theme;
+        transition: all 0.5ms ease-in;
+
+        &:hover {
+          background: $light-theme;
+          color: $dark-theme;
+          transform: scale(1.1);
+        }
       }
     }
     @include button();

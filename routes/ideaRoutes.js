@@ -1,13 +1,22 @@
 const express = require("express");
 
+const {
+  addIdea,
+  updateIdea,
+  deleteIdea,
+} = require("../controllers/ideaController");
+
+const isAuthenticated = require("../middlewares/isAuthenticated");
+
+
 const router = express.Router();
 
-router.get("/all", (req, res, next) => {});
+router.use(isAuthenticated);
 
-router.post("/add", (req, res, next) => {});
+router.post("/add", addIdea);
 
-router.patch("/update/:id", (req, res, next) => {});
+router.patch("/update/:id", updateIdea);
 
-router.delete("/delete/:id", (req, res, next) => {});
+router.delete("/delete/:id", deleteIdea);
 
 module.exports = router;

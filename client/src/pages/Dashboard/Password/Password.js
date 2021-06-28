@@ -100,7 +100,7 @@ const Password = () => {
                 >
                   <img
                     className="password__leftBottomPasswordLogo"
-                    src=""
+                    src={password.avatar}
                     alt="logo"
                   />
                   <div className="password__leftBottomPasswordDetails">

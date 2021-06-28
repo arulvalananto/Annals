@@ -1,16 +1,11 @@
-const jwt = require("jsonwebtoken");
-const { promisify } = require("util");
-
 const User = require("../models/User");
 
+const AppError = require("../utils/AppError");
+
 module.exports = async (req, res, next) => {
-  const decoded = await promisify(jwt.verify)(
-    req.session.token,
-    process.env.JWT_SECRET
-  );
-  const currentUser = await User.findById(decoded.id);
-  if (!currentUser) {
-    return next(new AppError("You are not authenticated...Please log in", 401));
+  const user = await User.findById(req.session.user.id);
+  if (!user) {
+    return next(new AppError("you are not authenticated, please log in", 400));
   }
   next();
 };
