@@ -51,10 +51,7 @@ const Idea = ({
           />
         )}
       </span>
-      <div
-        className="idea__tools"
-        style={{ display: `${editMode && "block"}` }}
-      >
+      <div className="idea__tools">
         {editMode ? (
           <>
             <span className="no">
@@ -67,7 +64,10 @@ const Idea = ({
             </span>
             <span className="yes">
               <MdDone
-                onClick={() => editHandler(_id, content, updateContent)}
+                onClick={() => {
+                  editHandler(_id, content, updateContent);
+                  setEditMode(!editMode);
+                }}
               />
             </span>
           </>

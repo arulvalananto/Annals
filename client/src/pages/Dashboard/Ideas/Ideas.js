@@ -30,14 +30,18 @@ const Ideas = () => {
     e.preventDefault();
     try {
       setLoading(true);
+
       const response = await axios.post("/api/v1/ideas/add", {
         title,
         content,
       });
-      dispatch(fetchUser(response.data));
-      setLoading(false);
+
       setTitle("");
       setContent("");
+
+      dispatch(fetchUser(response.data));
+
+      setLoading(false);
     } catch (err) {
       setLoading(false);
       alert(err.response?.data.message);
@@ -51,26 +55,40 @@ const Ideas = () => {
     setOpenModal(false);
   };
 
-  const editIdea = (id, content, updateContent) => {
-    if (!updateContent) {
+  const editIdea = async (id, content, updatedContent) => {
+    if (!updatedContent) {
       return alert("idea should not be empty!");
     }
-    if (content === updateContent.trim()) {
+    if (content === updatedContent.trim()) {
       return alert("no change happens");
     }
+    try {
+      setLoading(true);
 
-    console.log("updated");
+      const res = await axios.patch(`/api/v1/ideas/update/${id}`, {
+        content: updatedContent,
+      });
+
+      setLoading(false);
+      dispatch(fetchUser(res.data));
+    } catch (err) {
+      setLoading(false);
+      alert(err.response?.data.message);
+    }
   };
 
   const deleteIdea = async (e) => {
     e.preventDefault();
     try {
       setLoading(true);
+
       const response = await axios.delete(`/api/v1/ideas/delete/${deleteId}`);
-      dispatch(fetchUser(response.data));
+
       cancelDelete();
+      dispatch(fetchUser(response.data));
       setLoading(false);
     } catch (err) {
+      cancelDelete();
       alert(err.response.data.message);
       setLoading(false);
     }
