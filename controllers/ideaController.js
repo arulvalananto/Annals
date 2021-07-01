@@ -1,6 +1,8 @@
 const User = require("../models/User");
 const Idea = require("../models/Idea");
+
 const AppError = require("../utils/AppError");
+const catchAsync = require("../utils/catchAsync");
 
 const sendResponse = async (sessionUser, res) => {
   const user = await User.findById(sessionUser.id).populate("ideas");
@@ -10,38 +12,46 @@ const sendResponse = async (sessionUser, res) => {
   res.status(200).json({ loggedIn: true, user });
 };
 
-exports.addIdea = async (req, res, next) => {
+exports.addIdea = catchAsync(async (req, res) => {
   const { title, content } = req.body;
 
-  try {
-    const idea = await Idea.findById(req.session.user.ideas._id);
+  await Idea.updateOne(
+    { _id: req.session.user.ideas._id },
+    {
+      $push: {
+        entries: { title, content },
+      },
+    }
+  );
 
-    idea.entries.push({ title, content });
+  sendResponse(req.session.user, res);
+});
 
-    await idea.save();
+exports.updateIdea = catchAsync(async (req, res) => {
+  const { content } = req.body;
 
-    sendResponse(req.session.user, res);
-  } catch (err) {
-    return next(new AppError(err.message, 500));
+  await Idea.updateOne(
+    {
+      _id: req.session.user.ideas._id,
+      entries: { $elemMatch: { _id: req.params.id } },
+    },
+    {
+      $set: { "entries.$.content": content },
+    }
+  );
+
+  sendResponse(req.session.user, res);
+});
+
+exports.deleteIdea = catchAsync(async (req, res, next) => {
+  const idea = await Idea.findById(req.session.user.ideas._id);
+
+  if (!idea) {
+    return next(new AppError("Id not found!", 404));
   }
-};
+  idea.entries.remove(req.params.id);
 
-exports.updateIdea = async (req, res, next) => {};
+  await idea.save();
 
-exports.deleteIdea = async (req, res, next) => {
-  try {
-    const ideas = await Idea.findById(req.session.user.ideas._id);
-
-    const filteredEntries = ideas.entries.filter(
-      (entry) => entry.id !== req.params.id
-    );
-
-    ideas.entries = filteredEntries;
-
-    await ideas.save();
-
-    sendResponse(req.session.user, res);
-  } catch (err) {
-    return next(new AppError(err.message, 500));
-  }
-};
+  sendResponse(req.session.user, res);
+});

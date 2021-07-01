@@ -5,9 +5,12 @@ const AppError = require("../utils/AppError");
 const crypto = require("../utils/crypto");
 const sendEmail = require("../utils/email");
 const passwordStrengthChecker = require("../utils/passwordStrength");
+const catchAsync = require("../utils/catchAsync");
 
-const sendResponse = async (sessionUser, user, res) => {
-  sessionUser = user;
+const sendResponse = async (req, res) => {
+  const user = await User.findById(req.session.user.id);
+
+  req.session.user = user;
 
   res.status(200).json({
     loggedIn: true,
@@ -15,99 +18,86 @@ const sendResponse = async (sessionUser, user, res) => {
   });
 };
 
-exports.generatePin = async (req, res, next) => {
-  try {
-    const { pin } = req.body;
+exports.generatePin = catchAsync(async (req, res, next) => {
+  const { pin } = req.body;
 
-    const user = await User.findById(req.session.user.id);
+  if (!pin || pin.trim().length === 0) {
+    return next(new AppError("Please enter valid pin", 400));
+  }
 
-    if (user.passwords.pin) {
-      return next(new AppError("your already set a pin for this account", 400));
+  await User.updateOne(
+    { id: req.session.user.id },
+    {
+      $set: {
+        "passwords.pin": pin,
+      },
     }
+  );
 
-    if (!pin || pin.trim().length === 0) {
-      return next(new AppError("Please enter valid pin", 400));
+  sendResponse(req, res);
+});
+
+exports.verifyPin = catchAsync(async (req, res, next) => {
+  const { password, pin } = req.body;
+
+  const user = await User.findById(req.session.user.id);
+
+  if (user.passwords.pin !== pin) {
+    return next(new AppError("Invalid Pin", 401));
+  }
+  const decryptPassword = crypto.decrypt(password);
+
+  res.status(200).json({
+    decryptPassword,
+  });
+});
+
+exports.addPassword = catchAsync(async (req, res) => {
+  const { title, link, username, password } = req.body;
+
+  const passwordStrength = passwordStrengthChecker(password);
+
+  const encryptedPassword = crypto.encrypt(password);
+
+  const logo = await Logo.findOne({
+    avatar: { $regex: title.toLowerCase(), $options: "i" },
+  });
+
+  let avatar;
+  if (!logo) {
+    avatar = "http://localhost:5000/uploads/default.png";
+  } else {
+    avatar = "http://localhost:5000/" + logo.avatar;
+  }
+
+  await User.updateOne(
+    { _id: req.session.user.id },
+    {
+      $push: {
+        "passwords.entries": {
+          title,
+          link,
+          username,
+          password: encryptedPassword,
+          passwordStrength,
+          avatar,
+        },
+      },
     }
+  );
 
-    user.passwords.pin = pin;
+  sendResponse(req, res);
+});
 
-    await user.save();
+exports.deletePassword = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.session.user.id);
 
-    sendResponse(req.session.user, user, res);
-  } catch (err) {
-    return next(new AppError(err.message, 400));
-  }
-};
+  user.passwords.entries.remove(req.params.id);
 
-exports.verifyPin = async (req, res, next) => {
-  try {
-    const { password, pin } = req.body;
+  await user.save();
 
-    const user = await User.findById(req.session.user.id);
-
-    if (user.passwords.pin !== pin) {
-      return next(new AppError("Invalid Pin", 401));
-    }
-    const decryptPassword = crypto.decrypt(password);
-
-    res.status(200).json({
-      decryptPassword,
-    });
-  } catch (err) {
-    return next(new AppError(err.message, 401));
-  }
-};
-exports.addPassword = async (req, res, next) => {
-  try {
-    const { title, link, username, password } = req.body;
-
-    const passwordStrength = passwordStrengthChecker(password);
-
-    const user = await User.findById(req.session.user.id);
-
-    const encryptedPassword = crypto.encrypt(password);
-
-    const logo = await Logo.findOne({
-      avatar: { $regex: title.toLowerCase(), $options: "i" },
-    });
-
-    user.passwords.entries.push({
-      title,
-      link,
-      username,
-      password: encryptedPassword,
-      passwordStrength,
-      avatar: "http://localhost:5000/" + logo.avatar,
-    });
-
-    await user.save();
-
-    sendResponse(req.session.user, user, res);
-  } catch (err) {
-    return next(new AppError(err.message, 400));
-  }
-};
-
-exports.deletePassword = async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    console.log(typeof id);
-
-    const user = await User.findById(req.session.user.id);
-
-    const updatedEntries = user.passwords.entries.filter(
-      (entry) => entry._id != id
-    );
-
-    user.passwords.entries = updatedEntries;
-
-    await user.save();
-
-    sendResponse(req.session.user, user, res);
-  } catch (err) {
-    return next(new AppError(err.message, 400));
-  }
-};
+  sendResponse(req, res);
+});
 
 exports.changePin = (req, res, next) => {
   try {
