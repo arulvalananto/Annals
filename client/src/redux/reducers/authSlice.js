@@ -2,18 +2,15 @@ import { createSlice } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
 
 const slice = createSlice({
-    name: "auth",
-    initialState: {
-        userData: {},
+  name: "auth",
+  initialState: {
+    userData: {},
+  },
+  reducers: {
+    fetchUser: (auth, action) => {
+      return action.payload;
     },
-    reducers: {
-        fetchUser: (auth, action) => {
-            return {
-                ...auth,
-                userData: action.payload,
-            };
-        },
-    },
+  },
 });
 
 export const { fetchUser } = slice.actions;

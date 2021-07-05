@@ -19,7 +19,7 @@ const Password = () => {
   const [passwordDetails, setPasswordDetails] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const passwords = useSelector((state) => state.auth.userData.user.passwords);
+  const passwords = useSelector((state) => state.auth.user.passwords);
 
   const toggleDetails = (val, data) => {
     setShow(data);

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { day, date, month, year } from "../../utils/dates";
 
 const Pages = () => {
-  const diary = useSelector((state) => state.auth.userData.user.diary);
+  const diary = useSelector((state) => state.auth.user.diary);
 
   if (!diary) {
     return <p>Something went wrong!</p>;

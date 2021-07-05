@@ -3,7 +3,13 @@ import "./Model.scss";
 import FormInput from "../FormInput/FormInput";
 import Button from "../Button/Button";
 
-const Model = ({ handleChange, toggleModal, submitHandler, error }) => {
+const Model = ({
+  handleChange,
+  toggleModal,
+  submitHandler,
+  error,
+  loading,
+}) => {
   return (
     <div className="modal">
       <div className="modal__container">
@@ -33,7 +39,7 @@ const Model = ({ handleChange, toggleModal, submitHandler, error }) => {
           <Button type="button" inverted onClick={toggleModal}>
             Cancel
           </Button>
-          <Button type="submit" onClick={submitHandler}>
+          <Button type="submit" onClick={submitHandler} loading={loading}>
             Submit
           </Button>
         </div>

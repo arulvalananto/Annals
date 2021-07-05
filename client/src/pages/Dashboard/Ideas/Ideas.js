@@ -24,7 +24,7 @@ const Ideas = () => {
 
   const dispatch = useDispatch();
 
-  const ideas = useSelector((state) => state.auth.userData.user.ideas.entries);
+  const ideas = useSelector((state) => state.auth.user.ideas.entries);
 
   const addIdea = async (e) => {
     e.preventDefault();
@@ -100,7 +100,7 @@ const Ideas = () => {
   };
 
   const renderIdea = useCallback(() => {
-    if (ideas.length === 0) {
+    if (!ideas || ideas?.length === 0) {
       return <p className="ideas--empty">No Ideas yet...</p>;
     }
 

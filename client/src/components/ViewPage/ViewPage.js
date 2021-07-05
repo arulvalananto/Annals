@@ -19,7 +19,7 @@ const ViewPage = () => {
 
   const [loading, setLoading] = useState(false);
 
-  const pages = useSelector((state) => state.auth.userData.user.diary.pages);
+  const pages = useSelector((state) => state.auth.user.diary.pages);
   const page = pages.find((el) => el._id === id);
 
   const [isEditMode, setIsEditMode] = useState(false);

@@ -10,7 +10,7 @@ import Pages from "../../../components/Pages/Pages";
 const formattedDate = new Date().toISOString().split("T")[0];
 
 const Diary = () => {
-  const diary = useSelector((state) => state.auth.userData.user.diary);
+  const diary = useSelector((state) => state.auth.user.diary);
 
   const [dateFormat, setDateFormat] = useState("date");
 
