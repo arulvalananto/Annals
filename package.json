@@ -7,7 +7,8 @@
     "test": "jest",
     "start": "node server",
     "dev": "nodemon server",
-    "prod": "SET NODE_ENV=\"production\" && nodemon server"
+    "prod": "SET NODE_ENV=\"production\" && nodemon server",
+    "front": "cd client && npm start"
   },
   "keywords": [],
   "author": "",

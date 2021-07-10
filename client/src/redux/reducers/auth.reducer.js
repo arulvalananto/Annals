@@ -3,18 +3,47 @@ import { createSelector } from "reselect";
 
 const slice = createSlice({
   name: "auth",
-  initialState: {},
+  initialState: {
+    isPending: true,
+    isLoggedIn: false,
+    user: {},
+  },
   reducers: {
+    requestPending: (auth, action) => {
+      return {
+        ...auth,
+        isPending: true,
+      };
+    },
+    requestFailed: (auth, action) => {
+      return {
+        ...auth,
+        isPending: false,
+        isLoggedIn: false,
+      };
+    },
     fetchUser: (auth, action) => {
-      return action.payload;
+      return {
+        ...auth,
+        user: action.payload.user,
+        isLoggedIn: action.payload.loggedIn,
+        isPending: false,
+      };
     },
   },
 });
 
-export const { fetchUser } = slice.actions;
+export const { fetchUser, requestFailed, requestPending } = slice.actions;
 
 export default slice.reducer;
 
 // Selector
 
-export const selectUser = createSelector((state) => state.auth.user.user);
+const selectAuth = (state) => state.auth;
+
+export const selectUser = createSelector(selectAuth, (el) => el.user);
+export const selectLoading = createSelector(selectAuth, (el) => el.isPending);
+export const selectIsLoggedIn = createSelector(
+  selectAuth,
+  (el) => el.isLoggedIn
+);

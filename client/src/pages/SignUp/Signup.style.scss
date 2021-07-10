@@ -1,6 +1,6 @@
 @import "../../App.global.style.scss";
 
-.signup {
+.signUp {
   display: flex;
   color: $primary-color;
 
@@ -23,7 +23,7 @@
       align-self: flex-start;
       padding: 1.5rem;
 
-      .signup__leftLogo {
+      .signUp__leftLogo {
         padding: 0.3rem 0.6rem;
         border: 4px solid $light-theme;
         font-weight: bold;
@@ -31,7 +31,7 @@
       }
     }
     &Text {
-      font-size: 45px;
+      font-size: 32px;
       color: lightgray;
       width: 75%;
       padding-left: 1.5rem;
@@ -50,7 +50,7 @@
       flex: 1;
     }
 
-    &Head {
+    &Header {
       @include flexRow();
       align-self: flex-end;
       padding: 1.5rem;
@@ -77,29 +77,46 @@
         }
       }
     }
-    &Tail {
+    &Footer {
       @include flexRow();
       flex-direction: column;
       margin-top: 6rem;
 
       &Title {
         font-size: 35px;
+        font-weight: 500;
         text-transform: uppercase;
+      }
+      &Subtitle {
+        color: gray;
+        margin-top: 0.5rem;
       }
       &Form {
         margin-top: 3rem;
-        width: 350px;
-        max-width: 300px;
+        width: 500px;
         user-select: none;
+
+        @media (max-width: 750px) {
+          width: 400px;
+        }
+
+        @media (max-width: 500px) {
+          width: 300px;
+        }
+        @media (max-width: 300px) {
+          width: 250px;
+        }
+
         &Input {
           font-size: 18px;
           padding: 0.7rem 1rem;
           width: $percentage;
+          height: 50px;
           background: #fafafa;
           transition: all 0.5ms ease-in;
         }
         &Button {
-          width: $percentage;
+          width: 95%;
           background: $primary-color;
           color: $light-theme;
           padding: 1rem;
@@ -107,11 +124,12 @@
           font-weight: $font-weight-bold;
           cursor: pointer;
           margin-top: 1rem;
-        }
-        .signup__rightFooterButton:focus,
-        .signup__rightFooterButton:active,
-        .signup__rightFooterButton:hover {
-          background: #010614;
+
+          &:focus,
+          &:active,
+          &:hover {
+            background: #010614;
+          }
         }
       }
     }

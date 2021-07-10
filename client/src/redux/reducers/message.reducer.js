@@ -1,4 +1,5 @@
-const { createSlice } = require("@reduxjs/toolkit");
+import { createSlice } from "@reduxjs/toolkit";
+import { createSelector } from "reselect";
 
 const messageSlice = createSlice({
   name: "message",
@@ -42,3 +43,9 @@ export const {
 } = messageSlice.actions;
 
 export default messageSlice.reducer;
+
+// Selectors
+
+const selectState = (state) => state;
+
+export const selectMessage = createSelector(selectState, (el) => el.message);

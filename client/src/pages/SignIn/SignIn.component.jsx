@@ -15,6 +15,7 @@ import { fetchUser } from "../../redux/reducers/auth.reducer";
 import { setFailureMessage } from "../../redux/reducers/message.reducer";
 // Other Components
 import FormInput from "../../components/FormInput/FormInput.component";
+import Button from "../../components/Button/Button.component";
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -101,12 +102,13 @@ const SignIn = () => {
             <button className="signIn__rightHeaderButton">Sign Up</button>
           </Link>
         </div>
-        <div className="signin__rightFooter">
-          <h3 className="signin__rightFooterTitle">Sign In</h3>
-          <form className="signin__rightFooterForm" onSubmit={handleSubmit}>
+        <div className="signIn__rightFooter">
+          <h3 className="signIn__rightFooterTitle">Sign In</h3>
+          <p className="signIn__rightFooterSubtitle">Welcome back! sign in and let's go</p>
+          <form className="signIn__rightFooterForm" onSubmit={handleSubmit}>
             <FormInput
               ref={emailRef}
-              className="signup__rightFooterInput"
+              className="signIn__rightFooterFormInput"
               type="email"
               placeholder="Email Address"
               name="email"
@@ -116,7 +118,7 @@ const SignIn = () => {
               error={errors?.email}
             />
             <FormInput
-              className="signup__rightFooterInput"
+              className="signIn__rightFooterFormInput"
               type="password"
               placeholder="Password"
               name="password"
@@ -126,29 +128,23 @@ const SignIn = () => {
               error={errors?.password}
             />
             <Link to="/forgotPassword">
-              <p className="signin__rightFooterForgotPassword">
+              <p className="signIn__rightFooterForgot">
                 Forgot Password?
               </p>
             </Link>
-            {loading ? (
-              <div className="spinner">
-                <CircularProgress size={26} color="inherit" />
-              </div>
-            ) : (
-              <button className="signup__rightFooterButton" type="submit">
-                Sign In
-              </button>
-            )}
+            <button className="signIn__rightFooterFormButton" type="submit">
+              {!loading ? "Sign up" : <CircularProgress size={18} color="inherit" />}
+            </button>
           </form>
-          <p className="signin__splitter">or signin with</p>
-          <div className="signin__rightFooterButtonContainer">
+          <p className="signIn__splitter">or signin with</p>
+          <div className="signIn__rightFooterButtonContainer">
             <a href="http://localhost:5000/auth/google">
-              <button type="button" className="signin__googleButton">
+              <button type="button" className="signIn__googleButton">
                 <FcGoogle />
               </button>
             </a>
             <a href="http://localhost:5000/auth/facebook">
-              <button type="button" className="signin__facebookButton">
+              <button type="button" className="signIn__facebookButton">
                 <FaFacebookF />
               </button>
             </a>

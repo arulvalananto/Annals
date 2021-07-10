@@ -5,7 +5,7 @@
 
   &__left {
     flex: 0.4;
-    background: #010a24;
+    background: $primary-color;
     background-image: url("../../assets/signin__cover.jpg");
     background-position: top;
     background-size: cover;
@@ -67,71 +67,78 @@
         }
       }
     }
-    .signin__rightFooter {
+    &Footer {
       @include flexRow();
       flex-direction: column;
-      margin-top: 5rem;
+      margin-top: 6rem;
 
       &Title {
         font-size: 35px;
+        font-weight: 500;
         text-transform: uppercase;
+      }
+      &Subtitle {
+        color: gray;
+        margin-top: 0.5rem;
       }
       &Form {
         margin-top: 3rem;
-        width: 350px;
-        max-width: 300px;
+        width: 500px;
+        user-select: none;
 
-        .signup__rightFooterInput {
+        @media (max-width: 750px) {
+          width: 400px;
+        }
+
+        @media (max-width: 500px) {
+          width: 300px;
+        }
+        @media (max-width: 300px) {
+          width: 250px;
+        }
+
+        &Input {
           font-size: $font-x-large;
-          padding: 0.7rem 1rem;
-          width: $percentage;
+          height: 50px;
+          width: 100%;
           background: #fafafa;
           transition: all 0.5ms ease-in;
         }
-      }
+        a {
+          text-decoration: none;
 
-      .spinner {
-        @include flexRow();
-        justify-content: center;
-        width: $percentage;
-        margin: 2rem 0;
-      }
+          .signIn__rightFooterForgot {
+            width: 95%;
+            color: $primary-color;
+            text-align: right;
+            margin-bottom: 0.5rem;
+            font-weight: $font-weight-bold;
+          }
+          .signIn__rightFooterForgot:hover {
+            text-decoration: underline;
+          }
+        }
 
-      .signup__rightFooterButton {
-        width: $percentage;
-        background: $primary-color;
-        color: $light-theme;
-        padding: 1rem;
-        font-size: $font-normal;
-        font-weight: $font-weight-bold;
-        margin-top: 1rem;
-        cursor: pointer;
+        &Button {
+          width: 95%;
+          background: $primary-color;
+          color: $light-theme;
+          padding: 1rem;
+          font-size: $font-normal;
+          font-weight: $font-weight-bold;
+          cursor: pointer;
+          margin-top: 1rem;
 
-        &:last-child {
-          margin-top: 0.2rem;
+          &:focus,
+          &:active,
+          &:hover {
+            background: #010614;
+          }
         }
       }
-      .signup__rightFooterButton:focus,
-      .signup__rightFooterButton:active,
-      .signup__rightFooterButton:hover {
-        background: $primary-color;
-      }
     }
-    a {
-      text-decoration: none;
 
-      .signin__rightFooterForgotPassword {
-        width: $percentage;
-        color: $primary-color;
-        text-align: right;
-        margin-bottom: 0.5rem;
-        font-weight: $font-weight-bold;
-      }
-      .signin__rightFooterForgotPassword:hover {
-        text-decoration: underline;
-      }
-    }
-    .signin__splitter {
+    .signIn__splitter {
       margin: 2rem 0;
       position: relative;
       background: $light-theme;
@@ -149,14 +156,14 @@
         border-bottom: 1px solid #dedede;
       }
     }
-    .signin__rightFooterButtonContainer {
+    .signIn__rightFooterButtonContainer {
       margin-bottom: 1rem;
       @include flexRow();
       justify-content: space-between;
       width: 100px;
 
-      .signin__facebookButton,
-      .signin__googleButton {
+      .signIn__facebookButton,
+      .signIn__googleButton {
         border: none;
         background: $light-theme;
         font-size: 20px;
@@ -165,10 +172,10 @@
         padding-bottom: 0.2rem;
         cursor: pointer;
       }
-      .signin__googleButton {
+      .signIn__googleButton {
         border: 1px solid $dark-theme;
       }
-      .signin__facebookButton {
+      .signIn__facebookButton {
         background: #3c5a9a;
         color: $light-theme;
       }
