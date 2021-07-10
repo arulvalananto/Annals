@@ -1,0 +1,66 @@
+@import "../../../App.global.style.scss";
+
+.todoList {
+  display: flex;
+  align-items: flex-start;
+  width: $percentage;
+  height: $percentage;
+  padding: 2rem;
+
+  &__do,
+  &__doing,
+  &__done {
+    flex: 1;
+    margin: $rem;
+    border-radius: 4px;
+    border: 1px solid $light-theme-with-opacity;
+
+    &Header {
+      @include flexRow();
+      justify-content: space-between;
+      padding: $rem;
+      margin-bottom: 0.5rem;
+    }
+
+    &AddButton {
+      background: $button-primary-color;
+      padding: 0.5rem;
+      text-align: center;
+      color: $dark-theme;
+      border-radius: 4px;
+      margin: $rem;
+      margin-bottom: 1.5rem;
+    }
+
+    &Lists {
+      height: 35vw;
+      overflow: auto;
+      padding: $rem;
+      padding-top: 0;
+
+      @include scroll();
+
+      .todoList__doList,
+      .todoList__doingList,
+      .todoList__doneList {
+        padding: $rem;
+        background: $light-theme-with-opacity;
+        margin: 0.5rem 0;
+        border-radius: 4px;
+
+        &:first-child {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+
+  &__do {
+  }
+
+  &__doing {
+  }
+
+  &__done {
+  }
+}

@@ -1,0 +1,45 @@
+@import "../../App.global.style.scss";
+
+.header {
+  @include flexRow();
+  justify-content: space-between;
+  height: 60px;
+  padding: 0 $rem;
+  color: $primary-color;
+
+  &__left {
+    a {
+      text-decoration: none;
+      color: $primary-color;
+      z-index: 103;
+      cursor: pointer;
+
+      .header__logo {
+        padding: 0.4rem 0.8rem;
+        border: 4px solid $primary-color;
+        font-weight: $font-weight-bold;
+        font-size: $font-x-large;
+      }
+    }
+  }
+  &__right {
+    .header__signupButton,
+    .header__signinButton {
+      border: 1px solid $dark-theme;
+      outline: none;
+      font-size: $font-normal;
+      font-weight: 600;
+      position: relative;
+      padding: 0.4rem 0.8rem;
+      transition: padding 0.2ms ease-in;
+      box-shadow: 5px 5px 0px 0px $primary-color;
+      margin-left: 2rem;
+      color: $primary-color;
+
+      &:active {
+        box-shadow: 1px 1px 0px 0px $primary-color;
+        transform: translateY(2px);
+      }
+    }
+  }
+}

@@ -3,8 +3,8 @@ const LocalStrategy = require("passport-local").Strategy;
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
 
-const User = require("../models/User");
-const Idea = require("../models/Idea");
+const User = require("../models/User.model");
+const Idea = require("../models/Idea.model");
 
 passport.serializeUser((user, done) => {
   done(null, user.id);

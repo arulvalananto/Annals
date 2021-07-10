@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "node server",
     "dev": "nodemon server",
     "prod": "SET NODE_ENV=\"production\" && nodemon server"
@@ -18,7 +18,6 @@
     "connect-mongo": "^4.4.1",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
-    "crypto": "^1.0.1",
     "dotenv": "^9.0.2",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
@@ -26,12 +25,15 @@
     "mongoose": "^5.12.10",
     "multer": "^1.4.2",
     "nodemailer": "^6.6.1",
-    "nodemon": "^2.0.7",
     "passport": "^0.4.1",
     "passport-facebook": "^3.0.0",
     "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",
-    "reselect": "^4.0.0",
+    "redis": "^3.1.2",
     "validator": "^13.6.0"
+  },
+  "devDependencies": {
+    "jest": "^27.0.6",
+    "puppeteer": "^10.1.0"
   }
 }

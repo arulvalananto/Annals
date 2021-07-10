@@ -1,0 +1,15 @@
+@import "../../App.global.style.scss";
+
+.textEditor {
+  background: $light-theme-with-opacity;
+  border: none;
+  width: $percentage;
+  height: 500px;
+  font-size: $font-small;
+  color: $light-theme;
+  padding: 1rem;
+  resize: none;
+  font-family: inherit;
+
+  @include scroll();
+}

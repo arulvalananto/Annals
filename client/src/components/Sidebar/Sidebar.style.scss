@@ -1,0 +1,43 @@
+@import "../../App.global.style.scss";
+
+.sidebar {
+  width: 75px;
+  height: 100vh;
+  box-shadow: 0px 0.25px 0.5px $light-theme;
+  @include flexRow();
+  flex-direction: column;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  left: 0;
+
+  &__top {
+    flex: 0.1;
+    @include flexRow();
+    justify-content: center;
+  }
+  &__middle {
+    @include flexColumn();
+    justify-content: center;
+    flex: 0.8;
+  }
+  &__bottom {
+    flex: 0.1;
+    @include flexRow();
+    justify-content: center;
+  }
+  .sidebar__logo {
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    border-radius: 50%;
+    @include flexRow();
+    justify-content: center;
+    cursor: pointer;
+    color: $slight-theme;
+  }
+  .sidebar__logo--active,
+  .sidebar__logo:hover {
+    color: $dark-theme;
+    background: $button-primary-color;
+  }
+}

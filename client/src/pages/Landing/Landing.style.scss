@@ -1,0 +1,55 @@
+@import "../../App.global.style.scss";
+
+.landing {
+  color: $primary-color;
+  background: $light-theme;
+  height: 100vh;
+  @include userSelect();
+
+  &__container {
+    @include flexRow;
+    margin: 3rem 0;
+
+    &Left {
+      flex: 1;
+      padding: 2rem;
+
+      &Title {
+        font-size: 70px;
+
+        @media (max-width: 800px) {
+          font-size: 50px;
+        }
+      }
+      &Subtitle {
+        margin-top: 2rem;
+        font-size: 35px;
+
+        @media (max-width: 1180px) {
+          font-size: 25px;
+        }
+      }
+    }
+    &Right {
+      flex: 1;
+
+      &ImageContainer {
+        text-align: center;
+
+        .landing__containerRightImage {
+          width: 650px;
+          height: 500px;
+          object-fit: contain;
+
+          @media (max-width: 675px) {
+            width: 100%;
+            height: 350px;
+          }
+        }
+      }
+    }
+    @media (max-width: 1180px) {
+      flex-direction: column;
+    }
+  }
+}

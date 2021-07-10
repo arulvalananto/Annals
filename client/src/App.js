@@ -1,23 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import "./App.css";
 // React Router
 import { BrowserRouter, useHistory } from "react-router-dom";
 // React Redux
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUser } from "./redux/reducers/authSlice";
 // Axios
 import axios from "./axios";
 
 import AppRoutes from "./AppRoutes";
-
-import SuccessMessage from "./components/SuccessMessage/SuccessMessage";
-import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
-import {
-  clearSuccessMesage,
-  clearSuccessMessage,
-  setFailureMessage,
-  setSuccessMessage,
-} from "./redux/reducers/messageSlice";
+// Other Components
+import SuccessMessage from "./components/SuccessMessage/SuccessMessage.component";
+import ErrorMessage from "./components/ErrorMessage/ErrorMessage.component";
+// Reducers
+import { fetchUser } from "./redux/reducers/auth.reducer";
+import { setFailureMessage } from "./redux/reducers/message.reducer";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,31 +22,30 @@ function App() {
 
   const [loading, setLoading] = useState(true);
 
-  const state = useSelector((state) => state);
-  console.log(state);
+  const auth = useSelector((state) => state.auth);
+  console.log(auth);
 
   const message = useSelector((state) => state.message);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("/api/v1/current-user");
-        dispatch(fetchUser(response.data));
-        if (response.data.loggedIn) {
-          history.push("/");
-        } else {
-          history.push("/signin");
-        }
-        setLoading(false);
-      } catch (err) {
-        console.log(err);
-        dispatch(setFailureMessage(err.message));
-        setLoading(false);
+  const fetchData = useCallback(async () => {
+    try {
+      const response = await axios.get("/api/v1/current-user");
+      dispatch(fetchUser(response.data));
+      if (response.data.loggedIn) {
+        history.push("/");
+      } else {
+        history.push("/signin");
       }
-    };
+      setLoading(false);
+    } catch (err) {
+      dispatch(setFailureMessage(err.message));
+      setLoading(false);
+    }
+  }, [dispatch]); // if you add 'history' to dependency, fectchData runs rapidly on landing page.
 
+  useEffect(() => {
     fetchData();
-  }, [dispatch, history]);
+  }, [fetchData]);
 
   if (loading) {
     return (

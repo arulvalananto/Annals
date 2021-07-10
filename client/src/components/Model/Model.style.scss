@@ -1,0 +1,62 @@
+@import "../../App.global.style.scss";
+
+.modal {
+  @include absolute();
+  width: 95vw;
+  height: 100vh;
+  background: $model-overlay-bg;
+  @include flexColumn();
+  align-items: center;
+  justify-content: center;
+
+  &__container {
+    @include flexColumn();
+    background: $model-bg;
+    width: 325px;
+    height: 290px;
+    border-radius: 5px;
+  }
+  &__header {
+    font-size: 20px;
+    border-bottom: 1px solid $light-theme-with-opacity;
+    padding: $rem;
+    font-weight: $font-weight-normal;
+  }
+  &__body {
+    padding: 1.5rem;
+    padding-bottom: 0.5rem;
+
+    .form-input {
+      border-radius: 3px;
+      padding: 0.4rem 0.8rem;
+      width: $percentage;
+      font-size: $font-normal;
+      outline: none;
+      margin-bottom: 0.5rem;
+
+      &:last-child {
+        margin-bottom: 0.1rem;
+      }
+    }
+  }
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    padding: $rem;
+
+    button {
+      &:first-child {
+        background: $light-theme;
+        color: $dark-theme;
+        transition: all 0.5ms ease-in;
+
+        &:hover {
+          background: $light-theme;
+          color: $dark-theme;
+          transform: scale(1.1);
+        }
+      }
+    }
+    @include button();
+  }
+}

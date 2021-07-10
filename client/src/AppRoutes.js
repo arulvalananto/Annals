@@ -4,10 +4,10 @@ import { useSelector } from "react-redux";
 //  React Router
 import { Route } from "react-router";
 // Other Components
-import Dashboard from "./pages/Dashboard/Dashboard";
-import SignIn from "./pages/SignIn/SignIn";
-import SignUp from "./pages/SignUp/SignUp";
-import Landing from "./pages/Landing/Landing";
+import Dashboard from "./pages/Dashboard/Dashboard.component";
+import SignIn from "./pages/SignIn/SignIn.component";
+import SignUp from "./pages/SignUp/SignUp.component";
+import Landing from "./pages/Landing/Landing.component";
 
 const AppRoutes = () => {
   const user = useSelector((state) => state.auth);

@@ -1,0 +1,73 @@
+@import "../../App.global.style.scss";
+
+.pages__empty {
+  font-size: 32px;
+  color: $slight-theme;
+  align-self: center;
+}
+.pages {
+  @include flexRow();
+  flex-wrap: wrap;
+  margin-top: 2rem;
+  padding: 1rem;
+
+  .page {
+    background: $light-theme-with-opacity;
+    width: 250px;
+    height: 100px;
+    @include flexRow();
+    border-radius: 5px;
+    position: relative;
+    margin: 1rem;
+    text-decoration: none;
+    color: $light-theme;
+
+    &:hover {
+      color: $dark-theme;
+      background: $button-primary-color;
+    }
+    &:hover .page__labelYear {
+      color: $dark-theme;
+    }
+    &:hover .page__labelStart {
+      border-right: 1px solid $dark-theme;
+    }
+    &:hover .page__labelMid {
+      color: $dark-theme;
+    }
+    .page__labelStart {
+      text-transform: uppercase;
+      font-weight: $font-weight-bold;
+      flex: 0.4;
+      font-size: 2rem;
+      padding: 1rem;
+      border-right: 2px solid $slight-theme;
+
+      &:hover {
+        border-right: 1px solid $dark-theme;
+      }
+    }
+    .page__labelMid {
+      flex: 0.1;
+      padding: 1rem;
+      font-size: 1.5rem;
+      color: $slight-theme;
+
+      &:hover {
+        color: $dark-theme;
+      }
+    }
+    .page__labelEnd {
+      font-size: 2rem;
+      flex: 0.4rem;
+    }
+    .page__labelCorner {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      color: $slight-theme;
+      padding: 0 0.5rem 0.5rem 0;
+      font-size: 12px;
+    }
+  }
+}

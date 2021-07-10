@@ -5,13 +5,14 @@ const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const MongoStore = require("connect-mongo");
 
-const authRoutes = require("./routes/authRoutes");
-const diaryRoutes = require("./routes/diaryRoutes");
-const passwordRoutes = require("./routes/passwordRoutes");
-const ideaRoutes = require("./routes/ideaRoutes");
-const logoRoutes = require("./routes/logoRoutes");
+const authRoutes = require("./routes/auth.routes");
+const diaryRoutes = require("./routes/diary.routes");
+const passwordRoutes = require("./routes/password.routes");
+const ideaRoutes = require("./routes/idea.routes");
+const logoRoutes = require("./routes/logo.routes");
 
 require("./utils/passport");
+// require("./utils/cache");
 
 const app = express();
 
