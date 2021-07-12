@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "start": "node server",
-    "dev": "nodemon server",
+    "dev": "nodemon server --trace-sync-io",
     "prod": "SET NODE_ENV=\"production\" && nodemon server",
     "front": "cd client && npm start"
   },
@@ -16,12 +16,14 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "chalk": "^4.1.1",
+    "compression": "^1.7.4",
     "connect-mongo": "^4.4.1",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^9.0.2",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
+    "helmet": "^4.6.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.10",
     "multer": "^1.4.2",

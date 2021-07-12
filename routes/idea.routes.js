@@ -1,4 +1,5 @@
 const express = require("express");
+const Idea = require("../models/Idea.model");
 
 const {
   addIdea,
@@ -7,7 +8,6 @@ const {
 } = require("../controllers/idea.controller");
 
 const isAuthenticated = require("../middlewares/isAuthenticated");
-
 
 const router = express.Router();
 

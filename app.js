@@ -1,21 +1,25 @@
 const express = require("express");
 const cors = require("cors");
+const helmet = require("helmet");
 const passport = require("passport");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const MongoStore = require("connect-mongo");
+const compression = require("compression");
 
 const authRoutes = require("./routes/auth.routes");
 const diaryRoutes = require("./routes/diary.routes");
 const passwordRoutes = require("./routes/password.routes");
 const ideaRoutes = require("./routes/idea.routes");
 const logoRoutes = require("./routes/logo.routes");
+const todoRoutes = require("./routes/todo.routes");
 
 require("./utils/passport");
 // require("./utils/cache");
 
 const app = express();
 
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));
 app.use(
@@ -26,7 +30,8 @@ app.use(
   })
 );
 app.use(cookieParser());
-app.use(express.urlencoded({ extended: true }));
+app.use(helmet());
+app.use(compression());
 
 app.use(
   session({
@@ -55,6 +60,7 @@ app.use("/api/v1/logos", logoRoutes);
 app.use("/", authRoutes);
 app.use("/api/v1", diaryRoutes);
 app.use("/api/v1/password", passwordRoutes);
+app.use("/api/v1/todos", todoRoutes);
 app.use("/api/v1/ideas", ideaRoutes);
 
 app.use("*", (req, res) => {

@@ -4,7 +4,6 @@ import { createSelector } from "reselect";
 const slice = createSlice({
   name: "auth",
   initialState: {
-    isPending: true,
     isLoggedIn: false,
     user: {
       email: "",
@@ -16,16 +15,9 @@ const slice = createSlice({
     },
   },
   reducers: {
-    requestPending: (auth, action) => {
+    authFailed: (auth, action) => {
       return {
         ...auth,
-        isPending: true,
-      };
-    },
-    requestFailed: (auth, action) => {
-      return {
-        ...auth,
-        isPending: false,
         isLoggedIn: false,
       };
     },
@@ -34,13 +26,12 @@ const slice = createSlice({
         ...auth,
         user: action.payload.user,
         isLoggedIn: action.payload.loggedIn,
-        isPending: false,
       };
     },
   },
 });
 
-export const { fetchUser, requestFailed, requestPending } = slice.actions;
+export const { fetchUser, authFailed } = slice.actions;
 
 export default slice.reducer;
 
@@ -49,7 +40,6 @@ export default slice.reducer;
 const selectAuth = (state) => state.auth;
 
 export const selectUser = createSelector(selectAuth, (el) => el.user);
-export const selectLoading = createSelector(selectAuth, (el) => el.isPending);
 export const selectIsLoggedIn = createSelector(
   selectAuth,
   (el) => el.isLoggedIn

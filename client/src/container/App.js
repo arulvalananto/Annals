@@ -5,40 +5,43 @@ import { BrowserRouter } from "react-router-dom";
 // React Redux
 import { useDispatch, useSelector } from "react-redux";
 // Axios
-import axios from "./axios";
+import axios from "../axios";
 // Other Components
 import AppRoutes from "./AppRoutes.component";
-import SuccessMessage from "./components/SuccessMessage/SuccessMessage.component";
-import ErrorMessage from "./components/ErrorMessage/ErrorMessage.component";
-import Spinner from "./components/Spinner/Spinner.component";
+import SuccessMessage from "../components/SuccessMessage/SuccessMessage.component";
+import ErrorMessage from "../components/ErrorMessage/ErrorMessage.component";
+import Spinner from "../components/Spinner/Spinner.component";
 // Reducers
+import { authFailed, fetchUser } from "../redux/reducers/auth.reducer";
 import {
-  fetchUser,
-  requestFailed,
   requestPending,
+  requestFailed,
+  requestSucceed,
   selectLoading,
-} from "./redux/reducers/auth.reducer";
+} from "../redux/reducers/request.reducer";
 import {
   setFailureMessage,
   selectMessage,
-} from "./redux/reducers/message.reducer";
+} from "../redux/reducers/message.reducer";
 
 function App() {
   const dispatch = useDispatch();
 
-  const auth = useSelector((state) => state.auth);
+  const state = useSelector((state) => state);
   const loading = useSelector((state) => selectLoading(state));
   const message = useSelector((state) => selectMessage(state));
 
-  console.log(auth);
+  console.log(state);
 
   const fetchData = useCallback(async () => {
     try {
       dispatch(requestPending());
       const res = await axios.get("/api/v1/current-user");
+      dispatch(requestSucceed());
       dispatch(fetchUser(res.data));
     } catch (err) {
       dispatch(requestFailed());
+      dispatch(authFailed());
       dispatch(setFailureMessage(err.message));
     }
   }, []); // if you add 'history' to dependency, fectchData runs rapidly on landing page.

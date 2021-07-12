@@ -34,6 +34,7 @@ const userSchema = mongoose.Schema(
     diary: { type: Timeline.schema, default: {} },
     passwords: { type: Password.schema, default: {} },
     ideas: { type: mongoose.Schema.Types.ObjectId, ref: "Idea" },
+    todos: [{ type: mongoose.Schema.Types.ObjectId, ref: "Todos" }],
   },
   {
     toObject: {

@@ -54,7 +54,9 @@ exports.getCurrentUser = catchAsync(async (req, res, next) => {
       process.env.JWT_SECRET
     );
 
-    const currentUser = await User.findById(decoded.id).populate("ideas");
+    const currentUser = await User.findById(decoded.id)
+      .lean()
+      .populate("ideas");
     // .cache({ key: decoded.id });
 
     if (!currentUser) {
