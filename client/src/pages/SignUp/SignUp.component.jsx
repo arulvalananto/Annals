@@ -13,7 +13,6 @@ import SignUpCover from "../../assets/signup__cover.png";
 import { CircularProgress } from "@material-ui/core";
 // Other Components
 import FormInput from "../../components/FormInput/FormInput.component";
-import Button from "../../components/Button/Button.component";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -93,71 +92,82 @@ const SignUp = () => {
   };
 
   return (
-    <div className="signUp">
-      <div className="signUp__left">
-        <Link to="/">
-          <p className="signUp__leftLogo">_Annals</p>
+    <div className='signUp'>
+      <div className='signUp__left'>
+        <Link to='/'>
+          <p className='signUp__leftLogo'>_Annals</p>
         </Link>
-        <h3 className="signUp__leftText">Write and Read your content securely</h3>
+        <h3 className='signUp__leftText'>
+          Write and Read your content securely
+        </h3>
         <img
           src={SignUpCover}
-          alt="Annals SignUp Cover"
-          className="signUp__leftFooterImage"
+          alt='Annals SignUp Cover'
+          className='signUp__leftFooterImage'
         />
       </div>
-      <div className="signUp__right">
-        <div className="signUp__rightHeader">
+      <div className='signUp__right'>
+        <div className='signUp__rightHeader'>
           <p>Already have an account?</p>
-          <Link to="/signin">
-            <button className="signUp__rightHeaderButton">Sign In</button>
+          <Link to='/signin'>
+            <button className='signUp__rightHeaderButton'>Sign In</button>
           </Link>
         </div>
-        <div className="signUp__rightFooter">
-          <h3 className="signUp__rightFooterTitle">Sign Up</h3>
-          <p className="signUp__rightFooterSubtitle">Create an account and protect your privacy with annals</p>
-          <form onSubmit={submitHandler} className="signUp__rightFooterForm">
+        <div className='signUp__rightFooter'>
+          <h3 className='signUp__rightFooterTitle'>Sign Up</h3>
+          <p className='signUp__rightFooterSubtitle'>
+            Create an account and protect your privacy with annals
+          </p>
+          <form onSubmit={submitHandler} className='signUp__rightFooterForm'>
             <FormInput
-              className="signUp__rightFooterFormInput"
-              type="text"
-              placeholder="Full Name"
-              name="fullName"
+              className='signUp__rightFooterFormInput'
+              type='text'
+              placeholder='Full Name'
+              name='fullName'
               handleChange={changeHandler}
-              autoComplete="off"
+              autoComplete='off'
               value={credentials.fullName}
               error={errors?.fullName}
             />
             <FormInput
-              className="signUp__rightFooterFormInput"
-              type="email"
-              placeholder="Email Address"
-              name="email"
+              className='signUp__rightFooterFormInput'
+              type='email'
+              placeholder='Email Address'
+              name='email'
               handleChange={changeHandler}
-              autoComplete="off"
+              autoComplete='off'
               value={credentials.email}
               error={errors?.email}
             />
             <FormInput
-              className="signUp__rightFooterFormInput"
-              type="password"
-              placeholder="Password"
-              name="password"
+              className='signUp__rightFooterFormInput'
+              type='password'
+              placeholder='Password'
+              name='password'
               handleChange={changeHandler}
-              autoComplete="off"
+              autoComplete='off'
               value={credentials.password}
               error={errors?.password}
             />
             <FormInput
-              className="signUp__rightFooterFormInput"
-              type="password"
-              placeholder="Confirm Password"
-              name="confirmPassword"
+              className='signUp__rightFooterFormInput'
+              type='password'
+              placeholder='Confirm Password'
+              name='confirmPassword'
               handleChange={changeHandler}
-              autoComplete="off"
+              autoComplete='off'
               value={credentials.confirmPassword}
               error={errors?.confirmPassword}
             />
-            <button loading={loading} className="signUp__rightFooterFormButton" type="submit">
-              {!loading ? "Sign up" : <CircularProgress size={18} color="inherit" />}
+            <button
+              loading={loading}
+              className='signUp__rightFooterFormButton'
+              type='submit'>
+              {!loading ? (
+                "Sign up"
+              ) : (
+                <CircularProgress size={18} color='inherit' />
+              )}
             </button>
           </form>
         </div>

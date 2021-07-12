@@ -11,7 +11,7 @@ const FormInput = ({
   return (
     <div className="formInput">
       <input
-        className={`${className} formInput--field ${
+        className={`${className && className} formInput--field ${
           error && "formInput--fieldError"
         } `}
         onChange={(e) => handleChange(e.target)}

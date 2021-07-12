@@ -105,7 +105,7 @@ const Ideas = () => {
 
   const renderIdea = useCallback(() => {
     if (!ideas || ideas?.length === 0) {
-      return <p className="ideas--empty">No Ideas yet...</p>;
+      return <p className='ideas--empty'>No Ideas yet...</p>;
     }
 
     return ideas.map((idea) => (
@@ -119,29 +119,27 @@ const Ideas = () => {
   }, [ideas, editIdea]);
 
   return (
-    <div className="ideas">
+    <div className='ideas'>
       <div
-        className="ideas--overlay"
-        style={{ display: `${title ? "block" : "none"}` }}
-      ></div>
-      <form onSubmit={addIdea} className="ideas__header">
-        <div className="ideas__headerForm">
+        className='ideas--overlay'
+        style={{ display: `${title ? "block" : "none"}` }}></div>
+      <form onSubmit={addIdea} className='ideas__header'>
+        <div className='ideas__headerForm'>
           <input
-            type="text"
-            placeholder="Add Idea (Title)"
-            className="ideas__headerFormInput"
+            type='text'
+            placeholder='Add Idea (Title)'
+            className='ideas__headerFormInput'
             onChange={(e) => setTitle(e.target.value)}
             value={title}
           />
           <button
-            type="submit"
-            className="ideas__headerFormButton"
-            style={{ display: `${title && content ? "block" : "none"}` }}
-          >
+            type='submit'
+            className='ideas__headerFormButton'
+            style={{ display: `${title && content ? "block" : "none"}` }}>
             {loading ? (
-              <CircularProgress size={18} color="inherit" />
+              <CircularProgress size={18} color='inherit' />
             ) : (
-              <BsArrowRight size="20" />
+              <BsArrowRight size='20' />
             )}
           </button>
         </div>
@@ -149,13 +147,13 @@ const Ideas = () => {
           style={{
             display: `${title ? "block" : "none"}`,
           }}
-          className="ideas__headerFormContent"
+          className='ideas__headerFormContent'
           onChange={(e) => setContent(e.target.value)}
           value={content}
-          placeholder="Type Your Idea"
+          placeholder='Type Your Idea'
         />
       </form>
-      <div className="ideas__footer">{renderIdea()}</div>
+      <div className='ideas__footer'>{renderIdea()}</div>
       {openModal && (
         <YesOrNoModel yes={deleteIdea} no={cancelDelete} loading={loading} />
       )}

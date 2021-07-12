@@ -49,7 +49,7 @@ function App() {
     return <Spinner />;
   }
   return (
-    <div className="app">
+    <div className='app'>
       {message.success && <SuccessMessage message={message.success} />}
       {message.failure && <ErrorMessage message={message.failure} />}
       <BrowserRouter>

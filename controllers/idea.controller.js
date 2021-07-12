@@ -23,7 +23,6 @@ exports.addIdea = catchAsync(async (req, res) => {
       },
     }
   );
-
   sendResponse(req.session.user, res);
 });
 

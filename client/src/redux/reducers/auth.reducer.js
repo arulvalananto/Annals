@@ -6,7 +6,14 @@ const slice = createSlice({
   initialState: {
     isPending: true,
     isLoggedIn: false,
-    user: {},
+    user: {
+      email: "",
+      fullName: "",
+      googleId: "",
+      diary: { pages: [] },
+      ideas: { entries: [] },
+      passwords: { pin: "", entries: [] },
+    },
   },
   reducers: {
     requestPending: (auth, action) => {
