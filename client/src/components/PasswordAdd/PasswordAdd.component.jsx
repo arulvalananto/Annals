@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./AddPassword.style.scss";
+import "./PasswordAdd.style.scss";
 
 import axios from "../../axios";
 
@@ -10,7 +10,7 @@ import Button from "../Button/Button.component";
 
 const INPUT_DATA = ["title", "link", "username", "password"];
 
-const AddPassword = ({ toggleDetails }) => {
+const PasswordAdd = ({ toggleDetails }) => {
   const initialState = {
     title: "",
     link: "",
@@ -74,11 +74,11 @@ const AddPassword = ({ toggleDetails }) => {
 
   const renderInput = () => {
     return INPUT_DATA?.map((name) => (
-      <div className='addPassword__inputsContainer' key={name}>
-        <div className='addPassword__inputContainer'>
-          <label className='addPassword__label'>{name}</label>
+      <div className='passwordAdd__inputsContainer' key={name}>
+        <div className='passwordAdd__inputContainer'>
+          <label className='passwordAdd__label'>{name}</label>
           <input
-            className='addPassword__input'
+            className='passwordAdd__input'
             type={`${
               name === "link"
                 ? "url"
@@ -100,22 +100,22 @@ const AddPassword = ({ toggleDetails }) => {
           />
         </div>
         {errors[name] && (
-          <p className='addPassword__input--error'>{errors[name]}</p>
+          <p className='passwordAdd__input--error'>{errors[name]}</p>
         )}
       </div>
     ));
   };
 
   return (
-    <div className='addPassword'>
+    <div className='passwordAdd'>
       <Button
         type='button'
-        className='addPassword__backButton'
+        className='passwordAdd__backButton'
         onClick={() => toggleDetails("", "")}>
         Back
       </Button>
-      <h3 className='addPassword__title'>Add Password</h3>
-      <form className='addPassword__form'>{renderInput()}</form>
+      <h3 className='passwordAdd__title'>Add Password</h3>
+      <form className='passwordAdd__form'>{renderInput()}</form>
       <div className='password__buttonContainer'>
         <Button type='button' inverted onClick={clearInput} disabled={loading}>
           Reset
@@ -132,4 +132,4 @@ const AddPassword = ({ toggleDetails }) => {
   );
 };
 
-export default AddPassword;
+export default PasswordAdd;

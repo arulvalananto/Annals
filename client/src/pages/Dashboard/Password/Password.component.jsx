@@ -6,8 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { IoAddCircleOutline } from "react-icons/io5";
 import { MdSettingsBackupRestore } from "react-icons/md";
 // Other Components
-import AddPassword from "../../../components/AddPassword/AddPassword.component";
-import ViewPassword from "../../../components/ViewPassword/ViewPassword.component";
+import PasswordAdd from "../../../components/PasswordAdd/PasswordAdd.component";
+import PasswordView from "../../../components/PasswordView/PasswordView.component";
 import GeneratePin from "../../../components/GeneratePin/GeneratePin.component";
 import YesOrNoModel from "../../../components/YesOrNoModel/YesOrNoModel.component";
 // Material UI
@@ -55,13 +55,13 @@ const Password = () => {
   const showContent = () => {
     if (show === "view") {
       return (
-        <ViewPassword
+        <PasswordView
           passwordDetails={passwordDetails}
           toggleDetails={toggleDetails}
         />
       );
     } else if (show === "add") {
-      return <AddPassword toggleDetails={toggleDetails} />;
+      return <PasswordAdd toggleDetails={toggleDetails} />;
     }
   };
 
@@ -70,13 +70,13 @@ const Password = () => {
       {!passwords?.pin ? (
         <GeneratePin />
       ) : (
-        <div className="password">
-          <div className="password__left">
-            <div className="password__leftTop">
-              <Tooltip title="Add Password" arrow placement="top">
+        <div className='password'>
+          <div className='password__left'>
+            <div className='password__leftTop'>
+              <Tooltip title='Add Password' arrow placement='top'>
                 <i>
                   <IoAddCircleOutline
-                    size="24"
+                    size='24'
                     onClick={() => {
                       setPasswordDetails("");
                       setShow("add");
@@ -84,39 +84,38 @@ const Password = () => {
                   />
                 </i>
               </Tooltip>
-              <Tooltip title="Change Pin" arrow placement="top">
+              <Tooltip title='Change Pin' arrow placement='top'>
                 <i>
                   <MdSettingsBackupRestore
                     onClick={toggleChangeModel}
-                    size="24"
+                    size='24'
                   />
                 </i>
               </Tooltip>
             </div>
-            <div className="password__leftBottom">
+            <div className='password__leftBottom'>
               {passwords.entries?.map((password) => (
                 <div
-                  className="password__leftBottomPasswordList"
+                  className='password__leftBottomPasswordList'
                   key={password._id}
                   onClick={() => {
                     setPasswordDetails(password);
                     setShow("view");
-                  }}
-                >
+                  }}>
                   <img
-                    className="password__leftBottomPasswordLogo"
+                    className='password__leftBottomPasswordLogo'
                     src={password.avatar}
-                    alt="logo"
+                    alt='logo'
                   />
-                  <div className="password__leftBottomPasswordDetails">
-                    <span className="title">{password.title}</span>
-                    <span className="link">{password?.link}</span>
+                  <div className='password__leftBottomPasswordDetails'>
+                    <span className='title'>{password.title}</span>
+                    <span className='link'>{password?.link}</span>
                   </div>
                 </div>
               ))}
             </div>
           </div>
-          <div className="password__right">{showContent()}</div>
+          <div className='password__right'>{showContent()}</div>
           {isOpenChangeModel && (
             <YesOrNoModel
               yes={changePin}

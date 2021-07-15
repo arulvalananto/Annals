@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./viewPage.style.scss";
+import "./PageView.style.scss";
 
 import Button from "../Button/Button.component";
 // React Redux
@@ -14,7 +14,7 @@ import { dateString } from "../../utils/dates";
 import { pageUpdated } from "../../redux/reducers/auth.reducer";
 import { setFailureMessage } from "../../redux/reducers/message.reducer";
 
-const ViewPage = () => {
+const PageView = () => {
   const { id } = useParams();
 
   const history = useHistory();
@@ -58,22 +58,22 @@ const ViewPage = () => {
   };
 
   return (
-    <div className='viewPage'>
-      <div className='viewPage__top'>
+    <div className='pageView'>
+      <div className='pageView__top'>
         <button
           type='button'
           disabled={loading}
-          className='viewPage__topButton viewPage__topButton--back'
+          className='pageView__topButton pageView__topButton--back'
           onClick={() => history.goBack()}>
           Back
         </button>
-        <p className='viewPage__topDate'>{dateString(page.createdAt)}</p>
-        <div className='viewPage__topButtonContainer'>
+        <p className='pageView__topDate'>{dateString(page.createdAt)}</p>
+        <div className='pageView__topButtonContainer'>
           <button
             type='button'
             disabled={loading}
-            className={`viewPage__topButton ${
-              isEditMode && "viewPage__topButton--cancel"
+            className={`pageView__topButton ${
+              isEditMode && "pageView__topButton--cancel"
             }`}
             onClick={toggleEdit}>
             {isEditMode ? "Cancel" : "Edit"}
@@ -83,22 +83,22 @@ const ViewPage = () => {
               type='submit'
               loading={loading}
               disabled={loading}
-              className='viewPage__topButton'
+              className='pageView__topButton'
               onClick={submitHandler}>
               Save
             </Button>
           )}
         </div>
       </div>
-      <div className='viewPage__bottom'>
+      <div className='pageView__bottom'>
         <textarea
           disabled={isEditMode ? false : true}
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          className='viewPage__bottomContent'></textarea>
+          className='pageView__bottomContent'></textarea>
       </div>
     </div>
   );
 };
 
-export default ViewPage;
+export default PageView;

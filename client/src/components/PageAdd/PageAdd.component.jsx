@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./AddPage.style.scss";
+import "./PageAdd.style.scss";
 // Other Components
 import Button from "../Button/Button.component";
 import TextEditor from "../TextEditor/TextEditor.component";
@@ -14,7 +14,7 @@ import { pageAdded } from "../../redux/reducers/auth.reducer";
 import { setFailureMessage } from "../../redux/reducers/message.reducer";
 import { useDispatch } from "react-redux";
 
-const AddPage = () => {
+const PageAdd = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -48,19 +48,19 @@ const AddPage = () => {
   };
 
   return (
-    <div className='addPage'>
-      <div className='addPage__top'>
+    <div className='pageAdd'>
+      <div className='pageAdd__top'>
         <button
           type='button'
-          className='addPage__topButton addPage__topButton--back'
+          className='pageAdd__topButton pageAdd__topButton--back'
           onClick={() => history.goBack()}
           disabled={loading}>
           Back
         </button>
-        <p className='addPage__topDate'>{dateString(Date.now())}</p>
+        <p className='pageAdd__topDate'>{dateString(Date.now())}</p>
         <Button
           type='button'
-          className='addPage__topButton'
+          className='pageAdd__topButton'
           loading={loading}
           disabled={loading}
           onClick={handleSubmit}>
@@ -72,4 +72,4 @@ const AddPage = () => {
   );
 };
 
-export default AddPage;
+export default PageAdd;

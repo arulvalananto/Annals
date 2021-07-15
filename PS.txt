@@ -1,1 +1,3 @@
 have to refactor add password controller
+
+make whole app with static typing (optional) options: Typescript, flow. 

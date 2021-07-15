@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./ViewPassword.style.scss";
+import "./PasswordView.style.scss";
 // Other Components
 import Button from "../Button/Button.component";
 import FormInput from "../FormInput/FormInput.component";
@@ -21,7 +21,7 @@ import { Tooltip } from "@material-ui/core";
 
 const INPUT_DATA = ["title", "link", "username", "password"];
 
-const ViewPassword = ({ passwordDetails, toggleDetails }) => {
+const PasswordView = ({ passwordDetails, toggleDetails }) => {
   const initialState = {
     title: "",
     link: "",
@@ -104,17 +104,17 @@ const ViewPassword = ({ passwordDetails, toggleDetails }) => {
   };
 
   return (
-    <div className='viewPassword__container'>
-      <div className={`viewPassword ${!verify && "viewPassword--blur"}`}>
-        <div className='viewPassword__header'>
+    <div className='passwordView__container'>
+      <div className={`passwordView ${!verify && "passwordView--blur"}`}>
+        <div className='passwordView__header'>
           <button
             type='button'
-            className='viewPassword__headerButton'
+            className='passwordView__headerButton'
             onClick={() => toggleDetails("", "")}>
             Back
           </button>
           <MdDelete
-            className='viewPassword__headerDeleteButton'
+            className='passwordView__headerDeleteButton'
             onClick={toggleDeleteModel}
             size='24'
             color='inherit'
@@ -226,4 +226,4 @@ const ViewPassword = ({ passwordDetails, toggleDetails }) => {
   );
 };
 
-export default ViewPassword;
+export default PasswordView;

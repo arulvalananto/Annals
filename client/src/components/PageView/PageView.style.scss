@@ -1,17 +1,16 @@
 @import "../../container/App.global.style.scss";
 
-.addPage {
-  width: 100%;
+.pageView {
+  width: $percentage;
   height: 500px;
   padding: 3rem;
-
   &__top {
     @include flexRow();
     justify-content: space-between;
     margin-bottom: 1.5rem;
 
     &Date {
-      font-size: 1.5rem;
+      font-size: 24px;
       font-weight: $font-weight-bold;
       text-transform: uppercase;
     }
@@ -32,12 +31,45 @@
       }
     }
 
-    .addPage__topButton--back {
+    .pageView__topButton--back {
       background: $button-secondary-color;
       &:active,
       &:hover {
         background: $button-secondary-touch-color;
       }
+    }
+    .pageView__topButtonContainer {
+      display: flex;
+      justify-content: space-between;
+
+      .pageView__topButton--cancel {
+        margin-right: 1rem;
+        background: $button-secondary-color;
+        color: $dark-theme;
+
+        &:hover {
+          background: $button-secondary-touch-color;
+        }
+      }
+    }
+  }
+  &__bottom {
+    height: 500px;
+
+    &Content {
+      width: $percentage;
+      height: $percentage;
+      color: $light-theme;
+      background: $light-theme-with-opacity;
+      font-size: $font-small;
+      padding: 1rem;
+      font-family: inherit;
+      word-wrap: break-word;
+      word-break: keep-all;
+      resize: none;
+      margin-right: 1rem;
+
+      @include scroll();
     }
   }
 }
