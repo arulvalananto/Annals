@@ -4,53 +4,43 @@ const Idea = require("../models/Idea.model");
 const AppError = require("../utils/AppError");
 const catchAsync = require("../utils/catchAsync");
 
-const sendResponse = async (sessionUser, res) => {
-  const user = await User.findById(sessionUser.id).populate("ideas");
-
-  sessionUser = user;
-
-  res.status(200).json({ loggedIn: true, user });
-};
-
 exports.addIdea = catchAsync(async (req, res) => {
   const { title, content } = req.body;
 
-  await Idea.updateOne(
-    { _id: req.session.user.ideas._id },
-    {
-      $push: {
-        entries: { title, content },
-      },
-    }
-  );
-  sendResponse(req.session.user, res);
+  const user = await User.findById(req.session.userId).populate("ideas");
+
+  const idea = await Idea({ title, content, createdBy: user.id }).save();
+
+  user.ideas.push(idea.id);
+  await user.save();
+
+  res.status(201).json(idea);
 });
 
 exports.updateIdea = catchAsync(async (req, res) => {
   const { content } = req.body;
 
-  await Idea.updateOne(
-    {
-      _id: req.session.user.ideas._id,
-      entries: { $elemMatch: { _id: req.params.id } },
-    },
-    {
-      $set: { "entries.$.content": content },
-    }
-  );
+  const idea = await Idea.findById(req.params.id);
 
-  sendResponse(req.session.user, res);
+  idea.content = content;
+  await idea.save();
+
+  res.status(200).json(idea);
 });
 
 exports.deleteIdea = catchAsync(async (req, res, next) => {
-  const idea = await Idea.findById(req.session.user.ideas._id);
+  const { id } = req.params;
 
+  const idea = await Idea.deleteOne({ _id: id });
   if (!idea) {
     return next(new AppError("Id not found!", 404));
   }
-  idea.entries.remove(req.params.id);
+  const user = await User.findById(req.session.userId).populate("ideas");
 
-  await idea.save();
+  console.log(user);
 
-  sendResponse(req.session.user, res);
+  user.ideas.remove(id);
+  await user.save();
+
+  res.status(200).json({ deleted: true });
 });

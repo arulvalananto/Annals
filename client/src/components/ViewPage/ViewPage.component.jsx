@@ -11,7 +11,7 @@ import axios from "../../axios";
 // Utils
 import { dateString } from "../../utils/dates";
 // Reducers
-import { fetchUser } from "../../redux/reducers/auth.reducer";
+import { pageUpdated } from "../../redux/reducers/auth.reducer";
 import { setFailureMessage } from "../../redux/reducers/message.reducer";
 
 const ViewPage = () => {
@@ -47,7 +47,7 @@ const ViewPage = () => {
         `/api/v1/update-timeline/${page._id}`,
         { content }
       );
-      dispatch(fetchUser(response?.data));
+      dispatch(pageUpdated(response?.data));
 
       history.push("/diary");
       setLoading(false);
@@ -58,48 +58,44 @@ const ViewPage = () => {
   };
 
   return (
-    <div className="viewPage">
-      <div className="viewPage__top">
+    <div className='viewPage'>
+      <div className='viewPage__top'>
         <button
-          type="button"
+          type='button'
           disabled={loading}
-          className="viewPage__topButton viewPage__topButton--back"
-          onClick={() => history.goBack()}
-        >
+          className='viewPage__topButton viewPage__topButton--back'
+          onClick={() => history.goBack()}>
           Back
         </button>
-        <p className="viewPage__topDate">{dateString(page.writtenAt)}</p>
-        <div className="viewPage__topButtonContainer">
+        <p className='viewPage__topDate'>{dateString(page.createdAt)}</p>
+        <div className='viewPage__topButtonContainer'>
           <button
-            type="button"
+            type='button'
             disabled={loading}
             className={`viewPage__topButton ${
               isEditMode && "viewPage__topButton--cancel"
             }`}
-            onClick={toggleEdit}
-          >
+            onClick={toggleEdit}>
             {isEditMode ? "Cancel" : "Edit"}
           </button>
           {isEditMode && (
             <Button
-              type="submit"
+              type='submit'
               loading={loading}
               disabled={loading}
-              className="viewPage__topButton"
-              onClick={submitHandler}
-            >
+              className='viewPage__topButton'
+              onClick={submitHandler}>
               Save
             </Button>
           )}
         </div>
       </div>
-      <div className="viewPage__bottom">
+      <div className='viewPage__bottom'>
         <textarea
           disabled={isEditMode ? false : true}
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          className="viewPage__bottomContent"
-        ></textarea>
+          className='viewPage__bottomContent'></textarea>
       </div>
     </div>
   );

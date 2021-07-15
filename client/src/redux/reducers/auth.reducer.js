@@ -6,15 +6,7 @@ const slice = createSlice({
   initialState: {
     isLoggedIn: false,
     isPending: true,
-    user: {
-      email: "",
-      fullName: "",
-      googleId: "",
-      diary: { pages: [] },
-      ideas: { entries: [] },
-      passwords: { pin: "", entries: [] },
-      todos: []
-    },
+    user: {},
   },
   reducers: {
     requestPending: (auth, action) => {
@@ -36,14 +28,98 @@ const slice = createSlice({
         isPending: false,
       };
     },
-    fetchUser: (auth, action) => {
+    userFetched: (auth, action) => {
       return {
         ...auth,
         user: action.payload.user,
         isLoggedIn: action.payload.loggedIn,
       };
     },
-    addTodo: (auth, action) => {
+    pageAdded: (auth, action) => {
+      return {
+        ...auth,
+        user: {
+          ...auth.user,
+          diary: [...auth.user.diary, action.payload],
+        },
+      };
+    },
+    pageUpdated: (auth, action) => {
+      return {
+        ...auth,
+        user: {
+          ...auth.user,
+          diary: auth.user.diary.map((page) =>
+            page._id === action.payload._id ? (page = action.payload) : page
+          ),
+        },
+      };
+    },
+    pinCreated: (auth, action) => {
+      return {
+        ...auth,
+        user: {
+          ...auth.user,
+          passwords: { ...auth.user.passwords, pin: action.payload.pin },
+        },
+      };
+    },
+    passwordFetched: (auth, action) => {
+      return {
+        ...auth,
+        user: {
+          ...auth.user,
+          passwords: { ...auth.user.passwords, entries: action.payload },
+        },
+      };
+    },
+    passwordDeleted: (auth, action) => {
+      console.log(action.payload);
+      return {
+        ...auth,
+        user: {
+          ...auth.user,
+          passwords: {
+            ...auth.user.passwords,
+            entries: auth.user.passwords.entries.filter(
+              (password) => password._id !== action.payload.id
+            ),
+          },
+        },
+      };
+    },
+    ideaAdded: (auth, action) => {
+      return {
+        ...auth,
+        user: {
+          ...auth.user,
+          ideas: [...auth.user.ideas, action.payload],
+        },
+      };
+    },
+    ideaUpdated: (auth, action) => {
+      return {
+        ...auth,
+        user: {
+          ...auth.user,
+          ideas: auth.user.ideas.map((idea) =>
+            idea._id === action.payload._id ? (idea = action.payload) : idea
+          ),
+        },
+      };
+    },
+    ideaDeleted: (auth, action) => {
+      return {
+        ...auth,
+        user: {
+          ...auth.user,
+          ideas: auth.user.ideas.filter(
+            (idea) => idea._id !== action.payload.id
+          ),
+        },
+      };
+    },
+    todoAdded: (auth, action) => {
       return {
         ...auth,
         user: {
@@ -56,12 +132,19 @@ const slice = createSlice({
 });
 
 export const {
-  fetchUser,
-  authFailed,
-  addTodo,
   requestFailed,
   requestPending,
   requestSucceed,
+  userFetched,
+  pageAdded,
+  pageUpdated,
+  pinCreated,
+  passwordFetched,
+  passwordDeleted,
+  ideaAdded,
+  ideaUpdated,
+  ideaDeleted,
+  todoAdded,
 } = slice.actions;
 
 export default slice.reducer;

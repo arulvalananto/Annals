@@ -13,10 +13,10 @@ import ErrorMessage from "../components/ErrorMessage/ErrorMessage.component";
 import Spinner from "../components/Spinner/Spinner.component";
 // Reducers
 import {
-  fetchUser,
   requestPending,
   requestFailed,
   requestSucceed,
+  userFetched,
   selectLoading,
 } from "../redux/reducers/auth.reducer";
 import {
@@ -38,7 +38,7 @@ function App() {
       dispatch(requestPending());
       const res = await axios.get("/api/v1/current-user");
       dispatch(requestSucceed());
-      dispatch(fetchUser(res.data));
+      dispatch(userFetched(res.data));
     } catch (err) {
       dispatch(requestFailed());
       dispatch(setFailureMessage(err.message));

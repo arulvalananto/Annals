@@ -8,10 +8,9 @@ import { dateString } from "../../utils/dates";
 
 import { useHistory } from "react-router-dom";
 
-
 import axios from "../../axios";
 
-import { fetchUser } from "../../redux/reducers/auth.reducer";
+import { pageAdded } from "../../redux/reducers/auth.reducer";
 import { setFailureMessage } from "../../redux/reducers/message.reducer";
 import { useDispatch } from "react-redux";
 
@@ -35,7 +34,7 @@ const AddPage = () => {
       });
 
       if (response.data) {
-        dispatch(fetchUser(response.data));
+        dispatch(pageAdded(response.data));
       }
       setLoading(false);
       history.push("/diary");
@@ -49,24 +48,22 @@ const AddPage = () => {
   };
 
   return (
-    <div className="addPage">
-      <div className="addPage__top">
+    <div className='addPage'>
+      <div className='addPage__top'>
         <button
-          type="button"
-          className="addPage__topButton addPage__topButton--back"
+          type='button'
+          className='addPage__topButton addPage__topButton--back'
           onClick={() => history.goBack()}
-          disabled={loading}
-        >
+          disabled={loading}>
           Back
         </button>
-        <p className="addPage__topDate">{dateString(Date.now())}</p>
+        <p className='addPage__topDate'>{dateString(Date.now())}</p>
         <Button
-          type="button"
-          className="addPage__topButton"
+          type='button'
+          className='addPage__topButton'
           loading={loading}
           disabled={loading}
-          onClick={handleSubmit}
-        >
+          onClick={handleSubmit}>
           Save
         </Button>
       </div>

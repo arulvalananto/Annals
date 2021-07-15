@@ -17,6 +17,7 @@ const ideaSchema = mongoose.Schema(
     toJSON: {
       virtuals: true,
     },
+    timestamps: true,
   }
 );
 

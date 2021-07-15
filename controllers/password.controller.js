@@ -1,3 +1,5 @@
+const bcrypt = require("bcryptjs");
+
 const User = require("../models/User.model");
 const Logo = require("../models/Logo.model");
 
@@ -6,15 +8,6 @@ const crypto = require("../utils/crypto");
 const sendEmail = require("../utils/email");
 const catchAsync = require("../utils/catchAsync");
 const passwordStrengthChecker = require("../utils/passwordStrength");
-
-const sendResponse = async (req, res) => {
-  const user = await User.findById(req.session.userId);
-
-  res.status(200).json({
-    loggedIn: true,
-    user,
-  });
-};
 
 exports.generatePin = catchAsync(async (req, res, next) => {
   const { pin } = req.body;
@@ -25,25 +18,23 @@ exports.generatePin = catchAsync(async (req, res, next) => {
 
   const user = await User.findById(req.session.userId);
 
-  user.passwords.pin = pin;
+  const hashPin = await bcrypt.hash(pin, 12);
 
+  user.passwords.pin = hashPin;
   await user.save();
 
-  res.status(200).json({
-    loggedIn: true,
-    user,
-  });
+  res.status(200).json({ pin: hashPin });
 });
 
 exports.verifyPin = catchAsync(async (req, res, next) => {
   const { password, pin } = req.body;
 
   const user = await User.findById(req.session.userId);
-  console.log(user)
 
-  if (user.passwords.pin !== pin) {
+  if (!(await bcrypt.compare(pin, user.passwords.pin))) {
     return next(new AppError("Invalid Pin", 401));
   }
+
   const decryptPassword = crypto.decrypt(password);
 
   res.status(200).json({
@@ -69,23 +60,19 @@ exports.addPassword = catchAsync(async (req, res) => {
     avatar = "http://localhost:5000/" + logo.avatar;
   }
 
-  await User.updateOne(
-    { _id: req.session.userId },
-    {
-      $push: {
-        "passwords.entries": {
-          title,
-          link,
-          username,
-          password: encryptedPassword,
-          passwordStrength,
-          avatar,
-        },
-      },
-    }
-  );
+  const user = await User.findById(req.session.userId);
 
-  sendResponse(req, res);
+  user.passwords.entries.push({
+    title,
+    link,
+    username,
+    password: encryptedPassword,
+    passwordStrength,
+    avatar,
+  });
+  await user.save();
+
+  res.status(201).json(user.passwords.entries);
 });
 
 exports.deletePassword = catchAsync(async (req, res, next) => {
@@ -95,7 +82,7 @@ exports.deletePassword = catchAsync(async (req, res, next) => {
 
   await user.save();
 
-  sendResponse(req, res);
+  res.status(200).json({ deleted: true });
 });
 
 exports.changePin = (req, res, next) => {

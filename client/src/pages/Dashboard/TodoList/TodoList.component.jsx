@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "./TodoList.style.scss";
 
 import { useDispatch, useSelector } from "react-redux";
-import { addTodo, selectTodos } from "../../../redux/reducers/auth.reducer";
+import { selectTodos, todoAdded } from "../../../redux/reducers/auth.reducer";
 import { setFailureMessage } from "../../../redux/reducers/message.reducer";
 
 import { IoAdd } from "react-icons/io5";
@@ -45,7 +45,7 @@ const TodoList = () => {
     try {
       setLoading(true);
       const res = await axios.post("/api/v1/todos/add", { content });
-      dispatch(addTodo(res?.data));
+      dispatch(todoAdded(res?.data));
       setEditMode(!editMode);
       setContent("");
       setLoading(false);

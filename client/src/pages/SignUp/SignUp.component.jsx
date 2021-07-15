@@ -6,7 +6,7 @@ import { Link, useHistory } from "react-router-dom";
 import axios from "../../axios";
 // React Redux
 import { useDispatch } from "react-redux";
-import { fetchUser } from "../../redux/reducers/auth.reducer";
+import { userFetched } from "../../redux/reducers/auth.reducer";
 import { setFailureMessage } from "../../redux/reducers/message.reducer";
 // Image
 import SignUpCover from "../../assets/signup__cover.png";
@@ -81,7 +81,7 @@ const SignUp = () => {
       setLoading(true);
       try {
         const response = await axios.post("/api/v1/register", credentials);
-        dispatch(fetchUser(response.data));
+        dispatch(userFetched(response.data));
         setLoading(false);
         history.replace("/");
       } catch (err) {

@@ -3,7 +3,7 @@ import "./GeneratePin.style.scss";
 // Reducers
 import axios from "../../axios";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUser } from "../../redux/reducers/auth.reducer";
+import { pinCreated } from "../../redux/reducers/auth.reducer";
 import {
   clearFailureMessage,
   setFailureMessage,
@@ -14,12 +14,12 @@ import Model from "../Model/Model.component";
 const GeneratePin = () => {
   const [isOpenModel, setIsOpenModel] = useState(false);
 
-  const intialState = {
+  const initialState = {
     pin: "",
     confirmPin: "",
   };
 
-  const [credentials, setCredentials] = useState(intialState);
+  const [credentials, setCredentials] = useState(initialState);
 
   const [loading, setLoading] = useState(false);
 
@@ -29,7 +29,7 @@ const GeneratePin = () => {
   const toggleModal = () => {
     setIsOpenModel((prevState) => !prevState);
     dispatch(clearFailureMessage());
-    setCredentials(intialState);
+    setCredentials(initialState);
   };
 
   const submitHandler = async () => {
@@ -37,11 +37,10 @@ const GeneratePin = () => {
     if (pin && pin === confirmPin) {
       try {
         setLoading(true);
-        const response = await axios.post("/api/v1/password/generate-pin", {
+        const res = await axios.post("/api/v1/password/generate-pin", {
           pin,
         });
-        console.log(response);
-        dispatch(fetchUser(response.data));
+        dispatch(pinCreated(res?.data));
         toggleModal();
         setLoading(false);
       } catch (err) {
@@ -60,15 +59,14 @@ const GeneratePin = () => {
 
   return (
     <>
-      <div className="generatePin">
-        <p className="generatePin__info">
+      <div className='generatePin'>
+        <p className='generatePin__info'>
           If you are not generate a common password for all password, click here
         </p>
         <button
-          type="button"
-          className="generatePin__button"
-          onClick={toggleModal}
-        >
+          type='button'
+          className='generatePin__button'
+          onClick={toggleModal}>
           Generate Pin
         </button>
       </div>

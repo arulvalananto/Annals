@@ -4,7 +4,7 @@ import "./AddPassword.style.scss";
 import axios from "../../axios";
 
 import { useDispatch } from "react-redux";
-import { fetchUser } from "../../redux/reducers/auth.reducer";
+import { passwordFetched } from "../../redux/reducers/auth.reducer";
 import { setFailureMessage } from "../../redux/reducers/message.reducer";
 import Button from "../Button/Button.component";
 
@@ -61,12 +61,10 @@ const AddPassword = ({ toggleDetails }) => {
       try {
         setLoading(true);
         const response = await axios.post("/api/v1/password/add", credentials);
-        if (response?.data) {
-          dispatch(fetchUser(response.data));
-          toggleDetails("", "");
-          clearInput();
-          setLoading(false);
-        }
+        dispatch(passwordFetched(response?.data));
+        toggleDetails("", "");
+        clearInput();
+        setLoading(false);
       } catch (err) {
         dispatch(setFailureMessage(err.response?.data.message));
         setLoading(false);
@@ -76,11 +74,11 @@ const AddPassword = ({ toggleDetails }) => {
 
   const renderInput = () => {
     return INPUT_DATA?.map((name) => (
-      <div className="addPassword__inputsContainer" key={name}>
-        <div className="addPassword__inputContainer">
-          <label className="addPassword__label">{name}</label>
+      <div className='addPassword__inputsContainer' key={name}>
+        <div className='addPassword__inputContainer'>
+          <label className='addPassword__label'>{name}</label>
           <input
-            className="addPassword__input"
+            className='addPassword__input'
             type={`${
               name === "link"
                 ? "url"
@@ -98,37 +96,35 @@ const AddPassword = ({ toggleDetails }) => {
             value={credentials[name]}
             name={name}
             onChange={changeHandler}
-            autoComplete="off"
+            autoComplete='off'
           />
         </div>
         {errors[name] && (
-          <p className="addPassword__input--error">{errors[name]}</p>
+          <p className='addPassword__input--error'>{errors[name]}</p>
         )}
       </div>
     ));
   };
 
   return (
-    <div className="addPassword">
+    <div className='addPassword'>
       <Button
-        type="button"
-        className="addPassword__backButton"
-        onClick={() => toggleDetails("", "")}
-      >
+        type='button'
+        className='addPassword__backButton'
+        onClick={() => toggleDetails("", "")}>
         Back
       </Button>
-      <h3 className="addPassword__title">Add Password</h3>
-      <form className="addPassword__form">{renderInput()}</form>
-      <div className="password__buttonContainer">
-        <Button type="button" inverted onClick={clearInput} disabled={loading}>
+      <h3 className='addPassword__title'>Add Password</h3>
+      <form className='addPassword__form'>{renderInput()}</form>
+      <div className='password__buttonContainer'>
+        <Button type='button' inverted onClick={clearInput} disabled={loading}>
           Reset
         </Button>
         <Button
-          type="submit"
+          type='submit'
           loading={loading}
           onClick={submitHandler}
-          disabled={loading}
-        >
+          disabled={loading}>
           Submit
         </Button>
       </div>

@@ -6,7 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { BsArrowRight } from "react-icons/bs";
 
-import { fetchUser } from "../../../redux/reducers/auth.reducer";
+import {
+  ideaAdded,
+  ideaUpdated,
+  ideaDeleted,
+} from "../../../redux/reducers/auth.reducer";
 import { setFailureMessage } from "../../../redux/reducers/message.reducer";
 
 import { CircularProgress } from "@material-ui/core";
@@ -25,23 +29,21 @@ const Ideas = () => {
 
   const dispatch = useDispatch();
 
-  const ideas = useSelector((state) => state.auth.user.ideas.entries);
+  const ideas = useSelector((state) => state.auth.user.ideas);
 
-  const addIdea = async (e) => {
+  const addIdeaHandler = async (e) => {
     e.preventDefault();
     try {
       setLoading(true);
 
-      const response = await axios.post("/api/v1/ideas/add", {
+      const res = await axios.post("/api/v1/ideas/add", {
         title,
         content,
       });
 
       setTitle("");
       setContent("");
-
-      dispatch(fetchUser(response.data));
-
+      dispatch(ideaAdded(res.data));
       setLoading(false);
     } catch (err) {
       setLoading(false);
@@ -56,7 +58,7 @@ const Ideas = () => {
     setOpenModal(false);
   };
 
-  const editIdea = useCallback(
+  const editIdeaHandler = useCallback(
     async (id, content, updatedContent) => {
       if (!updatedContent) {
         return dispatch(setFailureMessage("idea should not be empty!"));
@@ -72,7 +74,7 @@ const Ideas = () => {
         });
 
         setLoading(false);
-        dispatch(fetchUser(res.data));
+        dispatch(ideaUpdated(res.data));
       } catch (err) {
         setLoading(false);
         dispatch(setFailureMessage(err.response?.data.message));
@@ -81,19 +83,19 @@ const Ideas = () => {
     [dispatch]
   );
 
-  const deleteIdea = async (e) => {
+  const deleteIdeaHandler = async (e) => {
     e.preventDefault();
     try {
       setLoading(true);
-
-      const response = await axios.delete(`/api/v1/ideas/delete/${deleteId}`);
-
-      cancelDelete();
-      dispatch(fetchUser(response.data));
+      const res = await axios.delete(`/api/v1/ideas/delete/${deleteId}`);
       setLoading(false);
+      if (res.data.deleted) {
+        dispatch(ideaDeleted({ id: deleteId }));
+      }
+      cancelDelete();
     } catch (err) {
       cancelDelete();
-      dispatch(setFailureMessage(err.response.data.message));
+      dispatch(setFailureMessage(err.response?.data?.message));
       setLoading(false);
     }
   };
@@ -112,18 +114,18 @@ const Ideas = () => {
       <Idea
         key={idea._id}
         idea={idea}
-        editHandler={editIdea}
+        editHandler={editIdeaHandler}
         deleteHandler={selectDeleteId}
       />
     ));
-  }, [ideas, editIdea]);
+  }, [ideas, editIdeaHandler]);
 
   return (
     <div className='ideas'>
       <div
         className='ideas--overlay'
         style={{ display: `${title ? "block" : "none"}` }}></div>
-      <form onSubmit={addIdea} className='ideas__header'>
+      <form onSubmit={addIdeaHandler} className='ideas__header'>
         <div className='ideas__headerForm'>
           <input
             type='text'
@@ -155,7 +157,11 @@ const Ideas = () => {
       </form>
       <div className='ideas__footer'>{renderIdea()}</div>
       {openModal && (
-        <YesOrNoModel yes={deleteIdea} no={cancelDelete} loading={loading} />
+        <YesOrNoModel
+          yes={deleteIdeaHandler}
+          no={cancelDelete}
+          loading={loading}
+        />
       )}
     </div>
   );

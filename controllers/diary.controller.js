@@ -12,13 +12,13 @@ exports.addPage = catchAsync(async (req, res, next) => {
   if (!user) {
     return next(new AppError("No User with this email", 401));
   }
-
-  const date = user.diary.find(
+  
+  const written = user.diary.find(
     (page) =>
       new Date(page.createdAt).toDateString() ===
       new Date(Date.now()).toDateString()
   );
-  if (date) {
+  if (written) {
     return next(
       new AppError("You have already written a journal for today", 400)
     );
@@ -29,7 +29,7 @@ exports.addPage = catchAsync(async (req, res, next) => {
   user.diary.push(page.id);
   await user.save();
 
-  res.status(200).json(page);
+  res.status(201).json(page);
 });
 
 exports.updatePage = catchAsync(async (req, res, next) => {

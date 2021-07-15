@@ -6,7 +6,7 @@ import FormInput from "../FormInput/FormInput.component";
 import YesOrNoModel from "../YesOrNoModel/YesOrNoModel.component";
 // Reducers
 import { useDispatch } from "react-redux";
-import { fetchUser } from "../../redux/reducers/auth.reducer";
+import { passwordDeleted } from "../../redux/reducers/auth.reducer";
 import { setFailureMessage } from "../../redux/reducers/message.reducer";
 //  Axios
 import axios from "../../axios";
@@ -86,11 +86,13 @@ const ViewPassword = ({ passwordDetails, toggleDetails }) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.delete(
+      const res = await axios.delete(
         `/api/v1/password/delete/${passwordDetails._id}`
       );
-
-      dispatch(fetchUser(response.data));
+      console.log(res.data);
+      if (res.data?.deleted) {
+        dispatch(passwordDeleted({ id: passwordDetails._id }));
+      }
 
       setIsDeleteModel(false);
       toggleDetails("", "");
@@ -102,31 +104,30 @@ const ViewPassword = ({ passwordDetails, toggleDetails }) => {
   };
 
   return (
-    <div className="viewPassword__container">
+    <div className='viewPassword__container'>
       <div className={`viewPassword ${!verify && "viewPassword--blur"}`}>
-        <div className="viewPassword__header">
+        <div className='viewPassword__header'>
           <button
-            type="button"
-            className="viewPassword__headerButton"
-            onClick={() => toggleDetails("", "")}
-          >
+            type='button'
+            className='viewPassword__headerButton'
+            onClick={() => toggleDetails("", "")}>
             Back
           </button>
           <MdDelete
-            className="viewPassword__headerDeleteButton"
+            className='viewPassword__headerDeleteButton'
             onClick={toggleDeleteModel}
-            size="24"
-            color="inherit"
+            size='24'
+            color='inherit'
           />
         </div>
-        <h3 className="password__title">Password Details</h3>
-        <form className="password__form">
+        <h3 className='password__title'>Password Details</h3>
+        <form className='password__form'>
           {INPUT_DATA?.map((name) => (
-            <div className="password__inputsContainer" key={name}>
-              <div className="password__inputContainer">
-                <label className="password__label">{name}</label>
+            <div className='password__inputsContainer' key={name}>
+              <div className='password__inputContainer'>
+                <label className='password__label'>{name}</label>
                 <input
-                  className="password__input"
+                  className='password__input'
                   type={`${
                     name === "link"
                       ? "url"
@@ -151,10 +152,10 @@ const ViewPassword = ({ passwordDetails, toggleDetails }) => {
                   }
                   name={name}
                   onChange={changeHandler}
-                  autoComplete="off"
+                  autoComplete='off'
                 />
                 {name === "password" && (
-                  <p className="show-password">
+                  <p className='show-password'>
                     {isVisible ? (
                       <MdVisibility onClick={toggleVisiblePassword} />
                     ) : (
@@ -165,52 +166,51 @@ const ViewPassword = ({ passwordDetails, toggleDetails }) => {
               </div>
             </div>
           ))}
-          <div className="password__progressContainer">
-            <label className="password__label">Password Strength</label>
+          <div className='password__progressContainer'>
+            <label className='password__label'>Password Strength</label>
             <Tooltip title={passwordDetails.passwordStrength + "%"}>
               <progress
-                className="password__progress"
-                max="100"
-                value={+passwordDetails.passwordStrength}
-              ></progress>
+                className='password__progress'
+                max='100'
+                value={+passwordDetails.passwordStrength}></progress>
             </Tooltip>
           </div>
-          <div className="password__riskContainer">
-            <label className="password__label">Risk</label>
+          <div className='password__riskContainer'>
+            <label className='password__label'>Risk</label>
             <p className={`password__risk ${passwordDetails.risk}`}>
               {passwordDetails.risk}
             </p>
           </div>
         </form>
-        <div className="password__buttonContainer">
-          <button className="password__reset">Update</button>
-          <button className="password__submit">Save</button>
+        <div className='password__buttonContainer'>
+          <button className='password__reset'>Update</button>
+          <button className='password__submit'>Save</button>
         </div>
       </div>
       {!verify && (
-        <div className="unlockButton__overlay">
-          <Button type="button" onClick={toggleModel}>
+        <div className='unlockButton__overlay'>
+          <Button type='button' onClick={toggleModel}>
             Unlock
           </Button>
         </div>
       )}
       {isModel && (
         <>
-          <div className="model-overlay"></div>
-          <div className="model">
-            <form onSubmit={verifyPassword} className="model-container">
-              <h4 className="title">Enter Password</h4>
+          <div className='model-overlay'></div>
+          <div className='model'>
+            <form onSubmit={verifyPassword} className='model-container'>
+              <h4 className='title'>Enter Password</h4>
               <FormInput
-                className="form-input"
-                type="password"
+                className='form-input'
+                type='password'
                 value={pin}
                 onChange={(e) => setPin(e.target.value)}
                 required
               />
-              <Button type="submit" loading={loading} disabled={loading}>
+              <Button type='submit' loading={loading} disabled={loading}>
                 Verify
               </Button>
-              <MdClear className="clear" size={30} onClick={toggleModel} />
+              <MdClear className='clear' size={30} onClick={toggleModel} />
             </form>
           </div>
         </>

@@ -44,6 +44,36 @@ exports.register = catchAsync(async (req, res, next) => {
   res.status(201).json({ loggedIn: true, user });
 });
 
+exports.loginError = (err, req, res, next) => {
+  if (err) {
+    return next(new AppError(err, 404));
+  }
+  next();
+};
+
+exports.login = (req, res, next) => {
+  sendResponse(req, next, req.user.id);
+
+  res.status(200).json({ loggedIn: true, user: req.user });
+};
+
+exports.thirdPartyLogin = (req, res, next) => {
+  sendResponse(req, next, req.user.id);
+
+  res.redirect("http://localhost:3000/");
+};
+
+
+exports.logout = async (req, res) => {
+  if (req.session) {
+    req.session.destroy();
+  }
+
+  res.clearCookie("token");
+
+  res.redirect("http://localhost:3000/signin");
+};
+
 exports.getCurrentUser = catchAsync(async (req, res, next) => {
   if (req.session.token) {
     const decoded = await promisify(jwt.verify)(
@@ -73,32 +103,3 @@ exports.getCurrentUser = catchAsync(async (req, res, next) => {
     res.send({ loggedIn: false });
   }
 });
-
-exports.logout = async (req, res) => {
-  if (req.session) {
-    req.session.destroy();
-  }
-
-  res.clearCookie("token");
-
-  res.redirect("http://localhost:3000/signin");
-};
-
-exports.loginError = (err, req, res, next) => {
-  if (err) {
-    return next(new AppError(err, 404));
-  }
-  next();
-};
-
-exports.login = (req, res, next) => {
-  sendResponse(req, next, req.user.id);
-
-  res.status(200).json({ loggedIn: true, user: req.user });
-};
-
-exports.thirdPartyLogin = (req, res, next) => {
-  sendResponse(req, next, req.user.id);
-
-  res.redirect("http://localhost:3000/");
-};

@@ -11,7 +11,7 @@ import { CircularProgress } from "@material-ui/core";
 import axios from "../../axios";
 // React Redux
 import { useDispatch } from "react-redux";
-import { fetchUser } from "../../redux/reducers/auth.reducer";
+import { userFetched } from "../../redux/reducers/auth.reducer";
 import { setFailureMessage } from "../../redux/reducers/message.reducer";
 // Other Components
 import FormInput from "../../components/FormInput/FormInput.component";
@@ -73,7 +73,7 @@ const SignIn = () => {
       setLoading(true);
       try {
         const response = await axios.post("/api/v1/login", credentials);
-        dispatch(fetchUser(response?.data));
+        dispatch(userFetched(response?.data));
         setLoading(false);
         history.replace("/");
       } catch (err) {
