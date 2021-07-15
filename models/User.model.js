@@ -31,9 +31,9 @@ const userSchema = mongoose.Schema(
     facebookId: {
       type: String,
     },
-    diary: { type: Timeline.schema, default: {} },
     passwords: { type: Password.schema, default: {} },
-    ideas: { type: mongoose.Schema.Types.ObjectId, ref: "Idea" },
+    diary: [{ type: mongoose.Schema.Types.ObjectId, ref: "Diary" }],
+    ideas: [{ type: mongoose.Schema.Types.ObjectId, ref: "Idea" }], // Made a change at here
     todos: [{ type: mongoose.Schema.Types.ObjectId, ref: "Todos" }],
   },
   {

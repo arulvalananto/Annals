@@ -30,13 +30,10 @@ exports.register = catchAsync(async (req, res, next) => {
 
   const formattedPassword = await bcrypt.hash(password, 12);
 
-  const idea = await Idea().save();
-
   const user = User({
     fullName,
     email,
     password: formattedPassword,
-    ideas: idea,
   });
   await user.save();
 
@@ -56,7 +53,9 @@ exports.getCurrentUser = catchAsync(async (req, res, next) => {
 
     const currentUser = await User.findById(decoded.id)
       .lean()
-      .populate("ideas");
+      .populate("diary")
+      .populate("ideas")
+      .populate("todos");
     // .cache({ key: decoded.id });
 
     if (!currentUser) {
@@ -68,7 +67,7 @@ exports.getCurrentUser = catchAsync(async (req, res, next) => {
       );
     }
 
-    req.session.user = currentUser;
+    req.session.userId = decoded.id;
     res.send({ loggedIn: true, user: currentUser });
   } else {
     res.send({ loggedIn: false });

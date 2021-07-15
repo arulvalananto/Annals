@@ -11,9 +11,11 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-  User.findById(id).lean().then((user) => {
-    done(null, user);
-  });
+  User.findById(id)
+    .lean()
+    .then((user) => {
+      done(null, user);
+    });
 });
 
 passport.use(
@@ -71,14 +73,12 @@ passport.use(
         return done(null, existingUser);
       }
 
-      const idea = await Idea().save();
-
       const user = await new User({
         googleId: profile.id,
         email: profile._json.email,
         fullName: profile.displayName,
-        ideas: idea,
       }).save();
+      
       done(null, user);
     }
   )
@@ -98,16 +98,12 @@ passport.use(
         return done(null, existingUser);
       }
 
-      const idea = await Idea().save();
-
       const user = await new User({
         facebookId: profile.id,
         email: profile.emails[0].value,
         fullName: profile.displayName,
-        ideas: idea,
-      })
-        .populate("ideas")
-        .save();
+      }).save();
+
       done(null, user);
     }
   )

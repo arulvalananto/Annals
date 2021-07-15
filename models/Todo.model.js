@@ -12,6 +12,7 @@ const todoSchema = mongoose.Schema(
         values: ["todo", "inprogress", "done"],
         message: "{VALUE} is not valid",
       },
+      default: "todo",
     },
     createdAt: { type: Date, default: Date.now() },
     updatedAt: Date,

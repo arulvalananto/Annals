@@ -2,16 +2,13 @@ const mongoose = require("mongoose");
 
 const ideaSchema = mongoose.Schema(
   {
-    entries: [
-      {
-        title: {
-          type: String,
-        },
-        content: {
-          type: String,
-        },
-      },
-    ],
+    title: {
+      type: String,
+    },
+    content: {
+      type: String,
+    },
+    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   },
   {
     toObject: {

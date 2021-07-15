@@ -1,66 +1,50 @@
+const Diary = require("../models/Diary.model");
 const User = require("../models/User.model");
 
 const AppError = require("../utils/AppError");
 const catchAsync = require("../utils/catchAsync");
 
-const sendResponse = (req, res, user) => {
-  req.session.user = user;
-
-  res.status(200).json({
-    loggedIn: true,
-    user,
-  });
-};
-
 exports.addPage = catchAsync(async (req, res, next) => {
   const { content, weather, location } = req.body;
 
-  const user = await User.findById(req.session.user.id);
+  const user = await User.findById(req.session.userId).populate("diary");
 
   if (!user) {
     return next(new AppError("No User with this email", 401));
   }
-  const date = user.diary.pages.find(
-    (el) =>
-      new Date(el.writtenAt).toDateString() ==
+
+  const date = user.diary.find(
+    (page) =>
+      new Date(page.createdAt).toDateString() ===
       new Date(Date.now()).toDateString()
   );
   if (date) {
     return next(
-      new AppError(
-        "You have already written a journal for today, So you can edit it",
-        400
-      )
+      new AppError("You have already written a journal for today", 400)
     );
   }
 
-  user.diary.pages.push({
-    content,
-  });
+  const page = await Diary({ content, createdBy: user.id }).save();
 
+  user.diary.push(page.id);
   await user.save();
 
-  sendResponse(req, res, user);
+  res.status(200).json(page);
 });
 
 exports.updatePage = catchAsync(async (req, res, next) => {
-  const { id } = req.params;
-
-  const user = await User.findById(req.session.user.id);
-
-  const page = user.diary.pages.id(id);
+  const page = await Diary.findById(req.params.id);
 
   if (
-    new Date(page.writtenAt).toDateString("en-IN") !==
+    new Date(page.createdAt).toDateString("en-IN") !==
     new Date(Date.now()).toDateString("en-IN")
   ) {
     return next(new AppError("you can only update on that day", 400));
   }
 
   page.content = req.body.content;
-  page.writtenAt = new Date();
 
-  await user.save();
+  await page.save();
 
-  sendResponse(req, res, user);
+  res.status(200).json(page);
 });

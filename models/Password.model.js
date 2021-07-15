@@ -5,6 +5,7 @@ const passwordSchema = mongoose.Schema(
     pin: {
       type: String,
       default: "",
+      select: false, // select options is not implemented
     },
     entries: [
       {

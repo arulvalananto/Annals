@@ -12,13 +12,13 @@ import SuccessMessage from "../components/SuccessMessage/SuccessMessage.componen
 import ErrorMessage from "../components/ErrorMessage/ErrorMessage.component";
 import Spinner from "../components/Spinner/Spinner.component";
 // Reducers
-import { authFailed, fetchUser } from "../redux/reducers/auth.reducer";
 import {
+  fetchUser,
   requestPending,
   requestFailed,
   requestSucceed,
   selectLoading,
-} from "../redux/reducers/request.reducer";
+} from "../redux/reducers/auth.reducer";
 import {
   setFailureMessage,
   selectMessage,
@@ -41,7 +41,6 @@ function App() {
       dispatch(fetchUser(res.data));
     } catch (err) {
       dispatch(requestFailed());
-      dispatch(authFailed());
       dispatch(setFailureMessage(err.message));
     }
   }, []); // if you add 'history' to dependency, fectchData runs rapidly on landing page.

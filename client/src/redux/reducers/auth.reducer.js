@@ -5,6 +5,7 @@ const slice = createSlice({
   name: "auth",
   initialState: {
     isLoggedIn: false,
+    isPending: true,
     user: {
       email: "",
       fullName: "",
@@ -12,13 +13,27 @@ const slice = createSlice({
       diary: { pages: [] },
       ideas: { entries: [] },
       passwords: { pin: "", entries: [] },
+      todos: []
     },
   },
   reducers: {
-    authFailed: (auth, action) => {
+    requestPending: (auth, action) => {
       return {
         ...auth,
+        isPending: true,
+      };
+    },
+    requestFailed: (auth, action) => {
+      return {
+        ...auth,
+        isPending: false,
         isLoggedIn: false,
+      };
+    },
+    requestSucceed: (request, action) => {
+      return {
+        ...request,
+        isPending: false,
       };
     },
     fetchUser: (auth, action) => {
@@ -28,10 +43,26 @@ const slice = createSlice({
         isLoggedIn: action.payload.loggedIn,
       };
     },
+    addTodo: (auth, action) => {
+      return {
+        ...auth,
+        user: {
+          ...auth.user,
+          todos: [...auth.user.todos, action.payload],
+        },
+      };
+    },
   },
 });
 
-export const { fetchUser, authFailed } = slice.actions;
+export const {
+  fetchUser,
+  authFailed,
+  addTodo,
+  requestFailed,
+  requestPending,
+  requestSucceed,
+} = slice.actions;
 
 export default slice.reducer;
 
@@ -44,3 +75,6 @@ export const selectIsLoggedIn = createSelector(
   selectAuth,
   (el) => el.isLoggedIn
 );
+export const selectLoading = createSelector(selectAuth, (el) => el.isPending);
+
+export const selectTodos = createSelector(selectAuth, (el) => el.user.todos);

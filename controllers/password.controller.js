@@ -8,9 +8,7 @@ const catchAsync = require("../utils/catchAsync");
 const passwordStrengthChecker = require("../utils/passwordStrength");
 
 const sendResponse = async (req, res) => {
-  const user = await User.findById(req.session.user.id);
-
-  req.session.user = user;
+  const user = await User.findById(req.session.userId);
 
   res.status(200).json({
     loggedIn: true,
@@ -20,13 +18,12 @@ const sendResponse = async (req, res) => {
 
 exports.generatePin = catchAsync(async (req, res, next) => {
   const { pin } = req.body;
-  console.log(pin);
 
   if (!pin || pin.trim().length === 0) {
     return next(new AppError("Please enter valid pin", 400));
   }
 
-  const user = await User.findById(req.session.user.id);
+  const user = await User.findById(req.session.userId);
 
   user.passwords.pin = pin;
 
@@ -41,7 +38,8 @@ exports.generatePin = catchAsync(async (req, res, next) => {
 exports.verifyPin = catchAsync(async (req, res, next) => {
   const { password, pin } = req.body;
 
-  const user = await User.findById(req.session.user.id);
+  const user = await User.findById(req.session.userId);
+  console.log(user)
 
   if (user.passwords.pin !== pin) {
     return next(new AppError("Invalid Pin", 401));
@@ -72,7 +70,7 @@ exports.addPassword = catchAsync(async (req, res) => {
   }
 
   await User.updateOne(
-    { _id: req.session.user.id },
+    { _id: req.session.userId },
     {
       $push: {
         "passwords.entries": {
@@ -91,7 +89,7 @@ exports.addPassword = catchAsync(async (req, res) => {
 });
 
 exports.deletePassword = catchAsync(async (req, res, next) => {
-  const user = await User.findById(req.session.user.id);
+  const user = await User.findById(req.session.userId);
 
   user.passwords.entries.remove(req.params.id);
 

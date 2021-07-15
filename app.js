@@ -13,6 +13,7 @@ const passwordRoutes = require("./routes/password.routes");
 const ideaRoutes = require("./routes/idea.routes");
 const logoRoutes = require("./routes/logo.routes");
 const todoRoutes = require("./routes/todo.routes");
+const adminRoutes = require("./routes/admin.routes");
 
 require("./utils/passport");
 // require("./utils/cache");
@@ -60,8 +61,9 @@ app.use("/api/v1/logos", logoRoutes);
 app.use("/", authRoutes);
 app.use("/api/v1", diaryRoutes);
 app.use("/api/v1/password", passwordRoutes);
-app.use("/api/v1/todos", todoRoutes);
 app.use("/api/v1/ideas", ideaRoutes);
+app.use("/api/v1/todos", todoRoutes);
+app.use("/api/v1/admin", adminRoutes);
 
 app.use("*", (req, res) => {
   res.status(404).json({

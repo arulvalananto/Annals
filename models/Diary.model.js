@@ -1,37 +1,30 @@
 const mongoose = require("mongoose");
 
 const diarySchema = mongoose.Schema(
-    {
-        pages: [
-            {
-                content: {
-                    type: String,
-                    trim: true,
-                    required: [true, "content should not be empty!"],
-                },
-                climate: {
-                    type: String,
-                },
-                location: {
-                    lat: Number,
-                    lng: Number,
-                },
-                writtenAt: {
-                    type: Date,
-                    default: Date.now(),
-                },
-            },
-        ],
+  {
+    content: {
+      type: String,
+      trim: true,
+      required: [true, "content should not be empty!"],
     },
-    {
-        toObject: {
-            virtuals: true,
-        },
-        toJSON: {
-            virtuals: true,
-        },
-        timestamps: true,
-    }
+    climate: {
+      type: String,
+    },
+    location: {
+      lat: Number,
+      lng: Number,
+    },
+    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  },
+  {
+    toObject: {
+      virtuals: true,
+    },
+    toJSON: {
+      virtuals: true,
+    },
+    timestamps: true,
+  }
 );
 
 module.exports = mongoose.model("Diary", diarySchema);

@@ -16,16 +16,16 @@ const Pages = () => {
 
   return (
     <>
-      {diary.pages.length === 0 ? (
-        <p className="pages__empty">Nothing write yet...</p>
+      {diary?.length === 0 ? (
+        <p className='pages__empty'>Nothing write yet...</p>
       ) : (
-        <div className="pages">
-          {diary.pages.map(({ _id, writtenAt }) => (
-            <Link key={_id} className="page" to={`/diary/view/${_id}`}>
-              <p className="page__labelStart">{day(writtenAt)}</p>
-              <p className="page__labelMid">{date(writtenAt)} </p>
-              <p className="page__labelEnd">{month(writtenAt)}</p>
-              <p className="page__labelCorner">{year(writtenAt)}</p>
+        <div className='pages'>
+          {diary?.map(({ _id, createdAt }) => (
+            <Link key={_id} className='page' to={`/diary/view/${_id}`}>
+              <p className='page__labelStart'>{day(createdAt)}</p>
+              <p className='page__labelMid'>{date(createdAt)} </p>
+              <p className='page__labelEnd'>{month(createdAt)}</p>
+              <p className='page__labelCorner'>{year(createdAt)}</p>
             </Link>
           ))}
         </div>
