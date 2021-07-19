@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../../../redux/reducers/auth.reducer";
 
 const Home = () => {
-  const user = useSelector((state) => selectUser(state));
+  const user = useSelector(selectUser);
 
   return (
     <div>

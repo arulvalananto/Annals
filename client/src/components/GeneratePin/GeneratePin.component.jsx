@@ -1,60 +1,50 @@
 import React, { useState } from "react";
 import "./GeneratePin.style.scss";
 // Reducers
-import axios from "../../axios";
 import { useDispatch, useSelector } from "react-redux";
-import { pinCreated } from "../../redux/reducers/auth.reducer";
 import {
   clearFailureMessage,
+  selectMessage,
   setFailureMessage,
 } from "../../redux/reducers/message.reducer";
 // Other Component
 import Model from "../Model/Model.component";
+import { generatePin } from "../../redux/actions/user.actions";
 
 const GeneratePin = () => {
-  const [isOpenModel, setIsOpenModel] = useState(false);
-
   const initialState = {
     pin: "",
     confirmPin: "",
   };
 
   const [credentials, setCredentials] = useState(initialState);
-
   const [loading, setLoading] = useState(false);
+  const [isOpenModel, setIsOpenModel] = useState(false);
 
   const dispatch = useDispatch();
-  const error = useSelector((state) => state.message.failure);
+  const message = useSelector(selectMessage);
 
   const toggleModal = () => {
-    setIsOpenModel((prevState) => !prevState);
+    setIsOpenModel(!isOpenModel);
     dispatch(clearFailureMessage());
     setCredentials(initialState);
   };
 
-  const submitHandler = async () => {
-    const { pin, confirmPin } = credentials;
-    if (pin && pin === confirmPin) {
-      try {
-        setLoading(true);
-        const res = await axios.post("/api/v1/password/generate-pin", {
-          pin,
-        });
-        dispatch(pinCreated(res?.data));
-        toggleModal();
-        setLoading(false);
-      } catch (err) {
-        dispatch(setFailureMessage(err.response.data.message));
-        setLoading(false);
-      }
-    } else {
-      dispatch(setFailureMessage("Please enter valid pin"));
-    }
-  };
+  const toggleLoading = (val) => setLoading(val);
 
   const changeHandler = (e) => {
     const { name, value } = e.target;
     setCredentials({ ...credentials, [name]: value });
+  };
+
+  const submitHandler = async () => {
+    const { pin, confirmPin } = credentials;
+
+    if (pin && pin === confirmPin) {
+      dispatch(generatePin(toggleLoading, toggleModal, pin));
+    } else {
+      dispatch(setFailureMessage("Please enter valid pin"));
+    }
   };
 
   return (
@@ -74,7 +64,7 @@ const GeneratePin = () => {
         {isOpenModel && (
           <Model
             submitHandler={submitHandler}
-            error={error}
+            error={message.failure}
             toggleModal={toggleModal}
             handleChange={changeHandler}
             loading={loading}

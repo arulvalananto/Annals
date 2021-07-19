@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useState } from "react";
 import "./SignIn.style.scss";
 // React Router
 import { Link, useHistory } from "react-router-dom";
@@ -7,12 +7,9 @@ import { FcGoogle } from "react-icons/fc";
 import { FaFacebookF } from "react-icons/fa";
 // Material-UI
 import { CircularProgress } from "@material-ui/core";
-// Axios
-import axios from "../../axios";
 // React Redux
 import { useDispatch } from "react-redux";
-import { userFetched } from "../../redux/reducers/auth.reducer";
-import { setFailureMessage } from "../../redux/reducers/message.reducer";
+import { login } from "../../redux/actions/auth.actions";
 // Other Components
 import FormInput from "../../components/FormInput/FormInput.component";
 
@@ -29,8 +26,6 @@ const SignIn = () => {
   const [loading, setLoading] = useState(false);
 
   const history = useHistory();
-
-  const emailRef = useRef();
 
   const changeHandler = useCallback(
     (data) => {
@@ -66,26 +61,18 @@ const SignIn = () => {
     return true;
   };
 
+  const toggleLoading = (val) => {
+    setLoading(val);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const isValid = validateForm();
     if (isValid) {
       setLoading(true);
-      try {
-        const response = await axios.post("/api/v1/login", credentials);
-        dispatch(userFetched(response?.data));
-        setLoading(false);
-        history.replace("/");
-      } catch (err) {
-        dispatch(setFailureMessage(err.response?.data.message));
-        setLoading(false);
-      }
+      dispatch(login(credentials, toggleLoading, history));
     }
   };
-
-  useEffect(() => {
-    emailRef.current?.focus();
-  }, []);
 
   return (
     <div className='signIn'>
@@ -108,7 +95,6 @@ const SignIn = () => {
           </p>
           <form className='signIn__rightFooterForm' onSubmit={handleSubmit}>
             <FormInput
-              ref={emailRef}
               className='signIn__rightFooterFormInput'
               type='email'
               placeholder='Email Address'

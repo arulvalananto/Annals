@@ -59,7 +59,7 @@ app.use(passport.session());
 app.use("/api/v1/logos", logoRoutes);
 
 app.use("/", authRoutes);
-app.use("/api/v1", diaryRoutes);
+app.use("/api/v1/diary", diaryRoutes);
 app.use("/api/v1/password", passwordRoutes);
 app.use("/api/v1/ideas", ideaRoutes);
 app.use("/api/v1/todos", todoRoutes);

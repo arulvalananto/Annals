@@ -6,24 +6,21 @@ import Button from "../Button/Button.component";
 import { useDispatch, useSelector } from "react-redux";
 // React Router
 import { useHistory, useParams } from "react-router";
-// Axios
-import axios from "../../axios";
 // Utils
 import { dateString } from "../../utils/dates";
 // Reducers
-import { pageUpdated } from "../../redux/reducers/auth.reducer";
+import { selectDiary } from "../../redux/reducers/auth.reducer";
 import { setFailureMessage } from "../../redux/reducers/message.reducer";
+import { updatePage } from "../../redux/actions/user.actions";
 
 const PageView = () => {
   const { id } = useParams();
-
   const history = useHistory();
-
   const dispatch = useDispatch();
 
   const [loading, setLoading] = useState(false);
 
-  const pages = useSelector((state) => state.auth.user.diary);
+  const pages = useSelector(selectDiary);
   const page = pages.find((el) => el._id === id);
 
   const [isEditMode, setIsEditMode] = useState(false);
@@ -34,27 +31,25 @@ const PageView = () => {
     setContent(page.content);
   };
 
-  const submitHandler = async () => {
-    if (content.length < 1)
-      return dispatch(setFailureMessage("content should not be empty"));
-    if (content?.trim() === page.content)
-      return dispatch(
+  const toggleLoading = (val) => setLoading(val);
+
+  const isValid = () => {
+    if (content.length < 1) {
+      dispatch(setFailureMessage("content should not be empty"));
+      return false;
+    }
+    if (content?.trim() === page.content) {
+      dispatch(
         setFailureMessage("You should modify the content before change")
       );
-    setLoading(true);
-    try {
-      const response = await axios.patch(
-        `/api/v1/update-timeline/${page._id}`,
-        { content }
-      );
-      dispatch(pageUpdated(response?.data));
-
-      history.push("/diary");
-      setLoading(false);
-    } catch (err) {
-      dispatch(setFailureMessage(err?.response?.data?.message));
-      setLoading(false);
+      return false;
     }
+
+    return true;
+  };
+
+  const submitHandler = async () => {
+    if (isValid) dispatch(updatePage(page._id, content, toggleLoading, history));
   };
 
   return (

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import "./Password.style.scss";
-// React Router
+// Reducers
 import { useDispatch, useSelector } from "react-redux";
+import { selectPasswords } from "../../../redux/reducers/auth.reducer";
+import { changeCommonPin } from "../../../redux/actions/user.actions";
 // React Icons
 import { IoAddCircleOutline } from "react-icons/io5";
 import { MdSettingsBackupRestore } from "react-icons/md";
@@ -12,10 +14,6 @@ import GeneratePin from "../../../components/GeneratePin/GeneratePin.component";
 import YesOrNoModel from "../../../components/YesOrNoModel/YesOrNoModel.component";
 // Material UI
 import { Tooltip } from "@material-ui/core";
-//  Axios
-import axios from "../../../axios";
-// Reducers
-import { setFailureMessage } from "../../../redux/reducers/message.reducer";
 
 const Password = () => {
   const [show, setShow] = useState("");
@@ -24,7 +22,7 @@ const Password = () => {
 
   const dispatch = useDispatch();
 
-  const passwords = useSelector((state) => state.auth.user.passwords);
+  const passwords = useSelector(selectPasswords);
 
   const toggleDetails = (val, data) => {
     setShow(data);
@@ -33,23 +31,14 @@ const Password = () => {
   const [isOpenChangeModel, setIsOpenChangeModel] = useState(false);
 
   const toggleChangeModel = () => {
-    setIsOpenChangeModel((prevState) => !prevState);
+    setIsOpenChangeModel(!isOpenChangeModel);
     setShow("");
   };
+  const toggleLoading = (val) => setLoading(val);
 
   const changePin = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    try {
-      await axios.get("/api/v1/password/change-pin");
-      setLoading(false);
-      setIsOpenChangeModel(false);
-    } catch (err) {
-      if (err.response) {
-        dispatch(setFailureMessage(err.response.data.message));
-      }
-      setLoading(false);
-    }
+    dispatch(changeCommonPin(toggleLoading, toggleChangeModel));
   };
 
   const showContent = () => {

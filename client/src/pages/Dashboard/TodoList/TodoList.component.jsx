@@ -2,30 +2,23 @@ import React, { useEffect, useRef, useState } from "react";
 import "./TodoList.style.scss";
 
 import { useDispatch, useSelector } from "react-redux";
-import { selectTodos, todoAdded } from "../../../redux/reducers/auth.reducer";
-import { setFailureMessage } from "../../../redux/reducers/message.reducer";
+import { selectTodos } from "../../../redux/reducers/auth.reducer";
+import { addTodo } from "../../../redux/actions/user.actions";
 
 import { IoAdd } from "react-icons/io5";
 import { GoChevronRight } from "react-icons/go";
 import { GrSubtract } from "react-icons/gr";
 import { CircularProgress, Tooltip } from "@material-ui/core";
 
-import axios from "../../../axios";
-
 const TodoList = () => {
   const [content, setContent] = useState("");
   const [editMode, setEditMode] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const dispatch = useDispatch();
-
-  const dragOver = (e) => {};
-
-  const dragStart = (e) => {};
-
   const contentRef = useRef();
 
-  const todos = useSelector((state) => selectTodos(state));
+  const dispatch = useDispatch();
+  const todos = useSelector(selectTodos);
 
   useEffect(() => {
     if (editMode) {
@@ -35,30 +28,29 @@ const TodoList = () => {
     }
   }, [editMode, contentRef]);
 
+  const toggleLoading = (val) => setLoading(val);
+  const toggleEditMode = () => setEditMode(!editMode);
+
+  const clearInput = () => setContent("");
+
+  const dragOver = (e) => {};
+
+  const dragStart = (e) => {};
+
   const handleKeyDown = (e) => {
     e.target.style.height = "inherit";
     e.target.style.height = `${e.target.scrollHeight}px`;
   };
 
-  const handleSubmit = async (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    try {
-      setLoading(true);
-      const res = await axios.post("/api/v1/todos/add", { content });
-      dispatch(todoAdded(res?.data));
-      setEditMode(!editMode);
-      setContent("");
-      setLoading(false);
-    } catch (err) {
-      setLoading(false);
-      setFailureMessage(err.response?.data);
-    }
+    dispatch(addTodo(toggleLoading, content, clearInput, toggleEditMode));
   };
 
   const renderInput = () => {
     if (editMode) {
       return (
-        <form onSubmit={handleSubmit} className='todoList__AddContent'>
+        <form onSubmit={submitHandler} className='todoList__AddContent'>
           <textarea
             onKeyDown={handleKeyDown}
             ref={contentRef}

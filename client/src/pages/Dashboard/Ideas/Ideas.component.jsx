@@ -1,59 +1,46 @@
 import React, { useCallback, useEffect, useState } from "react";
 import "./Ideas.style.scss";
-
-import axios from "../../../axios";
+// Reducers
 import { useDispatch, useSelector } from "react-redux";
-
-import { BsArrowRight } from "react-icons/bs";
-
 import {
-  ideaAdded,
-  ideaUpdated,
-  ideaDeleted,
-} from "../../../redux/reducers/auth.reducer";
+  addIdea,
+  deleteIdea,
+  updateIdea,
+} from "../../../redux/actions/user.actions";
+import { selectIdeas } from "../../../redux/reducers/auth.reducer";
 import { setFailureMessage } from "../../../redux/reducers/message.reducer";
-
+// Icons
+import { BsArrowRight } from "react-icons/bs";
 import { CircularProgress } from "@material-ui/core";
-
+// Other Components
 import YesOrNoModel from "../../../components/YesOrNoModel/YesOrNoModel.component";
 import Idea from "../../../components/Idea/Idea.component";
 
 const Ideas = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-
   const [deleteId, setDeleteId] = useState("");
   const [openModal, setOpenModal] = useState(false);
-
   const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
+  const ideas = useSelector(selectIdeas);
 
-  const ideas = useSelector((state) => state.auth.user.ideas);
+  const clearInput = () => {
+    setTitle("");
+    setContent("");
+  };
+
+  const toggleLoading = (val) => setLoading(val);
 
   const addIdeaHandler = async (e) => {
     e.preventDefault();
-    try {
-      setLoading(true);
-
-      const res = await axios.post("/api/v1/ideas/add", {
-        title,
-        content,
-      });
-
-      setTitle("");
-      setContent("");
-      dispatch(ideaAdded(res.data));
-      setLoading(false);
-    } catch (err) {
-      setLoading(false);
-      dispatch(setFailureMessage(err.response?.data.message));
-    }
+    dispatch(addIdea(toggleLoading, title, content, clearInput));
   };
 
   useEffect(() => {}, [ideas]);
 
-  const cancelDelete = () => {
+  const clearDelete = () => {
     selectDeleteId("");
     setOpenModal(false);
   };
@@ -66,38 +53,14 @@ const Ideas = () => {
       if (content === updatedContent.trim()) {
         return dispatch(setFailureMessage("no change happens"));
       }
-      try {
-        setLoading(true);
-
-        const res = await axios.patch(`/api/v1/ideas/update/${id}`, {
-          content: updatedContent,
-        });
-
-        setLoading(false);
-        dispatch(ideaUpdated(res.data));
-      } catch (err) {
-        setLoading(false);
-        dispatch(setFailureMessage(err.response?.data.message));
-      }
+      dispatch(updateIdea(toggleLoading, id, updatedContent));
     },
     [dispatch]
   );
 
   const deleteIdeaHandler = async (e) => {
     e.preventDefault();
-    try {
-      setLoading(true);
-      const res = await axios.delete(`/api/v1/ideas/delete/${deleteId}`);
-      setLoading(false);
-      if (res.data.deleted) {
-        dispatch(ideaDeleted({ id: deleteId }));
-      }
-      cancelDelete();
-    } catch (err) {
-      cancelDelete();
-      dispatch(setFailureMessage(err.response?.data?.message));
-      setLoading(false);
-    }
+    dispatch(deleteIdea(toggleLoading, deleteId, clearDelete));
   };
 
   const selectDeleteId = (id) => {
@@ -159,7 +122,7 @@ const Ideas = () => {
       {openModal && (
         <YesOrNoModel
           yes={deleteIdeaHandler}
-          no={cancelDelete}
+          no={clearDelete}
           loading={loading}
         />
       )}

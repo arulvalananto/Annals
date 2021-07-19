@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import "./PasswordAdd.style.scss";
-
-import axios from "../../axios";
-
+// Reducers
 import { useDispatch } from "react-redux";
-import { passwordFetched } from "../../redux/reducers/auth.reducer";
-import { setFailureMessage } from "../../redux/reducers/message.reducer";
+import { addPassword } from "../../redux/actions/user.actions";
+// Other Components
 import Button from "../Button/Button.component";
 
 const INPUT_DATA = ["title", "link", "username", "password"];
@@ -17,23 +15,18 @@ const PasswordAdd = ({ toggleDetails }) => {
     username: "",
     password: "",
   };
+
   const [credentials, setCredentials] = useState(initialState);
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
 
-  const [loading, setLoading] = useState(false);
+  const clearInput = () => setCredentials(initialState);
 
-  const changeHandler = (e) => {
-    const { name, value } = e.target;
-    setCredentials({ ...credentials, [name]: value });
-  };
+  const toggleLoading = (val) => setLoading(val);
 
-  const clearInput = () => {
-    setCredentials(initialState);
-  };
-
-  const validate = () => {
+  const isValid = () => {
     let titleError = "";
     let passwordError = "";
 
@@ -54,21 +47,17 @@ const PasswordAdd = ({ toggleDetails }) => {
     return true;
   };
 
+  const changeHandler = (e) => {
+    const { name, value } = e.target;
+    setCredentials({ ...credentials, [name]: value });
+  };
+
   const submitHandler = async () => {
     setErrors({});
-    const isValid = validate();
     if (isValid) {
-      try {
-        setLoading(true);
-        const response = await axios.post("/api/v1/password/add", credentials);
-        dispatch(passwordFetched(response?.data));
-        toggleDetails("", "");
-        clearInput();
-        setLoading(false);
-      } catch (err) {
-        dispatch(setFailureMessage(err.response?.data.message));
-        setLoading(false);
-      }
+      dispatch(
+        addPassword(toggleLoading, toggleDetails, clearInput, credentials)
+      );
     }
   };
 

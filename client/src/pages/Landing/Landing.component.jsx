@@ -6,7 +6,7 @@ import LandingCover from "../../assets/landing__cover.jpg";
 // Other Components
 import Header from "../../components/Header/Header.component";
 
-const Landing = (props) => {
+const Landing = () => {
   return (
     <div className="landing">
       <Header />

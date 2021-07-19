@@ -1,55 +1,35 @@
-import React, { useEffect, useCallback, Suspense } from "react";
+import React, { useEffect, Suspense } from "react";
 import "./App.css";
 // React Router
 import { BrowserRouter } from "react-router-dom";
 // React Redux
 import { useDispatch, useSelector } from "react-redux";
-// Axios
-import axios from "../axios";
 // Other Components
 import AppRoutes from "./AppRoutes.component";
 import SuccessMessage from "../components/SuccessMessage/SuccessMessage.component";
 import ErrorMessage from "../components/ErrorMessage/ErrorMessage.component";
 import Spinner from "../components/Spinner/Spinner.component";
 // Reducers
-import {
-  requestPending,
-  requestFailed,
-  requestSucceed,
-  userFetched,
-  selectLoading,
-} from "../redux/reducers/auth.reducer";
-import {
-  setFailureMessage,
-  selectMessage,
-} from "../redux/reducers/message.reducer";
+import { selectLoading } from "../redux/reducers/auth.reducer";
+import { selectMessage } from "../redux/reducers/message.reducer";
+
+import { fetchUser } from "../redux/actions/auth.actions";
 
 function App() {
   const dispatch = useDispatch();
 
   const state = useSelector((state) => state);
-  const loading = useSelector((state) => selectLoading(state));
-  const message = useSelector((state) => selectMessage(state));
+  const loading = useSelector(selectLoading);
+  const message = useSelector(selectMessage);
 
   console.log(state);
 
-  const fetchData = useCallback(async () => {
-    try {
-      dispatch(requestPending());
-      const res = await axios.get("/api/v1/current-user");
-      dispatch(requestSucceed());
-      dispatch(userFetched(res.data));
-    } catch (err) {
-      dispatch(requestFailed());
-      dispatch(setFailureMessage(err.message));
-    }
-  }, []); // if you add 'history' to dependency, fectchData runs rapidly on landing page.
-
-  useEffect(() => fetchData(), [fetchData]);
+  useEffect(() => dispatch(fetchUser), [dispatch]);
 
   if (loading) {
     return <Spinner />;
   }
+  
   return (
     <div className='app'>
       {message.success && <SuccessMessage message={message.success} />}

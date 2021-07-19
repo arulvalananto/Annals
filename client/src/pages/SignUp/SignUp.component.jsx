@@ -2,12 +2,9 @@ import React, { useCallback, useState } from "react";
 import "./Signup.style.scss";
 // React Router
 import { Link, useHistory } from "react-router-dom";
-// Axios
-import axios from "../../axios";
 // React Redux
 import { useDispatch } from "react-redux";
-import { userFetched } from "../../redux/reducers/auth.reducer";
-import { setFailureMessage } from "../../redux/reducers/message.reducer";
+import { register } from "../../redux/actions/auth.actions";
 // Image
 import SignUpCover from "../../assets/signup__cover.png";
 import { CircularProgress } from "@material-ui/core";
@@ -74,20 +71,16 @@ const SignUp = () => {
     return true;
   };
 
+  const toggleLoading = (val) => {
+    setLoading(val);
+  };
+
   const submitHandler = async (e) => {
     e.preventDefault();
     const isValid = validateForm();
     if (isValid) {
       setLoading(true);
-      try {
-        const response = await axios.post("/api/v1/register", credentials);
-        dispatch(userFetched(response.data));
-        setLoading(false);
-        history.replace("/");
-      } catch (err) {
-        dispatch(setFailureMessage(err.response.data.message));
-        setLoading(false);
-      }
+      dispatch(register(credentials, toggleLoading, history));
     }
   };
 

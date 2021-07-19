@@ -3,48 +3,27 @@ import "./PageAdd.style.scss";
 // Other Components
 import Button from "../Button/Button.component";
 import TextEditor from "../TextEditor/TextEditor.component";
-
+// Utilities
 import { dateString } from "../../utils/dates";
-
+// React Router
 import { useHistory } from "react-router-dom";
-
-import axios from "../../axios";
-
-import { pageAdded } from "../../redux/reducers/auth.reducer";
-import { setFailureMessage } from "../../redux/reducers/message.reducer";
+// Reducers
 import { useDispatch } from "react-redux";
+import { addPage } from "../../redux/actions/user.actions";
 
 const PageAdd = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
   const [content, setContent] = useState("");
-
   const [loading, setLoading] = useState(false);
 
-  const changeHandler = (val) => {
-    setContent(val);
-  };
+  const toggleLoading = (val) => setLoading(val);
 
-  const handleSubmit = async () => {
-    setLoading(true);
-    try {
-      const response = await axios.post("/api/v1/add-timeline", {
-        content,
-      });
+  const changeHandler = (val) => setContent(val);
 
-      if (response.data) {
-        dispatch(pageAdded(response.data));
-      }
-      setLoading(false);
-      history.push("/diary");
-    } catch (err) {
-      if (err.response) {
-        dispatch(setFailureMessage(err.response?.data.message));
-        history.push("/diary");
-      }
-      setLoading(false);
-    }
+  const submitHandler = async () => {
+    dispatch(addPage(content, toggleLoading, history));
   };
 
   return (
@@ -63,7 +42,7 @@ const PageAdd = () => {
           className='pageAdd__topButton'
           loading={loading}
           disabled={loading}
-          onClick={handleSubmit}>
+          onClick={submitHandler}>
           Save
         </Button>
       </div>

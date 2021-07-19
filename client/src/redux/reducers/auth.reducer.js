@@ -159,5 +159,10 @@ export const selectIsLoggedIn = createSelector(
   (el) => el.isLoggedIn
 );
 export const selectLoading = createSelector(selectAuth, (el) => el.isPending);
-
+export const selectDiary = createSelector(selectAuth, (el) => el.user.diary);
+export const selectPasswords = createSelector(
+  selectAuth,
+  (el) => el.user.passwords
+);
+export const selectIdeas = createSelector(selectAuth, (el) => el.user.ideas);
 export const selectTodos = createSelector(selectAuth, (el) => el.user.todos);

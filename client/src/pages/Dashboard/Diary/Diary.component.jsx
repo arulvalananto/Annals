@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import "./Diary.style.scss";
 
-// import { useSelector } from "react-redux";
-
 import { Link } from "react-router-dom";
 
 import Pages from "../../../components/Pages/Pages.component";
@@ -10,8 +8,6 @@ import Pages from "../../../components/Pages/Pages.component";
 const formattedDate = new Date().toISOString().split("T")[0];
 
 const Diary = () => {
-  // const diary = useSelector((state) => state.auth.user.diary);
-
   const [dateFormat, setDateFormat] = useState("date");
 
   return (

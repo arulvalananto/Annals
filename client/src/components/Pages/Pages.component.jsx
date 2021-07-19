@@ -2,13 +2,14 @@ import React from "react";
 import "./Pages.style.scss";
 // React-Redux
 import { useSelector } from "react-redux";
+import { selectDiary } from "../../redux/reducers/auth.reducer";
 // React Router
 import { Link } from "react-router-dom";
-
+// Utilities
 import { day, date, month, year } from "../../utils/dates";
 
 const Pages = () => {
-  const diary = useSelector((state) => state.auth.user.diary);
+  const diary = useSelector(selectDiary);
 
   if (!diary) {
     return <p>Something went wrong!</p>;

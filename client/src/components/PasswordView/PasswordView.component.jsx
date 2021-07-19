@@ -6,10 +6,7 @@ import FormInput from "../FormInput/FormInput.component";
 import YesOrNoModel from "../YesOrNoModel/YesOrNoModel.component";
 // Reducers
 import { useDispatch } from "react-redux";
-import { passwordDeleted } from "../../redux/reducers/auth.reducer";
-import { setFailureMessage } from "../../redux/reducers/message.reducer";
-//  Axios
-import axios from "../../axios";
+import { deletePassword, verifyPin } from "../../redux/actions/user.actions";
 //  React Icons
 import {
   MdClear,
@@ -29,26 +26,21 @@ const PasswordView = ({ passwordDetails, toggleDetails }) => {
     password: "",
   };
 
+  const [loading, setLoading] = useState(false);
   const [credentials, setCredentials] = useState(initialState);
-
   const [pin, setPin] = useState("");
-
   const [verifiedPassword, setVerifiedPassword] = useState("");
   const [verify, setVerify] = useState(false);
-
   const [isVisible, setIsVisible] = useState(false);
   const [isModel, setIsModel] = useState(false);
   const [isDeleteModel, setIsDeleteModel] = useState(false);
 
-  const [loading, setLoading] = useState(false);
-
   const dispatch = useDispatch();
 
   const toggleModel = () => setIsModel(!isModel);
-
   const toggleVisiblePassword = () => setIsVisible(!isVisible);
-
   const toggleDeleteModel = () => setIsDeleteModel(!isDeleteModel);
+  const toggleLoading = (val) => setLoading(val);
 
   useEffect(() => {
     setVerify(false);
@@ -61,46 +53,28 @@ const PasswordView = ({ passwordDetails, toggleDetails }) => {
     setCredentials({ ...credentials, [name]: value });
   };
 
-  const verifyPassword = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      const response = await axios.post("/api/v1/password/verify-pin", {
-        password: passwordDetails.password,
-        pin,
-      });
-
-      setVerifiedPassword(response.data.decryptPassword);
-
-      setVerify(true);
-      setIsModel(false);
-      setPin("");
-      setLoading(false);
-    } catch (err) {
-      dispatch(setFailureMessage(err.response?.data.message));
-      setLoading(false);
-    }
+  const verified = (val) => {
+    setVerifiedPassword(val);
+    setVerify(true);
+    setIsModel(false);
+    setPin("");
   };
 
-  const deletePassword = async (e) => {
+  const verifyPasswordHandler = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    try {
-      const res = await axios.delete(
-        `/api/v1/password/delete/${passwordDetails._id}`
-      );
-      console.log(res.data);
-      if (res.data?.deleted) {
-        dispatch(passwordDeleted({ id: passwordDetails._id }));
-      }
+    dispatch(verifyPin(passwordDetails, pin, verified, toggleLoading));
+  };
 
-      setIsDeleteModel(false);
-      toggleDetails("", "");
-      setLoading(false);
-    } catch (err) {
-      dispatch(setFailureMessage(err.response?.data.message));
-      setLoading(false);
-    }
+  const deletePasswordHandler = async (e) => {
+    e.preventDefault();
+    dispatch(
+      deletePassword(
+        toggleLoading,
+        passwordDetails,
+        toggleDeleteModel,
+        toggleDetails
+      )
+    );
   };
 
   return (
@@ -198,7 +172,7 @@ const PasswordView = ({ passwordDetails, toggleDetails }) => {
         <>
           <div className='model-overlay'></div>
           <div className='model'>
-            <form onSubmit={verifyPassword} className='model-container'>
+            <form onSubmit={verifyPasswordHandler} className='model-container'>
               <h4 className='title'>Enter Password</h4>
               <FormInput
                 className='form-input'
@@ -217,7 +191,7 @@ const PasswordView = ({ passwordDetails, toggleDetails }) => {
       )}
       {isDeleteModel && (
         <YesOrNoModel
-          yes={deletePassword}
+          yes={deletePasswordHandler}
           no={toggleDeleteModel}
           loading={loading}
         />

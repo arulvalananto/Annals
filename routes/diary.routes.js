@@ -8,8 +8,8 @@ const router = express.Router();
 
 router.use(isAuthenticated);
 
-router.post("/add-timeline", addPage);
+router.post("/add", addPage);
 
-router.patch("/update-timeline/:id", updatePage);
+router.patch("/update/:id", updatePage);
 
 module.exports = router;
