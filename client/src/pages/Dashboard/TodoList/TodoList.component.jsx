@@ -3,12 +3,14 @@ import "./TodoList.style.scss";
 
 import { useDispatch, useSelector } from "react-redux";
 import { selectTodos } from "../../../redux/reducers/auth.reducer";
-import { addTodo } from "../../../redux/actions/user.actions";
+import { addTodo, updateTodoStatus } from "../../../redux/actions/user.actions";
 
 import { IoAdd } from "react-icons/io5";
 import { GoChevronRight } from "react-icons/go";
 import { GrSubtract } from "react-icons/gr";
 import { CircularProgress, Tooltip } from "@material-ui/core";
+
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const TodoList = () => {
   const [content, setContent] = useState("");
@@ -19,6 +21,16 @@ const TodoList = () => {
 
   const dispatch = useDispatch();
   const todos = useSelector(selectTodos);
+
+  const todo = todos?.filter((el) => el.status === "todo");
+  const inprogress = todos?.filter((el) => el.status === "inprogress");
+  const done = todos?.filter((el) => el.status === "done");
+
+  const sections = [
+    { title: "To Do", variable: todo },
+    { title: "In Progress", variable: inprogress },
+    { title: "Done", variable: done },
+  ];
 
   useEffect(() => {
     if (editMode) {
@@ -33,14 +45,30 @@ const TodoList = () => {
 
   const clearInput = () => setContent("");
 
-  const dragOver = (e) => {};
+  const dragOver = (result) => {
+    console.log(result);
+    const { destination, source, draggableId } = result;
 
-  const dragStart = (e) => {};
+    if (!destination) return;
+
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    )
+      return;
+
+    const newTodos = todos.map((el) =>
+      el._id === draggableId ? { ...el, status: destination.droppableId } : el
+    );
+    dispatch(updateTodoStatus(newTodos, destination.droppableId, draggableId));
+  };
 
   const handleKeyDown = (e) => {
     e.target.style.height = "inherit";
     e.target.style.height = `${e.target.scrollHeight}px`;
   };
+
+  console.log(todos);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -77,61 +105,115 @@ const TodoList = () => {
 
   return (
     <div className='todoList'>
-      <div className='todoList__do'>
-        <div className='todoList__doHeader'>
-          <h3 className='todoList__doTitle'>To do</h3>
-          <p className='todoList__doCount'>0</p>
+      <DragDropContext onDragEnd={(e) => dragOver(e)}>
+        <div className='todoList__do'>
+          <div className='todoList__doHeader'>
+            <h3 className='todoList__doTitle'>To do</h3>
+            <p className='todoList__doCount'>{todo?.length || "0"}</p>
+          </div>
+          <Tooltip title={editMode ? "close" : "add"} arrow placement='top'>
+            <p
+              className='todoList__doAddButton'
+              onClick={() => setEditMode(!editMode)}
+            >
+              {editMode ? <GrSubtract size={20} /> : <IoAdd size={20} />}
+            </p>
+          </Tooltip>
+          <div>{renderInput()}</div>
+          <Droppable droppableId='todo'>
+            {(provided) => (
+              <div
+                className='todoList__doLists'
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+                key='todo'
+              >
+                {todo.map((todo, index) => (
+                  <Draggable
+                    draggableId={todo._id}
+                    index={index}
+                    key={todo._id}
+                  >
+                    {(provided, snapshot) => (
+                      <p
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        className='todoList__doList'
+                        ref={provided.innerRef}
+                      >
+                        {todo.content}
+                      </p>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
         </div>
-        <Tooltip title={editMode ? "close" : "add"} arrow placement='top'>
-          <p
-            className='todoList__doAddButton'
-            onClick={() => setEditMode(!editMode)}>
-            {editMode ? <GrSubtract size={20} /> : <IoAdd size={20} />}
-          </p>
-        </Tooltip>
-        <div>{renderInput()}</div>
-        <div className='todoList__doLists' onDragOver={(e) => dragOver(e)}>
-          {todos
-            .filter((todo) => todo.status === "todo")
-            .map((todo) => (
-              <p
-                key={todo._id}
-                className='todoList__doList'
-                draggable
-                onDragStart={(e) => dragStart(e)}>
-                {todo.content}
-              </p>
-            ))}
+        <div className='todoList__doing'>
+          <div className='todoList__doingHeader'>
+            <h3 className='todoList__doingTitle'>In progress</h3>
+            <p className='todoList__doingCount'>{inprogress?.length || "0"}</p>
+          </div>
+          <Droppable droppableId='inprogress'>
+            {(provided) => (
+              <div
+                className='todoList__doingLists'
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+              >
+                {inprogress.map((todo, index) => (
+                  <Draggable draggableId={todo._id} index={index}>
+                    {(provided, snapshot) => (
+                      <p
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        className='todoList__doingList'
+                        ref={provided.innerRef}
+                      >
+                        {todo.content}
+                      </p>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
         </div>
-      </div>
-      <div className='todoList__doing'>
-        <div className='todoList__doingHeader'>
-          <h3 className='todoList__doingTitle'>In progress</h3>
-          <p className='todoList__doingCount'>0</p>
+        <div className='todoList__done'>
+          <div className='todoList__doneHeader'>
+            <h3 className='todoList__doneTitle'>Done</h3>
+            <p className='todoList__doneCount'>{done?.length || "0"}</p>
+          </div>
+          <Droppable droppableId='done'>
+            {(provided) => (
+              <div
+                className='todoList__doneLists'
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+              >
+                {done.map((todo, index) => (
+                  <Draggable draggableId={todo._id} index={index}>
+                    {(provided, snapshot) => (
+                      <p
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        className='todoList__doneList'
+                        ref={provided.innerRef}
+                      >
+                        {todo.content}
+                      </p>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
         </div>
-        <div className='todoList__doingLists' onDragOver={(e) => dragOver(e)}>
-          <p
-            className='todoList__doingList'
-            draggable
-            onDragStart={(e) => dragStart(e)}>
-            uihiuij iuiuiu
-          </p>
-        </div>
-      </div>
-      <div className='todoList__done'>
-        <div className='todoList__doneHeader'>
-          <h3 className='todoList__doneTitle'>Done</h3>
-          <p className='todoList__doneCount'>0</p>
-        </div>
-        <div className='todoList__doneLists' onDragOver={(e) => dragOver(e)}>
-          <p
-            className='todoList__doneList'
-            draggable
-            onDragStart={(e) => dragStart(e)}>
-            iuy ihiu
-          </p>
-        </div>
-      </div>
+      </DragDropContext>
     </div>
   );
 };

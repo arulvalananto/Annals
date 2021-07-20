@@ -78,7 +78,7 @@ passport.use(
         email: profile._json.email,
         fullName: profile.displayName,
       }).save();
-      
+
       done(null, user);
     }
   )

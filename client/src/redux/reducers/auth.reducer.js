@@ -128,6 +128,16 @@ const slice = createSlice({
         },
       };
     },
+    todoStatusUpdated: (auth, action) => {
+      console.log(action.payload);
+      return {
+        ...auth,
+        user: {
+          ...auth.user,
+          todos: action.payload,
+        },
+      };
+    },
   },
 });
 
@@ -145,6 +155,7 @@ export const {
   ideaUpdated,
   ideaDeleted,
   todoAdded,
+  todoStatusUpdated,
 } = slice.actions;
 
 export default slice.reducer;

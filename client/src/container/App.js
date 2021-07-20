@@ -29,7 +29,7 @@ function App() {
   if (loading) {
     return <Spinner />;
   }
-  
+
   return (
     <div className='app'>
       {message.success && <SuccessMessage message={message.success} />}

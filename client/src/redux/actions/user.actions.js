@@ -9,6 +9,7 @@ import {
   passwordFetched,
   pinCreated,
   todoAdded,
+  todoStatusUpdated,
 } from "../reducers/auth.reducer";
 import { setFailureMessage } from "../reducers/message.reducer";
 
@@ -182,3 +183,12 @@ export const addTodo =
       setFailureMessage(err.response?.data);
     }
   };
+
+export const updateTodoStatus = (newTodos, status, id) => async (dispatch) => {
+  dispatch(todoStatusUpdated(newTodos));
+  try {
+    await axios.patch(`/todos/update-status/${id}`, { status });
+  } catch (e) {
+    setFailureMessage(e.response?.data);
+  }
+};

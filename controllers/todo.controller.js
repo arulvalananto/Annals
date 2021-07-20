@@ -6,17 +6,13 @@ const catchAsync = require("../utils/catchAsync");
 exports.addTodo = catchAsync(async (req, res, next) => {
   const { content } = req.body;
 
-  const userId = req.session.user._id;
-
   const todo = await Todo({
     content,
-    createdBy: userId,
+    createdBy: req.session.userId,
   }).save();
 
-  const user = await User.findById(userId);
-
-  user.todos.push(todo);
-
+  const user = await User.findById(req.session.userId);
+  user.todos.push(todo._id);
   await user.save();
 
   res.status(201).json(todo);
@@ -27,9 +23,9 @@ exports.updateTodo = (req, res, next) => {
 };
 
 exports.updateStatus = catchAsync(async (req, res, next) => {
-  const { status, id } = req.body;
+  const { status } = req.body;
 
-  const todo = await Todo.findById(id);
+  const todo = await Todo.findById(req.params.id);
 
   todo.status = status;
 
@@ -40,6 +36,4 @@ exports.updateStatus = catchAsync(async (req, res, next) => {
   // This is end point is not completed.
 });
 
-exports.deleteTodo = (req, res, next) => {
-  
-};
+exports.deleteTodo = (req, res, next) => {};
