@@ -26,11 +26,11 @@ const TodoList = () => {
   const inprogress = todos?.filter((el) => el.status === "inprogress");
   const done = todos?.filter((el) => el.status === "done");
 
-  const sections = [
-    { title: "To Do", variable: todo },
-    { title: "In Progress", variable: inprogress },
-    { title: "Done", variable: done },
-  ];
+  // const sections = [
+  //   { title: "To Do", variable: todo },
+  //   { title: "In Progress", variable: inprogress },
+  //   { title: "Done", variable: done },
+  // ];
 
   useEffect(() => {
     if (editMode) {
@@ -121,9 +121,11 @@ const TodoList = () => {
           </Tooltip>
           <div>{renderInput()}</div>
           <Droppable droppableId='todo'>
-            {(provided) => (
+            {(provided, snapshot) => (
               <div
-                className='todoList__doLists'
+                className={`todoList__doLists ${
+                  snapshot.isDraggingOver ? "todoList__doLists--dragging" : ""
+                }`}
                 ref={provided.innerRef}
                 {...provided.droppableProps}
                 key='todo'
@@ -138,7 +140,11 @@ const TodoList = () => {
                       <p
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
-                        className='todoList__doList'
+                        className={`todoList__doList ${
+                          snapshot.isDragging
+                            ? "todoList__doList--dragging"
+                            : ""
+                        }`}
                         ref={provided.innerRef}
                       >
                         {todo.content}
@@ -157,9 +163,13 @@ const TodoList = () => {
             <p className='todoList__doingCount'>{inprogress?.length || "0"}</p>
           </div>
           <Droppable droppableId='inprogress'>
-            {(provided) => (
+            {(provided, snapshot) => (
               <div
-                className='todoList__doingLists'
+                className={`todoList__doingLists ${
+                  snapshot.isDraggingOver
+                    ? "todoList__doingLists--dragging"
+                    : ""
+                }`}
                 ref={provided.innerRef}
                 {...provided.droppableProps}
               >
@@ -169,7 +179,11 @@ const TodoList = () => {
                       <p
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
-                        className='todoList__doingList'
+                        className={`todoList__doingList ${
+                          snapshot.isDragging
+                            ? "todoList__doingList--dragging"
+                            : ""
+                        }`}
                         ref={provided.innerRef}
                       >
                         {todo.content}
@@ -188,9 +202,11 @@ const TodoList = () => {
             <p className='todoList__doneCount'>{done?.length || "0"}</p>
           </div>
           <Droppable droppableId='done'>
-            {(provided) => (
+            {(provided, snapshot) => (
               <div
-                className='todoList__doneLists'
+                className={`todoList__doneLists ${
+                  snapshot.isDraggingOver ? "todoList__doneLists--dragging" : ""
+                }`}
                 ref={provided.innerRef}
                 {...provided.droppableProps}
               >
@@ -200,7 +216,11 @@ const TodoList = () => {
                       <p
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
-                        className='todoList__doneList'
+                        className={`todoList__doneList ${
+                          snapshot.isDragging
+                            ? "todoList__doneList--dragging"
+                            : ""
+                        }`}
                         ref={provided.innerRef}
                       >
                         {todo.content}

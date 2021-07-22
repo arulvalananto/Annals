@@ -2,12 +2,13 @@
 
 .button {
   color: $dark-theme;
-  background: $button-primary-color;
+  background: $primary-color;
   @include buttonWithoutBorder();
   font-weight: $font-weight-bold;
   padding: 0.5rem 2rem;
   text-transform: uppercase;
   cursor: pointer;
+  box-shadow: $shadow;
 
   &:hover {
     background: $button-primary-touch-color;

@@ -1,5 +1,8 @@
-$primary-color: #010a24;
-$secondary-color: #171721;
+$primary-bg-color: #010a24;
+$secondary-bg-color: #171721;
+
+$primary-color: #4b24bf;
+$secondary-color: #f41368;
 
 $button-primary-color: #a9ded8;
 $button-primary-touch-color: #9edfd7;
@@ -32,6 +35,19 @@ $scroll-bg: #ccf6ed;
 
 $model-overlay-bg: rgba(255, 255, 255, 0.01);
 $model-bg: rgb(29, 28, 28);
+
+$shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+
+@mixin flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin viewport {
+  width: 100vw;
+  height: 100vh;
+}
 
 @mixin flexRow {
   display: flex;

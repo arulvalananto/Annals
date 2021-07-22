@@ -4,20 +4,21 @@
   @include flexColumn();
 
   &--field {
-    width: 95%;
+    width: $percentage;
     padding: 0.5rem 1rem;
-    font-size: 18px;
+    font-size: $font-x-large;
     border: none;
     outline: none;
     border-bottom: 1px solid $slight-theme;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 
     &:focus {
-      border-color: $dark-theme;
+      border-bottom: 3px solid $dark-theme;
     }
   }
   &--fieldError {
-    border: 1px solid red;
-    outline: 1px solid red;
+    border-bottom: 3px solid red;
   }
 
   &__inputErrorMessage {

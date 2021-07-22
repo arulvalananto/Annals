@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { login } from "../../redux/actions/auth.actions";
 // Other Components
 import FormInput from "../../components/FormInput/FormInput.component";
+import logo from "../../assets/logo.png";
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -78,7 +79,7 @@ const SignIn = () => {
     <div className='signIn'>
       <div className='signIn__left'>
         <Link to='/'>
-          <p className='signIn__leftLogo'>_Annals</p>
+          <img src={logo} alt='logo' className='signIn__leftLogo' />
         </Link>
       </div>
       <div className='signIn__right'>
@@ -90,9 +91,7 @@ const SignIn = () => {
         </div>
         <div className='signIn__rightFooter'>
           <h3 className='signIn__rightFooterTitle'>Sign In</h3>
-          <p className='signIn__rightFooterSubtitle'>
-            Welcome back! sign in and let's go
-          </p>
+          <p className='signIn__rightFooterSubtitle'>Welcome back 💖</p>
           <form className='signIn__rightFooterForm' onSubmit={handleSubmit}>
             <FormInput
               className='signIn__rightFooterFormInput'
@@ -125,7 +124,7 @@ const SignIn = () => {
               )}
             </button>
           </form>
-          <p className='signIn__splitter'>or signin with</p>
+          <p className='signIn__splitter'>OR</p>
           <div className='signIn__rightFooterButtonContainer'>
             <a href='http://localhost:5000/auth/google'>
               <button type='button' className='signIn__googleButton'>

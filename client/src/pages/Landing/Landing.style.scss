@@ -1,33 +1,39 @@
 @import "../../container/App.global.style.scss";
 
 .landing {
-  color: $primary-color;
   background: $light-theme;
+  margin: 0 8rem;
   height: 100vh;
   @include userSelect();
 
   &__container {
-    @include flexRow;
     margin: 3rem 0;
 
-    &Left {
+    .landing__start {
       flex: 1;
       padding: 2rem;
 
-      &Title {
+      &Title,
+      &Subtitle {
         font-size: 70px;
+        text-align: center;
 
-        @media (max-width: 800px) {
+        @media (max-width: 768px) {
           font-size: 50px;
         }
-      }
-      &Subtitle {
-        margin-top: 2rem;
-        font-size: 35px;
-
-        @media (max-width: 1180px) {
-          font-size: 25px;
+        @media (max-width: 425px) {
+          font-size: 35px;
         }
+      }
+      &Title {
+        color: #1a5af8;
+      }
+
+      &Content {
+        margin-top: 0.5rem;
+        color: gray;
+        font-size: 24px;
+        text-align: center;
       }
     }
     &Right {
@@ -42,7 +48,7 @@
           object-fit: contain;
 
           @media (max-width: 675px) {
-            width: 100%;
+            width: $percentage;
             height: 350px;
           }
         }
@@ -51,5 +57,18 @@
     @media (max-width: 1180px) {
       flex-direction: column;
     }
+  }
+}
+
+@media (max-width: 1024px) {
+  .landing {
+    margin: 0 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .landing__startTitle,
+  .landing__startSubtitle {
+    font-size: 40px;
   }
 }

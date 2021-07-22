@@ -10,6 +10,7 @@ import SignUpCover from "../../assets/signup__cover.png";
 import { CircularProgress } from "@material-ui/core";
 // Other Components
 import FormInput from "../../components/FormInput/FormInput.component";
+import logo from "../../assets/logo-with-icon-white.svg";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -88,7 +89,7 @@ const SignUp = () => {
     <div className='signUp'>
       <div className='signUp__left'>
         <Link to='/'>
-          <p className='signUp__leftLogo'>_Annals</p>
+          <img src={logo} className='signUp__leftLogo' alt='logo' />
         </Link>
         <h3 className='signUp__leftText'>
           Write and Read your content securely
@@ -101,7 +102,7 @@ const SignUp = () => {
       </div>
       <div className='signUp__right'>
         <div className='signUp__rightHeader'>
-          <p>Already have an account?</p>
+          <p>Have an account?</p>
           <Link to='/signin'>
             <button className='signUp__rightHeaderButton'>Sign In</button>
           </Link>
@@ -109,7 +110,7 @@ const SignUp = () => {
         <div className='signUp__rightFooter'>
           <h3 className='signUp__rightFooterTitle'>Sign Up</h3>
           <p className='signUp__rightFooterSubtitle'>
-            Create an account and protect your privacy with annals
+            Let's start a journey with us
           </p>
           <form onSubmit={submitHandler} className='signUp__rightFooterForm'>
             <FormInput
@@ -152,10 +153,7 @@ const SignUp = () => {
               value={credentials.confirmPassword}
               error={errors?.confirmPassword}
             />
-            <button
-              loading={loading}
-              className='signUp__rightFooterFormButton'
-              type='submit'>
+            <button className='signUp__rightFooterFormButton' type='submit'>
               {!loading ? (
                 "Sign up"
               ) : (
