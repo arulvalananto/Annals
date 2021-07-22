@@ -4,89 +4,189 @@
   color: $light-theme;
   margin-top: 2rem;
   position: relative;
+  height: 100%;
+
+  &__overlay {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 5;
+  }
 
   &__top {
     height: 50px;
     padding: 0 3rem;
-    @include flexRow();
-    justify-content: space-between;
-    flex-wrap: wrap;
+    @include flex();
+
+    @media (max-width: 425px) {
+      flex-direction: column;
+      align-items: center;
+    }
 
     &AddButton {
       border: none;
       outline: none;
       padding: 0.4rem 1.6rem;
       font-size: $font-normal;
-      background: $button-primary-color;
+      background: $secondary-color;
       margin-top: 0.5rem;
-      @include flexRow();
-      justify-content: space-between;
+      @include flex;
       margin-right: 1rem;
       text-decoration: none;
-      color: $dark-theme;
+      color: $light-theme;
+      border-radius: 5px;
+      transition: 0.4s;
 
       &:active,
       &:hover {
-        background: $button-primary-touch-color;
+        transform: translateX(5px);
+      }
+
+      @media (max-width: 425px) {
+        margin-bottom: 1rem;
+        order: -1;
       }
     }
 
     &Container {
-      @include flexRow();
-      justify-content: center;
-      flex-wrap: wrap;
+      flex: 0.5;
+      position: relative;
 
-      .diary__topSearch {
+      .diary__topInput {
+        width: 100%;
         font-size: $font-normal;
         padding: 0.5rem 1rem;
         background: $light-theme-with-opacity;
         color: $light-theme;
         border: none;
         outline: none;
-        flex: 0.4;
         margin-top: 0.5rem;
+        min-width: 200px;
+        transition: 0.4s;
+        padding-right: 35px;
 
         &:focus {
-          box-shadow: 0 0 2px $light-theme-with-opacity;
+          transform: translateX(-5px);
         }
       }
-      .diary__topDatePicker {
-        font-size: 1rem;
-        height: 35px;
-        margin: 0 1rem;
-        padding: 0 0.5rem;
-        font-family: "Courier New", Courier, monospace;
-        background: $light-theme-with-opacity;
-        color: $light-theme;
-        border: none;
-        text-transform: uppercase;
-        border-radius: 0;
-        margin-top: 0.5rem;
 
-        &::-webkit-calendar-picker-indicator {
-          background: url("../../../assets/calender.png") center/80% no-repeat;
-          width: 15px;
+      .diary__topSearch {
+        position: absolute;
+        top: 15px;
+        right: 10px;
+        cursor: pointer;
+        border-radius: 50%;
+
+        @media (min-width: 1024px) {
+          display: none;
         }
       }
-      .diary__topDateOptions {
-        font-size: 1rem;
-        margin-right: 1rem;
-        height: 35px;
-        color: $dark-theme;
-        padding: 0 0.5rem;
-        border: none;
-        margin-top: 0.5rem;
-      }
-      .diary__topSearchButton {
-        @include buttonWithoutBorder();
-        padding: 0.5rem 1rem;
-        font-size: $font-normal;
-        background: $button-secondary-color;
-        margin-top: 0.5rem;
 
-        &:active,
+      .diary__topSearchOptions {
+        position: absolute;
+        top: 15px;
+        right: 10px;
+        cursor: pointer;
+        border-radius: 50%;
+
+        @media (max-width: 1024px) {
+          display: none;
+        }
+
         &:hover {
-          background: $button-secondary-touch-color;
+          background-color: rgba(255, 255, 255, 0.01);
+        }
+      }
+    }
+    &Options {
+      width: 300px;
+      background: $model-bg;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      border-radius: 5px;
+      position: absolute;
+      top: 47px;
+      right: 49px;
+      z-index: 5;
+
+      @media (max-width: 1024px) {
+        display: none;
+      }
+
+      &Close {
+        align-self: flex-end;
+        margin-bottom: 0.5rem;
+        cursor: pointer;
+      }
+
+      .diary__topDatePickerContainer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .diary__topDatePicker {
+          font-size: 1rem;
+          height: 35px;
+          margin: 0 1rem;
+          padding: 0 0.5rem;
+          font-family: "Courier New", Courier, monospace;
+          background: $light-theme-with-opacity;
+          color: $light-theme;
+          border: none;
+          text-transform: uppercase;
+          border-radius: 0;
+          margin-top: 0.5rem;
+
+          &::-webkit-calendar-picker-indicator {
+            background: url("../../../assets/calender.png") center/80% no-repeat;
+            width: 15px;
+          }
+        }
+      }
+      .diary__topDateOptionsContainer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 0.5rem;
+
+        .diary__topDateOptions {
+          font-size: 1rem;
+          margin-right: 1rem;
+          height: 35px;
+          color: $dark-theme;
+          padding: 0 0.5rem;
+          border: none;
+          margin-top: 0.5rem;
+        }
+      }
+      .diary__topSearchButtonContainer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 0.5rem;
+
+        .diary__topSearchButton,
+        .diary__topRestoreButton {
+          @include buttonWithoutBorder();
+          padding: 0.5rem 1rem;
+          font-size: $font-normal;
+          margin-top: 1rem;
+          cursor: pointer;
+          color: $light-theme;
+          transition: 0.4s;
+          border-radius: 3px;
+          background: $primary-color;
+
+          &:active,
+          &:hover {
+            transform: translateY(3px);
+          }
+        }
+        .diary__topRestoreButton {
+          background: $secondary-color;
         }
       }
     }

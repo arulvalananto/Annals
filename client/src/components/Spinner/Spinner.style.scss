@@ -4,6 +4,7 @@
   @include viewport();
   @include flexRow();
   justify-content: center;
+  background-color: $light-theme;
 
   &--invert {
     background: $primary-bg-color;

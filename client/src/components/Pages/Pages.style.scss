@@ -21,19 +21,14 @@
     margin: 1rem;
     text-decoration: none;
     color: $light-theme;
+    transition: 0.4s;
 
     &:hover {
-      color: $dark-theme;
-      background: $button-primary-color;
-    }
-    &:hover .page__labelYear {
-      color: $dark-theme;
+      background: $primary-color;
+      transform: rotate(-3deg);
     }
     &:hover .page__labelStart {
-      border-right: 1px solid $dark-theme;
-    }
-    &:hover .page__labelMid {
-      color: $dark-theme;
+      border-right: 5px solid $light-theme;
     }
     .page__labelStart {
       text-transform: uppercase;
@@ -42,20 +37,12 @@
       font-size: 2rem;
       padding: 1rem;
       border-right: 2px solid $slight-theme;
-
-      &:hover {
-        border-right: 1px solid $dark-theme;
-      }
     }
     .page__labelMid {
       flex: 0.1;
       padding: 1rem;
       font-size: 1.5rem;
       color: $slight-theme;
-
-      &:hover {
-        color: $dark-theme;
-      }
     }
     .page__labelEnd {
       font-size: 2rem;

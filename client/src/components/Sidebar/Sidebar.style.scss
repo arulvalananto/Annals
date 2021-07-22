@@ -1,12 +1,13 @@
 @import "../../container/App.global.style.scss";
 
 .sidebar {
-  width: 75px;
+  width: 200px;
   height: 100vh;
   box-shadow: 0px 0.25px 0.5px $light-theme;
-  @include flexRow();
+  padding: 0 1rem;
+  display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-content: center;
   position: sticky;
   top: 0;
   left: 0;
@@ -14,7 +15,6 @@
   &__top {
     flex: 0.1;
     @include flexRow();
-    justify-content: center;
   }
   &__middle {
     @include flexColumn();
@@ -24,20 +24,39 @@
   &__bottom {
     flex: 0.1;
     @include flexRow();
-    justify-content: center;
   }
-  .sidebar__logo {
-    padding: 0.5rem;
+  .sidebar__link {
+    text-decoration: none;
+    width: 100%;
     margin: 0.5rem 0;
-    border-radius: 50%;
+  }
+  .sidebar__logoContainer {
     @include flexRow();
-    justify-content: center;
     cursor: pointer;
     color: $slight-theme;
+    text-decoration: none;
+    padding: 0rem 1rem;
+    margin: 0.5rem 0;
+    border-radius: 5px;
+    transition: 0.4s;
+
+    span {
+      margin-left: 0.5rem;
+    }
+
+    .sidebar__logo {
+      width: 30px;
+    }
+
+    &--active,
+    &:hover {
+      color: $light-theme;
+      background: $primary-color;
+      padding: 0.5rem 1rem;
+    }
   }
-  .sidebar__logo--active,
-  .sidebar__logo:hover {
-    color: $dark-theme;
-    background: $button-primary-color;
+
+  @media (max-width: 768px) {
+    display: none;
   }
 }

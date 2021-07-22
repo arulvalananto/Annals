@@ -2,6 +2,7 @@
 
 .signIn {
   display: flex;
+  background: $light-theme;
 
   &__left {
     flex: 0.4;
@@ -75,7 +76,6 @@
         text-transform: uppercase;
       }
       &Subtitle {
-        color: gray;
         margin-top: 0.5rem;
         font-size: $font-small;
       }
@@ -143,7 +143,6 @@
     .signIn__splitter {
       margin: 2rem 0;
       position: relative;
-      color: gray;
       padding: 0 0.6rem;
       font-weight: $font-weight-bold;
       font-size: $font-x-large;

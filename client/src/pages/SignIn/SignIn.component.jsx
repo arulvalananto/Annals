@@ -126,15 +126,15 @@ const SignIn = () => {
           </form>
           <p className='signIn__splitter'>OR</p>
           <div className='signIn__rightFooterButtonContainer'>
-            <a href='http://localhost:5000/auth/google'>
-              <button type='button' className='signIn__googleButton'>
+            <a href='http://localhost:5000/auth/google' aria-label='Google'>
+              <p className='signIn__googleButton'>
                 <FcGoogle />
-              </button>
+              </p>
             </a>
-            <a href='http://localhost:5000/auth/facebook'>
-              <button type='button' className='signIn__facebookButton'>
+            <a href='http://localhost:5000/auth/facebook' aria-label='Facebook'>
+              <p className='signIn__facebookButton'>
                 <FaFacebookF />
-              </button>
+              </p>
             </a>
           </div>
         </div>
