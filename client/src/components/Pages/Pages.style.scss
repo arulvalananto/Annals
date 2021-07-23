@@ -6,55 +6,72 @@
   align-self: center;
 }
 .pages {
-  @include flexRow();
+  display: flex;
   flex-wrap: wrap;
   margin-top: 2rem;
   padding: 1rem;
 
   .page {
     background: $light-theme-with-opacity;
-    width: 250px;
+    width: 100%;
     height: 100px;
-    @include flexRow();
+    flex: 1 0 200px;
+    @include flex();
     border-radius: 5px;
     position: relative;
     margin: 1rem;
+    padding: 0.5rem 2rem;
     text-decoration: none;
     color: $light-theme;
     transition: 0.4s;
+    overflow: hidden;
+
+    @media (min-width: 464px) {
+      max-width: calc(50% - 10px);
+    }
+    @media (min-width: 928px) {
+      max-width: calc(35% - 10px);
+    }
+    @media (min-width: 1024px) {
+      min-width: calc(30% - 10px);
+    }
+    @media (max-width: 1024px) {
+      padding: 0.5rem 1rem;
+    }
 
     &:hover {
       background: $primary-color;
       transform: rotate(-3deg);
     }
-    &:hover .page__labelStart {
+    &:hover .page__labelMid {
       border-right: 5px solid $light-theme;
     }
     .page__labelStart {
       text-transform: uppercase;
       font-weight: $font-weight-bold;
-      flex: 0.4;
       font-size: 2rem;
-      padding: 1rem;
-      border-right: 2px solid $slight-theme;
     }
     .page__labelMid {
-      flex: 0.1;
-      padding: 1rem;
-      font-size: 1.5rem;
-      color: $slight-theme;
+      height: 70px;
+      border-right: 2px solid $slight-theme;
     }
     .page__labelEnd {
       font-size: 2rem;
-      flex: 0.4rem;
+      span {
+        margin-left: 1rem;
+      }
     }
     .page__labelCorner {
       position: absolute;
       bottom: 0;
       right: 0;
       color: $slight-theme;
-      padding: 0 0.5rem 0.5rem 0;
+      padding: 0 0.2rem 0.2rem 0;
       font-size: 12px;
     }
+  }
+
+  @media (max-width: 768px) {
+    padding: 0;
   }
 }

@@ -66,6 +66,7 @@
         min-width: 200px;
         transition: 0.4s;
         padding-right: 35px;
+        z-index: 6;
 
         &:focus {
           transform: translateX(-5px);
