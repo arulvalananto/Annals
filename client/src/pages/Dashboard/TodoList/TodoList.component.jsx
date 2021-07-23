@@ -26,12 +26,6 @@ const TodoList = () => {
   const inprogress = todos?.filter((el) => el.status === "inprogress");
   const done = todos?.filter((el) => el.status === "done");
 
-  // const sections = [
-  //   { title: "To Do", variable: todo },
-  //   { title: "In Progress", variable: inprogress },
-  //   { title: "Done", variable: done },
-  // ];
-
   useEffect(() => {
     if (editMode) {
       contentRef.current.selectionStart = contentRef.current.value.length;
@@ -128,7 +122,6 @@ const TodoList = () => {
                 }`}
                 ref={provided.innerRef}
                 {...provided.droppableProps}
-                key='todo'
               >
                 {todo.map((todo, index) => (
                   <Draggable

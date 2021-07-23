@@ -13,6 +13,13 @@
       font-size: 24px;
       font-weight: $font-weight-bold;
       text-transform: uppercase;
+
+      @media (max-width: 768px) {
+        font-size: 16px;
+      }
+      @media (max-width: 425px) {
+        display: none;
+      }
     }
     &Button {
       @include flexRow();
@@ -20,23 +27,21 @@
       @include buttonWithoutBorder();
       padding: 0.4rem 1.6rem;
       font-size: $font-normal;
-      background: $button-primary-color;
+      background: $primary-color;
       margin-top: 0.5rem;
       text-decoration: none;
-      color: $dark-theme;
+      color: $light-theme;
+      border-radius: 3px;
+      transition: 0.4s;
 
       &:active,
       &:hover {
-        background: $button-primary-touch-color;
+        transform: translateY(3px);
       }
     }
 
     .pageView__topButton--back {
-      background: $button-secondary-color;
-      &:active,
-      &:hover {
-        background: $button-secondary-touch-color;
-      }
+      background: $secondary-color;
     }
     .pageView__topButtonContainer {
       display: flex;
@@ -44,11 +49,12 @@
 
       .pageView__topButton--cancel {
         margin-right: 1rem;
-        background: $button-secondary-color;
+        background: $tertiary-color;
         color: $dark-theme;
+        transition: 0.4s;
 
         &:hover {
-          background: $button-secondary-touch-color;
+          transform: translateY(3px);
         }
       }
     }
@@ -71,5 +77,19 @@
 
       @include scroll();
     }
+  }
+
+  &__date {
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    font-weight: $font-weight-bold;
+
+    @media (min-width: 425px) {
+      display: none;
+    }
+  }
+
+  @media (max-width: 425px) {
+    padding: 1rem;
   }
 }

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./PageAdd.style.scss";
 // Other Components
-import Button from "../Button/Button.component";
 import TextEditor from "../TextEditor/TextEditor.component";
 // Utilities
 import { dateString } from "../../utils/dates";
@@ -33,19 +32,22 @@ const PageAdd = () => {
           type='button'
           className='pageAdd__topButton pageAdd__topButton--back'
           onClick={() => history.goBack()}
-          disabled={loading}>
+          disabled={loading}
+        >
           Back
         </button>
         <p className='pageAdd__topDate'>{dateString(Date.now())}</p>
-        <Button
+        <button
           type='button'
           className='pageAdd__topButton'
           loading={loading}
           disabled={loading}
-          onClick={submitHandler}>
+          onClick={submitHandler}
+        >
           Save
-        </Button>
+        </button>
       </div>
+      <p className='pageAdd__date'>{dateString(Date.now())} :</p>
       <TextEditor body={content} changeHandler={changeHandler} />
     </div>
   );

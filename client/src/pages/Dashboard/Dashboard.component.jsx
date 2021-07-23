@@ -52,8 +52,8 @@ const Dashboard = () => {
           <div className='dashboard__rightContainer'>
             <Route exact path='/' component={Home} />
             <Route exact path='/diary' component={Diary} />
-            <Route path='/diary/view/:id' component={PageView} />
             <Route path='/diary/add' component={PageAdd} />
+            <Route path='/diary/view/:id' component={PageView} />
             <Route path='/passwords' component={Password} />
             <Route path='/routines'>Hello Routines</Route>
             <Route path='/ideas' component={Ideas} />

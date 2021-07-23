@@ -49,7 +49,8 @@ const PageView = () => {
   };
 
   const submitHandler = async () => {
-    if (isValid) dispatch(updatePage(page._id, content, toggleLoading, history));
+    if (isValid)
+      dispatch(updatePage(page._id, content, toggleLoading, history));
   };
 
   return (
@@ -59,7 +60,8 @@ const PageView = () => {
           type='button'
           disabled={loading}
           className='pageView__topButton pageView__topButton--back'
-          onClick={() => history.goBack()}>
+          onClick={() => history.goBack()}
+        >
           Back
         </button>
         <p className='pageView__topDate'>{dateString(page.createdAt)}</p>
@@ -70,27 +72,31 @@ const PageView = () => {
             className={`pageView__topButton ${
               isEditMode && "pageView__topButton--cancel"
             }`}
-            onClick={toggleEdit}>
+            onClick={toggleEdit}
+          >
             {isEditMode ? "Cancel" : "Edit"}
           </button>
           {isEditMode && (
-            <Button
+            <button
               type='submit'
               loading={loading}
               disabled={loading}
               className='pageView__topButton'
-              onClick={submitHandler}>
+              onClick={submitHandler}
+            >
               Save
-            </Button>
+            </button>
           )}
         </div>
       </div>
+      <p className='pageView__date'>{dateString(page.createdAt)} :</p>
       <div className='pageView__bottom'>
         <textarea
           disabled={isEditMode ? false : true}
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          className='pageView__bottomContent'></textarea>
+          className='pageView__bottomContent'
+        ></textarea>
       </div>
     </div>
   );
