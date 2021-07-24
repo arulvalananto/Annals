@@ -4,9 +4,7 @@
   color: $dark-theme;
   background: $primary-color;
   @include buttonWithoutBorder();
-  font-weight: $font-weight-bold;
   padding: 0.5rem 2rem;
-  text-transform: uppercase;
   cursor: pointer;
   box-shadow: $shadow;
 

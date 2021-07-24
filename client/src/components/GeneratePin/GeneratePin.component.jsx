@@ -20,9 +20,9 @@ const GeneratePin = () => {
   const [credentials, setCredentials] = useState(initialState);
   const [loading, setLoading] = useState(false);
   const [isOpenModel, setIsOpenModel] = useState(false);
+  const [error, setError] = useState("");
 
   const dispatch = useDispatch();
-  const message = useSelector(selectMessage);
 
   const toggleModal = () => {
     setIsOpenModel(!isOpenModel);
@@ -38,25 +38,24 @@ const GeneratePin = () => {
   };
 
   const submitHandler = async () => {
+    setError("");
     const { pin, confirmPin } = credentials;
 
     if (pin && pin === confirmPin) {
       dispatch(generatePin(toggleLoading, toggleModal, pin));
     } else {
-      dispatch(setFailureMessage("Please enter valid pin"));
+      setError("Please enter valid pin");
     }
   };
 
   return (
     <>
       <div className='generatePin'>
-        <p className='generatePin__info'>
-          If you are not generate a common password for all password, click here
-        </p>
         <button
           type='button'
           className='generatePin__button'
-          onClick={toggleModal}>
+          onClick={toggleModal}
+        >
           Generate Pin
         </button>
       </div>
@@ -64,7 +63,7 @@ const GeneratePin = () => {
         {isOpenModel && (
           <Model
             submitHandler={submitHandler}
-            error={message.failure}
+            error={error}
             toggleModal={toggleModal}
             handleChange={changeHandler}
             loading={loading}

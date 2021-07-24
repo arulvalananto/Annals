@@ -32,39 +32,6 @@ const Pages = () => {
               <p className='page__labelCorner'>{year(createdAt)}</p>
             </Link>
           ))}
-          {diary?.map(({ _id, createdAt }) => (
-            <Link key={_id} className='page' to={`/diary/view/${_id}`}>
-              <p className='page__labelStart'>{day(createdAt)}</p>
-              <p className='page__labelMid'></p>
-              <p className='page__labelEnd'>
-                {date(createdAt)}
-                <span>{month(createdAt)}</span>
-              </p>
-              <p className='page__labelCorner'>{year(createdAt)}</p>
-            </Link>
-          ))}
-          {diary?.map(({ _id, createdAt }) => (
-            <Link key={_id} className='page' to={`/diary/view/${_id}`}>
-              <p className='page__labelStart'>{day(createdAt)}</p>
-              <p className='page__labelMid'></p>
-              <p className='page__labelEnd'>
-                {date(createdAt)}
-                <span>{month(createdAt)}</span>
-              </p>
-              <p className='page__labelCorner'>{year(createdAt)}</p>
-            </Link>
-          ))}
-          {diary?.map(({ _id, createdAt }) => (
-            <Link key={_id} className='page' to={`/diary/view/${_id}`}>
-              <p className='page__labelStart'>{day(createdAt)}</p>
-              <p className='page__labelMid'></p>
-              <p className='page__labelEnd'>
-                {date(createdAt)}
-                <span>{month(createdAt)}</span>
-              </p>
-              <p className='page__labelCorner'>{year(createdAt)}</p>
-            </Link>
-          ))}
         </div>
       )}
     </>

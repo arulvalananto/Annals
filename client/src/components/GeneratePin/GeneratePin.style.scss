@@ -1,30 +1,27 @@
 @import "../../container/App.global.style.scss";
 
 .generatePin {
-  @include flexColumn();
-  width: $percentage;
+  margin-top: 3rem;
+  display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 5rem;
 
-  &__info {
-    font-size: $font-x-large;
-    margin-bottom: $rem;
-  }
   &__button {
     @include buttonWithoutBorder();
     padding: 0.4rem 1.6rem;
     font-size: $font-normal;
-    background: $button-primary-color;
+    background: $secondary-color;
     margin-top: 0.5rem;
     @include flexRow();
     justify-content: space-between;
     text-decoration: none;
-    color: $dark-theme;
+    color: $light-theme;
+    border-radius: 3px;
+    transition: 0.4s;
 
     &:active,
     &:hover {
-      background: $button-primary-touch-color;
+      transform: translateY(3px);
     }
   }
 }

@@ -2,9 +2,8 @@
 
 .modal {
   @include absolute();
-  width: 95vw;
   height: 100vh;
-  background: $model-overlay-bg;
+  width: 100%;
   @include flexColumn();
   align-items: center;
   justify-content: center;
@@ -12,19 +11,19 @@
   &__container {
     @include flexColumn();
     background: $model-bg;
-    width: 325px;
-    height: 290px;
+    width: 250px;
+    height: 250px;
     border-radius: 5px;
+    min-width: 250px;
+    min-height: 250px;
   }
   &__header {
-    font-size: 20px;
+    font-size: 18px;
     border-bottom: 1px solid $light-theme-with-opacity;
-    padding: $rem;
-    font-weight: $font-weight-normal;
+    padding: 0.5rem 1rem;
   }
   &__body {
-    padding: 1.5rem;
-    padding-bottom: 0.5rem;
+    padding: 1rem;
 
     .form-input {
       border-radius: 3px;
@@ -33,6 +32,12 @@
       font-size: $font-normal;
       outline: none;
       margin-bottom: 0.5rem;
+      border-bottom: none;
+      transition: 0.2s;
+
+      &:focus {
+        transform: translateY(-3px);
+      }
 
       &:last-child {
         margin-bottom: 0.1rem;
@@ -41,20 +46,24 @@
   }
   &__footer {
     display: flex;
-    justify-content: space-between;
-    padding: $rem;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 1rem;
 
     button {
       &:first-child {
         background: $light-theme;
         color: $dark-theme;
         transition: all 0.5ms ease-in;
+        margin-right: 0.5rem;
 
         &:hover {
           background: $light-theme;
           color: $dark-theme;
-          transform: scale(1.1);
         }
+      }
+      &:hover {
+        transform: scale(1.05);
       }
     }
     @include button();
