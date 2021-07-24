@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./PageView.style.scss";
 
-import Button from "../Button/Button.component";
 // React Redux
 import { useDispatch, useSelector } from "react-redux";
 // React Router

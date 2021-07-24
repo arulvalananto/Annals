@@ -55,7 +55,7 @@ const Dashboard = () => {
             <Route path='/diary/add' component={PageAdd} />
             <Route path='/diary/view/:id' component={PageView} />
             <Route path='/passwords' component={Password} />
-            <Route path='/routines'>Hello Routines</Route>
+            <Route path='/reminders'>Hello Reminders</Route>
             <Route path='/ideas' component={Ideas} />
             <Route path='/todos' component={TodoList} />
             <Route path='/notes'>Coming Soon... (Notes)</Route>

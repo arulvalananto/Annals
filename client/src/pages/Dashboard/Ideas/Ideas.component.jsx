@@ -87,9 +87,10 @@ const Ideas = () => {
     <div className='ideas'>
       <div
         className='ideas--overlay'
-        style={{ display: `${title ? "block" : "none"}` }}></div>
-      <form onSubmit={addIdeaHandler} className='ideas__header'>
-        <div className='ideas__headerForm'>
+        style={{ display: `${title ? "block" : "none"}` }}
+      ></div>
+      <div onSubmit={addIdeaHandler} className='ideas__header'>
+        <form className='ideas__headerForm'>
           <input
             type='text'
             placeholder='Add Idea (Title)'
@@ -97,17 +98,22 @@ const Ideas = () => {
             onChange={(e) => setTitle(e.target.value)}
             value={title}
           />
-          <button
-            type='submit'
-            className='ideas__headerFormButton'
-            style={{ display: `${title && content ? "block" : "none"}` }}>
-            {loading ? (
-              <CircularProgress size={18} color='inherit' />
-            ) : (
+          {loading && !openModal ? (
+            <CircularProgress
+              size={18}
+              color='inherit'
+              className='ideas__headerFormLoading'
+            />
+          ) : (
+            <button
+              type='submit'
+              className='ideas__headerFormButton'
+              style={{ display: `${title && content ? "block" : "none"}` }}
+            >
               <BsArrowRight size='20' />
-            )}
-          </button>
-        </div>
+            </button>
+          )}
+        </form>
         <textarea
           style={{
             display: `${title ? "block" : "none"}`,
@@ -117,7 +123,7 @@ const Ideas = () => {
           value={content}
           placeholder='Type Your Idea'
         />
-      </form>
+      </div>
       <div className='ideas__footer'>{renderIdea()}</div>
       {openModal && (
         <YesOrNoModel

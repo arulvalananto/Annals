@@ -3,8 +3,8 @@ import "./Sidebar.style.scss";
 // React Icons
 import { RiHome2Line, RiTodoLine, RiSettings4Line } from "react-icons/ri";
 import { FiLogOut } from "react-icons/fi";
-import { IoLockOpenOutline, IoBulbOutline, IoRepeat } from "react-icons/io5";
-import { BsPerson } from "react-icons/bs";
+import { IoLockOpenOutline, IoBulbOutline } from "react-icons/io5";
+import { BsPerson, BsAlarm } from "react-icons/bs";
 import { BiNote, BiBookOpen } from "react-icons/bi";
 // Other Components
 import ActiveLink from "../ActiveLink/ActiveLink.component";
@@ -23,7 +23,7 @@ const Sidebar = () => {
           title='Passwords'
           Icon={IoLockOpenOutline}
         />
-        <ActiveLink to='/routines' title='Routines' Icon={IoRepeat} />
+        <ActiveLink to='/reminders' title='Reminders' Icon={BsAlarm} />
         <ActiveLink to='/ideas' title='Ideas' Icon={IoBulbOutline} />
         <ActiveLink to='/todos' title='Todo List' Icon={RiTodoLine} />
         <ActiveLink to='/notes' title='Notes' Icon={BiNote} />

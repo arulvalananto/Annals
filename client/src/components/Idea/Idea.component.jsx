@@ -31,57 +31,63 @@ const Idea = ({
 
   const [updateContent, setUpdateContent] = useState(content);
 
+  const renderEdit = () => {
+    if (!editMode) {
+      return (
+        <>
+          <span className='edit'>
+            <FiEdit2 onClick={() => setEditMode(!editMode)} />
+          </span>
+          <span className='delete'>
+            <AiOutlineDelete onClick={() => deleteHandler(_id)} />
+          </span>
+        </>
+      );
+    }
+    return (
+      <>
+        <span className='no'>
+          <MdCancel
+            onClick={() => {
+              setUpdateContent(content);
+              setEditMode(!editMode);
+            }}
+          />
+        </span>
+        <span className='yes'>
+          <MdDone
+            onClick={() => {
+              editHandler(_id, content, updateContent);
+              setEditMode(!editMode);
+            }}
+          />
+        </span>
+      </>
+    );
+  };
+
   return (
     <div
-      className="idea"
+      className='idea'
       style={{ borderLeft: `4px solid ${randomColor()}` }}
       key={_id}
     >
-      <span className="idea__content">
-        <h4 className="title">{title}</h4>
+      <span className='idea__content'>
+        <h4 className='title'>{title}</h4>
         {!editMode ? (
           <p>{content}</p>
         ) : (
           <textarea
             onKeyDown={handleKeyDown}
             ref={editRef}
-            className="editField"
+            className='editField'
             value={updateContent}
             onChange={(e) => setUpdateContent(e.target.value)}
           />
         )}
       </span>
-      <div className="idea__tools">
-        {editMode ? (
-          <>
-            <span className="no">
-              <MdCancel
-                onClick={() => {
-                  setUpdateContent(content);
-                  setEditMode(!editMode);
-                }}
-              />
-            </span>
-            <span className="yes">
-              <MdDone
-                onClick={() => {
-                  editHandler(_id, content, updateContent);
-                  setEditMode(!editMode);
-                }}
-              />
-            </span>
-          </>
-        ) : (
-          <>
-            <span className="edit">
-              <FiEdit2 onClick={() => setEditMode(!editMode)} />
-            </span>
-            <span className="delete">
-              <AiOutlineDelete onClick={() => deleteHandler(_id)} />
-            </span>
-          </>
-        )}
-      </div>
+      <div className='idea__tools'>{renderEdit()}</div>
+      <div className='idea__tools--medium'>{renderEdit()}</div>
     </div>
   );
 };

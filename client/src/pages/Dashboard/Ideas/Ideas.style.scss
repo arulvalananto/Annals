@@ -1,31 +1,24 @@
 @import "../../../container/App.global.style.scss";
 
 .ideas {
-  width: $percentage;
-  height: $percentage;
-  padding: 2rem;
-  position: relative;
+  padding: 1rem;
+  flex: 1;
 
-  &--overlay {
-    z-index: 1;
-    width: 95vw;
-    height: 90vh;
-    @include absolute();
-    background: rgba(255, 255, 255, 0.01);
-    display: none;
+  @media (max-width: 325px) {
+    padding: 0;
   }
 
   &__header {
-    @include flexColumn();
+    display: flex;
     align-items: center;
     justify-content: center;
     margin-top: $rem;
     position: relative;
 
     &Form {
-      width: 50%;
       position: relative;
       z-index: 10;
+      flex: 0.5;
 
       &Input {
         width: $percentage;
@@ -34,14 +27,21 @@
         @include buttonWithoutBorder();
         color: $light-theme;
         padding-right: 2.5rem;
+        min-width: 200px;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
       }
 
+      &Loading,
       &Button {
         display: none;
         position: absolute;
         right: 10px;
         top: 10px;
         color: $light-theme;
+      }
+
+      &Button {
         font-weight: $font-weight-bold;
         background: transparent;
         @include buttonWithoutBorder();
@@ -61,6 +61,7 @@
         background: rgba(255, 255, 255, 0.98);
         border-bottom-left-radius: 4px;
         border-bottom-right-radius: 4px;
+        min-width: 200px;
       }
     }
   }
@@ -75,7 +76,6 @@
     color: $light-theme;
     width: $percentage;
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
   }
 }

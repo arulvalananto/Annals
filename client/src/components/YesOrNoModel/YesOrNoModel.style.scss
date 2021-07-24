@@ -9,12 +9,14 @@
 }
 .yesOrNoModel {
   @include absolute();
+  position: fixed;
+  left: 0;
+  top: 0;
   width: $percentage;
   height: $percentage;
   @include flexRow();
   justify-content: center;
   z-index: 100;
-  background: $model-overlay-bg;
 
   &__form {
     background: $model-bg;

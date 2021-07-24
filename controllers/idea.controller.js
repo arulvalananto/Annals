@@ -37,8 +37,6 @@ exports.deleteIdea = catchAsync(async (req, res, next) => {
   }
   const user = await User.findById(req.session.userId).populate("ideas");
 
-  console.log(user);
-
   user.ideas.remove(id);
   await user.save();
 
