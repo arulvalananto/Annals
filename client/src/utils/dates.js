@@ -1,4 +1,4 @@
-export const weeks = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+export const weeks = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 export const months = [
   "Jan",
   "Feb",
@@ -14,7 +14,7 @@ export const months = [
   "Dec",
 ];
 
-export const day = (data) => weeks[new Date(data).getDay() - 1];
+export const day = (data) => weeks[new Date(data).getDay()];
 export const date = (data) => new Date(data).getDate();
 export const month = (data) => months[new Date(data).getMonth()];
 export const year = (data) => new Date(data).getFullYear();
