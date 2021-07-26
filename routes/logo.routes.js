@@ -7,10 +7,13 @@ const AppError = require("../utils/AppError");
 
 const router = express.Router();
 
-router.post("/add", upload.single("logo"), async (req, res, next) => {
+router.post("/add", upload.array("images", 2), async (req, res, next) => {
+  console.log(req.files);
+
   try {
     const logo = new Logo({
-      avatar: req.file.path,
+      avatar: req.files[0].path,
+      cover: req.files[1].path,
     });
 
     await logo.save();

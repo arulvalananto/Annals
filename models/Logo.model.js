@@ -7,6 +7,11 @@ const logoSchema = mongoose.Schema(
       require: true,
       unique: true,
     },
+    cover: {
+      type: String,
+      require: true,
+      unique: true,
+    },
   },
   {
     toObject: {
