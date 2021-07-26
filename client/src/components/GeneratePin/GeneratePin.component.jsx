@@ -1,12 +1,8 @@
 import React, { useState } from "react";
 import "./GeneratePin.style.scss";
 // Reducers
-import { useDispatch, useSelector } from "react-redux";
-import {
-  clearFailureMessage,
-  selectMessage,
-  setFailureMessage,
-} from "../../redux/reducers/message.reducer";
+import { useDispatch } from "react-redux";
+import { clearFailureMessage } from "../../redux/reducers/message.reducer";
 // Other Component
 import Model from "../Model/Model.component";
 import { generatePin } from "../../redux/actions/user.actions";

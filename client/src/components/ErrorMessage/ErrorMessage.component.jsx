@@ -10,13 +10,13 @@ const ErrorMessage = ({ message }) => {
   const dispatch = useDispatch();
 
   return (
-    <div className="errorMessage">
-      <div className="container">
-        <p className="logo">
+    <div className='errorMessage'>
+      <div className='container'>
+        <p className='logo'>
           <VscError size={24} />
         </p>
-        <span className="message">{message}</span>
-        <p className="clear" onClick={() => dispatch(clearFailureMessage())}>
+        <span className='message'>{message}</span>
+        <p className='clear' onClick={() => dispatch(clearFailureMessage())}>
           <MdClear size={10} />
         </p>
       </div>

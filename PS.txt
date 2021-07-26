@@ -1,3 +1,5 @@
 have to refactor add password controller
 
 make whole app with static typing (optional) options: Typescript, flow. 
+
+make password page as well as todo with mobile responsiveness.
