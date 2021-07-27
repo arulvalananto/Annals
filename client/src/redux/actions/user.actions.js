@@ -73,13 +73,12 @@ export const generatePin = (loading, toggleModal, pin) => async (dispatch) => {
 };
 
 export const addPassword =
-  (loading, toggleDetails, clearInput, credentials) => async (dispatch) => {
+  (loading, toggleDetails, credentials) => async (dispatch) => {
     try {
       loading(true);
       const response = await axios.post("/password/add", credentials);
       loading(false);
       dispatch(passwordFetched(response?.data));
-      clearInput();
       toggleDetails("", "");
     } catch (err) {
       dispatch(setFailureMessage(err.response?.data.message));

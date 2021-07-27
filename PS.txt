@@ -3,3 +3,9 @@ have to refactor add password controller
 make whole app with static typing (optional) options: Typescript, flow. 
 
 make password page as well as todo with mobile responsiveness.
+
+change the add password route respective to the yesterday change of images.
+
+add password view pages
+
+style password page.

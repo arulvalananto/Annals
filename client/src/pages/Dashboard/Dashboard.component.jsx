@@ -19,10 +19,10 @@ const PageAdd = React.lazy(() =>
 );
 const Password = React.lazy(() => import("./Password/Password.component"));
 const PasswordAdd = React.lazy(() =>
-  import("../../components/PasswordAdd/PasswordAdd.component")
+  import("./Password/PasswordAdd/PasswordAdd.component")
 );
 const PasswordView = React.lazy(() =>
-  import("../../components/PasswordView/PasswordView.component")
+  import("./Password/PasswordView/PasswordView.component")
 );
 
 const Ideas = React.lazy(() => import("./Ideas/Ideas.component"));

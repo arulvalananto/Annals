@@ -7,15 +7,14 @@
   padding: 0.5rem 2rem;
   cursor: pointer;
   box-shadow: $shadow;
+  transition: 0.4s;
+  color: $light-theme;
+  border-radius: 3px;
 
   &:hover {
-    background: $button-primary-touch-color;
+    transform: translateY(-3px);
   }
 }
 .inverted {
-  background: $button-secondary-color;
-
-  &:hover {
-    background: $button-secondary-touch-color;
-  }
+  background: $secondary-color;
 }

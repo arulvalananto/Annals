@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./PasswordView.style.scss";
 // Other Components
-import Button from "../Button/Button.component";
-import FormInput from "../FormInput/FormInput.component";
-import YesOrNoModel from "../YesOrNoModel/YesOrNoModel.component";
+import Button from "../../../../components/Button/Button.component";
+import FormInput from "../../../../components/FormInput/FormInput.component";
+import YesOrNoModel from "../../../../components/YesOrNoModel/YesOrNoModel.component";
 // Reducers
 import { useDispatch } from "react-redux";
-import { deletePassword, verifyPin } from "../../redux/actions/user.actions";
+import { deletePassword, verifyPin } from "../../../../redux/actions/user.actions";
 //  React Icons
 import {
   MdClear,
