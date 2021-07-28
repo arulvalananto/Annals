@@ -45,19 +45,22 @@ exports.verifyPin = catchAsync(async (req, res, next) => {
 exports.addPassword = catchAsync(async (req, res) => {
   const { title, link, username, password } = req.body;
 
+  const changedTitle = title.split(" ").join("");
+
   const passwordStrength = passwordStrengthChecker(password);
 
-  const encryptedPassword = crypto.encrypt(password);
+  const encryptedPassword = await bcrypt.hash(password, 12);
 
   const logo = await Logo.findOne({
-    avatar: { $regex: title.toLowerCase(), $options: "i" },
+    avatar: { $regex: changedTitle, $options: "i" },
   });
 
-  let avatar;
-  if (!logo) {
-    avatar = "http://localhost:5000/uploads/default.png";
-  } else {
+  let avatar = "";
+  let coverImage = "";
+
+  if (logo) {
     avatar = "http://localhost:5000/" + logo.avatar;
+    coverImage = "http://localhost:5000/" + logo.cover;
   }
 
   const user = await User.findById(req.session.userId);
@@ -69,6 +72,7 @@ exports.addPassword = catchAsync(async (req, res) => {
     password: encryptedPassword,
     passwordStrength,
     avatar,
+    coverImage,
   });
   await user.save();
 

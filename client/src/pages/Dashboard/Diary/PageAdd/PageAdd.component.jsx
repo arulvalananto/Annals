@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import "./PageAdd.style.scss";
 // Other Components
-import TextEditor from "../TextEditor/TextEditor.component";
+import TextEditor from "../../../../components/TextEditor/TextEditor.component";
 // Utilities
-import { dateString } from "../../utils/dates";
+import { dateString } from "../../../../utils/dates";
 // React Router
 import { useHistory } from "react-router-dom";
 // Reducers
 import { useDispatch } from "react-redux";
-import { addPage } from "../../redux/actions/user.actions";
+import { addPage } from "../../../../redux/actions/user.actions";
 
 const PageAdd = () => {
   const history = useHistory();

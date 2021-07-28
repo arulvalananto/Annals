@@ -12,11 +12,9 @@ import Home from "./Home/Home.component";
 import Spinner from "../../components/Spinner/Spinner.component";
 const Diary = React.lazy(() => import("./Diary/Diary.component"));
 const PageView = React.lazy(() =>
-  import("../../components/PageView/PageView.component")
+  import("./Diary/PageView/PageView.component")
 );
-const PageAdd = React.lazy(() =>
-  import("../../components/PageAdd/PageAdd.component")
-);
+const PageAdd = React.lazy(() => import("./Diary/PageAdd/PageAdd.component"));
 const Password = React.lazy(() => import("./Password/Password.component"));
 const PasswordAdd = React.lazy(() =>
   import("./Password/PasswordAdd/PasswordAdd.component")

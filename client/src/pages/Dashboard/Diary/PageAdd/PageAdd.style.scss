@@ -1,22 +1,24 @@
-@import "../../container/App.global.style.scss";
+@import "../../../../container/App.global.style.scss";
 
-.pageView {
-  width: $percentage;
+.pageAdd {
+  width: 100%;
   height: 500px;
   padding: 3rem;
+
   &__top {
     @include flexRow();
     justify-content: space-between;
     margin-bottom: 1.5rem;
 
     &Date {
-      font-size: 24px;
+      font-size: 1.5rem;
       font-weight: $font-weight-bold;
       text-transform: uppercase;
 
       @media (max-width: 768px) {
-        font-size: 16px;
+        font-size: 1rem;
       }
+
       @media (max-width: 425px) {
         display: none;
       }
@@ -33,49 +35,16 @@
       color: $light-theme;
       border-radius: 3px;
       transition: 0.4s;
+      cursor: pointer;
 
       &:active,
       &:hover {
-        transform: translateY(3px);
+        letter-spacing: 3px;
       }
     }
 
-    .pageView__topButton--back {
+    .pageAdd__topButton--back {
       background: $secondary-color;
-    }
-    .pageView__topButtonContainer {
-      display: flex;
-      justify-content: space-between;
-
-      .pageView__topButton--cancel {
-        margin-right: 1rem;
-        background: $tertiary-color;
-        color: $dark-theme;
-        transition: 0.4s;
-
-        &:hover {
-          transform: translateY(3px);
-        }
-      }
-    }
-  }
-  &__bottom {
-    height: 500px;
-
-    &Content {
-      width: $percentage;
-      height: $percentage;
-      color: $light-theme;
-      background: $light-theme-with-opacity;
-      font-size: $font-small;
-      padding: 1rem;
-      font-family: inherit;
-      word-wrap: break-word;
-      word-break: keep-all;
-      resize: none;
-      margin-right: 1rem;
-
-      @include scroll();
     }
   }
 

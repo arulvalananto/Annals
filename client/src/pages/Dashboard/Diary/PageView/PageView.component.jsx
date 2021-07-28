@@ -6,11 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 // React Router
 import { useHistory, useParams } from "react-router";
 // Utils
-import { dateString } from "../../utils/dates";
+import { dateString } from "../../../../utils/dates";
 // Reducers
-import { selectDiary } from "../../redux/reducers/auth.reducer";
-import { setFailureMessage } from "../../redux/reducers/message.reducer";
-import { updatePage } from "../../redux/actions/user.actions";
+import { selectDiary } from "../../../../redux/reducers/auth.reducer";
+import { setFailureMessage } from "../../../../redux/reducers/message.reducer";
+import { updatePage } from "../../../../redux/actions/user.actions";
 
 const PageView = () => {
   const { id } = useParams();

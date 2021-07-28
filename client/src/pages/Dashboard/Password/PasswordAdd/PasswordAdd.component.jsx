@@ -28,7 +28,7 @@ const INPUT_DATA = [
   { name: "password", info: "" },
 ];
 
-const PasswordAdd = ({ toggleDetails }) => {
+const PasswordAdd = () => {
   const initialState = {
     title: "",
     link: "",
@@ -74,7 +74,7 @@ const PasswordAdd = ({ toggleDetails }) => {
   const submitHandler = async () => {
     setErrors({});
     if (isValid()) {
-      dispatch(addPassword(toggleLoading, toggleDetails, credentials));
+      dispatch(addPassword(toggleLoading,credentials, history));
     }
   };
 

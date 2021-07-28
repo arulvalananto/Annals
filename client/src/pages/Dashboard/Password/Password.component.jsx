@@ -38,7 +38,13 @@ const Password = () => {
               key={password._id}
               className='passwords__details'
             >
-              <h1>{password.title}</h1>
+              <h1 className='title'>{password.title}</h1>
+              <p className='username'>{password.username}</p>
+              <img
+                className='cover-image'
+                src={password.coverImage}
+                alt={password.title}
+              />
             </Link>
           ))}
         </div>

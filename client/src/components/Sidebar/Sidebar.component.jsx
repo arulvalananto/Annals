@@ -32,7 +32,7 @@ const Sidebar = () => {
       <div className='sidebar__bottom'>
         <a className='sidebar__link' href='http://localhost:5000/api/v1/logout'>
           <p className='sidebar__logoContainer'>
-            <FiLogOut size={20} className='sidebar__logo' />
+            <FiLogOut size={16} />
             <span>Log out</span>
           </p>
         </a>

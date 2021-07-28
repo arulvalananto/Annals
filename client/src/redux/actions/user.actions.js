@@ -73,13 +73,13 @@ export const generatePin = (loading, toggleModal, pin) => async (dispatch) => {
 };
 
 export const addPassword =
-  (loading, toggleDetails, credentials) => async (dispatch) => {
+  (loading, credentials, history) => async (dispatch) => {
     try {
       loading(true);
       const response = await axios.post("/password/add", credentials);
       loading(false);
       dispatch(passwordFetched(response?.data));
-      toggleDetails("", "");
+      history.push("/passwords");
     } catch (err) {
       dispatch(setFailureMessage(err.response?.data.message));
       loading(false);
@@ -103,17 +103,16 @@ export const verifyPin =
   };
 
 export const deletePassword =
-  (loading, passwordDetails, toggleDeleteModel, toggleDetails) =>
-  async (dispatch) => {
+  (loading, id, toggleDeleteModel, history) => async (dispatch) => {
     try {
       loading(true);
-      const res = await axios.delete(`/password/delete/${passwordDetails._id}`);
+      const res = await axios.delete(`/password/delete/${id}`);
       loading(false);
       if (res.data?.deleted) {
-        dispatch(passwordDeleted({ id: passwordDetails._id }));
+        history.push("/passwords");
+        dispatch(passwordDeleted({ id }));
       }
       toggleDeleteModel();
-      toggleDetails("", "");
     } catch (err) {
       dispatch(setFailureMessage(err.response?.data.message));
       loading(false);

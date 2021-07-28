@@ -19,8 +19,7 @@ const passwordSchema = mongoose.Schema(
           type: String,
         },
         password: {
-          iv: String,
-          content: String,
+          type: String,
         },
         risk: {
           type: String,
@@ -32,6 +31,13 @@ const passwordSchema = mongoose.Schema(
         avatar: {
           type: String,
         },
+        coverImage: {
+          type: String,
+        },
+        updatedAt: {
+          type: Date,
+          default: Date.now(),
+        },
       },
     ],
   },
@@ -42,6 +48,7 @@ const passwordSchema = mongoose.Schema(
     toJSON: {
       virtuals: true,
     },
+    timestamps: true,
   }
 );
 

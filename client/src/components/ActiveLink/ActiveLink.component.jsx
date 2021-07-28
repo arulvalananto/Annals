@@ -14,7 +14,7 @@ const ActiveLink = ({ title, to, Icon }) => {
           match && "sidebar__logoContainer--active"
         }`}
       >
-        <Icon size={20} className='sidebar__logo' />
+        <Icon size={16} className='sidebar__logo' />
         <span>{title}</span>
       </p>
     </Link>
