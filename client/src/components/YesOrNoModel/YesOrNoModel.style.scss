@@ -14,38 +14,51 @@
   top: 0;
   width: $percentage;
   height: $percentage;
-  @include flexRow();
+  display: flex;
+  align-items: center;
   justify-content: center;
   z-index: 100;
 
   &__form {
     background: $model-bg;
-    width: 300px;
+    width: 225px;
     position: relative;
     border-radius: 5px;
-    height: 120px;
+    height: 170px;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+
+    .icon {
+      margin-bottom: 0.8rem;
+    }
 
     .title {
-      font-size: 20px;
-      padding: $rem;
+      font-size: 16px;
       font-weight: $font-weight-normal;
+      margin-bottom: 0.3rem;
+    }
+    .subtitle {
+      font-size: 12px;
+      color: #a4a4a4;
+      margin-bottom: 1rem;
     }
 
     &ButtonContainer {
       @include flexRow();
       justify-content: space-between;
-      padding: $rem;
 
       button {
+        border-radius: 10px;
+
         &:first-child {
-          background: $light-theme;
-          color: $dark-theme;
+          background: transparent;
+          color: $light-theme;
           transition: all 0.5ms ease-in;
 
           &:hover {
-            background: $light-theme;
-            color: $dark-theme;
-            transform: scale(1.1);
+            transform: scale(1.05);
+            background: transparent;
           }
         }
       }

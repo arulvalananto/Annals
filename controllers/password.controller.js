@@ -37,6 +37,7 @@ exports.verifyPin = catchAsync(async (req, res, next) => {
 
   const decryptPassword = crypto.decrypt(password);
 
+  console.log(decryptPassword);
   res.status(200).json({
     decryptPassword,
   });
@@ -49,7 +50,7 @@ exports.addPassword = catchAsync(async (req, res) => {
 
   const passwordStrength = passwordStrengthChecker(password);
 
-  const encryptedPassword = await bcrypt.hash(password, 12);
+  const encryptedPassword = await crypto.encrypt(password);
 
   const logo = await Logo.findOne({
     avatar: { $regex: changedTitle, $options: "i" },

@@ -87,15 +87,16 @@ export const addPassword =
   };
 
 export const verifyPin =
-  (passwordDetails, pin, verified, loading) => async (dispatch) => {
+  (password, pin, verified, loading, unlock) => async (dispatch) => {
     try {
       loading(true);
       const res = await axios.post("/password/verify-pin", {
-        password: passwordDetails.password,
+        password,
         pin,
       });
       loading(false);
       verified(res.data.decryptPassword);
+      unlock(false);
     } catch (err) {
       dispatch(setFailureMessage(err.response?.data.message));
       loading(false);
