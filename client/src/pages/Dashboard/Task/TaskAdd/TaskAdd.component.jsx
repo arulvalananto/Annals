@@ -1,28 +1,43 @@
 import React, { useState } from "react";
 import "./TaskAdd.style.scss";
 
-import { Chip } from "@material-ui/core";
+import { ToggleButton, ToggleButtonGroup } from "@material-ui/lab";
+import { withStyles } from "@material-ui/core/styles";
 
 const levels = ["critical", "important", "normal"];
 const categories = [
-  { name: "food", color: "#FCB877" },
-  { name: "entertainment", color: "#6ED986" },
-  { name: "workout", color: "#F6816D" },
-  { name: "personal", color: "#F77295" },
-  { name: "work", color: "#43226D" },
-  { name: "clean", color: "#CD302F" },
-  { name: "others", color: "#0ABFC3" },
+  "food",
+  "entertainment",
+  "workout",
+  "personal",
+  "work",
+  "clean",
+  "others",
 ];
+
+const StyledToggleButtonGroup = withStyles((theme) => ({
+  grouped: {
+    margin: theme.spacing(0.5),
+    "&:not(:first-child)": {
+      borderRadius: theme.shape.borderRadius,
+    },
+    "&:first-child": {
+      borderRadius: theme.shape.borderRadius,
+    },
+    color: "white",
+  },
+}))(ToggleButtonGroup);
 
 const TaskAdd = () => {
   const [priority, setPriority] = useState("normal");
   const [category, setCategory] = useState("personal");
+  const [dueDate, setDueDate] = useState(new Date());
 
-  const changeHandler = (e) => {
-    console.log(e.target.value);
-    setPriority(e.target.value);
-  };
-  console.log(priority);
+  const changePriorityHandler = (e, value) => setPriority(value);
+  const changeDateHandler = (e) => setDueDate(e.target.value);
+  const changeCategoryHandler = (e) => setCategory(e.target.value);
+
+  console.log(dueDate);
 
   return (
     <div className='taskAdd'>
@@ -35,36 +50,52 @@ const TaskAdd = () => {
         </div>
         <div className='form-group'>
           <label>Priority Level</label>
-          <div className='form-radio-group'>
-            {levels.map((level) => (
-              <div key={level} className='radio-group'>
-                <input
-                  type='radio'
-                  name='priority'
+          <div className='form-priority-group'>
+            <StyledToggleButtonGroup
+              size='medium'
+              value={priority}
+              exclusive
+              onChange={changePriorityHandler}
+              aria-label='text alignment'
+            >
+              {levels.map((level) => (
+                <ToggleButton
+                  key={level}
                   value={level}
-                  checked={priority === level}
-                  onChange={changeHandler}
-                />
-                <label>{level}</label>
-              </div>
-            ))}
+                  aria-label={level}
+                  disabled={level === priority}
+                >
+                  {level}
+                </ToggleButton>
+              ))}
+            </StyledToggleButtonGroup>
           </div>
         </div>
 
         <div className='form-group'>
           <label>Category</label>
           <div className='form-category-group'>
-            {categories.map((category) => (
-              <Chip
-                size='medium'
-                style={{ background: `${category.color}` }}
-                label={category.name}
-              />
+            {categories.map((cate) => (
+              <div>
+                <input
+                  type='radio'
+                  name='category'
+                  value={cate}
+                  checked={category === cate}
+                  onChange={changeCategoryHandler}
+                />
+                <label>{cate}</label>
+              </div>
             ))}
           </div>
         </div>
         <div className='form-group'>
-          <input type='date' />
+          <label>Due Date</label>
+          <input type='date' value={dueDate} onChange={changeDateHandler} />
+        </div>
+        <div className='button-group'>
+          <button type='button'>Cancel</button>
+          <button type='submit'>Submit</button>
         </div>
       </form>
     </div>

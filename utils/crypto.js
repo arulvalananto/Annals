@@ -4,7 +4,7 @@ const crypto = require("crypto");
 const iv = crypto.randomBytes(32).toString("hex").slice(0, 16);
 
 // secret key
-const key = "jjhsAIyuKJJHThjhjfjhREhgfhvgSWKL";
+const key = process.env.CRYPTO_SECRET;
 
 exports.encrypt = (message) => {
   const encrypter = crypto.createCipheriv("aes-256-cbc", key, iv);

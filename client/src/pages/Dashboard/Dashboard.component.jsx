@@ -67,8 +67,6 @@ const Dashboard = () => {
             <Route path='/ideas' component={Ideas} />
             <Route exact path='/tasks' component={Task} />
             <Route path='/tasks/add' component={TaskAdd} />
-            <Route path='/expense'>Coming Soon... (Expense Tracker)</Route>
-            <Route path='/personal-info'>Coming Soon... (Personal Info)</Route>
           </div>
         </div>
         {visible && (

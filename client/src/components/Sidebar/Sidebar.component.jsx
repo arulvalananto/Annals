@@ -4,9 +4,8 @@ import "./Sidebar.style.scss";
 import { RiHome2Line, RiTodoLine, RiSettings4Line } from "react-icons/ri";
 import { FiLogOut } from "react-icons/fi";
 import { IoLockOpenOutline, IoBulbOutline } from "react-icons/io5";
-import { BsPerson, BsAlarm } from "react-icons/bs";
-import { BiNote, BiBookOpen } from "react-icons/bi";
-import { GiExpense } from "react-icons/gi";
+import { BsAlarm } from "react-icons/bs";
+import { BiBookOpen } from "react-icons/bi";
 // Other Components
 import ActiveLink from "../ActiveLink/ActiveLink.component";
 
@@ -27,8 +26,6 @@ const Sidebar = () => {
         <ActiveLink to='/reminders' title='Reminders' Icon={BsAlarm} />
         <ActiveLink to='/ideas' title='Ideas' Icon={IoBulbOutline} />
         <ActiveLink to='/tasks' title='Tasks' Icon={RiTodoLine} />
-        <ActiveLink to='/expense' title='Expenses' Icon={GiExpense} />
-        <ActiveLink to='/personal' title='Personal' Icon={BsPerson} />
       </div>
       <div className='sidebar__bottom'>
         <a className='sidebar__link' href='http://localhost:5000/api/v1/logout'>

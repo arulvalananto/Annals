@@ -2,9 +2,9 @@
 
 .taskAdd {
   flex: 1;
-  margin: 1rem 2rem;
+  margin: 2rem;
   background: #1a1a1a;
-  padding: 1rem 2rem;
+  padding: 2rem;
   border-radius: 4px;
 
   .title {
@@ -34,7 +34,7 @@
         margin-bottom: 0.5rem;
       }
 
-      input {
+      input[type="text"] {
         padding: 0.7rem 1.5rem;
         background: #313131;
         font-size: 1rem;
@@ -42,49 +42,72 @@
         @include buttonWithoutBorder();
         border-radius: 4px;
         padding-right: 4rem;
+        min-width: 250px;
 
         &:focus {
           border: 1px solid $primary-color;
         }
       }
-      .form-radio-group {
-        display: flex;
-        margin-top: 1rem;
-        .radio-group {
-          input[type="radio"] {
-            display: none;
-
-            &:checked + label {
-              border: 1px solid $secondary-color;
-              color: $secondary-color;
-            }
-          }
-          label {
-            background: #313131;
-            font-size: 16px;
-            border-radius: 4px;
-            padding: 0.5rem 2rem;
-            margin-bottom: 0.4rem;
-            margin-right: 0.4rem;
-            font-weight: normal;
-            text-transform: capitalize;
-
-            @media (max-width: 768px) {
-              font-size: 14px;
-            }
-          }
+      .form-priority-group {
+        .Mui-selected {
+          color: $dark-theme;
+          background: $tertiary-color;
+          transition: 0.4s;
         }
       }
       .form-category-group {
         margin-top: 0.5rem;
 
-        .MuiChip-root {
-          color: $light-theme;
-          font-size: 16px;
-          padding: 20px;
+        input[type="radio"] {
+          color: $secondary-color;
+          font-size: 18px;
           margin-right: 0.5rem;
-          margin-bottom: 0.5rem;
+          padding: 2rem 2rem;
+          background: red;
         }
+        label {
+          font-size: 18px;
+          font-weight: normal;
+        }
+      }
+
+      input[type="date"] {
+        width: 50%;
+        min-width: 250px;
+        padding: 0.7rem 1.5rem;
+        background: #313131;
+        font-size: 1rem;
+        color: $light-theme;
+        @include buttonWithoutBorder();
+        border-radius: 4px;
+      }
+    }
+  }
+  .button-group {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    button {
+      @include buttonWithoutBorder();
+      padding: 0.5rem 2rem;
+      color: $light-theme;
+      font-size: 16px;
+      font-weight: 500;
+      border-radius: 4px;
+      background: $primary-color;
+      cursor: pointer;
+      transition: 0.4s;
+
+      &:hover {
+        transform: translateY(4px);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      &:first-child {
+        margin-right: 1rem;
+        background: $secondary-color;
       }
     }
   }
