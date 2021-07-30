@@ -6,6 +6,10 @@ make password page as well as todo with mobile responsiveness.
 
 change the add password route respective to the yesterday change of images.
 
-add password view pages
+implement search for diary pages
 
-style password page.
+implement edit password details
+
+create task page
+
+tasks | importance | category | due date 

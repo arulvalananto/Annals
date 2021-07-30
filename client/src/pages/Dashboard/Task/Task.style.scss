@@ -1,0 +1,69 @@
+@import "../../../container/App.global.style.scss";
+
+.task {
+  flex: 1;
+  padding: 1rem 2rem;
+  position: relative;
+
+  &--backdrop {
+    z-index: 50;
+    position: 0;
+    left: 0;
+    top: 0;
+    flex: 1;
+    background: olive;
+  }
+
+  &__addModal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: $percentage;
+    height: $percentage;
+    transform: translate(-50%, 50%);
+  }
+
+  & &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &Left {
+      display: flex;
+
+      &Options {
+        background: $light-theme-with-opacity;
+        padding: 0.5rem;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: 0.4s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &--active {
+          border: 1px solid $secondary-color;
+          color: $secondary-color;
+        }
+      }
+    }
+    &Right {
+      &Options {
+        background: $primary-color;
+        color: $light-theme;
+        padding: 0.5rem;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: 0.4s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:focus,
+        &:hover {
+          padding: 0.5rem 1rem;
+        }
+      }
+    }
+  }
+}

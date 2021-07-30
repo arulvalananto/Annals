@@ -24,7 +24,8 @@ const PasswordView = React.lazy(() =>
 );
 
 const Ideas = React.lazy(() => import("./Ideas/Ideas.component"));
-const TodoList = React.lazy(() => import("./TodoList/TodoList.component"));
+const Task = React.lazy(() => import("./Task/Task.component"));
+const TaskAdd = React.lazy(() => import("./Task/TaskAdd/TaskAdd.component"));
 
 const Dashboard = () => {
   const [visible, setVisible] = useState(false);
@@ -64,8 +65,9 @@ const Dashboard = () => {
             <Route path='/passwords/view/:id' component={PasswordView} />
             <Route path='/reminders'>Hello Reminders</Route>
             <Route path='/ideas' component={Ideas} />
-            <Route path='/todos' component={TodoList} />
-            <Route path='/notes'>Coming Soon... (Notes)</Route>
+            <Route exact path='/tasks' component={Task} />
+            <Route path='/tasks/add' component={TaskAdd} />
+            <Route path='/expense'>Coming Soon... (Expense Tracker)</Route>
             <Route path='/personal-info'>Coming Soon... (Personal Info)</Route>
           </div>
         </div>
