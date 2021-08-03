@@ -12,7 +12,7 @@ const diaryRoutes = require("./routes/diary.routes");
 const passwordRoutes = require("./routes/password.routes");
 const ideaRoutes = require("./routes/idea.routes");
 const logoRoutes = require("./routes/logo.routes");
-const todoRoutes = require("./routes/todo.routes");
+const taskRoutes = require("./routes/task.routes");
 const adminRoutes = require("./routes/admin.routes");
 
 require("./utils/passport");
@@ -62,7 +62,7 @@ app.use("/", authRoutes);
 app.use("/api/v1/diary", diaryRoutes);
 app.use("/api/v1/password", passwordRoutes);
 app.use("/api/v1/ideas", ideaRoutes);
-app.use("/api/v1/todos", todoRoutes);
+app.use("/api/v1/tasks", taskRoutes);
 app.use("/api/v1/admin", adminRoutes);
 
 app.use("*", (req, res) => {

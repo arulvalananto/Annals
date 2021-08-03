@@ -2,19 +2,19 @@ const express = require("express");
 
 const isAuthenticated = require("../middlewares/isAuthenticated");
 const {
-  addTodo,
-  updateTodo,
+  addTask,
+  updateTask,
   updateStatus,
-  deleteTodo,
-} = require("../controllers/todo.controller");
+  deleteTask,
+} = require("../controllers/task.controller");
 
 const route = express.Router();
 
 route.use(isAuthenticated);
 
-route.post("/add", addTodo);
-route.patch("/update/:id", updateTodo);
+route.post("/add", addTask);
+route.patch("/update/:id", updateTask);
 route.patch("/update-status/:id", updateStatus);
-route.delete("delete", deleteTodo);
+route.delete("delete", deleteTask);
 
 module.exports = route;

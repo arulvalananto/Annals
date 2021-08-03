@@ -11,7 +11,6 @@
     left: 0;
     top: 0;
     flex: 1;
-    background: olive;
   }
 
   &__addModal {
@@ -23,7 +22,7 @@
     transform: translate(-50%, 50%);
   }
 
-  & &__header {
+  &__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -63,6 +62,38 @@
         &:hover {
           padding: 0.5rem 1rem;
         }
+      }
+    }
+  }
+
+  &__main {
+    margin: 1.5rem 0;
+    &Top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem;
+      border-radius: 4px;
+      border: 1px solid $light-theme-with-opacity;
+
+      .task__tasks {
+        justify-self: center;
+        flex: 0.55;
+        border-right: white;
+      }
+      .task__importance {
+        justify-self: center;
+        flex: 0.15;
+        border-right: white;
+      }
+      .task__category {
+        justify-self: center;
+        flex: 0.15;
+        border-right: white;
+      }
+      .task__dueDate {
+        justify-self: center;
+        flex: 0.15;
       }
     }
   }

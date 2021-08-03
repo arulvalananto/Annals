@@ -12,7 +12,7 @@ const Task = () => {
 
   return (
     <div className='task'>
-      <div className='task__header'>
+      <header className='task__header'>
         <div className='task__headerLeft'>
           <Tooltip title='Grid' arrow placement='top'>
             <p
@@ -43,7 +43,15 @@ const Task = () => {
             </Link>
           </Tooltip>
         </div>
-      </div>
+      </header>
+      <main className='task__main'>
+        <div className='task__mainTop'>
+          <p className='task__tasks'>Tasks</p>
+          <p className='task__importance'>Importance</p>
+          <p className='task__category'>Category</p>
+          <p className='task__dueDate'>Due Date</p>
+        </div>
+      </main>
     </div>
   );
 };

@@ -119,22 +119,21 @@ const slice = createSlice({
         },
       };
     },
-    todoAdded: (auth, action) => {
+    taskAdded: (auth, action) => {
       return {
         ...auth,
         user: {
           ...auth.user,
-          todos: [...auth.user.todos, action.payload],
+          tasks: [...auth.user.tasks, action.payload],
         },
       };
     },
-    todoStatusUpdated: (auth, action) => {
-      console.log(action.payload);
+    taskStatusUpdated: (auth, action) => {
       return {
         ...auth,
         user: {
           ...auth.user,
-          todos: action.payload,
+          tasks: action.payload,
         },
       };
     },
@@ -154,8 +153,8 @@ export const {
   ideaAdded,
   ideaUpdated,
   ideaDeleted,
-  todoAdded,
-  todoStatusUpdated,
+  taskAdded,
+  taskStatusUpdated,
 } = slice.actions;
 
 export default slice.reducer;

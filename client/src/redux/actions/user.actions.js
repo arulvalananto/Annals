@@ -8,8 +8,8 @@ import {
   passwordDeleted,
   passwordFetched,
   pinCreated,
-  todoAdded,
-  todoStatusUpdated,
+  taskAdded,
+  taskStatusUpdated,
 } from "../reducers/auth.reducer";
 import { setFailureMessage } from "../reducers/message.reducer";
 
@@ -168,25 +168,23 @@ export const deleteIdea =
     }
   };
 
-export const addTodo =
-  (loading, content, clearInput, toggleEditMode) => async (dispatch) => {
-    try {
-      loading(true);
-      const res = await axios.post("/todos/add", { content });
-      loading(false);
-      dispatch(todoAdded(res?.data));
-      toggleEditMode();
-      clearInput();
-    } catch (err) {
-      loading(false);
-      setFailureMessage(err.response?.data);
-    }
-  };
-
-export const updateTodoStatus = (newTodos, status, id) => async (dispatch) => {
-  dispatch(todoStatusUpdated(newTodos));
+export const addTask = (loading, task, history) => async (dispatch) => {
   try {
-    await axios.patch(`/todos/update-status/${id}`, { status });
+    loading(true);
+    const res = await axios.post("/tasks/add", task);
+    loading(false);
+    dispatch(taskAdded(res?.data));
+    history.push("/tasks");
+  } catch (err) {
+    loading(false);
+    setFailureMessage(err.response?.data);
+  }
+};
+
+export const updateTaskStatus = (newTodos, status, id) => async (dispatch) => {
+  dispatch(taskStatusUpdated(newTodos));
+  try {
+    await axios.patch(`/tasks/update-status/${id}`, { status });
   } catch (e) {
     setFailureMessage(e.response?.data);
   }

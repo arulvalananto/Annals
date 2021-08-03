@@ -52,7 +52,7 @@ const GeneratePin = () => {
           className='generatePin__button'
           onClick={toggleModal}
         >
-          Generate Pin
+          Generate Master Password
         </button>
       </div>
       <div>
