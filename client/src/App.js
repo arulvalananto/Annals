@@ -1,19 +1,18 @@
 import React, { useEffect, Suspense } from "react";
-import "./App.css";
 // React Router
 import { BrowserRouter } from "react-router-dom";
 // React Redux
 import { useDispatch, useSelector } from "react-redux";
 // Other Components
-import AppRoutes from "./AppRoutes.component";
-import SuccessMessage from "../components/SuccessMessage/SuccessMessage.component";
-import ErrorMessage from "../components/ErrorMessage/ErrorMessage.component";
-import Spinner from "../components/Spinner/Spinner.component";
+import AppRoutes from "./components/App/AppRoutes.component";
+import SuccessMessage from "./components/SuccessMessage/SuccessMessage.component";
+import ErrorMessage from "./components/ErrorMessage/ErrorMessage.component";
+import Spinner from "./components/Spinner/Spinner.component";
 // Reducers
-import { selectLoading } from "../redux/reducers/auth.reducer";
-import { selectMessage } from "../redux/reducers/message.reducer";
+import { selectLoading } from "./redux/reducers/auth.reducer";
+import { selectMessage } from "./redux/reducers/message.reducer";
 
-import { fetchUser } from "../redux/actions/auth.actions";
+import { fetchUser } from "./redux/actions/auth.actions";
 
 function App() {
   const dispatch = useDispatch();

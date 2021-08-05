@@ -1,15 +1,17 @@
 import React, { Suspense } from "react";
 // React Redux
 import { useSelector } from "react-redux";
-import { selectIsLoggedIn } from "../redux/reducers/auth.reducer";
+import { selectIsLoggedIn } from "../../redux/reducers/auth.reducer";
 //  React Router
 import { Route } from "react-router";
 // Other Components
-import Dashboard from "../pages/Dashboard/Dashboard.component";
-import Spinner from "../components/Spinner/Spinner.component";
-const SignIn = React.lazy(() => import("../pages/SignIn/SignIn.component"));
-const SignUp = React.lazy(() => import("../pages/SignUp/SignUp.component"));
-const Landing = React.lazy(() => import("../pages/Landing/Landing.component"));
+import Dashboard from "../../pages/Dashboard/Dashboard.component";
+import Spinner from "../Spinner/Spinner.component";
+const SignIn = React.lazy(() => import("../../pages/SignIn/SignIn.component"));
+const SignUp = React.lazy(() => import("../../pages/SignUp/SignUp.component"));
+const Landing = React.lazy(() =>
+  import("../../pages/Landing/Landing.component")
+);
 
 const AppRoutes = () => {
   const isLoggedIn = useSelector((state) => selectIsLoggedIn(state));

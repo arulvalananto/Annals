@@ -63,7 +63,6 @@ exports.thirdPartyLogin = (req, res, next) => {
   res.redirect("http://localhost:3000/");
 };
 
-
 exports.logout = async (req, res) => {
   if (req.session) {
     req.session.destroy();
@@ -85,7 +84,7 @@ exports.getCurrentUser = catchAsync(async (req, res, next) => {
       .lean()
       .populate("diary")
       .populate("ideas")
-      .populate("todos");
+      .populate("tasks");
     // .cache({ key: decoded.id });
 
     if (!currentUser) {

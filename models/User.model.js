@@ -33,8 +33,8 @@ const userSchema = mongoose.Schema(
     },
     passwords: { type: Password.schema, default: {} },
     diary: [{ type: mongoose.Schema.Types.ObjectId, ref: "Diary" }],
-    ideas: [{ type: mongoose.Schema.Types.ObjectId, ref: "Idea" }],
-    tasks: [{ type: mongoose.Schema.Types.ObjectId, ref: "Task" }],
+    ideas: [{ type: mongoose.Schema.Types.ObjectId, ref: "Ideas" }],
+    tasks: [{ type: mongoose.Schema.Types.ObjectId, ref: "Tasks" }],
   },
   {
     toObject: {
