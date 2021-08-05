@@ -28,25 +28,6 @@
     justify-content: space-between;
 
     &Left {
-      display: flex;
-
-      &Options {
-        background: $light-theme-with-opacity;
-        padding: 0.5rem;
-        border-radius: 3px;
-        cursor: pointer;
-        transition: 0.4s;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        &--active {
-          border: 1px solid $secondary-color;
-          color: $secondary-color;
-        }
-      }
-    }
-    &Right {
       &Options {
         background: $primary-color;
         color: $light-theme;
@@ -64,132 +45,12 @@
         }
       }
     }
+    &Right {
+      color: $light-theme;
+    }
   }
 
-  &__main {
+  main {
     margin: 1.5rem 0;
-
-    @media (max-width: 1024px) {
-      font-size: 14px;
-    }
-    &Top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-radius: 4px;
-
-      p {
-        flex: 0.15;
-        padding: 0.5rem;
-      }
-
-      .task__tasksHeader {
-        flex: 0.4;
-      }
-      .task__importanceHeader,
-      .task__tasksHeader,
-      .task__categoryHeader,
-      .task__statusHeader {
-        border-right: 2px solid $dark-theme;
-      }
-
-      .task__tasksHeader,
-      .task__statusHeader,
-      .task__importanceHeader,
-      .task__categoryHeader,
-      .task__dueDateHeader {
-        text-align: center;
-        font-weight: 600;
-        background: $tertiary-color;
-        color: $dark-theme;
-      }
-      .task__importanceHeader,
-      .task__dueDateHeader {
-        @media (max-width: 768px) {
-          display: none;
-        }
-      }
-
-      .task__categoryHeader {
-        @media (max-width: 425px) {
-          display: none;
-        }
-      }
-      .task__statusHeader,
-      .task__categoryHeader {
-        @media (max-width: 768px) {
-          flex: 0.3;
-        }
-      }
-      .task__tasksHeader,
-      .task__statusHeader {
-        @media (max-width: 425px) {
-          flex: 0.5;
-        }
-      }
-    }
-
-    &Bottom {
-      margin-top: 1rem;
-
-      .task__tasks {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        border: 1px solid $light-theme-with-opacity;
-        border-bottom: none;
-
-        &:last-child {
-          border-bottom: 1px solid $light-theme-with-opacity;
-        }
-
-        p {
-          flex: 0.15;
-          padding: 0.5rem;
-        }
-
-        .task__title {
-          flex: 0.4;
-        }
-
-        .task__status,
-        .task__priority,
-        .task__category,
-        .task__title {
-          border-right: 1px solid $light-theme-with-opacity;
-        }
-
-        .task__status,
-        .task__priority,
-        .task__category,
-        .task__dueDate {
-          text-align: center;
-        }
-
-        .task__priority,
-        .task__dueDate {
-          @media (max-width: 768px) {
-            display: none;
-          }
-        }
-        .task__category {
-          @media (max-width: 425px) {
-            display: none;
-          }
-        }
-        .task__status,
-        .task__category {
-          @media (max-width: 768px) {
-            flex: 0.3;
-          }
-        }
-        .task__status,
-        .task__title {
-          @media (max-width: 425px) {
-            flex: 0.5;
-          }
-        }
-      }
-    }
   }
 }

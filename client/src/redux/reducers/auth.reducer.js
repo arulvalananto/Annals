@@ -137,6 +137,17 @@ const slice = createSlice({
         },
       };
     },
+    taskDeleted: (auth, action) => {
+      return {
+        ...auth,
+        user: {
+          ...auth.user,
+          tasks: auth.user.tasks.filter(
+            (task) => task._id !== action.payload.id
+          ),
+        },
+      };
+    },
   },
 });
 
@@ -155,6 +166,7 @@ export const {
   ideaDeleted,
   taskAdded,
   taskStatusUpdated,
+  taskDeleted,
 } = slice.actions;
 
 export default slice.reducer;

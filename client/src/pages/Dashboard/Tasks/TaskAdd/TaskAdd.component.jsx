@@ -15,6 +15,8 @@ const categories = [
   "personal",
   "work",
   "clean",
+  "shopping",
+  "travel",
   "others",
 ];
 

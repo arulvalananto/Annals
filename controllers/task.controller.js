@@ -39,4 +39,18 @@ exports.updateStatus = catchAsync(async (req, res, next) => {
   // This is end point is not completed.
 });
 
-exports.deleteTask = (req, res, next) => {};
+exports.deleteTask = catchAsync(async (req, res, next) => {
+  const { id } = req.params;
+
+  const task = await Task.deleteOne({ _id: id });
+
+  if (!task) {
+    return next(new AppError("Id not Found", 404));
+  }
+  const user = await User.findById(req.session.userId).populate("tasks");
+
+  user.tasks.remove(id);
+  await user.save();
+
+  res.status(200).json({ deleted: true });
+});

@@ -7,6 +7,7 @@ const AppError = require("../utils/AppError");
 const catchAsync = require("../utils/catchAsync");
 
 module.exports = catchAsync(async (req, res, next) => {
+  console.log(req.session.token);
   if (!req.session.token) {
     return next(new AppError("unauthorized", 401));
   }

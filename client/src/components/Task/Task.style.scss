@@ -1,0 +1,42 @@
+@import "../../index.scss";
+
+.MuiAccordionSummary-root {
+  display: flex;
+  align-items: center;
+}
+.task {
+  flex-direction: column;
+}
+.task__tasks {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.5rem;
+
+  .task__title {
+    display: flex;
+    align-items: center;
+    flex: 0.55;
+
+    p {
+      transition: 0.4s;
+
+      &:hover {
+        transform: scale(1.05);
+        color: crimson;
+      }
+    }
+
+    span {
+      margin-left: 1rem;
+      color: $tertiary-color;
+    }
+  }
+  .task__status,
+  .task__priority,
+  .task__category {
+    flex: 0.15;
+    text-align: center;
+  }
+}

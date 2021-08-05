@@ -1,15 +1,16 @@
 import axios from "../../axios";
 import {
-  ideaAdded,
-  ideaDeleted,
-  ideaUpdated,
   pageAdded,
   pageUpdated,
-  passwordDeleted,
-  passwordFetched,
   pinCreated,
+  passwordFetched,
+  passwordDeleted,
+  ideaAdded,
+  ideaUpdated,
+  ideaDeleted,
   taskAdded,
   taskStatusUpdated,
+  taskDeleted,
 } from "../reducers/auth.reducer";
 import { setFailureMessage } from "../reducers/message.reducer";
 
@@ -21,10 +22,10 @@ export const addPage = (content, loading, history) => async (dispatch) => {
     });
     dispatch(pageAdded(res.data));
     loading(false);
-    history.push("/diary");
+    history.push("/journals");
   } catch (err) {
     dispatch(setFailureMessage(err.response?.data.message));
-    history.push("/diary");
+    history.push("/journals");
     loading(false);
   }
 };
@@ -38,7 +39,7 @@ export const updatePage =
       });
       loading(false);
       dispatch(pageUpdated(res?.data));
-      history.push("/diary");
+      history.push("/journals");
     } catch (err) {
       dispatch(setFailureMessage(err?.response?.data?.message));
       loading(false);
@@ -155,11 +156,9 @@ export const deleteIdea =
   (loading, deleteId, clearDelete) => async (dispatch) => {
     try {
       loading(true);
-      const res = await axios.delete(`/ideas/delete/${deleteId}`);
+      dispatch(ideaDeleted({ id: deleteId }));
+      await axios.delete(`/ideas/delete/${deleteId}`);
       loading(false);
-      if (res.data.deleted) {
-        dispatch(ideaDeleted({ id: deleteId }));
-      }
       clearDelete();
     } catch (err) {
       clearDelete();
@@ -187,5 +186,17 @@ export const updateTaskStatus = (newTodos, status, id) => async (dispatch) => {
     await axios.patch(`/tasks/update-status/${id}`, { status });
   } catch (e) {
     setFailureMessage(e.response?.data);
+  }
+};
+
+export const deleteTask = (loading, deleteId) => async (dispatch) => {
+  try {
+    loading(true);
+    dispatch(taskDeleted({ id: deleteId }));
+    await axios.delete(`/tasks/delete/${deleteId}`);
+    loading(false);
+  } catch (err) {
+    dispatch(setFailureMessage(err.response?.data?.message));
+    loading(false);
   }
 };
