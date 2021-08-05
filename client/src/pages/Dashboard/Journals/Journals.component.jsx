@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Diary.style.scss";
+import "./Journals.style.scss";
 
 import { Link } from "react-router-dom";
 // Icons
@@ -13,7 +13,7 @@ import Pages from "../../../components/Pages/Pages.component";
 
 const formattedDate = new Date().toISOString().split("T")[0];
 
-const Diary = () => {
+const Journals = () => {
   const [dateFormat, setDateFormat] = useState("date");
 
   const [showOptions, setShowOptions] = useState(false);
@@ -29,7 +29,7 @@ const Diary = () => {
       {showOptions && <div className='diary__overlay'></div>}
       <div className='diary'>
         <div className='diary__top'>
-          <Link to='/diary/add' className='diary__topAddButton'>
+          <Link to='/journals/page-add' className='diary__topAddButton'>
             <p>Add</p>
           </Link>
           <div className='diary__topContainer'>
@@ -98,4 +98,4 @@ const Diary = () => {
   );
 };
 
-export default Diary;
+export default Journals;

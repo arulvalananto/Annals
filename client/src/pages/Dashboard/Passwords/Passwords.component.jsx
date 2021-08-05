@@ -1,5 +1,5 @@
 import React from "react";
-import "./Password.style.scss";
+import "./Passwords.style.scss";
 
 import GeneratePin from "../../../components/GeneratePin/GeneratePin.component";
 

@@ -10,22 +10,24 @@ import { MdClear } from "react-icons/md";
 import Sidebar from "../../components/Sidebar/Sidebar.component";
 import Home from "./Home/Home.component";
 import Spinner from "../../components/Spinner/Spinner.component";
-const Diary = React.lazy(() => import("./Diary/Diary.component"));
+const Journals = React.lazy(() => import("./Journals/Journals.component"));
 const PageView = React.lazy(() =>
-  import("./Diary/PageView/PageView.component")
+  import("./Journals/PageView/PageView.component")
 );
-const PageAdd = React.lazy(() => import("./Diary/PageAdd/PageAdd.component"));
-const Password = React.lazy(() => import("./Password/Password.component"));
+const PageAdd = React.lazy(() =>
+  import("./Journals/PageAdd/PageAdd.component")
+);
+const Passwords = React.lazy(() => import("./Passwords/Passwords.component"));
 const PasswordAdd = React.lazy(() =>
-  import("./Password/PasswordAdd/PasswordAdd.component")
+  import("./Passwords/PasswordAdd/PasswordAdd.component")
 );
 const PasswordView = React.lazy(() =>
-  import("./Password/PasswordView/PasswordView.component")
+  import("./Passwords/PasswordView/PasswordView.component")
 );
 
 const Ideas = React.lazy(() => import("./Ideas/Ideas.component"));
-const Task = React.lazy(() => import("./Task/Task.component"));
-const TaskAdd = React.lazy(() => import("./Task/TaskAdd/TaskAdd.component"));
+const Tasks = React.lazy(() => import("./Tasks/Tasks.component"));
+const TaskAdd = React.lazy(() => import("./Tasks/TaskAdd/TaskAdd.component"));
 
 const Dashboard = () => {
   const [visible, setVisible] = useState(false);
@@ -57,15 +59,15 @@ const Dashboard = () => {
           </div>
           <div className='dashboard__rightContainer'>
             <Route exact path='/' component={Home} />
-            <Route exact path='/diary' component={Diary} />
-            <Route path='/diary/add' component={PageAdd} />
-            <Route path='/diary/view/:id' component={PageView} />
-            <Route exact path='/passwords' component={Password} />
+            <Route exact path='/journals' component={Journals} />
+            <Route path='/journals/page-add' component={PageAdd} />
+            <Route path='/journals/page-view/:id' component={PageView} />
+            <Route exact path='/passwords' component={Passwords} />
             <Route path='/passwords/add' component={PasswordAdd} />
             <Route path='/passwords/view/:id' component={PasswordView} />
             <Route path='/reminders'>Hello Reminders</Route>
             <Route path='/ideas' component={Ideas} />
-            <Route exact path='/tasks' component={Task} />
+            <Route exact path='/tasks' component={Tasks} />
             <Route path='/tasks/add' component={TaskAdd} />
           </div>
         </div>
@@ -80,8 +82,8 @@ const Dashboard = () => {
               <Link to='/'>
                 <li className='dashboard__rightMenuList'>Dashboard</li>
               </Link>
-              <Link to='/diary'>
-                <li className='dashboard__rightMenuList'>Diary</li>
+              <Link to='/journals'>
+                <li className='dashboard__rightMenuList'>Journals</li>
               </Link>
               <Link to='/passwords'>
                 <li className='dashboard__rightMenuList'>Passwords</li>

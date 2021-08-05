@@ -17,7 +17,7 @@ const Sidebar = () => {
       </div>
       <div className='sidebar__middle'>
         <ActiveLink to='/' title='Dashboard' Icon={RiHome2Line} />
-        <ActiveLink to='/diary' title='Diary' Icon={BiBookOpen} />
+        <ActiveLink to='/journals' title='Journals' Icon={BiBookOpen} />
         <ActiveLink
           to='/passwords'
           title='Passwords'

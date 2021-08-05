@@ -22,7 +22,7 @@ const Pages = () => {
       ) : (
         <div className='pages'>
           {diary?.map(({ _id, createdAt }) => (
-            <Link key={_id} className='page' to={`/diary/view/${_id}`}>
+            <Link key={_id} className='page' to={`/journals/page-view/${_id}`}>
               <p className='page__labelStart'>{day(createdAt)}</p>
               <p className='page__labelMid'></p>
               <p className='page__labelEnd'>

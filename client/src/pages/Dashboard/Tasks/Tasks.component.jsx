@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Task.style.scss";
+import "./Tasks.style.scss";
 
 import { FiMenu, FiGrid, FiPlus } from "react-icons/fi";
 
