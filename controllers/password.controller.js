@@ -37,7 +37,6 @@ exports.verifyPin = catchAsync(async (req, res, next) => {
 
   const decryptPassword = crypto.decrypt(password);
 
-  console.log(decryptPassword);
   res.status(200).json({
     decryptPassword,
   });

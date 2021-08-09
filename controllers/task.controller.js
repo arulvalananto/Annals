@@ -5,7 +5,6 @@ const catchAsync = require("../utils/catchAsync");
 
 exports.addTask = catchAsync(async (req, res, next) => {
   const { title, priorityLevel, category, dueDate } = req.body;
-  console.log(title);
   const task = await Task({
     title,
     priorityLevel,
@@ -34,9 +33,7 @@ exports.updateStatus = catchAsync(async (req, res, next) => {
 
   await task.save();
 
-  console.log(task);
-
-  // This is end point is not completed.
+  res.status(200).json({ updated: true });
 });
 
 exports.deleteTask = catchAsync(async (req, res, next) => {

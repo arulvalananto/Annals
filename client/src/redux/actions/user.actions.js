@@ -180,10 +180,13 @@ export const addTask = (loading, task, history) => async (dispatch) => {
   }
 };
 
-export const updateTaskStatus = (newTodos, status, id) => async (dispatch) => {
-  dispatch(taskStatusUpdated(newTodos));
+export const updateTaskStatus = (id, status) => async (dispatch) => {
+  dispatch(taskStatusUpdated({ id, status }));
   try {
-    await axios.patch(`/tasks/update-status/${id}`, { status });
+    const res = await axios.patch(`/tasks/update-status/${id}`, { status });
+    if (!res.data.updated) {
+      setFailureMessage("Something Wrong!");
+    }
   } catch (e) {
     setFailureMessage(e.response?.data);
   }

@@ -3,17 +3,6 @@ import "./Tasks.style.scss";
 import Task from "../../../components/Task/Task.component";
 
 import { FiPlus } from "react-icons/fi";
-import {
-  FaBroom,
-  FaLaptopCode,
-  FaShoppingCart,
-  FaSuitcaseRolling,
-  FaTrophy,
-  FaUserAlt,
-} from "react-icons/fa";
-import { IoFastFoodOutline } from "react-icons/io5";
-import { CgGym } from "react-icons/cg";
-import { RiNetflixLine, RiDeleteBinLine } from "react-icons/ri";
 
 import { Tooltip, CircularProgress } from "@material-ui/core";
 
@@ -24,31 +13,6 @@ import { deleteTask } from "../../../redux/actions/user.actions";
 
 const filterTasks = (tasks, condition) => {
   return tasks.filter((task) => task.status === condition);
-};
-
-const pickCategory = (category) => {
-  switch (category) {
-    case "food":
-      return <IoFastFoodOutline size={20} />;
-    case "workout":
-      return <CgGym size={20} />;
-    case "entertainment":
-      return <RiNetflixLine size={20} />;
-    case "clean":
-      return <FaBroom size={20} />;
-    case "work":
-      return <FaLaptopCode size={20} />;
-    case "personal":
-      return <FaUserAlt size={20} />;
-    case "others":
-      return <FaTrophy size={20} />;
-    case "shopping":
-      return <FaShoppingCart size={20} />;
-    case "travel":
-      return <FaSuitcaseRolling size={20} />;
-    default:
-      return;
-  }
 };
 
 const Tasks = () => {

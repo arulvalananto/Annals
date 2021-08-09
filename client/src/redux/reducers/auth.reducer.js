@@ -129,11 +129,16 @@ const slice = createSlice({
       };
     },
     taskStatusUpdated: (auth, action) => {
+      const { id, status } = action.payload;
+
+      const updatedTasks = auth.user.tasks.map((el) =>
+        el._id === id ? { ...el, status } : el
+      );
       return {
         ...auth,
         user: {
           ...auth.user,
-          tasks: action.payload,
+          tasks: updatedTasks,
         },
       };
     },

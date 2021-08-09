@@ -19,6 +19,13 @@
     align-items: center;
     flex: 0.55;
 
+    @media (max-width: 1024px) {
+      flex: 0.7;
+    }
+    @media (max-width: 768px) {
+      flex: 0.8;
+    }
+
     p {
       transition: 0.4s;
 
@@ -30,7 +37,13 @@
 
     span {
       margin-left: 1rem;
-      color: $tertiary-color;
+      word-break: break-all;
+      word-wrap: break-word;
+      // color: $tertiary-color;
+
+      @media (max-width: 768px) {
+        font-size: 12px;
+      }
     }
   }
   .task__status,
@@ -38,5 +51,21 @@
   .task__category {
     flex: 0.15;
     text-align: center;
+  }
+
+  .task__status {
+    @media (max-width: 768px) {
+      flex: 0.2;
+    }
+  }
+  .task__category {
+    @media (max-width: 1024px) {
+      display: none;
+    }
+  }
+  .task__priority {
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
 }

@@ -9,7 +9,7 @@ const taskSchema = mongoose.Schema(
     status: {
       type: String,
       enum: {
-        values: ["todo", "inprogress", "done"],
+        values: ["todo", "in-progress", "completed"],
         message: "{VALUE} is not valid",
       },
       default: "todo",
@@ -31,6 +31,8 @@ const taskSchema = mongoose.Schema(
           "personal",
           "work",
           "clean",
+          "shopping",
+          "travel",
           "others",
         ],
         message: "{VALUES} is not valid",

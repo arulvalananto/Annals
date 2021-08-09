@@ -24,6 +24,7 @@ const PasswordAdd = React.lazy(() =>
 const PasswordView = React.lazy(() =>
   import("./Passwords/PasswordView/PasswordView.component")
 );
+const Reminders = React.lazy(() => import("./Reminders/Reminders.component"));
 
 const Ideas = React.lazy(() => import("./Ideas/Ideas.component"));
 const Tasks = React.lazy(() => import("./Tasks/Tasks.component"));
@@ -65,7 +66,7 @@ const Dashboard = () => {
             <Route exact path='/passwords' component={Passwords} />
             <Route path='/passwords/add' component={PasswordAdd} />
             <Route path='/passwords/view/:id' component={PasswordView} />
-            <Route path='/reminders'>Hello Reminders</Route>
+            <Route path='/reminders' component={Reminders} />
             <Route path='/ideas' component={Ideas} />
             <Route exact path='/tasks' component={Tasks} />
             <Route path='/tasks/add' component={TaskAdd} />

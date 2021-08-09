@@ -8,6 +8,9 @@ import {
   Typography,
   makeStyles,
   Tooltip,
+  FormControl,
+  InputLabel,
+  Select,
 } from "@material-ui/core";
 
 import {
@@ -22,6 +25,8 @@ import { IoFastFoodOutline } from "react-icons/io5";
 import { MdExpandMore } from "react-icons/md";
 import { CgGym } from "react-icons/cg";
 import { RiNetflixLine, RiDeleteBinLine } from "react-icons/ri";
+import { useDispatch } from "react-redux";
+import { updateTaskStatus } from "../../redux/actions/user.actions";
 
 const pickCategory = (category) => {
   switch (category) {
@@ -59,18 +64,40 @@ const useStyles = makeStyles((theme) => ({
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
-    flexBasis: "10%",
+    flexBasis: "100px",
     flexShrink: 0,
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
     color: "#f41368",
   },
+  formControl: {
+    margin: theme.spacing(1),
+    maxWidth: 120,
+    minWidth: 50,
+    maxHeight: "50px",
+  },
+  formLabel: {
+    color: "#4b24bf",
+  },
+  status: {
+    color: "#fff",
+    fontSize: "14px",
+  },
+  statusOption: {
+    color: "#000",
+  },
 }));
 
 const Task = ({ data, onDelete, title }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
+  const changeStatusHandler = (e) => (id) => {
+    console.log(id);
+    dispatch(updateTaskStatus(id, e.target.value));
+  };
+  console.log(data);
   return (
     <Accordion className={classes.root}>
       <AccordionSummary
@@ -105,17 +132,35 @@ const Task = ({ data, onDelete, title }) => {
                 </p>
                 <span>{task.title}</span>
               </p>
-              <select className='task__status' value={task.status}>
-                <option value='todo' selected={task.status === "todo"}>
-                  to do
-                </option>
-                <option selected={task.status === "in-progress"}>
-                  In progress
-                </option>
-                <option selected={task.status === "completed"}>
-                  Completed
-                </option>
-              </select>
+
+              <FormControl className={classes.formControl}>
+                <InputLabel
+                  className={classes.formLabel}
+                  htmlFor='status-native-simple'
+                >
+                  Status
+                </InputLabel>
+                <Select
+                  className={classes.status}
+                  native
+                  value={task.status}
+                  onChange={(e) => changeStatusHandler(e)(task._id)}
+                  inputProps={{
+                    name: "status",
+                    id: "status-native-simple",
+                  }}
+                >
+                  <option className={classes.statusOption} value='todo'>
+                    Todo
+                  </option>
+                  <option className={classes.statusOption} value='in-progress'>
+                    In Progress
+                  </option>
+                  <option className={classes.statusOption} value='completed'>
+                    Completed
+                  </option>
+                </Select>
+              </FormControl>
               <p
                 className={`task__priority task__priority--${task.priorityLevel}`}
               >
