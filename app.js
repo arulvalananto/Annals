@@ -14,6 +14,7 @@ const ideaRoutes = require("./routes/idea.routes");
 const logoRoutes = require("./routes/logo.routes");
 const taskRoutes = require("./routes/task.routes");
 const adminRoutes = require("./routes/admin.routes");
+const reminderRoutes = require("./routes/reminder.routes");
 
 require("./utils/passport");
 // require("./utils/cache");
@@ -59,11 +60,12 @@ app.use(passport.session());
 app.use("/api/v1/logos", logoRoutes);
 
 app.use("/", authRoutes);
+app.use("/api/v1/admin", adminRoutes);
 app.use("/api/v1/diary", diaryRoutes);
 app.use("/api/v1/password", passwordRoutes);
 app.use("/api/v1/ideas", ideaRoutes);
 app.use("/api/v1/tasks", taskRoutes);
-app.use("/api/v1/admin", adminRoutes);
+app.use("/api/v1/reminders", reminderRoutes);
 
 app.use("*", (req, res) => {
   res.status(404).json({

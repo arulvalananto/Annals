@@ -5,6 +5,7 @@ import Calendar from "react-calendar";
 import { Button } from "@material-ui/core";
 import { MdSkipNext, MdSkipPrevious } from "react-icons/md";
 import { GrChapterPrevious, GrChapterNext } from "react-icons/gr";
+import { GoDiffAdded } from "react-icons/go";
 
 const Reminders = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -19,8 +20,8 @@ const Reminders = () => {
 
   const renderTitle =
     selectedDate == Date()
-      ? "Today Events"
-      : `${new Date(selectedDate).toLocaleDateString("en-IN")} Events`;
+      ? "Today Events:"
+      : `${new Date(selectedDate).toLocaleDateString("en-IN")} Events:`;
 
   return (
     <>
@@ -48,8 +49,13 @@ const Reminders = () => {
         </div>
         <div className="reminder__bottom">
           <div className="reminder__eventsHeader">
-            <p>{renderTitle}</p>
+            <h3>{renderTitle}</h3>
+            <button>
+              <GoDiffAdded size={14} />
+              <span>Add Events</span>
+            </button>
           </div>
+          <div className="reminder__events"></div>
         </div>
       </div>
     </>

@@ -35,6 +35,7 @@ const userSchema = mongoose.Schema(
     diary: [{ type: mongoose.Schema.Types.ObjectId, ref: "Diary" }],
     ideas: [{ type: mongoose.Schema.Types.ObjectId, ref: "Ideas" }],
     tasks: [{ type: mongoose.Schema.Types.ObjectId, ref: "Tasks" }],
+    reminders: [{ type: mongoose.Schema.Types.ObjectId, ref: "Reminders" }],
   },
   {
     toObject: {

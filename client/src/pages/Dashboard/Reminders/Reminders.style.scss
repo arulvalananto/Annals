@@ -30,5 +30,35 @@
     }
   }
   &__bottom {
+    .reminder__eventsHeader {
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      button {
+        color: $light-theme;
+        background: $secondary-color;
+        @include buttonWithoutBorder();
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        transition: 0.4s;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        span {
+          margin-left: 10px;
+        }
+
+        &:hover,
+        &:active {
+          transform: translateY(-3px);
+        }
+      }
+    }
+    .reminder__events {
+    }
   }
 }
