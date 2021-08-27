@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import "react-calendar/dist/Calendar.css";
 import "./Reminders.style.scss";
 import Calendar from "react-calendar";
@@ -18,10 +18,9 @@ const Reminders = () => {
     toggleShowDatePicker();
   };
 
-  const renderTitle =
-    selectedDate == Date()
-      ? "Today Events:"
-      : `${new Date(selectedDate).toLocaleDateString("en-IN")} Events:`;
+  const renderTitle = useCallback(() => {
+      return selectedDate == Date() ? "Today Events:" : `${new Date(selectedDate).toLocaleDateString("en-IN")} Events:`;
+  }, [selectedDate])
 
   return (
     <>
@@ -49,7 +48,7 @@ const Reminders = () => {
         </div>
         <div className="reminder__bottom">
           <div className="reminder__eventsHeader">
-            <h3>{renderTitle}</h3>
+            <h3>{renderTitle()}</h3>
             <button>
               <GoDiffAdded size={14} />
               <span>Add Events</span>

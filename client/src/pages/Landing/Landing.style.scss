@@ -15,7 +15,7 @@
 
       &Title,
       &Subtitle {
-        font-size: 70px;
+        font-size: 90px;
         text-align: center;
 
         @media (max-width: 768px) {
@@ -27,6 +27,8 @@
       }
       &Title {
         color: #1a5af8;
+        font-size: 65px;
+        margin-bottom: 0.5rem;
       }
 
       &Content {
@@ -36,26 +38,29 @@
         text-align: center;
       }
     }
-    &Right {
-      flex: 1;
+  }
+  .features {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 5rem;
 
-      &ImageContainer {
-        text-align: center;
+    .feature {
+      margin-left: 1rem;
 
-        .landing__containerRightImage {
-          width: 650px;
-          height: 500px;
-          object-fit: contain;
-
-          @media (max-width: 675px) {
-            width: $percentage;
-            height: 350px;
-          }
-        }
+      &__icon {
+        width: 75px;
+        height: 75px;
+        margin-bottom: 1rem;
       }
-    }
-    @media (max-width: 1180px) {
-      flex-direction: column;
+      &__title {
+        margin-bottom: 1rem;
+      }
+      &__subtitle {
+        font-size: 12px;
+        word-wrap: break-word;
+        word-break: break-all;
+      }
     }
   }
 }
