@@ -1,0 +1,4 @@
+Next Move:
+    * Enable Google Authentication and Facebook Authentication.
+    * Create Journal Module in backend and integrate with frontend.
+    * Send mail using any tool and complete forgotPassword Module.

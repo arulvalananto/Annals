@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .bg-animation {
+    background: url("https://loading.io/asset/524084");
+  }
+  .clip-path {
+    clip-path: polygon(0 0, 67% 0, 100% 100%, 0% 100%);
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+    width: 1rem;
+    height: 1rem;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #4b24bf;
+    border-radius: 0.5rem;
+  }
+
+  .custom-input::-webkit-calendar-picker-indicator {
+    background: url("./assets/calender.png") center/80% no-repeat;
+    width: 15px;
+  }
+
+  .shake {
+    animation: shake 0.2s ease-in-out;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+  @keyframes shake {
+    10% {
+      transform: translate3d(-2px, 0, 0);
+    }
+    20% {
+      transform: translate3d(3px, 0, 0);
+    }
+    30% {
+      transfrom: translate3d(-4px, 0, 0);
+    }
+    40% {
+      transfrom: translate3d(6px, 0, 0);
+    }
+    50% {
+      transfrom: translate3d(-6px, 0, 0);
+    }
+    60% {
+      transform: translate3d(9px, 0, 0);
+    }
+    70% {
+      transfrom: translate3d(-4px, 0, 0);
+    }
+    80% {
+      transform: translate3d(6px, 0, 0);
+    }
+    90% {
+      transform: translate3d(-2px, 0, 0);
+    }
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  .spinner {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+  }
+  .spinner__object {
+    width: 40px;
+    height: 40px;
+    background-color: #000;
+    z-index: 1;
+
+    margin: 100px auto;
+    -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
+    animation: sk-rotateplane 1.2s infinite ease-in-out;
+  }
+
+  @-webkit-keyframes sk-rotateplane {
+    0% {
+      -webkit-transform: perspective(120px);
+    }
+    50% {
+      -webkit-transform: perspective(120px) rotateY(180deg);
+    }
+    100% {
+      -webkit-transform: perspective(120px) rotateY(180deg) rotateX(180deg);
+    }
+  }
+
+  @keyframes sk-rotateplane {
+    0% {
+      transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+      -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    }
+    50% {
+      transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+      -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+    }
+    100% {
+      transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+      -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+    }
+  }
+}
