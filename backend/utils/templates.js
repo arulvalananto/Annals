@@ -70,20 +70,17 @@ exports.forgotPassword = (name, code) => {
     <title>Forgot Password Verification</title>
     <style>
       .box {
-        padding: 2px;
         background-color: #4b24bf;
-        height: 124px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 25px;
         color: #fff;
         font-size: 32px;
+        border-radius: 16px;
       }
     </style>
   </head>
   <body>
-    <h2>Your Forgot Password Verification Code is</h2>
+    <p>Dear ${name},</p>
+    <p>As your Requested for forgot password, We sent you a verification code to change your password</p>
+    <h2>The Code is</h2>
     <p class="box">
       ${code}
     </p>

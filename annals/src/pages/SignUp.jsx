@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Form } from "formik";
 import * as yup from "yup";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import cover from "../assets/signup_cover.gif";
 import Button from "../components/Button";
 import CustomForm from "../components/Form";
 import Input from "../components/Input";
 import Alerter from "../components/Alerter";
-import { register } from "../redux/actions/user.actions";
+import { register } from "../store/actions/user.actions";
 
 const validationSchema = yup.object().shape({
   fullName: yup
@@ -31,25 +31,23 @@ const validationSchema = yup.object().shape({
     .string()
     .required("Confirm Password is required")
     .min(8, "Password length should be 8 or above characters")
-    .label("Password"),
+    .label("Password")
+    .oneOf([yup.ref("password"), null], "Passwords must match"),
 });
 
 const SignUp = () => {
   const dispatch = useDispatch();
+  const { failure } = useSelector((state) => state.notify);
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
 
   const handleLoading = (val) => setLoading(val);
 
-  const handleError = (message = "") => setError(message);
-
-  const handleSubmit = (values) =>
-    dispatch(register(values, handleLoading, handleError));
+  const handleSubmit = (values) => dispatch(register(values, handleLoading));
 
   return (
     <div className="grid grid-cols-6 w-screen h-screen font-poppins">
-      <Alerter visible={error} message={error} handleError={handleError} />
+      <Alerter type="error" visible={failure} message={failure} />
       <div className="hidden w-full h-full xl:block col-span-2 bg-primary p-5 items-center justify-center flex-col">
         <div className="flex items-center justify-center mt-20">
           <img

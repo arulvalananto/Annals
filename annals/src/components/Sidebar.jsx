@@ -11,7 +11,7 @@ import {
 import { useDispatch } from "react-redux";
 
 import ActiveLink from "../components/ActiveLink";
-import { logout } from "../redux/actions/user.actions";
+import { logout } from "../store/actions/user.actions";
 
 const Sidebar = () => {
   const dispatch = useDispatch();

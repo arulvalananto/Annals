@@ -40,6 +40,7 @@ const userSchema = mongoose.Schema(
     },
     accountVerified: { type: Boolean, default: false },
     resetPasswordCode: { type: String, select: false, default: "" },
+    resetPasswordCodeSentAt: { type: Date, select: false },
     resetPasswordCodeFailure: { type: Number, default: 0 },
     passwordLastChangedAt: { type: Date, select: false, default: Date.now() },
     lastLoginAt: { type: Date, select: false, default: Date.now() },

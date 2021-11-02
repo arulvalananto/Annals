@@ -19,7 +19,7 @@ const sendMail = (options) => {
     from: "valananto134@gmail.com",
     to: options.to,
     subject: options.subject,
-    html: templates.accountCreated(options.name),
+    html: templates[options.template](options.name, options.code),
   };
   transporter.sendMail(mailOptions, function (err, data) {
     if (err) console.log(err.message);

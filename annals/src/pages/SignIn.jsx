@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Form } from "formik";
 import * as yup from "yup";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Lock } from "@mui/icons-material";
 
 import logo from "../assets/logo.png";
@@ -10,7 +10,7 @@ import Button from "../components/Button";
 import CustomForm from "../components/Form";
 import Input from "../components/Input";
 import Alerter from "../components/Alerter";
-import { login } from "../redux/actions/user.actions";
+import { login } from "../store/actions/user.actions";
 
 const validationSchema = yup.object().shape({
   email: yup
@@ -27,20 +27,17 @@ const validationSchema = yup.object().shape({
 
 const SignIn = () => {
   const dispatch = useDispatch();
+  const { failure } = useSelector((state) => state.notify);
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
 
   const handleLoading = (val) => setLoading(val);
 
-  const handleError = (message = "") => setError(message);
-
-  const handleSubmit = (values) =>
-    dispatch(login(values, handleLoading, handleError));
+  const handleSubmit = (values) => dispatch(login(values, handleLoading));
 
   return (
     <div className="grid grid-cols-5 w-screen h-screen font-poppins">
-      <Alerter visible={error} message={error} handleError={handleError} />
+      <Alerter type="error" visible={failure} message={failure} />
       <div className="hidden xl:block col-span-2 bg-primary bg-signin-cover bg-cover p-5">
         <img
           src={logo}

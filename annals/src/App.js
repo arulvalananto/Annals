@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 
-import { getCurrentUser } from "./redux/actions/user.actions";
+import { getCurrentUser } from "./store/actions/user.actions";
 import Dashboard from "./pages/Dashboard";
 import Landing from "./pages/Landing";
 import SignIn from "./pages/SignIn";
