@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 
 import { getCurrentUser } from "./store/actions/user.actions";
 import Dashboard from "./pages/Dashboard";
-import Landing from "./pages/Landing";
+import Welcome from "./pages/Welcome";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import RouteLock from "./RouteLock";
@@ -58,7 +58,7 @@ function App() {
       <RouteLock
         path="/welcome"
         exact
-        component={Landing}
+        component={Welcome}
         redirectTo="/"
         condition={user}
       />

@@ -46,7 +46,7 @@ const SignUp = () => {
   const handleSubmit = (values) => dispatch(register(values, handleLoading));
 
   return (
-    <div className="grid grid-cols-6 w-screen h-screen font-poppins">
+    <div className="grid grid-cols-6 w-screen h-screen font-poppins select-none">
       <Alerter type="error" visible={failure} message={failure} />
       <div className="hidden w-full h-full xl:block col-span-2 bg-primary p-5 items-center justify-center flex-col">
         <div className="flex items-center justify-center mt-20">

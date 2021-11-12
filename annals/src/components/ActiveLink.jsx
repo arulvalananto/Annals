@@ -12,7 +12,7 @@ const ActiveLink = ({ title, to, Icon }) => {
   return (
     <Link
       to={to}
-      className={`p-5 py-2 mb-3 text-sm rounded-md transition duration-500 ease-in-out hover:bg-primary transform hover:-translate-y-1 hover:scale-110 ${style}`}
+      className={`p-5 select-none py-2 mb-3 text-sm rounded-md transition duration-500 ease-in-out hover:bg-primary transform hover:-translate-y-1 hover:scale-110 ${style}`}
     >
       <p className="flex items-center">
         <Icon size={16} className="mr-3" />

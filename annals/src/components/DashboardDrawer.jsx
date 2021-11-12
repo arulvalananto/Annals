@@ -10,7 +10,7 @@ const DashboardDrawer = () => {
     <Drawer Icon={Menu}>
       <div className="px-5 p-3 flex flex-col w-64 font-poppins">
         {menuItems.map(({ to, Icon, title }) => (
-          <Link to={to} className="p-5 font-bold flex items-center">
+          <Link key={to} to={to} className="p-5 font-bold flex items-center">
             <Icon />
             <p className="ml-3">{title}</p>
           </Link>

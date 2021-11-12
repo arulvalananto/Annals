@@ -21,11 +21,10 @@ export const register = (credentials, handleLoading) => async (dispatch) => {
         authorization: `Bearer ${result.data.token}`,
       },
     });
-
+    
     dispatch(FETCHED_USER(response.data.user));
   } catch (err) {
     if (err.response) return dispatch(setFailure(err.response?.data.message));
-
     dispatch(setFailure(err.message));
   } finally {
     handleLoading(false);

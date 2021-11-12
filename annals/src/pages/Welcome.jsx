@@ -8,13 +8,15 @@ import Drawer from "../components/Drawer";
 
 const Landing = () => {
   return (
-    <div className="w-5/6 m-auto font-poppins">
-      <nav className="flex justify-between items-center mt-5">
-        <img
-          src={logo}
-          alt="Annals Logo"
-          className="w-14 h-14 object-contain"
-        />
+    <div className="mt-0 md:px-40 font-poppins bg-white select-none">
+      <nav className="flex justify-between items-center pt-5">
+        <Link to="/welcome">
+          <img
+            src={logo}
+            alt="Annals Logo"
+            className="w-14 h-14 object-contain"
+          />
+        </Link>
         <div className="lg:block hidden">
           <div className="flex items-center justify-center  ">
             <Link to="/sign-in">

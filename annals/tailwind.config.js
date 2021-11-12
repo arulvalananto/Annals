@@ -12,7 +12,7 @@ module.exports = {
       moderate: "goldenrod",
       darkgray: "#6B7280",
       facebook: "#3C5A9A",
-      mildgray: "rgb(29, 28, 28)",
+      mildgray: "#1d1c1c",
       bglight: "#1F1F23",
       bgdark: "#0E0E10",
       "custom-cyan": "#07AABD",

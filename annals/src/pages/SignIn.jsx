@@ -36,14 +36,16 @@ const SignIn = () => {
   const handleSubmit = (values) => dispatch(login(values, handleLoading));
 
   return (
-    <div className="grid grid-cols-5 w-screen h-screen font-poppins">
+    <div className="grid grid-cols-5 w-screen h-screen font-poppins select-none">
       <Alerter type="error" visible={failure} message={failure} />
       <div className="hidden xl:block col-span-2 bg-primary bg-signin-cover bg-cover p-5">
-        <img
-          src={logo}
-          alt="Annals Logo"
-          className="w-16 h-16 object-contain"
-        />
+        <Link to="/welcome">
+          <img
+            src={logo}
+            alt="Annals Logo"
+            className="w-16 h-16 object-contain"
+          />
+        </Link>
       </div>
       <div className="col-span-5 xl:col-span-3 bg-white p-10 w-full h-screen overflow-auto">
         <nav className="w-full flex items-center justify-end">
@@ -79,7 +81,7 @@ const SignIn = () => {
                 />
                 <Link
                   to="/forgot-password"
-                  className="underline text-primary mb-2 flex justify-end"
+                  className="underline text-primary mb-2 flex justify-end outline-none"
                 >
                   Forgot Password ?{" "}
                 </Link>

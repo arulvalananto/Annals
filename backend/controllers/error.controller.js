@@ -1,6 +1,6 @@
 const transformMessage = (message) => {
   if (message.startsWith("E11000")) {
-    return "Email Already Exist";
+    return "Already Exist";
   }
   return message;
 };
