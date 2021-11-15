@@ -1,4 +1,5 @@
 const Journal = require("../models/Journal.model");
+const AppError = require("../utils/AppError");
 const catchAsync = require("../utils/catchAsync");
 
 exports.getJournals = catchAsync(async (req, res, next) => {
@@ -22,12 +23,14 @@ exports.addJournal = catchAsync(async (req, res, next) => {
   res.status(201).json({ journal });
 });
 
-exports.editJournal = catchAsync(async (req, res, next) => {});
+exports.updateJournal = catchAsync(async (req, res, next) => {
+  const { content } = req.body;
 
-exports.deleteJournal = catchAsync(async (req, res, next) => {
-  await Journal.deleteOne({ _id: req.params.id });
+  const journal = await Journal.findById(req.params.id);
+  if (!journal) return next(new AppError("Journal not found"));
 
-  res.json(200).json({ message: "Journal Deleted" });
+  journal.content = content;
+  await journal.save();
+
+  res.status(200).json({ message: "Journal Updated" });
 });
-
-exports.deleteJournals = (req, res, next) => {};

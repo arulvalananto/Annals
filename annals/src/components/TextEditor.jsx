@@ -1,31 +1,36 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { CircularProgress } from "@mui/material";
+import { useHistory } from "react-router";
 
 import { addJournal, updateJournal } from "../store/actions/journals.action";
+import { setFailure } from "../store/actions/notification.actions";
 
-const TextEditor = ({ mode = "", contentText = "" }) => {
+const TextEditor = ({ mode = "", contentText = "", id = "" }) => {
   const handleKeyDown = (e) => {
     e.target.style.height = "inherit";
     e.target.style.height = `${e.target.scrollHeight}px`;
   };
 
   const [content, setContent] = useState(contentText);
-  const [loading, setLoading] = useState("");
+  const { isLoading } = useSelector((state) => state.loader);
+
+  const history = useHistory();
 
   const dispatch = useDispatch();
 
   const handleChange = (e) => setContent(e.target.value);
-  const handleLoading = (val) => setLoading(val);
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    dispatch(updateJournal(content, handleLoading));
+    if (content.trim() === contentText)
+      return dispatch(setFailure("Same Content cant be updated"));
+    dispatch(updateJournal(content, id, history));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addJournal(content, handleLoading));
+    dispatch(addJournal(content, history));
   };
 
   return (
@@ -41,13 +46,15 @@ const TextEditor = ({ mode = "", contentText = "" }) => {
         autoFocus
         disabled={mode === "view"}
       />
-      {mode !== "view" && content.trim().length > 0 ? (
+      {mode !== "view" &&
+      content.trim().length > 0 &&
+      content.trim() !== contentText ? (
         <button
           type="submit"
-          className="px-4 py-2 bg-secondary rounded transform hover:scale-95  fixed bottom-0 right-0 m-10 mr-20 select-none"
-          disabled={loading}
+          className="px-4 py-2 bg-secondary rounded transform hover:scale-95  fixed bottom-0 right-0 m-10 mr-20 select-none disabled: "
+          disabled={isLoading}
         >
-          {loading ? (
+          {isLoading ? (
             <CircularProgress size="20px" color="inherit" />
           ) : mode === "edit" ? (
             "Update"

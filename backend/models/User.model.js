@@ -28,6 +28,7 @@ const userSchema = mongoose.Schema(
       type: String,
       select: false,
       minLength: 8,
+      trim: true,
     },
     mobile: {
       type: String,

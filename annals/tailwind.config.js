@@ -29,6 +29,7 @@ module.exports = {
     fontFamily: {
       poppins: ["Poppins", "sans-serif"],
       rampart: ["Rampart One", "cursive"],
+      jura: ["Jura", "sans-serif"],
     },
     extend: {
       backgroundImage: {

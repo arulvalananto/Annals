@@ -1,13 +1,4 @@
 {
-    "cSpell.words": [
-        "signup",
-        "Swipeable"
-    ],
-    "cSpell.ignoreWords": [
-        "bgdark",
-        "bglight",
-        "darkgray",
-        "mildgray",
-        "signin"
-    ]
+  "cSpell.words": ["preconnect", "signup", "Swipeable"],
+  "cSpell.ignoreWords": ["bgdark", "bglight", "darkgray", "mildgray", "signin"]
 }

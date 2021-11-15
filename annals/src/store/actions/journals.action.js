@@ -1,7 +1,6 @@
 import axios from "../../axios";
 import {
   ADDED_JOURNAL,
-  DELETED_JOURNAL,
   FETCHED_JOURNALS,
   UPDATED_JOURNAL,
 } from "../reducers/journals.reducer";
@@ -36,17 +35,17 @@ export const fetchJournals = (handleLoading) => async (dispatch) => {
   }
 };
 
-export const addJournal = (values, handleLoading) => async (dispatch) => {
+export const addJournal = (content, history) => async (dispatch) => {
   try {
     dispatch(removeFailure());
-    handleLoading(true);
+    dispatch(setLoading(true));
 
     const token = localStorage.getItem("token");
-    if (!token) return handleLoading(false);
+    if (!token) return dispatch(clearLoading(false));
 
     const result = await axios.post(
       "/journals/add",
-      { content: values },
+      { content },
       {
         headers: {
           authorization: `Bearer ${token}`,
@@ -54,60 +53,46 @@ export const addJournal = (values, handleLoading) => async (dispatch) => {
       }
     );
     dispatch(ADDED_JOURNAL(result.data.journals));
+
     dispatch(setSuccess("Journal Added"));
     setTimeout(() => removeSuccess(""), 3000);
+
+    history.push("/journals");
   } catch (err) {
     if (err.response) return dispatch(setFailure(err.response?.data.message));
 
     dispatch(setFailure(err.message));
   } finally {
-    handleLoading(false);
+    dispatch(clearLoading(false));
   }
 };
 
-export const updateJournal =
-  (values, id, handleLoading) => async (dispatch) => {
-    try {
-      dispatch(removeFailure());
-      handleLoading(true);
+export const updateJournal = (content, id, history) => async (dispatch) => {
+  try {
+    dispatch(removeFailure());
+    dispatch(setLoading(true));
 
-      const token = localStorage.getItem("token");
-      if (!token) return handleLoading(false);
+    const token = localStorage.getItem("token");
+    if (!token) return dispatch(clearLoading(false));
 
-      const result = await axios.post(`/journals/update/${id}`, values, {
+    const result = await axios.patch(
+      `/journals/update/${id}`,
+      { content },
+      {
         headers: {
           authorization: `Bearer ${token}`,
         },
-      });
-      dispatch(UPDATED_JOURNAL({ id, values: result.data.journals }));
-    } catch (err) {
-      if (err.response) return dispatch(setFailure(err.response?.data.message));
+      }
+    );
+    dispatch(UPDATED_JOURNAL({ id, values: result.data.journals }));
 
-      dispatch(setFailure(err.message));
-    } finally {
-      handleLoading(false);
-    }
-  };
-
-export const deleteJournal = (id) => async (dispatch) => {
-  try {
-    dispatch(removeFailure());
-    dispatch(setLoading());
-
-    const token = localStorage.getItem("token");
-    if (!token) return dispatch(clearLoading());
-
-    await axios.delete(`/journals/delete/${id}`, {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    });
-    dispatch(DELETED_JOURNAL());
+    history.push("/journals");
   } catch (err) {
     if (err.response) return dispatch(setFailure(err.response?.data.message));
 
     dispatch(setFailure(err.message));
+    dispatch(clearLoading(false));
   } finally {
-    dispatch(clearLoading());
+    dispatch(clearLoading(false));
   }
 };

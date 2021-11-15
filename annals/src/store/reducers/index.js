@@ -1,13 +1,15 @@
 import { combineReducers } from "redux";
 
 import userReducer from "../reducers/user.reducer";
-import journalsReducer from "./journals.reducer";
 import notificationReducer from "./notification.reducer";
 import loaderReducer from "./loader.reducer";
+import journalsReducer from "./journals.reducer";
+import ideasReducer from "./ideas.reducer";
 
 export default combineReducers({
   user: userReducer,
   notify: notificationReducer,
-  journals: journalsReducer,
   loader: loaderReducer,
+  journals: journalsReducer,
+  ideas: ideasReducer,
 });

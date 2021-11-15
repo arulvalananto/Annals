@@ -30,7 +30,7 @@ const JournalEdit = () => {
         </h2>
       </div>
       <div>
-        <TextEditor mode="edit" contentText={journal.content} />
+        <TextEditor mode="edit" contentText={journal.content} id={id} />
       </div>
     </div>
   );

@@ -1,40 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { Add, Delete, Edit, DeleteOutlineSharp } from "@mui/icons-material";
+import { Add, Edit } from "@mui/icons-material";
 import { IconButton, Tooltip } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 
-import { deleteJournal, fetchJournals } from "../store/actions/journals.action";
+import { fetchJournals } from "../store/actions/journals.action";
 import SkeletonLoader from "./SkeletonLoader";
 import MonthPicker from "../components/MonthPicker";
-import Modal from "../components/Modal";
 import Alerter from "../components/Alerter";
 
 const Journals = () => {
   const dispatch = useDispatch();
+
   const journals = useSelector((state) => state.journals);
   const { failure, success } = useSelector((state) => state.notify);
 
   const [loading, setLoading] = useState(true);
-  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
-  const [selectedDeleteId, setSelectedDeleteId] = useState("");
 
   const [selectedMonth, setSelectedMonth] = useState("");
 
   const handleSelectedMonth = (value) => setSelectedMonth(value);
 
-  const handleDeleteModal = (id = "") => {
-    setSelectedDeleteId(id);
-    setIsDeleteModalVisible(!isDeleteModalVisible);
-  };
   const handleLoading = (val) => setLoading(val);
-
-  const handleDelete = (e) => {
-    e.preventDefault();
-    dispatch(deleteJournal(selectedDeleteId));
-    handleDeleteModal();
-  };
 
   useEffect(() => {
     dispatch(fetchJournals(handleLoading));
@@ -42,7 +30,7 @@ const Journals = () => {
   }, []);
 
   return (
-    <div className="">
+    <>
       <Alerter message={failure} visible={failure} type="error" />
       <Alerter message={success} visible={success} type="success" />
       <Tooltip title="Add" placement="top">
@@ -94,18 +82,13 @@ const Journals = () => {
                   </p>
                   <hr className="text-darkgray" />
                 </Link>
-                <div className="absolute right-0 bottom-0 w-36 flex items-center justify-between text-right p-5 ">
+                <div className="absolute right-0 bottom-0 w-36 text-right p-5 ">
                   <Tooltip title="Edit">
                     <Link to={`/journals/edit/${id}`}>
                       <IconButton>
                         <Edit className="hover:text-moderate text-white transition duration-500 transform hover:scale-125 cursor-pointer" />
                       </IconButton>
                     </Link>
-                  </Tooltip>
-                  <Tooltip title="Delete">
-                    <IconButton onClick={() => handleDeleteModal(id)}>
-                      <Delete className="hover:text-danger text-white transition duration-500 transform hover:scale-125 cursor-pointer" />
-                    </IconButton>
                   </Tooltip>
                 </div>
               </div>
@@ -117,31 +100,7 @@ const Journals = () => {
           </p>
         )}
       </div>
-      <Modal onClose={() => handleDeleteModal()} visible={isDeleteModalVisible}>
-        <form onSubmit={handleDelete}>
-          <DeleteOutlineSharp fontSize="large" className="mb-3" />
-          <h1 className="text-xl">Are You Sure?</h1>
-          <p className="text-xs text-gray-400 mt-3">
-            You are going to delete this journal permanently. please confirm
-          </p>
-          <div className="flex mt-5 text-sm">
-            <button
-              className="px-4 py-2 bg-bgdark rounded shadow"
-              type="button"
-              onClick={() => handleDeleteModal()}
-            >
-              Cancel
-            </button>
-            <button
-              className="px-4 py-2 bg-primary ml-2 rounded shadow"
-              type="submit"
-            >
-              Delete
-            </button>
-          </div>
-        </form>
-      </Modal>
-    </div>
+    </>
   );
 };
 

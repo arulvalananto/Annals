@@ -15,7 +15,7 @@ const JournalsAdd = () => {
   return (
     <div className="p-5 h-full w-full">
       <Alerter message={failure} visible={failure} type="error" />
-      <Alerter message={success} visible={success} type="error" />
+      <Alerter message={success} visible={success} type="success" />
       <p
         className="p-2 bg-tertiary flex items-center justify-center w-10 h-10 text-black rounded transform cursor-pointer hover:scale-90 "
         onClick={() => history.goBack()}
