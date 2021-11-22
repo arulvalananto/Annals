@@ -51,7 +51,7 @@ const TextEditor = ({ mode = "", contentText = "", id = "" }) => {
       content.trim() !== contentText ? (
         <button
           type="submit"
-          className="px-4 py-2 bg-secondary rounded transform hover:scale-95  fixed bottom-0 right-0 m-10 mr-20 select-none disabled: "
+          className="px-4 py-2 bg-secondary rounded transform hover:scale-95 fixed bottom-0 right-0 m-5 sm:m-10 sm:mr-20 select-none disabled: "
           disabled={isLoading}
         >
           {isLoading ? (

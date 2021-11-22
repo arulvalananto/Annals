@@ -31,7 +31,7 @@ const Alerter = ({ message, visible, type }) => {
           <Close fontSize="inherit" />
         </IconButton>
       }
-      className="fixed xl:bottom-5 bottom-2 left-1/2 transform -translate-x-1/2"
+      className="fixed xl:bottom-5 bottom-2 left-1/2 transform -translate-x-1/2 w-64 sm:w-72"
     >
       {message}
     </Alert>

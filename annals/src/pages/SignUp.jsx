@@ -60,19 +60,19 @@ const SignUp = () => {
           Write and store your data in a secure way
         </h3>
       </div>
-      <div className="col-span-6 xl:col-span-4 bg-white p-10 w-full h-screen overflow-auto">
+      <div className="col-span-6 xl:col-span-4 bg-white p-3 sm:p-10 w-full h-screen overflow-auto">
         <nav className="w-full flex items-center justify-end">
           <span className="mr-5">Have an account?</span>
           <Link to="/sign-in">
             <Button title="Sign In" className="bg-secondary text-white" />
           </Link>
         </nav>
-        <div className="mt-20">
+        <div className="mt-10 sm:mt-20">
           <h1 className="text-4xl font-bold text-center mb-2 uppercase">
             Sign Up
           </h1>
           <p className="text-center text-xl">Let's start a journey with us</p>
-          <div className="w-3/4 m-auto mt-10">
+          <div className="sm:w-3/4 m-auto mt-10">
             <CustomForm
               initialValues={{
                 fullName: "",

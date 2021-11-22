@@ -9,7 +9,7 @@ import Drawer from "../components/Drawer";
 const Landing = () => {
   return (
     <div className="mt-0 md:px-40 font-poppins bg-white select-none">
-      <nav className="flex justify-between items-center pt-5">
+      <nav className="flex justify-between items-center px-3 sm:p-0 pt-5">
         <Link to="/welcome">
           <img
             src={logo}

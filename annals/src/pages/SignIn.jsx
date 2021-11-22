@@ -47,7 +47,7 @@ const SignIn = () => {
           />
         </Link>
       </div>
-      <div className="col-span-5 xl:col-span-3 bg-white p-10 w-full h-screen overflow-auto">
+      <div className="col-span-5 xl:col-span-3 bg-white p-3 sm:p-10 w-full h-screen overflow-auto">
         <nav className="w-full flex items-center justify-end">
           <span className="mr-5">New User?</span>
           <Link to="/sign-up">
@@ -59,7 +59,7 @@ const SignIn = () => {
             Sign In
           </h1>
           <p className="text-center text-xl">Welcome back😍</p>
-          <div className="w-3/4 m-auto mt-10">
+          <div className="sm:w-3/4 m-auto mt-10">
             <CustomForm
               initialValues={{ email: "", password: "" }}
               validationSchema={validationSchema}

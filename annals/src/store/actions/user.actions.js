@@ -21,7 +21,7 @@ export const register = (credentials, handleLoading) => async (dispatch) => {
         authorization: `Bearer ${result.data.token}`,
       },
     });
-    
+
     dispatch(FETCHED_USER(response.data.user));
   } catch (err) {
     if (err.response) return dispatch(setFailure(err.response?.data.message));
@@ -57,22 +57,26 @@ export const login = (credentials, handleLoading) => async (dispatch) => {
 };
 
 export const getCurrentUser = (handleLoading) => async (dispatch) => {
-  dispatch(removeFailure());
-  handleLoading(true);
-
-  const token = localStorage.getItem("token");
-  if (!token) return handleLoading(false);
-
-  const result = await axios.get("/auth/current-user", {
-    headers: {
-      authorization: `Bearer ${token}`,
-    },
-  });
-
-  dispatch(FETCHED_USER(result.data.user));
   try {
+    dispatch(removeFailure());
+    handleLoading(true);
+
+    const token = localStorage.getItem("token");
+    if (!token) return handleLoading(false);
+
+    const result = await axios.get("/auth/current-user", {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+
+    console.log(result);
+
+    dispatch(FETCHED_USER(result.data.user));
   } catch (err) {
     if (err.response) return dispatch(setFailure(err.response?.data.message));
+
+    localStorage.removeItem("token");
 
     dispatch(setFailure(err.message));
   } finally {
