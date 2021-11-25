@@ -1,17 +1,20 @@
 const Idea = require("../models/Idea.model");
 const AppError = require("../utils/AppError");
 const catchAsync = require("../utils/catchAsync");
-const { colorName, colors } = require("../data/colors");
+const colors = require("../data/colors");
 
 exports.getIdeas = catchAsync(async (req, res, next) => {
   const ideas = await Idea.find({ createdBy: req.userId });
 
-  res.status(200).json({ result: ideas.length, ideas });
+  res.status(200).json({ results: ideas.length, ideas });
 });
 
 exports.addIdea = catchAsync(async (req, res, next) => {
   const { content, title } = req.body;
 
+  const random = Math.floor(Math.random() * colors.length);
+  const colorName =
+    random === colors.length ? random - 1 : random < 0 ? -1 : random;
   const color = colors[colorName];
 
   const idea = await Idea.create({

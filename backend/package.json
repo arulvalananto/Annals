@@ -26,5 +26,12 @@
     "nodemailer": "^6.7.0",
     "uuid": "^8.3.2",
     "validator": "^13.6.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "engines": {
+    "node": "14.x",
+    "npm": "6.x"
   }
 }

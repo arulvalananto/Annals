@@ -17,8 +17,7 @@ const ideaSlice = createSlice({
       );
     },
     DELETE_IDEA: (ideas, action) => {
-      const { id } = action.payload;
-      return ideas.filter((idea) => idea.id !== id);
+      return ideas.filter((idea) => idea.id !== action.payload);
     },
   },
 });

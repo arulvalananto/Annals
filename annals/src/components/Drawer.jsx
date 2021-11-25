@@ -1,8 +1,16 @@
 import React from "react";
 import { IconButton, SwipeableDrawer } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import { Clear } from "@mui/icons-material";
 
-const Drawer = ({ Icon, children }) => {
+const useStyles = makeStyles({
+  paper: {
+    background: "#1d1c1c",
+    color: "#fff",
+  },
+});
+
+const Drawer = ({ Icon, children, fontSize = "16px", className = "" }) => {
   const [anchor, setAnchor] = React.useState(false);
 
   const toggleDrawer = (event) => {
@@ -17,12 +25,15 @@ const Drawer = ({ Icon, children }) => {
     setAnchor(!anchor);
   };
 
+  const classes = useStyles();
+
   return (
-    <div>
+    <div className={`${className}`}>
       <button type="button" onClick={toggleDrawer}>
-        <Icon />
+        <Icon color="inherit" fontSize={fontSize} />
       </button>
       <SwipeableDrawer
+        classes={{ paper: classes.paper }}
         anchor="right"
         open={anchor}
         onClose={toggleDrawer}

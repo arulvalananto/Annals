@@ -1,4 +1,4 @@
-import axios from "../../axios";
+import axios, { axiosConfig } from "../../api/axios";
 import {
   ADDED_JOURNAL,
   FETCHED_JOURNALS,
@@ -17,14 +17,7 @@ export const fetchJournals = (handleLoading) => async (dispatch) => {
     dispatch(removeFailure());
     handleLoading(true);
 
-    const token = localStorage.getItem("token");
-    if (!token) return handleLoading(false);
-
-    const result = await axios.get("/journals/get", {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    });
+    const result = await axios.get("/journals/get", axiosConfig);
     dispatch(FETCHED_JOURNALS(result.data.journals));
   } catch (err) {
     if (err.response) return dispatch(setFailure(err.response?.data.message));
@@ -40,24 +33,15 @@ export const addJournal = (content, history) => async (dispatch) => {
     dispatch(removeFailure());
     dispatch(setLoading(true));
 
-    const token = localStorage.getItem("token");
-    if (!token) return dispatch(clearLoading(false));
-
-    const result = await axios.post(
-      "/journals/add",
-      { content },
-      {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const result = await axios.post("/journals/add", { content }, axiosConfig);
     dispatch(ADDED_JOURNAL(result.data.journals));
 
     dispatch(setSuccess("Journal Added"));
-    setTimeout(() => removeSuccess(""), 3000);
+    setTimeout(() => {
+      dispatch(removeSuccess(""));
+    }, 3000);
 
-    history.push("/journals");
+    history.push("/journals");  
   } catch (err) {
     if (err.response) return dispatch(setFailure(err.response?.data.message));
 
@@ -72,19 +56,17 @@ export const updateJournal = (content, id, history) => async (dispatch) => {
     dispatch(removeFailure());
     dispatch(setLoading(true));
 
-    const token = localStorage.getItem("token");
-    if (!token) return dispatch(clearLoading(false));
-
     const result = await axios.patch(
       `/journals/update/${id}`,
       { content },
-      {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      }
+      axiosConfig
     );
     dispatch(UPDATED_JOURNAL({ id, values: result.data.journals }));
+
+    dispatch(setSuccess("Journal Updated"));
+    setTimeout(() => {
+      dispatch(removeSuccess(""));
+    }, 3000);
 
     history.push("/journals");
   } catch (err) {

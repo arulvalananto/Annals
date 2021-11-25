@@ -129,9 +129,4 @@ const colors = [
   "yellowgreen",
 ];
 
-const random = Math.floor(Math.random() * colors.length);
-
-const colorName =
-  random === colors.length ? random - 1 : random < 0 ? -1 : random;
-
-module.exports = { colors, colorName };
+module.exports = colors;

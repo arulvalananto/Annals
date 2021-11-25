@@ -1,4 +1,4 @@
-import axios from "../../axios";
+import axios, { axiosConfig } from "../../api/axios";
 import { FETCHED_USER, REMOVED_USER } from "../reducers/user.reducer";
 import {
   removeFailure,
@@ -60,17 +60,7 @@ export const getCurrentUser = (handleLoading) => async (dispatch) => {
   try {
     dispatch(removeFailure());
     handleLoading(true);
-
-    const token = localStorage.getItem("token");
-    if (!token) return handleLoading(false);
-
-    const result = await axios.get("/auth/current-user", {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    });
-
-    console.log(result);
+    const result = await axios.get("/auth/current-user", axiosConfig);
 
     dispatch(FETCHED_USER(result.data.user));
   } catch (err) {
@@ -96,6 +86,7 @@ export const forgotPassword =
       handleLoading(true);
 
       const result = await axios.post("/auth/forgot-password", values);
+
       dispatch(setSuccess(result.data.message));
       handleIsCodeSent();
       setTimeout(() => dispatch(removeSuccess()), 3000);
@@ -113,7 +104,9 @@ export const resetPassword =
     try {
       dispatch(removeFailure());
       handleLoading(true);
+
       await axios.patch("/auth/reset-password", values);
+
       handleIsPasswordChanged();
     } catch (err) {
       if (err.response) return dispatch(setFailure(err.response?.data.message));
@@ -123,3 +116,5 @@ export const resetPassword =
       handleLoading(false);
     }
   };
+
+

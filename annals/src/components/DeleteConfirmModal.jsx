@@ -6,7 +6,7 @@ import Modal from "../components/Modal";
 const DeleteConfirmModal = ({ yes, no, visible }) => {
   return (
     <Modal onClose={no} visible={visible}>
-      <form onSubmit={yes}>
+      <div>
         <DeleteOutlineSharp fontSize="large" className="mb-3" />
         <h1 className="text-xl">Are You Sure?</h1>
         <p className="text-xs text-gray-400 mt-3">
@@ -22,12 +22,13 @@ const DeleteConfirmModal = ({ yes, no, visible }) => {
           </button>
           <button
             className="px-4 py-2 bg-primary ml-2 rounded shadow"
-            type="submit"
+            type="button"
+            onClick={yes}
           >
             Delete
           </button>
         </div>
-      </form>
+      </div>
     </Modal>
   );
 };

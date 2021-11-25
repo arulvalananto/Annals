@@ -13,8 +13,6 @@ const JournalView = () => {
   const journals = useSelector((state) => state.journals);
   const journal = journals.filter((journal) => journal.id === id)[0];
 
-  console.log(journal);
-
   return (
     <div className="p-5 h-full w-full">
       <p

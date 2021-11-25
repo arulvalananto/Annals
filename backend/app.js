@@ -29,6 +29,10 @@ app.use(function (req, res, next) {
   next();
 });
 
+// app.use("/", (req, res) => {
+//   res.status(200).json({ message: "Welcome to Annals" });
+// });
+
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/journals", journalRoutes);
 app.use("/api/v1/ideas", ideaRoutes);
