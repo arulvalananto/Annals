@@ -28,6 +28,7 @@ exports.register = catchAsync(async (req, res, next) => {
     to: email,
     subject: "Account Created Successfully",
     name: fullName,
+    template: "accountCreated",
   });
 
   res.status(201).json({ token });

@@ -10,7 +10,14 @@ const useStyles = makeStyles({
   },
 });
 
-const Drawer = ({ Icon, children, fontSize = "16px", className = "" }) => {
+const Drawer = ({
+  Icon,
+  children,
+  fontSize = "16px",
+  className = "",
+  submit = false,
+  onSubmit = () => {},
+}) => {
   const [anchor, setAnchor] = React.useState(false);
 
   const toggleDrawer = (event) => {
@@ -26,6 +33,11 @@ const Drawer = ({ Icon, children, fontSize = "16px", className = "" }) => {
   };
 
   const classes = useStyles();
+
+  const handleSubmit = () => {
+    onSubmit();
+    toggleDrawer();
+  };
 
   return (
     <div className={`${className}`}>
@@ -49,6 +61,14 @@ const Drawer = ({ Icon, children, fontSize = "16px", className = "" }) => {
           </IconButton>
         </button>
         <>{children}</>
+        {submit && (
+          <button
+            className="px-4 py-2 text-lg bg-primary rounded mx-4"
+            onClick={handleSubmit}
+          >
+            Update
+          </button>
+        )}
       </SwipeableDrawer>
     </div>
   );
