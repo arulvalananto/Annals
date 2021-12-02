@@ -4,12 +4,7 @@ import { Tooltip } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 
-import {
-  fetchIdeas,
-  addIdea,
-  deleteIdea,
-  updateIdea,
-} from "../store/actions/ideas.action";
+import { fetchIdeas, addIdea, deleteIdea } from "../store/actions/ideas.action";
 import DeleteConfirmModal from "../components/DeleteConfirmModal";
 import { classNames } from "../utils/helpers";
 import UpdateIdeaDrawer from "../components/UpdateIdeaDrawer";

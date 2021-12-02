@@ -13,16 +13,20 @@ const DashboardDrawer = () => {
 
   return (
     <Drawer Icon={Menu}>
-      <div className="px-5 p-3 flex flex-col w-64 font-poppins">
+      <div className=" flex flex-col w-64 font-poppins">
         {menuItems.map(({ to, Icon, title }) => (
-          <Link key={to} to={to} className="p-5 font-bold flex items-center">
+          <Link
+            key={to}
+            to={to}
+            className="p-5 my-3 font-bold flex items-center border__hover"
+          >
             <Icon />
             <p className="ml-3">{title}</p>
           </Link>
         ))}
         <button
           onClick={() => dispatch(logout())}
-          className="p-5 font-bold flex items-center"
+          className="p-5 font-bold flex items-center hover:bg-primary duration-200"
         >
           <LogoutIcon />
           <span className="ml-3">Logout</span>

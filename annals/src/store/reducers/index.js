@@ -5,6 +5,7 @@ import notificationReducer from "./notification.reducer";
 import loaderReducer from "./loader.reducer";
 import journalsReducer from "./journals.reducer";
 import ideasReducer from "./ideas.reducer";
+import passwordReducer from "./password.reducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -12,4 +13,5 @@ export default combineReducers({
   loader: loaderReducer,
   journals: journalsReducer,
   ideas: ideasReducer,
+  passwords: passwordReducer,
 });

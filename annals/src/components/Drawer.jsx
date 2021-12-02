@@ -1,5 +1,5 @@
 import React from "react";
-import { IconButton, SwipeableDrawer } from "@mui/material";
+import { SwipeableDrawer } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Clear } from "@mui/icons-material";
 
@@ -53,12 +53,10 @@ const Drawer = ({
       >
         <button
           type="button"
-          className="px-5 p-2 shadow-sm"
+          className="px-5 p-2 shadow-sm transform hover:scale-95 hover:text-gray-500"
           onClick={toggleDrawer}
         >
-          <IconButton>
-            <Clear />
-          </IconButton>
+          <Clear />
         </button>
         <>{children}</>
         {submit && (

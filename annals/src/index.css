@@ -215,3 +215,7 @@
     }
   }
 }
+.border__hover:hover {
+  border-left: 5px solid #4b24bf;
+  transition: all 0.4s ease-in;
+}
