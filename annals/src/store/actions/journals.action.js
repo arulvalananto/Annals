@@ -1,12 +1,12 @@
-import axios, { axiosConfig } from "../../api/axios";
+import axios from "../../api/axios";
 import {
   ADDED_JOURNAL,
   FETCHED_JOURNALS,
   UPDATED_JOURNAL,
 } from "../reducers/journals.reducer";
 import {
-  removeFailure,
-  removeSuccess,
+  clearFailure,
+  clearSuccess,
   setFailure,
   setSuccess,
 } from "./notification.actions";
@@ -14,10 +14,10 @@ import { setLoading, clearLoading } from "./loader.actions";
 
 export const fetchJournals = (handleLoading) => async (dispatch) => {
   try {
-    dispatch(removeFailure());
+    dispatch(clearFailure());
     handleLoading(true);
 
-    const result = await axios.get("/journals/get", axiosConfig);
+    const result = await axios.get("/journals/get");
     dispatch(FETCHED_JOURNALS(result.data.journals));
   } catch (err) {
     if (err.response) return dispatch(setFailure(err.response?.data.message));
@@ -30,18 +30,18 @@ export const fetchJournals = (handleLoading) => async (dispatch) => {
 
 export const addJournal = (content, history) => async (dispatch) => {
   try {
-    dispatch(removeFailure());
+    dispatch(clearFailure());
     dispatch(setLoading(true));
 
-    const result = await axios.post("/journals/add", { content }, axiosConfig);
+    const result = await axios.post("/journals/add", { content });
     dispatch(ADDED_JOURNAL(result.data.journals));
 
     dispatch(setSuccess("Journal Added"));
     setTimeout(() => {
-      dispatch(removeSuccess(""));
+      dispatch(clearSuccess(""));
     }, 3000);
 
-    history.push("/journals");  
+    history.push("/journals");
   } catch (err) {
     if (err.response) return dispatch(setFailure(err.response?.data.message));
 
@@ -53,19 +53,15 @@ export const addJournal = (content, history) => async (dispatch) => {
 
 export const updateJournal = (content, id, history) => async (dispatch) => {
   try {
-    dispatch(removeFailure());
+    dispatch(clearFailure());
     dispatch(setLoading(true));
 
-    const result = await axios.patch(
-      `/journals/update/${id}`,
-      { content },
-      axiosConfig
-    );
+    const result = await axios.patch(`/journals/update/${id}`, { content });
     dispatch(UPDATED_JOURNAL({ id, values: result.data.journals }));
 
     dispatch(setSuccess("Journal Updated"));
     setTimeout(() => {
-      dispatch(removeSuccess(""));
+      dispatch(clearSuccess(""));
     }, 3000);
 
     history.push("/journals");

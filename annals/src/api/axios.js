@@ -7,11 +7,10 @@ const instance = axios.create({
   timeoutErrorMessage: "Server Down",
 });
 
-export default instance;
+instance.interceptors.request.use(function (config) {
+  const token = localStorage.getItem("token");
+  config.headers.Authorization = token ? `Bearer ${token}` : "";
+  return config;
+});
 
-export const token = localStorage.getItem("token");
-export const axiosConfig = {
-  headers: {
-    authorization: `Bearer ${token}`,
-  },
-};
+export default instance;

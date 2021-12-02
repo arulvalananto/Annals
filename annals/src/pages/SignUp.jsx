@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Form } from "formik";
 import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,7 +9,7 @@ import Button from "../components/Button";
 import CustomForm from "../components/Form";
 import Input from "../components/Input";
 import Alerter from "../components/Alerter";
-import { register } from "../store/actions/user.actions";
+import { register } from "../store/actions/auth.actions";
 
 const validationSchema = yup.object().shape({
   fullName: yup
@@ -37,17 +37,21 @@ const validationSchema = yup.object().shape({
 
 const SignUp = () => {
   const dispatch = useDispatch();
-  const { failure } = useSelector((state) => state.notify);
+  const { failure, success } = useSelector((state) => state.notify);
 
   const [loading, setLoading] = useState(false);
 
+  const history = useHistory();
+
   const handleLoading = (val) => setLoading(val);
 
-  const handleSubmit = (values) => dispatch(register(values, handleLoading));
+  const handleSubmit = (values) =>
+    dispatch(register(values, handleLoading, history));
 
   return (
     <div className="grid grid-cols-6 w-screen h-screen font-poppins select-none">
       <Alerter type="error" visible={failure} message={failure} />
+      <Alerter type="success" visible={success} message={success} />
       <div className="hidden w-full h-full xl:block col-span-2 bg-primary p-5 items-center justify-center flex-col">
         <div className="flex items-center justify-center mt-20">
           <img

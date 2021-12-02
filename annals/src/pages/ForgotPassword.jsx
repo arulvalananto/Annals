@@ -9,7 +9,7 @@ import CustomForm from "../components/Form";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import Alerter from "../components/Alerter";
-import { forgotPassword, resetPassword } from "../store/actions/user.actions";
+import { forgotPassword, resetPassword } from "../store/actions/auth.actions";
 
 const forgotPasswordSchema = yup.object().shape({
   email: yup

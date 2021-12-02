@@ -3,16 +3,16 @@ import { Alert, IconButton } from "@mui/material";
 import { Close } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import {
-  removeFailure,
-  removeSuccess,
+  clearFailure,
+  clearSuccess,
 } from "../store/actions/notification.actions";
 
 const Alerter = ({ message, visible, type }) => {
   const dispatch = useDispatch();
 
   const onClose = () => {
-    if (type === "error") dispatch(removeFailure());
-    else dispatch(removeSuccess());
+    if (type === "error") dispatch(clearFailure());
+    else if (type === "success") dispatch(clearSuccess());
   };
 
   if (!visible) return null;

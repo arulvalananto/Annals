@@ -20,18 +20,16 @@ exports.register = catchAsync(async (req, res, next) => {
 
   const hashedPassword = await bcrypt.hash(password, 12);
 
-  const user = await User.create({ fullName, email, password: hashedPassword });
+  await User.create({ fullName, email, password: hashedPassword });
 
-  const token = sendToken(user._id);
+  // sendMail({
+  //   to: email,
+  //   subject: "Account Created Successfully",
+  //   name: fullName,
+  //   template: "accountCreated",
+  // });
 
-  sendMail({
-    to: email,
-    subject: "Account Created Successfully",
-    name: fullName,
-    template: "accountCreated",
-  });
-
-  res.status(201).json({ token });
+  res.status(201).json({ message: "User registered" });
 });
 
 exports.login = catchAsync(async (req, res, next) => {

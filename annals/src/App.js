@@ -2,72 +2,51 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 
-import { getCurrentUser } from "./store/actions/user.actions";
+import { getCurrentUser } from "./store/actions/auth.actions";
 import Dashboard from "./pages/Dashboard";
 import Welcome from "./pages/Welcome";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
-import RouteLock from "./RouteLock";
 import Alerter from "./components/Alerter";
 import Loading from "./components/Loading";
 import ForgotPassword from "./pages/ForgotPassword";
+import PrivateRoute from "./routes/PrivateRoute";
+import PublicRoute from "./routes/PublicRoute";
 
 function App() {
-  const user = useSelector((state) => state.user);
-
   const dispatch = useDispatch();
+  const { isLoggedIn } = useSelector((state) => state.auth);
 
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const handleLoading = (val) => setLoading(val);
   const handleError = (message) => setError(message);
 
   useEffect(() => {
-    dispatch(getCurrentUser(handleLoading, handleError));
+    if (localStorage.getItem("token")) dispatch(getCurrentUser(handleLoading));
+    else handleLoading(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(user);
-
-  if (loading) {
-    return <Loading />;
-  }
+  if (loading) return <Loading />;
 
   return (
     <BrowserRouter>
       <Alerter visible={error} message={error} handleError={handleError} />
-      <RouteLock
-        path="/sign-in"
-        component={SignIn}
-        redirectTo="/"
-        condition={user}
-      />
-      <RouteLock
-        path="/sign-up"
-        component={SignUp}
-        redirectTo="/"
-        condition={user}
-      />
-      <RouteLock
+      <PublicRoute
+        restricted={false}
         path="/forgot-password"
         component={ForgotPassword}
-        redirectTo="/"
-        condition={user}
       />
-      <RouteLock
+      <PublicRoute
+        restricted={isLoggedIn}
         path="/welcome"
-        exact
         component={Welcome}
-        redirectTo="/"
-        condition={user}
       />
-      <RouteLock
-        path="/"
-        component={Dashboard}
-        redirectTo="/welcome"
-        condition={!user}
-      />
+      <PublicRoute restricted={isLoggedIn} path="/sign-in" component={SignIn} />
+      <PublicRoute restricted={isLoggedIn} path="/sign-up" component={SignUp} />
+      <PrivateRoute path="/" component={Dashboard} />
     </BrowserRouter>
   );
 }

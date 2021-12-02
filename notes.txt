@@ -1,3 +1,3 @@
 Next Move:
-    * Create Journal Module in backend and integrate with frontend.
     * Enable Google Authentication and Facebook Authentication.
+    * Complete Password Module in both sides.

@@ -6,7 +6,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 
 import Drawer from "../components/Drawer";
 import menuItems from "../data/DashboardDrawerItems";
-import { logout } from "../store/actions/user.actions";
+import { logout } from "../store/actions/auth.actions";
 
 const DashboardDrawer = () => {
   const dispatch = useDispatch();

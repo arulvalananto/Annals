@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Form } from "formik";
 import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,7 +10,7 @@ import Button from "../components/Button";
 import CustomForm from "../components/Form";
 import Input from "../components/Input";
 import Alerter from "../components/Alerter";
-import { login } from "../store/actions/user.actions";
+import { login } from "../store/actions/auth.actions";
 
 const validationSchema = yup.object().shape({
   email: yup
@@ -31,9 +31,12 @@ const SignIn = () => {
 
   const [loading, setLoading] = useState(false);
 
+  const history = useHistory();
+
   const handleLoading = (val) => setLoading(val);
 
-  const handleSubmit = (values) => dispatch(login(values, handleLoading));
+  const handleSubmit = (values) =>
+    dispatch(login(values, handleLoading, history));
 
   return (
     <div className="grid grid-cols-5 w-screen h-screen font-poppins select-none">

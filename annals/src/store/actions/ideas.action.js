@@ -1,6 +1,6 @@
 import { clearLoading, setLoading } from "./loader.actions";
 import { setFailure } from "./notification.actions";
-import axios, { axiosConfig } from "../../api/axios";
+import axios from "../../api/axios";
 import {
   ADD_IDEA,
   FETCH_IDEAS,
@@ -12,7 +12,7 @@ export const fetchIdeas = () => async (dispatch) => {
   try {
     dispatch(setLoading());
 
-    const result = await axios.get("/ideas/get", axiosConfig);
+    const result = await axios.get("/ideas/get");
     dispatch(FETCH_IDEAS(result.data.ideas));
   } catch (err) {
     if (err.response) return dispatch(setFailure(err.response.data.message));
@@ -26,7 +26,7 @@ export const addIdea = (idea, clearFields) => async (dispatch) => {
   try {
     dispatch(setLoading());
 
-    const result = await axios.post("/ideas/add", idea, axiosConfig);
+    const result = await axios.post("/ideas/add", idea);
     dispatch(ADD_IDEA(result.data.idea));
 
     clearFields();
@@ -42,11 +42,7 @@ export const updateIdea = (id, values) => async (dispatch) => {
   try {
     dispatch(setLoading());
 
-    const response = await axios.patch(
-      `/ideas/update/${id}`,
-      values,
-      axiosConfig
-    );
+    const response = await axios.patch(`/ideas/update/${id}`, values);
     console.log(response);
     dispatch(UPDATE_IDEA({ id, values }));
   } catch (err) {
@@ -61,7 +57,7 @@ export const deleteIdea = (id) => async (dispatch) => {
   try {
     dispatch(setLoading());
 
-    await axios.delete(`/ideas/delete/${id}`, axiosConfig);
+    await axios.delete(`/ideas/delete/${id}`);
     dispatch(DELETE_IDEA(id));
   } catch (err) {
     if (err.response) return dispatch(setFailure(err.response.data.message));

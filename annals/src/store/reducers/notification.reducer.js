@@ -10,13 +10,13 @@ const notificationSlice = createSlice({
     SET_FAILURE: (notify, action) => {
       return { ...notify, failure: action.payload };
     },
-    REMOVE_FAILURE: (notify, action) => {
+    CLEAR_FAILURE: (notify, action) => {
       return { ...notify, failure: "" };
     },
     SET_SUCCESS: (notify, action) => {
       return { ...notify, success: action.payload };
     },
-    REMOVE_SUCCESS: (notify, action) => {
+    CLEAR_SUCCESS: (notify, action) => {
       return { ...notify, success: "" };
     },
   },
@@ -24,5 +24,5 @@ const notificationSlice = createSlice({
 
 export default notificationSlice.reducer;
 
-export const { SET_FAILURE, SET_SUCCESS, REMOVE_FAILURE, REMOVE_SUCCESS } =
+export const { SET_FAILURE, SET_SUCCESS, CLEAR_FAILURE, CLEAR_SUCCESS } =
   notificationSlice.actions;
