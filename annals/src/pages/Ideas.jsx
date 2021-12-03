@@ -80,7 +80,7 @@ const Ideas = () => {
           />
           <Tooltip title="Submit">
             <button
-              className={`absolute top-1.5 right-2 transform hover:scale-95 ${classNames(
+              className={`absolute top-1.5 right-2 transform hover:scale-95 text-secondary ${classNames(
                 idea.title && idea.content && !isLoading,
                 "block",
                 "hidden"

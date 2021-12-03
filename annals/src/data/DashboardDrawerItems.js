@@ -9,7 +9,7 @@ import {
 const menuItems = [
   { to: "/", Icon: HomeIcon, title: "Home" },
   { to: "/journals", Icon: ImportContacts, title: "Journals" },
-  { to: "/passwords", Icon: Lock, title: "Passwords" },
+  { to: "/personals", Icon: Lock, title: "Personals" },
   { to: "/ideas", Icon: WbIncandescent, title: "Ideas" },
   { to: "/tasks", Icon: Task, title: "Tasks" },
 ];

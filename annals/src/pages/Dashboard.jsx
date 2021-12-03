@@ -24,8 +24,6 @@ const Dashboard = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(loading);
-
   return (
     <>
       {(isLoading || loading) && <LinearProgress color="secondary" />}

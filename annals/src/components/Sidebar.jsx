@@ -25,7 +25,7 @@ const Sidebar = () => {
         <div className="flex flex-col">
           <ActiveLink to="/" title="Dashboard" Icon={HomeIcon} />
           <ActiveLink to="/journals" title="Journals" Icon={ImportContacts} />
-          <ActiveLink to="/passwords" title="Passwords" Icon={Lock} />
+          <ActiveLink to="/personals" title="Personals" Icon={Lock} />
           <ActiveLink to="/ideas" title="Ideas" Icon={WbIncandescent} />
           <ActiveLink to="/tasks" title="Tasks" Icon={Task} />
         </div>

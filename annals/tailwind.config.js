@@ -35,6 +35,8 @@ module.exports = {
       backgroundImage: {
         "signin-cover": "url('./assets/signin_cover.jpg')",
         "forgotPassword-cover": "url('./assets/forgotPassword_cover.jpg')",
+        "credit-card-1": "url('./assets/creditcard-1.jpg')",
+        "credit-card-2": "url('./assets/creditcard-2.jpg')",
       },
       animation: {
         shake: "shake 1s ease-in-out",
@@ -50,7 +52,10 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      rotate: ["active", "group-hover"],
+      scale: ["active", "group-hover"],
+    },
   },
   plugins: [],
 };
