@@ -38,7 +38,7 @@ const Passwords = () => {
           to="/cryptocurrencies"
           className="bg-mildgray w-full sm:w-96 flex-1 h-40 rounded flex flex-col items-center justify-center p-5"
         >
-          <h1 className="text-3xl text-secondary">Cryptocurrency</h1>
+          <h1 className="text-3xl text-secondary">Crypto Wallets</h1>
           <p className="text-xl font-jura font-bold mt-3">0</p>
         </Link>
         <Link

@@ -7,7 +7,7 @@ import JournalsAdd from "../pages/JournalsAdd";
 import JournalEdit from "../pages/JournalEdit";
 import JournalView from "../pages/JournalView";
 import Cards from "../pages/Cards";
-import Passwords from "../pages/Personals";
+import Passwords from "../pages/Passwords";
 import CryptoWallets from "../pages/CryptoWallets";
 
 const routes = [
