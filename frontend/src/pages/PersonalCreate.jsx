@@ -50,6 +50,38 @@ const cryptoWalletInputs = [
   },
 ];
 
+const cardInputs = [
+  {
+    label: "Bank Name",
+    type: "text",
+    placeholder: "Enter bank name",
+    required: true,
+  },
+  {
+    label: "Provider Name",
+    type: "text",
+    placeholder: "Enter provider name",
+  },
+  {
+    label: "Card Number",
+    type: "text",
+    placeholder: "Enter card number",
+    required: true,
+  },
+  {
+    label: "Name of the Account Holder",
+    type: "text",
+    placeholder: "Enter account holder name",
+    required: true,
+  },
+  {
+    label: "Name of the Expiry Date",
+    type: "month",
+    placeholder: "Enter expiry date",
+    required: true,
+  },
+];
+
 const CustomTab = withStyles({
   root: { color: "#fff" },
   selected: { color: "#4b24bf" },
@@ -135,7 +167,30 @@ const PersonalCreate = () => {
               </button>
             </form>
           </TabPanel>
-          <TabPanel value="3">Item Three</TabPanel>
+          <TabPanel value="3">
+            <form className="flex flex-col gap-3" onSubmit={handleWalletCreate}>
+              {cardInputs.map(({ label, required, type, placeholder }) => (
+                <div className="flex flex-col">
+                  <label className="text-xs mb-1 text-gray-600">
+                    {label}
+                    {required && <span className="text-danger ml-1">*</span>}
+                  </label>
+                  <input
+                    type={type}
+                    placeholder={placeholder}
+                    className="px-4 py-3 text-sm bg-mildgray outline-none transition-all focus:border-primary border-2 border-opacity-0 rounded focus:border-opacity-100"
+                    required={required}
+                  />
+                </div>
+              ))}
+              <button
+                type="submit"
+                className="bg-tertiary text-black py-2 px-4 mt-5 rounded"
+              >
+                Create
+              </button>
+            </form>
+          </TabPanel>
         </TabContext>
       </div>
     </div>
