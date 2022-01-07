@@ -7,9 +7,9 @@ import {
 } from "@mui/icons-material";
 
 const menuItems = [
-  { to: "/", Icon: HomeIcon, title: "Home" },
+  { to: "/", Icon: HomeIcon, title: "Dashboard" },
   { to: "/journals", Icon: ImportContacts, title: "Journals" },
-  { to: "/personals", Icon: Lock, title: "Personals" },
+  { to: "/personal", Icon: Lock, title: "Personal" },
   { to: "/ideas", Icon: WbIncandescent, title: "Ideas" },
   { to: "/tasks", Icon: Task, title: "Tasks" },
 ];

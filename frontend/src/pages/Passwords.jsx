@@ -10,7 +10,15 @@ import {
 import BackButton from "../components/BackButton";
 import { useState } from "react";
 
-const headers = ["No", "Name", "Password", "URL", "Last modified", "Actions"];
+const headers = [
+  "No",
+  "Name",
+  "Username",
+  "Password",
+  "URL",
+  "Last modified",
+  "Actions",
+];
 
 const Passwords = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -30,8 +38,8 @@ const Passwords = () => {
         <div className="bg-bgdark flex items-center justify-between p-3 rounded mb-5">
           <p className="flex-1 text-center">1</p>
           <p className="flex-1 text-center">Twitter</p>
+          <p className="flex-1 text-center">valan anto</p>
           <div className="flex-1 text-center flex items-center justify-center relative group">
-            <div className="bg-white opacity-0 group-hover:opacity-100 absolute top-0 left-0 w-full h-full"></div>
             <input
               type={isPasswordVisible ? "text" : "password"}
               className="bg-bgdark outline-none select-nones w"
@@ -40,7 +48,7 @@ const Passwords = () => {
             />
             <button
               type="button"
-              className="absolute top-0 right-10 opacity-0 transform transition-opacity hover:scale-105 group-hover:opacity-100"
+              className="absolute -top-6 z-20 right-10 opacity-0 transform transition-opacity hover:scale-110 group-hover:opacity-100"
             >
               <ContentPaste fontSize="0.8rem" />
             </button>
@@ -48,7 +56,7 @@ const Passwords = () => {
             {isPasswordVisible ? (
               <button
                 type="button"
-                className="absolute top-0 right-0 opacity-0 transform transition-opacity hover:scale-105 group-hover:opacity-100"
+                className="absolute -top-6 z-20 right-0 opacity-0 transform transition-opacity hover:scale-110 group-hover:opacity-100"
                 onClick={togglePasswordVisible}
               >
                 <VisibilityOff fontSize="0.8rem" />
@@ -56,7 +64,7 @@ const Passwords = () => {
             ) : (
               <button
                 type="button"
-                className="absolute top-0 right-0 opacity-0 transform transition-opacity hover:scale-105 group-hover:opacity-100"
+                className="absolute -top-6 z-20 right-0 opacity-0 transform transition-opacity hover:scale-110 group-hover:opacity-100"
                 onClick={togglePasswordVisible}
               >
                 <Visibility fontSize="0.8rem" />

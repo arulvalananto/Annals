@@ -1,17 +1,10 @@
 import React from "react";
-import {
-  Settings,
-  Home as HomeIcon,
-  ImportContacts,
-  Lock,
-  WbIncandescent,
-  Task,
-  ExitToApp,
-} from "@mui/icons-material";
+import { Settings, ExitToApp } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 
 import ActiveLink from "../components/ActiveLink";
 import { logout } from "../store/actions/auth.actions";
+import menuItems from "../data/DashboardDrawerItems";
 
 const Sidebar = () => {
   const dispatch = useDispatch();
@@ -23,13 +16,12 @@ const Sidebar = () => {
       <div className="flex flex-col justify-between w-full h-full">
         <ActiveLink to="/settings" title="Settings" Icon={Settings} />
         <div className="flex flex-col">
-          <ActiveLink to="/" title="Dashboard" Icon={HomeIcon} />
-          <ActiveLink to="/journals" title="Journals" Icon={ImportContacts} />
-          <ActiveLink to="/personals" title="Personals" Icon={Lock} />
-          <ActiveLink to="/ideas" title="Ideas" Icon={WbIncandescent} />
-          <ActiveLink to="/tasks" title="Tasks" Icon={Task} />
+          {menuItems.map(({ to, Icon, title }) => (
+            <ActiveLink to={to} Icon={Icon} title={title} />
+          ))}
         </div>
-        <div
+        <button
+          type="button"
           className="p-5 py-2 mb-2 rounded-md text-sm hover:bg-primary"
           onClick={handleLogOut}
         >
@@ -37,7 +29,7 @@ const Sidebar = () => {
             <ExitToApp size={16} className="mr-3" />
             <span>Log out</span>
           </p>
-        </div>
+        </button>
       </div>
     </div>
   );
