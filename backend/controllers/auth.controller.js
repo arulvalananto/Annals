@@ -131,3 +131,35 @@ exports.changePassword = catchAsync(async (req, res, next) => {
 
   res.status(200).json({ message: "Password Changed" });
 });
+
+exports.generateMasterPassword = catchAsync(async (req, res, next) => {
+  const { masterPassword } = req.body;
+
+  const user = await User.findById(req.userId);
+  if (!user) return next(new AppError("No user found"));
+
+  const hashedPassword = await bcrypt.hash(masterPassword, 12);
+  user.masterPassword = hashedPassword;
+  user.hasMasterPassword = true;
+  await user.save();
+
+  const token = sendToken(user._id, true);
+
+  res.status(201).json({ token });
+});
+
+exports.checkMasterPassword = catchAsync(async (req, res, next) => {
+  const { masterPassword } = req.body;
+
+  const user = await User.findById(req.userId);
+  if (!user) return next(new AppError("No user found"));
+
+  if (!user.hasMasterPassword)
+    return next(new AppError("Master password is not found"));
+  if (!(await bcrypt.compare(masterPassword, user.masterPassword)))
+    return next(new AppError("Master password does not match"));
+
+  const token = sendToken(user._id, true);
+
+  res.status(201).json({ token });
+});

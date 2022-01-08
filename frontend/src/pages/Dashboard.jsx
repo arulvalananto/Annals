@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { LinearProgress } from "@mui/material";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch, useHistory } from "react-router-dom";
 
 import Sidebar from "../components/Sidebar";
 import TopBar from "../components/TopBar";
@@ -10,19 +10,22 @@ import { getCurrentUser } from "../store/actions/auth.actions";
 
 const Dashboard = () => {
   const { isLoading } = useSelector((state) => state.loader);
-  const { user } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const [loading, setLoading] = useState(true);
   const handleLoading = (val) => setLoading(val);
 
   useEffect(() => {
-    if (!user) {
-      dispatch(getCurrentUser(handleLoading));
-    } else handleLoading(false);
+    if (localStorage.getItem("token")) dispatch(getCurrentUser(handleLoading));
+    else handleLoading(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (!sessionStorage.getItem("verified")) history.push("/master-password");
+  });
 
   return (
     <>

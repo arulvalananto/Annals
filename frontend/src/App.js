@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Redirect, Route } from "react-router-dom";
 
 import { getCurrentUser } from "./store/actions/auth.actions";
 import Dashboard from "./pages/Dashboard";
@@ -12,6 +12,8 @@ import Loading from "./components/Loading";
 import ForgotPassword from "./pages/ForgotPassword";
 import PrivateRoute from "./routes/PrivateRoute";
 import PublicRoute from "./routes/PublicRoute";
+import MasterPassword from "./pages/MasterPassword";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,6 +24,8 @@ function App() {
 
   const handleLoading = (val) => setLoading(val);
   const handleError = (message) => setError(message);
+
+  console.log(handleLoading);
 
   useEffect(() => {
     if (localStorage.getItem("token")) dispatch(getCurrentUser(handleLoading));
@@ -46,7 +50,10 @@ function App() {
       />
       <PublicRoute restricted={isLoggedIn} path="/sign-in" component={SignIn} />
       <PublicRoute restricted={isLoggedIn} path="/sign-up" component={SignUp} />
-      <PrivateRoute path="/" component={Dashboard} />
+      <Route path="/master-password" component={MasterPassword} />
+      <PrivateRoute path="/" component={Dashboard} exact />
+      <Route path="/404" component={NotFound} />
+      <Redirect from="*" to="/404" />
     </BrowserRouter>
   );
 }
