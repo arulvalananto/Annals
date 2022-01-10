@@ -1,20 +1,34 @@
+import React from "react";
+
 import Home from "../pages/Home";
-import Journals from "../pages/Journals";
-import Personal from "../pages/Personal";
-import Ideas from "../pages/Ideas";
-import Tasks from "../pages/Tasks";
-import JournalsAdd from "../pages/JournalsAdd";
-import JournalEdit from "../pages/JournalEdit";
-import JournalView from "../pages/JournalView";
-import Cards from "../pages/Cards";
-import Passwords from "../pages/Passwords";
-import CryptoWallets from "../pages/CryptoWallets";
-import PersonalCreate from "../pages/PersonalCreate";
+const Journals = React.lazy(() => import("../pages/Journals"));
+const JournalAdd = React.lazy(() => import("../pages/JournalAdd"));
+const JournalEdit = React.lazy(() => import("../pages/JournalEdit"));
+const JournalView = React.lazy(() => import("../pages/JournalView"));
+const Personal = React.lazy(() => import("../pages/Personal"));
+const PersonalCreate = React.lazy(() => import("../pages/PersonalCreate"));
+const Passwords = React.lazy(() => import("../pages/Passwords"));
+const CryptoWallets = React.lazy(() => import("../pages/CryptoWallets"));
+const Cards = React.lazy(() => import("../pages/Cards"));
+const Ideas = React.lazy(() => import("../pages/Ideas"));
+const Tasks = React.lazy(() => import("../pages/Tasks"));
+
+// import Journals from "../pages/Journals";
+// import Personal from "../pages/Personal";
+// import Ideas from "../pages/Ideas";
+// import Tasks from "../pages/Tasks";
+// import JournalsAdd from "../pages/JournalsAdd";
+// import JournalEdit from "../pages/JournalEdit";
+// import JournalView from "../pages/JournalView";
+// import Cards from "../pages/Cards";
+// import Passwords from "../pages/Passwords";
+// import CryptoWallets from "../pages/CryptoWallets";
+// import PersonalCreate from "../pages/PersonalCreate";
 
 const routes = [
   { path: "/journals/view/:id", component: JournalView },
   { path: "/journals/edit/:id", component: JournalEdit },
-  { path: "/journals/add", component: JournalsAdd },
+  { path: "/journals/add", component: JournalAdd },
   {
     path: "/journals",
     component: Journals,
@@ -29,6 +43,7 @@ const routes = [
   {
     path: "/",
     component: Home,
+    exact: true,
   },
 ];
 

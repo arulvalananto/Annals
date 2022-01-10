@@ -70,6 +70,7 @@ export const getCurrentUser = (handleLoading) => async (dispatch) => {
 
 export const logout = () => (dispatch) => {
   localStorage.removeItem("token");
+  if (sessionStorage.getItem("verified")) sessionStorage.removeItem("verified");
   dispatch(LOGOUT());
 };
 

@@ -138,6 +138,9 @@ exports.generateMasterPassword = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.userId);
   if (!user) return next(new AppError("No user found"));
 
+  if (user.hasMasterPassword)
+    return next(new AppError("Your master password is already set"));
+
   const hashedPassword = await bcrypt.hash(masterPassword, 12);
   user.masterPassword = hashedPassword;
   user.hasMasterPassword = true;
@@ -151,7 +154,7 @@ exports.generateMasterPassword = catchAsync(async (req, res, next) => {
 exports.checkMasterPassword = catchAsync(async (req, res, next) => {
   const { masterPassword } = req.body;
 
-  const user = await User.findById(req.userId);
+  const user = await User.findById(req.userId).select("+masterPassword");
   if (!user) return next(new AppError("No user found"));
 
   if (!user.hasMasterPassword)
@@ -161,5 +164,5 @@ exports.checkMasterPassword = catchAsync(async (req, res, next) => {
 
   const token = sendToken(user._id, true);
 
-  res.status(201).json({ token });
+  res.status(200).json({ token });
 });

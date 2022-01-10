@@ -21,9 +21,11 @@ route.post("/forgot-password", forgotPassword);
 route.patch("/reset-password", resetPassword);
 
 route.use(isAuthenticated);
+
 route.get("/current-user", getCurrentUser);
 route.patch("/change-password", changePassword);
-route.get("/check-master-password", checkMasterPassword);
+
+route.post("/check-master-password", checkMasterPassword);
 route.post("/generate-master-password", generateMasterPassword);
 
 module.exports = route;

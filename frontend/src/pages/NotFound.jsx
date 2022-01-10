@@ -1,8 +1,27 @@
-import { KeyboardArrowLeft } from "@mui/icons-material";
 import React from "react";
+import { KeyboardArrowLeft } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 import "./NotFound.css";
+
+const words = [
+  "e",
+  "r",
+  "r",
+  "o",
+  "r",
+  "_4",
+  "_0",
+  "_4",
+  "n",
+  "o",
+  "t",
+  "f",
+  "o",
+  "u",
+  "n",
+  "d",
+];
 
 const NotFound = () => {
   return (
@@ -11,22 +30,9 @@ const NotFound = () => {
         <div class="sad-mac"></div>
         <figcaption>
           <span class="sr-text">Error 404: Not Found</span>
-          <span class="e"></span>
-          <span class="r"></span>
-          <span class="r"></span>
-          <span class="o"></span>
-          <span class="r"></span>
-          <span class="_4"></span>
-          <span class="_0"></span>
-          <span class="_4"></span>
-          <span class="n"></span>
-          <span class="o"></span>
-          <span class="t"></span>
-          <span class="f"></span>
-          <span class="o"></span>
-          <span class="u"></span>
-          <span class="n"></span>
-          <span class="d"></span>
+          {words.map((word) => (
+            <span class={word}></span>
+          ))}
         </figcaption>
       </figure>
       <Link to="/" className="flex items-center gap-1 text-white p-2">

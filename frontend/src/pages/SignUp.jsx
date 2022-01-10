@@ -14,7 +14,7 @@ import { register } from "../store/actions/auth.actions";
 const validationSchema = yup.object().shape({
   fullName: yup
     .string()
-    .max(30, "Exiting name length")
+    .max(30, "Existing name length")
     .required("Full name is required")
     .label("Full Name"),
   email: yup

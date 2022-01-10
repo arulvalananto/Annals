@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { LinearProgress } from "@mui/material";
 import { Redirect, Route, Switch, useHistory } from "react-router-dom";
@@ -34,11 +34,19 @@ const Dashboard = () => {
         <Sidebar />
         <div className="col-span-6 xl:col-span-5 bg-bgdark text-white">
           <TopBar />
-          <Switch>
-            {routes.map(({ path, component }) => (
-              <Route path={path} component={component} key={path} />
-            ))}
-          </Switch>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Switch>
+              {routes.map(({ path, component, exact }) => (
+                <Route
+                  path={path}
+                  component={component}
+                  key={path}
+                  exact={exact}
+                />
+              ))}
+              <Redirect from="*" to="/404" />
+            </Switch>
+          </Suspense>
         </div>
       </div>
     </>

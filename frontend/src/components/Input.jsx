@@ -12,10 +12,8 @@ const Input = ({ type, placeholder, name, className, Icon }) => {
 
   const style =
     errors[name] && touched[name]
-      ? "border-danger shake"
-      : className
-      ? className
-      : "";
+      ? `${className} border-danger shake`
+      : className;
 
   const condition = type === "password";
 
@@ -31,7 +29,7 @@ const Input = ({ type, placeholder, name, className, Icon }) => {
         name={name}
         onChange={handleChange}
         onBlur={handleBlur}
-        className={`p-3 rounded border-2 outline-none ${style} text-black ${
+        className={`p-3 rounded border-2 outline-none ${style} ${
           condition ? "pr-10" : ""
         }`}
       />
@@ -40,9 +38,14 @@ const Input = ({ type, placeholder, name, className, Icon }) => {
           <VisibilityOff
             className="absolute right-4 top-4"
             onClick={changeType}
+            color="inherit"
           />
         ) : (
-          <Visibility className="absolute right-4 top-4" onClick={changeType} />
+          <Visibility
+            className="absolute right-4 top-4"
+            onClick={changeType}
+            color="inherit"
+          />
         ))}
       <ErrorMessage visible={touched[name]} message={errors[name]} />
     </div>
