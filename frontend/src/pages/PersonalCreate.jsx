@@ -1,86 +1,20 @@
 import React, { useState } from "react";
-import BackButton from "../components/BackButton";
 import { Box } from "@mui/system";
 import { Tab } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { withStyles } from "@mui/styles";
+import { Form } from "formik";
 
-const passwordInputs = [
-  {
-    label: "Name",
-    type: "text",
-    placeholder: "Enter name",
-    required: true,
-  },
-  {
-    label: "Username",
-    type: "text",
-    placeholder: "Enter username",
-    info: "You can enter username/email/phone number here",
-  },
-  {
-    label: "Password",
-    type: "password",
-    placeholder: "Enter password",
-    required: true,
-  },
-  {
-    label: "URL",
-    type: "url",
-    placeholder: "Enter URL",
-    required: true,
-  },
-];
-
-const cryptoWalletInputs = [
-  {
-    label: "Public Address",
-    type: "text",
-    placeholder: "Enter public address",
-  },
-  {
-    label: "Private Address",
-    type: "text",
-    placeholder: "Enter private address",
-  },
-  {
-    label: "Pass Phrase",
-    type: "text",
-    placeholder: "Enter pass phrase",
-  },
-];
-
-const cardInputs = [
-  {
-    label: "Bank Name",
-    type: "text",
-    placeholder: "Enter bank name",
-    required: true,
-  },
-  {
-    label: "Provider Name",
-    type: "text",
-    placeholder: "Enter provider name",
-  },
-  {
-    label: "Card Number",
-    type: "text",
-    placeholder: "Enter card number",
-    required: true,
-  },
-  {
-    label: "Name of the Account Holder",
-    type: "text",
-    placeholder: "Enter account holder name",
-    required: true,
-  },
-  {
-    label: "Name of the Expiry Date",
-    type: "month",
-    placeholder: "Enter expiry date",
-    required: true,
-  },
-];
+import BackButton from "../components/BackButton";
+import CustomForm from "../components/Form";
+import Input from "../components/Input";
+import Label from "../components/Label";
+import Button from "../components/Button";
+import {
+  cardInputs,
+  cryptoWalletInputs,
+  passwordInputs,
+} from "../data/PersonalInputs";
 
 const CustomTab = withStyles({
   root: { color: "#fff" },
@@ -94,12 +28,14 @@ const PersonalCreate = () => {
     setCategoryNumber(newValue);
   };
 
-  const handlePasswordCreate = (e) => {
-    e.preventDefault();
+  const handlePasswordCreate = (values) => {
+    console.log(values);
   };
-
-  const handleWalletCreate = (e) => {
-    e.preventDefault();
+  const handleCardCreate = (values) => {
+    console.log(values);
+  };
+  const handleWalletCreate = (values) => {
+    console.log(values);
   };
 
   return (
@@ -115,36 +51,89 @@ const PersonalCreate = () => {
             </TabList>
           </Box>
           <TabPanel value="1">
-            <form
+            <CustomForm
               className="flex flex-col gap-3"
+              initialValues={{ name: "", username: "", password: "", url: "" }}
               onSubmit={handlePasswordCreate}
             >
-              {passwordInputs.map(({ label, type, placeholder, required }) => (
-                <div className="flex flex-col">
-                  <label className="text-xs mb-1 text-gray-600">
-                    {label}
-                    {required && <span className="text-danger ml-1">*</span>}
-                  </label>
-                  <input
-                    type={type}
-                    placeholder={placeholder}
-                    className="px-4 py-3 text-sm bg-mildgray outline-none transition-all focus:border-primary border-2 border-opacity-0 rounded focus:border-opacity-100"
-                    required={required}
-                  />
-                </div>
-              ))}
-              <button
-                type="submit"
-                className="bg-secondary py-2 px-4 mt-5 rounded"
-              >
-                Create
-              </button>
-            </form>
+              <Form>
+                {passwordInputs.map(
+                  ({ label, type, placeholder, required }) => (
+                    <div className="flex flex-col">
+                      <Label>
+                        {label}
+                        {required && (
+                          <span className="text-danger ml-1">*</span>
+                        )}
+                      </Label>
+                      <Input
+                        type={type}
+                        placeholder={placeholder}
+                        className="px-4 py-3 text-sm bg-mildgray outline-none transition-all focus:border-primary border-2 border-opacity-0 rounded focus:border-opacity-100"
+                        required={required}
+                      />
+                    </div>
+                  )
+                )}
+                <Button
+                  type="submit"
+                  title="Create"
+                  className="bg-secondary py-2 px-4 mt-5 rounded w-full transform hover:scale-95"
+                />
+              </Form>
+            </CustomForm>
           </TabPanel>
           <TabPanel value="2">
-            <form className="flex flex-col gap-3" onSubmit={handleWalletCreate}>
-              {cryptoWalletInputs.map(
-                ({ label, required, type, placeholder }) => (
+            <CustomForm
+              className="flex flex-col gap-3"
+              initialValues={{
+                publicAddress: "",
+                privateAddress: "",
+                passPhrase: "",
+              }}
+              onSubmit={handleWalletCreate}
+            >
+              <Form>
+                {cryptoWalletInputs.map(
+                  ({ label, required, type, placeholder }) => (
+                    <div className="flex flex-col">
+                      <Label>
+                        {label}
+                        {required && (
+                          <span className="text-danger ml-1">*</span>
+                        )}
+                      </Label>
+                      <Input
+                        type={type}
+                        placeholder={placeholder}
+                        className="px-4 py-3 text-sm bg-mildgray outline-none transition-all focus:border-primary border-2 border-opacity-0 rounded focus:border-opacity-100"
+                        required={required}
+                      />
+                    </div>
+                  )
+                )}
+                <Button
+                  type="submit"
+                  className="bg-primary py-2 px-4 mt-5 rounded w-full transform hover:scale-95"
+                  title="Create"
+                />
+              </Form>
+            </CustomForm>
+          </TabPanel>
+          <TabPanel value="3">
+            <CustomForm
+              className="flex flex-col gap-3"
+              initialValues={{
+                bankName: "",
+                providerName: "",
+                cardNumber: "",
+                accountHolderName: "",
+                expiry: "",
+              }}
+              onSubmit={handleCardCreate}
+            >
+              <Form>
+                {cardInputs.map(({ label, required, type, placeholder }) => (
                   <div className="flex flex-col">
                     <label className="text-xs mb-1 text-gray-600">
                       {label}
@@ -157,39 +146,14 @@ const PersonalCreate = () => {
                       required={required}
                     />
                   </div>
-                )
-              )}
-              <button
-                type="submit"
-                className="bg-primary py-2 px-4 mt-5 rounded"
-              >
-                Create
-              </button>
-            </form>
-          </TabPanel>
-          <TabPanel value="3">
-            <form className="flex flex-col gap-3" onSubmit={handleWalletCreate}>
-              {cardInputs.map(({ label, required, type, placeholder }) => (
-                <div className="flex flex-col">
-                  <label className="text-xs mb-1 text-gray-600">
-                    {label}
-                    {required && <span className="text-danger ml-1">*</span>}
-                  </label>
-                  <input
-                    type={type}
-                    placeholder={placeholder}
-                    className="px-4 py-3 text-sm bg-mildgray outline-none transition-all focus:border-primary border-2 border-opacity-0 rounded focus:border-opacity-100"
-                    required={required}
-                  />
-                </div>
-              ))}
-              <button
-                type="submit"
-                className="bg-tertiary text-black py-2 px-4 mt-5 rounded"
-              >
-                Create
-              </button>
-            </form>
+                ))}
+                <Button
+                  type="submit"
+                  title="Create"
+                  className="bg-tertiary w-full text-black py-2 px-4 mt-5 rounded transform hover:scale-95"
+                />
+              </Form>
+            </CustomForm>
           </TabPanel>
         </TabContext>
       </div>

@@ -61,7 +61,7 @@ const Drawer = ({
         <>{children}</>
         {submit && (
           <button
-            className="px-4 py-2 text-lg bg-primary rounded mx-4"
+            className="px-4 py-2 text-sm bg-primary rounded mx-4 transform hover:scale-95"
             onClick={handleSubmit}
           >
             Update

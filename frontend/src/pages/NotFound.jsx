@@ -2,26 +2,7 @@ import React from "react";
 import { KeyboardArrowLeft } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
-import "./NotFound.css";
-
-const words = [
-  "e",
-  "r",
-  "r",
-  "o",
-  "r",
-  "_4",
-  "_0",
-  "_4",
-  "n",
-  "o",
-  "t",
-  "f",
-  "o",
-  "u",
-  "n",
-  "d",
-];
+import words from "../data/NotFoundWords";
 
 const NotFound = () => {
   return (

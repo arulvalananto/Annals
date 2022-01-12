@@ -42,7 +42,7 @@ const UpdateIdeaDrawer = ({ selectedId }) => {
             name="title"
             value={idea.title}
             onChange={handleChange}
-            className="bg-bglight mb-2 text-lg px-4 py-2"
+            className="px-4 py-3 text-sm bg-bgdark outline-none transition-all focus:border-primary border-2 border-opacity-0 rounded focus:border-opacity-100"
           />
         </div>
         <div className="flex flex-col mb-4">
@@ -50,7 +50,7 @@ const UpdateIdeaDrawer = ({ selectedId }) => {
             Content
           </label>
           <textarea
-            className="bg-bglight resize-none h-40 outline-none px-4 py-2 text-lg"
+            className="resize-none px-4 py-3 text-sm bg-bgdark outline-none transition-all focus:border-primary border-2 border-opacity-0 rounded focus:border-opacity-100"
             value={idea.content}
             name="content"
             onChange={handleChange}
