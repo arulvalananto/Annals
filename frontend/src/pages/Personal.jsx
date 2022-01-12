@@ -77,8 +77,9 @@ const Personal = () => {
         {initialLoading ? (
           <SkeletonLoader />
         ) : (
-          links.map(({ count, to, title, color }) => (
+          links.map(({ count, to, title, color }, index) => (
             <Link
+              key={index}
               to={to}
               className="bg-mildgray w-full sm:w-96 flex-1 h-40 rounded flex flex-col items-center justify-center p-5"
             >

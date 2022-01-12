@@ -34,7 +34,7 @@ const UpdateIdeaDrawer = ({ selectedId }) => {
       <h3 className="p-5 text-3xl font-bold uppercase">Update Idea</h3>
       <div className="flex flex-col p-5 w-64  sm:w-96">
         <div className="flex flex-col mb-4">
-          <label htmlFor="title" className="mb-1 text-sm text-gray-500">
+          <label htmlFor="title" className="text-xs mb-1 text-gray-600">
             Title
           </label>
           <input
@@ -46,7 +46,7 @@ const UpdateIdeaDrawer = ({ selectedId }) => {
           />
         </div>
         <div className="flex flex-col mb-4">
-          <label htmlFor="content" className="mb-1 text-sm text-gray-500">
+          <label htmlFor="content" className="text-xs mb-1 text-gray-600">
             Content
           </label>
           <textarea
