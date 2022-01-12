@@ -95,6 +95,7 @@ const Ideas = () => {
       <div className="card-columns columns-5-lg columns-4-md columns-3-sm mt-10">
         {ideas?.map(({ color, title, content, id }, index) => (
           <div
+            key={index}
             className="bg-mildgray card card-content w-72 p-4 h-auto m-3 border-l-4 col-span-1 relative"
             style={{ borderColor: color }}
           >

@@ -13,7 +13,11 @@ const ideaSchema = mongoose.Schema(
       required: [true, "Content should be empty"],
     },
     color: { type: String },
-    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
   },
   {
     toObject: {

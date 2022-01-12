@@ -17,7 +17,7 @@ const cardSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  expiryDate: {
+  expiry: {
     type: Date,
     required: true,
   },

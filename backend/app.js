@@ -6,6 +6,7 @@ const compression = require("compression");
 const authRoutes = require("./routes/auth.routes");
 const journalRoutes = require("./routes/journal.routes");
 const ideaRoutes = require("./routes/idea.routes");
+const personalRoutes = require("./routes/personal.routes");
 const errorController = require("./controllers/error.controller");
 
 const app = express();
@@ -36,6 +37,7 @@ app.use(function (req, res, next) {
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/journals", journalRoutes);
 app.use("/api/v1/ideas", ideaRoutes);
+app.use("/api/v1/personal", personalRoutes);
 
 app.use("*", (req, res) => {
   res.status(404).json({

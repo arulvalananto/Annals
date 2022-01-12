@@ -10,7 +10,11 @@ const CryptoWalletSchema = mongoose.Schema({
   passPhrase: {
     type: String,
   },
-  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  createdBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("CryptoWallets", CryptoWalletSchema);

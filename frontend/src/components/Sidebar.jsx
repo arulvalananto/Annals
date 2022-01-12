@@ -17,7 +17,7 @@ const Sidebar = () => {
         <ActiveLink to="/settings" title="Settings" Icon={Settings} />
         <div className="flex flex-col">
           {menuItems.map(({ to, Icon, title }) => (
-            <ActiveLink to={to} Icon={Icon} title={title} />
+            <ActiveLink to={to} Icon={Icon} title={title} key={to} />
           ))}
         </div>
         <button

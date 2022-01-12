@@ -14,7 +14,11 @@ const journalSchema = mongoose.Schema(
     },
     climate: { type: String },
     location: { lat: Number, lng: Number },
-    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
   },
   {
     toObject: {
