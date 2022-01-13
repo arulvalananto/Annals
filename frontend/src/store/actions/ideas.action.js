@@ -1,5 +1,6 @@
+import toast from "react-hot-toast";
+
 import { clearLoading, setLoading } from "./loader.actions";
-import { setFailure } from "./notification.actions";
 import axios from "../../api/axios";
 import {
   ADD_IDEA,
@@ -15,9 +16,8 @@ export const fetchIdeas = () => async (dispatch) => {
     const result = await axios.get("/ideas/get");
     dispatch(FETCH_IDEAS(result.data.ideas));
   } catch (err) {
-    if (err.response) return dispatch(setFailure(err.response.data.message));
-
-    dispatch(setFailure(err.message));
+    if (err.response) return toast.error(err.response.data.message);
+    toast.error(err.message);
   } finally {
     dispatch(clearLoading());
   }
@@ -31,9 +31,8 @@ export const addIdea = (idea, clearFields) => async (dispatch) => {
 
     clearFields();
   } catch (err) {
-    if (err.response) return dispatch(setFailure(err.response.data.message));
-
-    dispatch(setFailure(err.message));
+    if (err.response) return toast.error(err.response.data.message);
+    toast.error(err.message);
   } finally {
     dispatch(clearLoading());
   }
@@ -46,9 +45,8 @@ export const updateIdea = (id, values) => async (dispatch) => {
     console.log(response);
     dispatch(UPDATE_IDEA({ id, values }));
   } catch (err) {
-    if (err.response) return dispatch(setFailure(err.response.data.message));
-
-    dispatch(setFailure(err.message));
+    if (err.response) return toast.error(err.response.data.message);
+    toast.error(err.message);
   } finally {
     dispatch(clearLoading());
   }
@@ -60,9 +58,8 @@ export const deleteIdea = (id) => async (dispatch) => {
     await axios.delete(`/ideas/delete/${id}`);
     dispatch(DELETE_IDEA(id));
   } catch (err) {
-    if (err.response) return dispatch(setFailure(err.response.data.message));
-
-    dispatch(setFailure(err.message));
+    if (err.response) return toast.error(err.response.data.message);
+    toast.error(err.message);
   } finally {
     dispatch(clearLoading());
   }

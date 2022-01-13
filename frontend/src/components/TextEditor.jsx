@@ -4,7 +4,7 @@ import { CircularProgress } from "@mui/material";
 import { useHistory } from "react-router";
 
 import { addJournal, updateJournal } from "../store/actions/journals.action";
-import { setFailure } from "../store/actions/notification.actions";
+import toast from "react-hot-toast";
 
 const TextEditor = ({ mode = "", contentText = "", id = "" }) => {
   const handleKeyDown = (e) => {
@@ -24,7 +24,7 @@ const TextEditor = ({ mode = "", contentText = "", id = "" }) => {
   const handleUpdate = (e) => {
     e.preventDefault();
     if (content.trim() === contentText)
-      return dispatch(setFailure("Same Content cant be updated"));
+      return toast.error("Same Content cant be updated");
     dispatch(updateJournal(content, id, history));
   };
 

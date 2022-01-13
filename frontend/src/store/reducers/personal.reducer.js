@@ -11,9 +11,18 @@ const personalSlice = createSlice({
     FETCH_PERSONAL_DATA: (personal, action) => {
       return action.payload;
     },
+    ADD_PERSONAL_DATA: (personal, action) => {
+      return {
+        ...personal,
+        [`${action.payload.category}s`]: [
+          ...personal.passwords,
+          action.payload,
+        ],
+      };
+    },
   },
 });
 
-export const { FETCH_PERSONAL_DATA } = personalSlice.actions;
+export const { FETCH_PERSONAL_DATA, ADD_PERSONAL_DATA } = personalSlice.actions;
 
 export default personalSlice.reducer;

@@ -1,23 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Form } from "formik";
 import * as yup from "yup";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { Tooltip } from "@mui/material";
 
 import logo from "../assets/logo-2.png";
 import CustomForm from "../components/Form";
 import Input from "../components/Input";
 import Button from "../components/Button";
-import {
-  setFailure,
-  clearFailure,
-} from "../store/actions/notification.actions";
 import axios from "../api/axios";
-import { useHistory } from "react-router-dom";
-import { useCallback } from "react";
-import Alerter from "../components/Alerter";
 import { logout } from "../store/actions/auth.actions";
-import { Tooltip } from "@mui/material";
+import toast from "react-hot-toast";
 
 const validationSchema = yup.object().shape({
   password: yup
@@ -54,21 +49,19 @@ const MasterPassword = () => {
 
   const handleCreate = async (values) => {
     try {
-      dispatch(clearFailure());
       setLoading(true);
 
       const response = await axios.post("/auth/generate-master-password", {
         masterPassword: values.password,
       });
       if (response.status !== 201 && !response.data)
-        return dispatch(setFailure("Something went wrong"));
+        return toast.error("something went wrong");
 
       sessionStorage.setItem("verified", response.data.token);
       history.push("/");
     } catch (err) {
-      console.log(err.response);
-      if (err.response) return dispatch(setFailure(err.response?.data.message));
-      dispatch(setFailure(err.message));
+      if (err.response) return toast.error(err.response.data.message);
+      toast.error(err.message);
     } finally {
       setLoading(false);
     }
@@ -76,22 +69,21 @@ const MasterPassword = () => {
 
   const handleSubmit = async (values) => {
     try {
-      dispatch(clearFailure());
       setLoading(true);
 
       const response = await axios.post("/auth/check-master-password", {
         masterPassword: values.password,
       });
       if (response.status !== 200 && !response.data)
-        return dispatch(setFailure("Something went wrong"));
+        return toast.error("Something went wrong");
 
       sessionStorage.setItem("verified", response.data.token);
       history.push("/");
     } catch (err) {
       console.log(err.response);
 
-      if (err.response) return dispatch(setFailure(err.response?.data.message));
-      dispatch(setFailure(err.message));
+      if (err.response) return toast.error(err.response.data.message);
+      toast.error(err.message);
     } finally {
       setLoading(false);
     }
@@ -110,13 +102,13 @@ const MasterPassword = () => {
               type="password"
               name="password"
               placeholder="master password"
-              className="px-4 py-3 text-sm bg-mildgray outline-none transition-all focus:border-primary border-2 rounded focus:border-opacity-100 w-96 border-gray-700 text-white"
+              className="px-4 py-3 text-sm bg-mildgray outline-none transition-all focus:border-tertiary border-2 rounded focus:border-opacity-100 w-96 border-gray-700 text-white"
             />
             <Input
               type="password"
               name="confirmPassword"
               placeholder="confirm master password"
-              className="px-4 py-3 text-sm bg-mildgray outline-none transition-all focus:border-primary border-2 rounded focus:border-opacity-100 w-96 border-gray-700 text-white"
+              className="px-4 py-3 text-sm bg-mildgray outline-none transition-all focus:border-tertiary border-2 rounded focus:border-opacity-100 w-96 border-gray-700 text-white"
             />
             <Button
               title="Submit"
@@ -139,7 +131,7 @@ const MasterPassword = () => {
               type="password"
               name="password"
               placeholder="Enter your master password"
-              className="px-4 py-3 text-sm bg-mildgray outline-none transition-all focus:border-primary border-2 rounded focus:border-opacity-100 w-96 border-gray-700 text-white"
+              className="px-4 py-3 text-sm bg-mildgray outline-none transition-all focus:border-secondary border-2 rounded focus:border-opacity-100 w-96 border-gray-700 text-white"
             />
             <Button
               title="Submit"
@@ -161,7 +153,6 @@ const MasterPassword = () => {
 
   return (
     <div className="w-screen h-screen bg-mildgray  flex flex-col items-center justify-center relative">
-      <Alerter visible={error} message={error} handleError={handleError} />
       <img src={logo} alt="Annals logo" className="w-40 h-40 object-cover" />
       {renderForm()}
       <Tooltip title="Logout">

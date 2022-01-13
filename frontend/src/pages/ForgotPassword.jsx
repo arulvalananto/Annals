@@ -8,7 +8,6 @@ import logo from "../assets/logo-2.png";
 import CustomForm from "../components/Form";
 import Input from "../components/Input";
 import Button from "../components/Button";
-import Alerter from "../components/Alerter";
 import { forgotPassword, resetPassword } from "../store/actions/auth.actions";
 
 const forgotPasswordSchema = yup.object().shape({
@@ -68,8 +67,6 @@ const ForgotPassword = () => {
       <div className="bg-bgdark bg-opacity-50 fixed top-0 left-0 w-screen h-screen"></div>
       <div className="w-screen lg:w-2/3  h-screen fixed top-0 left-0 lg:bg-bglight clip-path"></div>
       <div className="w-screen lg:w-1/2 bg-opacity-90 shadow backdrop-blur-lg fixed top-0 left-0 h-screen z-50 text-white p-10 flex flex-col">
-        <Alerter type="error" message={failure} visible={failure} />
-        <Alerter type="success" message={success} visible={success} />
         <div>
           <img
             src={logo}

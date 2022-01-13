@@ -1,9 +1,9 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
 import { getCurrentUser } from "./store/actions/auth.actions";
-import Alerter from "./components/Alerter";
 import Loading from "./components/Loading";
 import PrivateRoute from "./routes/PrivateRoute";
 import PublicRoute from "./routes/PublicRoute";
@@ -19,11 +19,9 @@ function App() {
   const dispatch = useDispatch();
   const { isLoggedIn } = useSelector((state) => state.auth);
 
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
 
   const handleLoading = (val) => setLoading(val);
-  const handleError = (message) => setError(message);
 
   useEffect(() => {
     if (localStorage.getItem("token")) dispatch(getCurrentUser(handleLoading));
@@ -35,7 +33,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Alerter visible={error} message={error} handleError={handleError} />
+      <Toaster />
       <Suspense fallback={<div>Loading...</div>}>
         <Switch>
           <PublicRoute

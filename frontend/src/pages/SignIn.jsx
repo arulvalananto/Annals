@@ -9,7 +9,6 @@ import logo from "../assets/logo.png";
 import Button from "../components/Button";
 import CustomForm from "../components/Form";
 import Input from "../components/Input";
-import Alerter from "../components/Alerter";
 import { login } from "../store/actions/auth.actions";
 
 const validationSchema = yup.object().shape({
@@ -40,7 +39,6 @@ const SignIn = () => {
 
   return (
     <div className="grid grid-cols-5 w-screen h-screen font-poppins select-none">
-      <Alerter type="error" visible={failure} message={failure} />
       <div className="hidden xl:block col-span-2 bg-primary bg-signin-cover bg-cover p-5">
         <Link to="/welcome">
           <img

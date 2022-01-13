@@ -24,8 +24,8 @@ export const passwordInputs = [
     label: "URL",
     type: "url",
     placeholder: "Enter URL",
-    required: true,
     name: "url",
+    required: true,
   },
 ];
 
@@ -35,6 +35,7 @@ export const cryptoWalletInputs = [
     type: "text",
     placeholder: "Enter public address",
     name: "publicAddress",
+    required: true,
   },
   {
     label: "Private Address",

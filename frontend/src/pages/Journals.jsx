@@ -8,13 +8,11 @@ import moment from "moment";
 import { fetchJournals } from "../store/actions/journals.action";
 import SkeletonLoader from "./SkeletonLoader";
 import MonthPicker from "../components/MonthPicker";
-import Alerter from "../components/Alerter";
 
 const Journals = () => {
   const dispatch = useDispatch();
 
   const journals = useSelector((state) => state.journals);
-  const { failure, success } = useSelector((state) => state.notify);
 
   const [loading, setLoading] = useState(true);
 
@@ -31,8 +29,6 @@ const Journals = () => {
 
   return (
     <>
-      <Alerter message={failure} visible={failure} type="error" />
-      <Alerter message={success} visible={success} type="success" />
       <Tooltip title="Add" placement="top">
         <Link to="/journals/add">
           <button className="bg-secondary p-3 rounded-3xl fixed bottom-4 sm:bottom-10 right-4 sm:right-10 z-30 block sm:hidden">
