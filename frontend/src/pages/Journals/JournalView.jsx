@@ -2,9 +2,9 @@ import React from "react";
 import { useParams } from "react-router";
 import moment from "moment";
 
-import TextEditor from "../components/TextEditor";
+import TextEditor from "../../components/TextEditor";
 import { useSelector } from "react-redux";
-import BackButton from "../components/BackButton";
+import BackButton from "../../components/BackButton";
 
 const JournalView = () => {
   const { id } = useParams();

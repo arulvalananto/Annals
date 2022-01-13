@@ -1,7 +1,7 @@
 import React from "react";
 import moment from "moment";
 
-import { ReactComponent as Chip } from "../assets/credit-card-chip.svg";
+import { ReactComponent as Chip } from "../../../assets/credit-card-chip.svg";
 
 const Card = ({
   card: { bankName, providerName, cardNumber, accountHolderName, expiry },

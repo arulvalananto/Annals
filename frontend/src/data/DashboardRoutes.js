@@ -1,17 +1,23 @@
 import React from "react";
 
-import Home from "../pages/Home";
-const Journals = React.lazy(() => import("../pages/Journals"));
-const JournalAdd = React.lazy(() => import("../pages/JournalAdd"));
-const JournalEdit = React.lazy(() => import("../pages/JournalEdit"));
-const JournalView = React.lazy(() => import("../pages/JournalView"));
-const Personal = React.lazy(() => import("../pages/Personal"));
-const PersonalCreate = React.lazy(() => import("../pages/PersonalCreate"));
-const Passwords = React.lazy(() => import("../pages/Passwords"));
-const CryptoWallets = React.lazy(() => import("../pages/CryptoWallets"));
-const Cards = React.lazy(() => import("../pages/Cards"));
-const Ideas = React.lazy(() => import("../pages/Ideas"));
-const Tasks = React.lazy(() => import("../pages/Tasks"));
+import Home from "../pages/Home/Home";
+const Journals = React.lazy(() => import("../pages/Journals/Journals"));
+const JournalAdd = React.lazy(() => import("../pages/Journals/JournalAdd"));
+const JournalEdit = React.lazy(() => import("../pages/Journals/JournalEdit"));
+const JournalView = React.lazy(() => import("../pages/Journals/JournalView"));
+const Personal = React.lazy(() => import("../pages/Personal/Personal"));
+const PersonalCreate = React.lazy(() =>
+  import("../pages/Personal/PersonalCreate")
+);
+const Passwords = React.lazy(() =>
+  import("../pages/Personal/Password/Passwords")
+);
+const CryptoWallets = React.lazy(() =>
+  import("../pages/Personal/Wallet/CryptoWallets")
+);
+const Cards = React.lazy(() => import("../pages/Personal/Card/Cards"));
+const Ideas = React.lazy(() => import("../pages/Idea/Ideas"));
+const Tasks = React.lazy(() => import("../pages/Task/Tasks"));
 
 // import Journals from "../pages/Journals";
 // import Personal from "../pages/Personal";

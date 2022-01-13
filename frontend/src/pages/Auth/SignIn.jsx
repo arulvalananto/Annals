@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Form } from "formik";
 import * as yup from "yup";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Lock } from "@mui/icons-material";
 
-import logo from "../assets/logo.png";
-import Button from "../components/Button";
-import CustomForm from "../components/Form";
-import Input from "../components/Input";
-import { login } from "../store/actions/auth.actions";
+import logo from "../../assets/logo.png";
+import Button from "../../components/Button";
+import CustomForm from "../../components/Form";
+import Input from "../../components/Input";
+import { login } from "../../store/actions/auth.actions";
 
 const validationSchema = yup.object().shape({
   email: yup
@@ -26,7 +26,6 @@ const validationSchema = yup.object().shape({
 
 const SignIn = () => {
   const dispatch = useDispatch();
-  const { failure } = useSelector((state) => state.notify);
 
   const [loading, setLoading] = useState(false);
 

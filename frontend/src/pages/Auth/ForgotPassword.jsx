@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Form } from "formik";
 import * as yup from "yup";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
-import logo from "../assets/logo-2.png";
-import CustomForm from "../components/Form";
-import Input from "../components/Input";
-import Button from "../components/Button";
-import { forgotPassword, resetPassword } from "../store/actions/auth.actions";
+import logo from "../../assets/logo-2.png";
+import CustomForm from "../../components/Form";
+import Input from "../../components/Input";
+import Button from "../../components/Button";
+import {
+  forgotPassword,
+  resetPassword,
+} from "../../store/actions/auth.actions";
 
 const forgotPasswordSchema = yup.object().shape({
   email: yup
@@ -34,7 +37,6 @@ const resetSchema = yup.object().shape({
 
 const ForgotPassword = () => {
   const dispatch = useDispatch();
-  const { failure, success } = useSelector((state) => state.notify);
 
   const [loading, setLoading] = useState(false);
   const [isCodeSent, setIsCodeSent] = useState(false);

@@ -4,10 +4,10 @@ import { Tooltip } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 
-import { fetchIdeas, addIdea, deleteIdea } from "../store/actions/ideas.action";
-import DeleteConfirmModal from "../components/DeleteConfirmModal";
-import { classNames } from "../utils/helpers";
-import UpdateIdeaDrawer from "../components/UpdateIdeaDrawer";
+import { fetchIdeas, addIdea, deleteIdea } from "../../store/actions/ideas.action";
+import DeleteConfirmModal from "../../components/DeleteConfirmModal";
+import { classNames } from "../../utils/helpers";
+import UpdateIdeaDrawer from "../../components/UpdateIdeaDrawer";
 
 const initialState = {
   title: "",

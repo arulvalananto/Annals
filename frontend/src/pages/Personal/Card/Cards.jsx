@@ -1,11 +1,20 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
-import BackButton from "../components/BackButton";
+import BackButton from "../../../components/BackButton";
 import Card from "./Card";
 
 const Cards = () => {
+  const history = useHistory();
+
   const { cards } = useSelector((state) => state.personal);
+
+  if (!cards.length) {
+    history.push("/personal");
+  }
+
+  console.log(cards);
 
   return (
     <div className="p-1 sm:p-5">

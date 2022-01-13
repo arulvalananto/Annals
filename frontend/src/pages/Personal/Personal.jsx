@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { Search, Add } from "@mui/icons-material";
 
-import { fetchPersonalData } from "../store/actions/personal.actions";
-import SkeletonLoader from "./SkeletonLoader";
+import { fetchPersonalData } from "../../store/actions/personal.actions";
+import SkeletonLoader from "../../components/SkeletonLoader";
 
 const Personal = () => {
   const [initialLoading, setInitialLoading] = useState(true);

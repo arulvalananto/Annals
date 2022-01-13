@@ -6,12 +6,12 @@ import * as yup from "yup";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Tooltip } from "@mui/material";
 
-import logo from "../assets/logo-2.png";
-import CustomForm from "../components/Form";
-import Input from "../components/Input";
-import Button from "../components/Button";
-import axios from "../api/axios";
-import { logout } from "../store/actions/auth.actions";
+import logo from "../../assets/logo-2.png";
+import CustomForm from "../../components/Form";
+import Input from "../../components/Input";
+import Button from "../../components/Button";
+import axios from "../../api/axios";
+import { logout } from "../../store/actions/auth.actions";
 import toast from "react-hot-toast";
 
 const validationSchema = yup.object().shape({
@@ -43,9 +43,6 @@ const MasterPassword = () => {
   const history = useHistory();
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-
-  const handleError = (message) => setError(message);
 
   const handleCreate = async (values) => {
     try {

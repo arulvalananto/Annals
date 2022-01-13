@@ -1,8 +1,8 @@
 import React from "react";
 import moment from "moment";
 
-import TextEditor from "../components/TextEditor";
-import BackButton from "../components/BackButton";
+import TextEditor from "../../components/TextEditor";
+import BackButton from "../../components/BackButton";
 
 const JournalsAdd = () => {
   return (

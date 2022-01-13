@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Menu, ArrowDownward, ArrowRightAlt } from "@mui/icons-material";
 
-import logo from "../assets/logo.png";
-import Button from "../components/Button";
-import Drawer from "../components/Drawer";
+import logo from "../../assets/logo.png";
+import Button from "../../components/Button";
+import Drawer from "../../components/Drawer";
 
 const Landing = () => {
   return (

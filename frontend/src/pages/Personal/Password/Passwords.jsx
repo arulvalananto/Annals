@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-import BackButton from "../components/BackButton";
+import BackButton from "../../../components/BackButton";
 import Password from "./Password";
 
 const headers = [
@@ -10,7 +10,6 @@ const headers = [
   "Name",
   "Username",
   "Password",
-  "URL",
   "Last modified",
   "Actions",
 ];
@@ -33,11 +32,9 @@ const Passwords = () => {
           <p className="flex-1 text-center">{header}</p>
         ))}
       </div>
-      <div>
-        {passwords.map((password, index) => (
-          <Password password={password} index={index} key={index} />
-        ))}
-      </div>
+      {passwords.map((password, index) => (
+        <Password password={password} index={index} key={index} />
+      ))}
     </div>
   );
 };

@@ -1,4 +1,27 @@
-export const passwordInputs = [
+import * as yup from "yup";
+
+const passwordValidationSchema = yup.object().shape({
+  name: yup.string().max(100).required(),
+  username: yup.string().max(100),
+  password: yup.string().max(100).required(),
+  url: yup.string().url(),
+});
+
+const cryptoWalletValidationSchema = yup.object().shape({
+  publicAddress: yup.string().max(256).required(),
+  privateAddress: yup.string().max(256),
+  passPhrase: yup.string().max(256),
+});
+
+const cardValidationSchema = yup.object().shape({
+  bankName: "",
+  providerName: "",
+  cardNumber: "",
+  accountHolderName: "",
+  expiry: "",
+});
+
+const passwordInputs = [
   {
     label: "Name",
     type: "text",
@@ -29,7 +52,7 @@ export const passwordInputs = [
   },
 ];
 
-export const cryptoWalletInputs = [
+const cryptoWalletInputs = [
   {
     label: "Public Address",
     type: "text",
@@ -51,7 +74,7 @@ export const cryptoWalletInputs = [
   },
 ];
 
-export const cardInputs = [
+const cardInputs = [
   {
     label: "Bank Name",
     type: "text",
@@ -87,3 +110,53 @@ export const cardInputs = [
     name: "expiry",
   },
 ];
+
+const panels = [
+  {
+    value: "1",
+    initialValues: {
+      name: "",
+      username: "",
+      password: "",
+      url: "",
+      category: "password",
+    },
+    inputs: passwordInputs,
+    validationSchema: passwordValidationSchema,
+    color: "secondary",
+  },
+  {
+    value: "2",
+    initialValues: {
+      publicAddress: "",
+      privateAddress: "",
+      passPhrase: "",
+      category: "cryptoWallet",
+    },
+    inputs: cryptoWalletInputs,
+    validationSchema: cryptoWalletValidationSchema,
+    color: "primary",
+  },
+  {
+    value: "3",
+    initialValues: {
+      bankName: "",
+      providerName: "",
+      cardNumber: "",
+      accountHolderName: "",
+      expiry: "",
+      category: "card",
+    },
+    inputs: cardInputs,
+    validationSchema: cardValidationSchema,
+    color: "tertiary",
+  },
+];
+
+export const tabs = [
+  { label: "Password" },
+  { label: "Crypto Wallet" },
+  { label: "Card" },
+];
+
+export default panels;

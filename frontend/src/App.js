@@ -8,16 +8,19 @@ import Loading from "./components/Loading";
 import PrivateRoute from "./routes/PrivateRoute";
 import PublicRoute from "./routes/PublicRoute";
 import Dashboard from "./pages/Dashboard";
-import Welcome from "./pages/Welcome";
-import SignIn from "./pages/SignIn";
-import SignUp from "./pages/SignUp";
-const MasterPassword = React.lazy(() => import("./pages/MasterPassword"));
+import Welcome from "./pages/Auth/Welcome";
+import SignIn from "./pages/Auth/SignIn";
+import SignUp from "./pages/Auth/SignUp";
+const MasterPassword = React.lazy(() => import("./pages/Auth/MasterPassword"));
 const NotFound = React.lazy(() => import("./pages/NotFound"));
-const ForgotPassword = React.lazy(() => import("./pages/ForgotPassword"));
+const ForgotPassword = React.lazy(() => import("./pages/Auth/ForgotPassword"));
 
 function App() {
   const dispatch = useDispatch();
   const { isLoggedIn } = useSelector((state) => state.auth);
+
+  const state = useSelector((state) => state);
+  console.log(state);
 
   const [loading, setLoading] = useState(true);
 

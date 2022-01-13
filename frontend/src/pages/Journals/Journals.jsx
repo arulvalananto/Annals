@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 
-import { fetchJournals } from "../store/actions/journals.action";
-import SkeletonLoader from "./SkeletonLoader";
-import MonthPicker from "../components/MonthPicker";
+import { fetchJournals } from "../../store/actions/journals.action";
+import SkeletonLoader from "../../components/SkeletonLoader";
+import MonthPicker from "../../components/MonthPicker";
 
 const Journals = () => {
   const dispatch = useDispatch();

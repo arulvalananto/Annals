@@ -15,7 +15,7 @@ const personalSlice = createSlice({
       return {
         ...personal,
         [`${action.payload.category}s`]: [
-          ...personal.passwords,
+          ...personal[`${action.payload.category}s`],
           action.payload,
         ],
       };

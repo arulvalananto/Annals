@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Form } from "formik";
 import * as yup from "yup";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
-import cover from "../assets/signup_cover.gif";
-import Button from "../components/Button";
-import CustomForm from "../components/Form";
-import Input from "../components/Input";
-import { register } from "../store/actions/auth.actions";
+import cover from "../../assets/signup_cover.gif";
+import Button from "../../components/Button";
+import CustomForm from "../../components/Form";
+import Input from "../../components/Input";
+import { register } from "../../store/actions/auth.actions";
 
 const validationSchema = yup.object().shape({
   fullName: yup
@@ -36,7 +36,6 @@ const validationSchema = yup.object().shape({
 
 const SignUp = () => {
   const dispatch = useDispatch();
-  const { failure, success } = useSelector((state) => state.notify);
 
   const [loading, setLoading] = useState(false);
 
