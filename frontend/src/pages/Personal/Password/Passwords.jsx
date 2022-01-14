@@ -13,7 +13,9 @@ const headers = [
 ];
 
 const Passwords = ({ handleDeleteMode }) => {
-  const { passwords } = useSelector((state) => state.personal);
+  const {
+    docs: { passwords },
+  } = useSelector((state) => state.personal);
 
   return (
     <>

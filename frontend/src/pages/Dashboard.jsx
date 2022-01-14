@@ -7,6 +7,7 @@ import Sidebar from "../components/Sidebar";
 import TopBar from "../components/TopBar";
 import routes from "../data/DashboardRoutes";
 import { getCurrentUser } from "../store/actions/auth.actions";
+import Loader from "../components/Loader";
 
 const Dashboard = () => {
   const { isLoading } = useSelector((state) => state.loader);
@@ -34,7 +35,7 @@ const Dashboard = () => {
         <Sidebar />
         <div className="col-span-6 xl:col-span-5 bg-bgdark text-white">
           <TopBar />
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loader />}>
             <Switch>
               {routes.map(({ path, component, exact }) => (
                 <Route

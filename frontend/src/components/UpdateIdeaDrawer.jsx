@@ -6,9 +6,9 @@ import Drawer from "../components/Drawer";
 import { updateIdea } from "../store/actions/ideas.action";
 
 const UpdateIdeaDrawer = ({ selectedId }) => {
-  const ideas = useSelector((state) => state.ideas);
+  const { docs } = useSelector((state) => state.ideas);
 
-  const selectedIdea = ideas.find((idea) => idea.id === selectedId);
+  const selectedIdea = docs.find((idea) => idea.id === selectedId);
   const dispatch = useDispatch();
 
   const [idea, setIdea] = useState({

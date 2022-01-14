@@ -6,42 +6,35 @@ import { Search, Add } from "@mui/icons-material";
 import { fetchPersonalData } from "../../store/actions/personal.actions";
 import SkeletonLoader from "../../components/SkeletonLoader";
 
+const links = [
+  {
+    title: "Passwords",
+    name: "passwords",
+    color: "primary",
+  },
+  {
+    title: "Crypto Wallets",
+    name: "cryptoWallets",
+    color: "secondary",
+  },
+  {
+    title: "Cards",
+    name: "cards",
+    color: "tertiary",
+  },
+];
+
 const Personal = () => {
   const [initialLoading, setInitialLoading] = useState(true);
 
   const history = useHistory();
   const dispatch = useDispatch();
-  const personal = useSelector((state) => state.personal);
-
-  const links = [
-    {
-      to: "/personal/passwords",
-      title: "Passwords",
-      count: personal?.passwords.length || 0,
-      color: "primary",
-    },
-    {
-      to: "/personal/crypto-wallet",
-      title: "Crypto Wallets",
-      count: personal?.cryptoWallets.length || 0,
-      color: "secondary",
-    },
-    {
-      to: "/personal/cards",
-      title: "Cards",
-      count: personal?.cards.length || 0,
-      color: "tertiary",
-    },
-  ];
+  const { synced, docs } = useSelector((state) => state.personal);
 
   const handleLoading = (val) => setInitialLoading(val);
 
   useEffect(() => {
-    if (
-      !personal.passwords.length ||
-      !personal.cryptoWallets.length ||
-      !personal.cards.length
-    ) {
+    if (!synced) {
       dispatch(fetchPersonalData(handleLoading));
     } else {
       handleLoading(false);
@@ -77,14 +70,16 @@ const Personal = () => {
         {initialLoading ? (
           <SkeletonLoader />
         ) : (
-          links.map(({ count, to, title, color }, index) => (
+          links.map(({ title, color, name }, index) => (
             <Link
               key={index}
-              to={to}
+              to={`/personal/${name}`}
               className="bg-mildgray w-full sm:w-96 flex-1 h-40 rounded flex flex-col items-center justify-center p-5"
             >
               <h1 className={`text-3xl text-${color} capitalize`}>{title}</h1>
-              <p className="text-xl font-jura font-bold mt-3">{count}</p>
+              <p className="text-xl font-jura font-bold mt-3">
+                {docs[name].length || 0}
+              </p>
             </Link>
           ))
         )}

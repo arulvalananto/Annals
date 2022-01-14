@@ -12,7 +12,7 @@ import MonthPicker from "../../components/MonthPicker";
 const Journals = () => {
   const dispatch = useDispatch();
 
-  const journals = useSelector((state) => state.journals);
+  const { docs, synced } = useSelector((state) => state.journals);
 
   const [loading, setLoading] = useState(true);
 
@@ -23,7 +23,8 @@ const Journals = () => {
   const handleLoading = (val) => setLoading(val);
 
   useEffect(() => {
-    dispatch(fetchJournals(handleLoading));
+    if (!synced) dispatch(fetchJournals(handleLoading));
+    else setLoading(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -62,14 +63,14 @@ const Journals = () => {
       <div>
         {loading ? (
           <SkeletonLoader />
-        ) : journals?.length > 0 ? (
+        ) : docs?.length > 0 ? (
           <div className="grid lg:grid-cols-4 xl:place-items-center md:grid-cols-3 sm:grid-cols-2 lg:gap-x-1 gap-x-3 gap-y-5 grid-cols-1 p-3 py-10 pb-40 sm:pb-10">
-            {journals?.map(({ id, date, updatedAt }) => (
+            {docs?.map(({ _id, date, updatedAt }) => (
               <div
-                key={id}
+                key={_id}
                 className="lg:w-62 xl:w-72 h-40 bg-mildgray col-span-1 rounded-sm shadow p-5 relative transition duration-500 transform hover:-rotate-3"
               >
-                <Link to={`/journals/view/${id}`}>
+                <Link to={`/journals/view/${_id}`}>
                   <h1 className="text-2xl select-none">
                     {moment(date).locale("en-in").format("DD-MM-YYYY")}
                   </h1>
@@ -80,7 +81,7 @@ const Journals = () => {
                 </Link>
                 <div className="absolute right-0 bottom-0 w-36 text-right p-5 ">
                   <Tooltip title="Edit">
-                    <Link to={`/journals/edit/${id}`}>
+                    <Link to={`/journals/edit/${_id}`}>
                       <IconButton>
                         <Edit className="hover:text-moderate text-white transition duration-500 transform hover:scale-125 cursor-pointer" />
                       </IconButton>

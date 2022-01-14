@@ -2,7 +2,7 @@ import axios from "axios";
 
 const instance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
-  // "https://infinite-sands-32683.herokuapp.com/api/v1/" ||
+  // "https://annals.herokuapp.com/api/v1/" ||
   withCredentials: true,
   timeout: 10000,
   timeoutErrorMessage: "Server Down",

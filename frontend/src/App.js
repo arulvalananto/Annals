@@ -4,7 +4,8 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 
 import { getCurrentUser } from "./store/actions/auth.actions";
-import Loading from "./components/Loading";
+import InitialLoader from "./components/InitialLoader";
+import Loader from "./components/Loader";
 import PrivateRoute from "./routes/PrivateRoute";
 import PublicRoute from "./routes/PublicRoute";
 import Dashboard from "./pages/Dashboard";
@@ -32,12 +33,12 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (loading) return <Loading />;
+  if (loading) return <InitialLoader />;
 
   return (
     <BrowserRouter>
       <Toaster />
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loader />}>
         <Switch>
           <PublicRoute
             restricted={isLoggedIn}

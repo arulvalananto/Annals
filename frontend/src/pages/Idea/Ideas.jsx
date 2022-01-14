@@ -4,7 +4,11 @@ import { Tooltip } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 
-import { fetchIdeas, addIdea, deleteIdea } from "../../store/actions/ideas.action";
+import {
+  fetchIdeas,
+  addIdea,
+  deleteIdea,
+} from "../../store/actions/ideas.action";
 import DeleteConfirmModal from "../../components/DeleteConfirmModal";
 import { classNames } from "../../utils/helpers";
 import UpdateIdeaDrawer from "../../components/UpdateIdeaDrawer";
@@ -19,16 +23,16 @@ const Ideas = () => {
   const [isDeleteMode, setIsDeleteMode] = useState(false);
   const [selectedDeleteId, setSelectedDeleteId] = useState("");
 
-  const ideas = useSelector((state) => state.ideas);
+  const { docs, synced } = useSelector((state) => state.ideas);
   const { isLoading } = useSelector((state) => state.loader);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchIdeas());
+    if (!synced) dispatch(fetchIdeas());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
-  useEffect(() => {}, [ideas]);
+  useEffect(() => {}, [docs]);
 
   const clearFields = () => setIdea(initialState);
 
@@ -93,7 +97,7 @@ const Ideas = () => {
         </form>
       </div>
       <div className="card-columns columns-5-lg columns-4-md columns-3-sm mt-10">
-        {ideas?.map(({ color, title, content, id }, index) => (
+        {docs?.map(({ color, title, content, id }, index) => (
           <div
             key={index}
             className="bg-mildgray card card-content w-72 p-4 h-auto m-3 border-l-4 col-span-1 relative"

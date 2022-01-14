@@ -3,7 +3,9 @@ import { useSelector } from "react-redux";
 import Card from "./Card";
 
 const Cards = () => {
-  const { cards } = useSelector((state) => state.personal);
+  const {
+    docs: { cards },
+  } = useSelector((state) => state.personal);
 
   return (
     <div className="flex items-center gap-3 flex-wrap">

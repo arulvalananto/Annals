@@ -12,8 +12,7 @@ const PersonalTemplate = ({ title, value, name, Component }) => {
 
   const dispatch = useDispatch();
 
-  const personal = useSelector((state) => state.personal);
-  const data = personal[value];
+  const { synced } = useSelector((state) => state.personal);
 
   const [isDeleteMode, setIsDeleteMode] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -30,7 +29,7 @@ const PersonalTemplate = ({ title, value, name, Component }) => {
     dispatch(deletePersonalData(setIsLoading, pickedId, name, setPickedId));
   };
 
-  if (!data.length) {
+  if (!synced) {
     history.push("/personal");
   }
 

@@ -25,7 +25,7 @@ const routes = [
   },
   { path: "/personal/create", component: PersonalCreate },
   { path: "/personal/passwords", component: Passwords },
-  { path: "/personal/crypto-wallet", component: CryptoWallets },
+  { path: "/personal/cryptoWallets", component: CryptoWallets },
   { path: "/personal/cards", component: Cards },
   { path: "/personal", component: Personal },
   { path: "/ideas", component: Ideas },

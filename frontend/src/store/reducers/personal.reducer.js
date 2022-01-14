@@ -3,20 +3,26 @@ import { createSlice } from "@reduxjs/toolkit";
 const personalSlice = createSlice({
   name: "personal",
   initialState: {
-    passwords: [],
-    cards: [],
-    cryptoWallets: [],
+    docs: {
+      passwords: [],
+      cards: [],
+      cryptoWallets: [],
+    },
+    synced: false,
   },
   reducers: {
     FETCH_PERSONAL_DATA: (personal, action) => {
-      return action.payload;
+      return { ...personal, docs: action.payload, synced: true };
     },
     ADD_PERSONAL_DATA: (personal, action) => {
       const category = `${action.payload.category}s`;
 
       return {
         ...personal,
-        [category]: [...personal[category], action.payload],
+        docs: {
+          ...personal.docs,
+          [category]: [...personal[category], action.payload],
+        },
       };
     },
     DELETE_PERSONAL_DATA: (personal, action) => {
@@ -24,9 +30,12 @@ const personalSlice = createSlice({
 
       return {
         ...personal,
-        [category]: personal[category].filter(
-          (ele) => ele._id !== action.payload.id
-        ),
+        docs: {
+          ...personal.docs,
+          [category]: personal[category].filter(
+            (ele) => ele._id !== action.payload.id
+          ),
+        },
       };
     },
   },
