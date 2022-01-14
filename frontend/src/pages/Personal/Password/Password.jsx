@@ -3,7 +3,11 @@ import { HighlightOff, ContentPaste, Visibility } from "@mui/icons-material";
 
 import IconButton from "../../../components/IconButton";
 
-const Password = ({ password: { name, username, password }, index }) => {
+const Password = ({
+  password: { name, username, password, _id },
+  index,
+  handleDeleteMode,
+}) => {
   return (
     <div className="bg-bgdark flex items-center justify-between p-3 rounded mb-5">
       <p className="flex-1 text-center">{index + 1}</p>
@@ -25,7 +29,7 @@ const Password = ({ password: { name, username, password }, index }) => {
         <button type="button" onClick={() => console.log("clicked")}>
           <IconButton Icon={Visibility} color="moderate" />
         </button>
-        <button type="button" onClick={() => console.log("clicked")}>
+        <button type="button" onClick={() => handleDeleteMode(_id)}>
           <IconButton Icon={HighlightOff} color="danger" />
         </button>
       </p>

@@ -1,6 +1,7 @@
 import toast from "react-hot-toast";
 
 import axios from "../../api/axios";
+import { errResponse } from "../../utils/helpers";
 import { LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT } from "../reducers/auth.reducer";
 
 export const register =
@@ -14,8 +15,7 @@ export const register =
       toast.success("User registered");
       history.push("/sign-in");
     } catch (err) {
-      if (err.response) return toast.error(err.response.data.message);
-      toast.error(err.message);
+      errResponse(err);
     } finally {
       handleLoading(false);
     }
@@ -34,9 +34,7 @@ export const login =
 
       history.push("/");
     } catch (err) {
-      console.log(err.message);
-      if (err.response) return toast.error(err.response.data.message);
-      toast.error(err.message);
+      errResponse(err);
     } finally {
       handleLoading(false);
     }
@@ -52,8 +50,7 @@ export const getCurrentUser = (handleLoading) => async (dispatch) => {
     dispatch(LOGIN_FAIL());
     handleLoading(false);
 
-    if (err.response) return toast.error(err.response.data.message);
-    toast.error(err.message);
+    errResponse(err);
   }
 };
 
@@ -73,8 +70,7 @@ export const forgotPassword =
       toast.success(result.data.message);
       handleIsCodeSent();
     } catch (err) {
-      if (err.response) return toast.error(err.response.data.message);
-      toast.error(err.message);
+      errResponse(err);
     } finally {
       handleLoading(false);
     }
@@ -89,8 +85,7 @@ export const resetPassword =
 
       handleIsPasswordChanged();
     } catch (err) {
-      if (err.response) return toast.error(err.response.data.message);
-      toast.error(err.message);
+      errResponse(err);
     } finally {
       handleLoading(false);
     }

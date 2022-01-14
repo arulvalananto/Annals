@@ -1,6 +1,7 @@
 import toast from "react-hot-toast";
 
 import axios from "../../api/axios";
+import { errResponse } from "../../utils/helpers";
 import {
   ADDED_JOURNAL,
   FETCHED_JOURNALS,
@@ -15,8 +16,7 @@ export const fetchJournals = (handleLoading) => async (dispatch) => {
     const result = await axios.get("/journals/get");
     dispatch(FETCHED_JOURNALS(result.data.journals));
   } catch (err) {
-    if (err.response) return toast.error(err.response.data.message);
-    toast.error(err.message);
+    errResponse(err);
   } finally {
     handleLoading(false);
   }
@@ -33,8 +33,7 @@ export const addJournal = (content, history) => async (dispatch) => {
 
     history.push("/journals");
   } catch (err) {
-    if (err.response) return toast.error(err.response.data.message);
-    toast.error(err.message);
+    errResponse(err);
   } finally {
     dispatch(clearLoading(false));
   }
@@ -50,8 +49,8 @@ export const updateJournal = (content, id, history) => async (dispatch) => {
     toast.success("Journal updated");
     history.push("/journals");
   } catch (err) {
-    if (err.response) return toast.error(err.response.data.message);
-    toast.error(err.message);
+    errResponse(err);
+
     dispatch(clearLoading(false));
   } finally {
     dispatch(clearLoading(false));

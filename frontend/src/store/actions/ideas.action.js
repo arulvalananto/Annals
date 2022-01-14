@@ -1,5 +1,3 @@
-import toast from "react-hot-toast";
-
 import { clearLoading, setLoading } from "./loader.actions";
 import axios from "../../api/axios";
 import {
@@ -8,6 +6,7 @@ import {
   DELETE_IDEA,
   UPDATE_IDEA,
 } from "../reducers/ideas.reducer";
+import { errResponse } from "../../utils/helpers";
 
 export const fetchIdeas = () => async (dispatch) => {
   try {
@@ -16,8 +15,7 @@ export const fetchIdeas = () => async (dispatch) => {
     const result = await axios.get("/ideas/get");
     dispatch(FETCH_IDEAS(result.data.ideas));
   } catch (err) {
-    if (err.response) return toast.error(err.response.data.message);
-    toast.error(err.message);
+    errResponse(err);
   } finally {
     dispatch(clearLoading());
   }
@@ -31,8 +29,7 @@ export const addIdea = (idea, clearFields) => async (dispatch) => {
 
     clearFields();
   } catch (err) {
-    if (err.response) return toast.error(err.response.data.message);
-    toast.error(err.message);
+    errResponse(err);
   } finally {
     dispatch(clearLoading());
   }
@@ -45,8 +42,7 @@ export const updateIdea = (id, values) => async (dispatch) => {
     console.log(response);
     dispatch(UPDATE_IDEA({ id, values }));
   } catch (err) {
-    if (err.response) return toast.error(err.response.data.message);
-    toast.error(err.message);
+    errResponse(err);
   } finally {
     dispatch(clearLoading());
   }
@@ -58,8 +54,7 @@ export const deleteIdea = (id) => async (dispatch) => {
     await axios.delete(`/ideas/delete/${id}`);
     dispatch(DELETE_IDEA(id));
   } catch (err) {
-    if (err.response) return toast.error(err.response.data.message);
-    toast.error(err.message);
+    errResponse(err);
   } finally {
     dispatch(clearLoading());
   }

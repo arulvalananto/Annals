@@ -54,6 +54,13 @@ const passwordInputs = [
 
 const cryptoWalletInputs = [
   {
+    label: "Name",
+    type: "text",
+    placeholder: "Enter wallet name",
+    name: "name",
+    required: true,
+  },
+  {
     label: "Public Address",
     type: "text",
     placeholder: "Enter public address",

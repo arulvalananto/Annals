@@ -1,9 +1,11 @@
 import toast from "react-hot-toast";
 
 import axios from "../../api/axios";
+import { errResponse } from "../../utils/helpers";
 import {
   FETCH_PERSONAL_DATA,
   ADD_PERSONAL_DATA,
+  DELETE_PERSONAL_DATA,
 } from "../reducers/personal.reducer";
 
 export const fetchPersonalData = (handleLoading) => async (dispatch) => {
@@ -11,8 +13,7 @@ export const fetchPersonalData = (handleLoading) => async (dispatch) => {
     const response = await axios.get("/personal");
     dispatch(FETCH_PERSONAL_DATA(response.data));
   } catch (err) {
-    if (err.response) return toast.error(err.response.data.message);
-    toast.error(err.message);
+    errResponse(err);
   } finally {
     handleLoading(false);
   }
@@ -30,8 +31,26 @@ export const createPersonalData =
         history.push("/personal");
       }
     } catch (err) {
-      if (err.response) return toast.error(err.response.data.message);
-      toast.error(err.message);
+      errResponse(err);
+    } finally {
+      loading(false);
+    }
+  };
+
+export const deletePersonalData =
+  (loading, id, category, pickedId) => async (dispatch) => {
+    try {
+      loading(true);
+
+      const response = await axios.delete(`/personal/${id}/${category}`);
+      if (response.status === 200) {
+        dispatch(DELETE_PERSONAL_DATA({ id, category }));
+
+        toast.success(`${category} deleted`);
+        pickedId("");
+      }
+    } catch (err) {
+      errResponse(err);
     } finally {
       loading(false);
     }

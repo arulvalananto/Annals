@@ -9,27 +9,11 @@ const Personal = React.lazy(() => import("../pages/Personal/Personal"));
 const PersonalCreate = React.lazy(() =>
   import("../pages/Personal/PersonalCreate")
 );
-const Passwords = React.lazy(() =>
-  import("../pages/Personal/Password/Passwords")
-);
-const CryptoWallets = React.lazy(() =>
-  import("../pages/Personal/Wallet/CryptoWallets")
-);
-const Cards = React.lazy(() => import("../pages/Personal/Card/Cards"));
+const Passwords = React.lazy(() => import("../pages/Personal/Password"));
+const CryptoWallets = React.lazy(() => import("../pages/Personal/Wallet"));
+const Cards = React.lazy(() => import("../pages/Personal/Card"));
 const Ideas = React.lazy(() => import("../pages/Idea/Ideas"));
 const Tasks = React.lazy(() => import("../pages/Task/Tasks"));
-
-// import Journals from "../pages/Journals";
-// import Personal from "../pages/Personal";
-// import Ideas from "../pages/Ideas";
-// import Tasks from "../pages/Tasks";
-// import JournalsAdd from "../pages/JournalsAdd";
-// import JournalEdit from "../pages/JournalEdit";
-// import JournalView from "../pages/JournalView";
-// import Cards from "../pages/Cards";
-// import Passwords from "../pages/Passwords";
-// import CryptoWallets from "../pages/CryptoWallets";
-// import PersonalCreate from "../pages/PersonalCreate";
 
 const routes = [
   { path: "/journals/view/:id", component: JournalView },
