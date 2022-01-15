@@ -20,8 +20,10 @@ const Passwords = ({ handleDeleteMode }) => {
   return (
     <>
       <div className="bg-mildgray flex items-center justify-between p-3 rounded-sm mb-5">
-        {headers.map((header) => (
-          <p className="flex-1 text-center">{header}</p>
+        {headers.map((header, index) => (
+          <p className="flex-1 text-center" key={index}>
+            {header}
+          </p>
         ))}
       </div>
       {passwords.map((password, index) => (

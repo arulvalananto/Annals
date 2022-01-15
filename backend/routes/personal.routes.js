@@ -14,7 +14,7 @@ router.use(isAuthenticated);
 
 router.get("/", getAllPersonal);
 router.post("/create", addPersonal);
-router.patch("/:id", updatePersonal);
+router.patch("/:id/:category", updatePersonal);
 router.delete("/:id/:category", deletePersonal);
 
 module.exports = router;

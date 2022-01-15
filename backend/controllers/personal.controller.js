@@ -11,6 +11,10 @@ const _creation = async (Model, req) => {
   });
 };
 
+const _updatable = async (Model, id, body) => {
+  await Model.findByIdAndUpdate(id, body);
+};
+
 const _deletion = async (Model, req, res, next) => {
   const { id } = req.params;
 
@@ -19,7 +23,7 @@ const _deletion = async (Model, req, res, next) => {
 
   await Model.deleteOne({ _id: id });
 
-  res.status(200).json({ message: "Idea Deleted" });
+  res.status(200).json({ message: "Data Deleted" });
 };
 
 exports.addPersonal = catchAsync(async (req, res, next) => {
@@ -57,7 +61,29 @@ exports.getAllPersonal = catchAsync(async (req, res, next) => {
   res.status(200).json({ passwords, cards, cryptoWallets });
 });
 
-exports.updatePersonal = catchAsync(async (req, res, next) => {});
+exports.updatePersonal = catchAsync(async (req, res, next) => {
+  const { category, id } = req.params;
+
+  if (!category) {
+    return next(new AppError("Category is not defined", 400));
+  }
+
+  switch (category.toLowerCase()) {
+    case "password":
+      await _updatable(Password, id, req.body);
+      break;
+    case "cryptowallet":
+      await _updatable(CryptoWallet, id, req.body);
+      break;
+    case "card":
+      await _updatable(Card, id, req.body);
+      break;
+    default:
+      return next(new AppError("Invalid category", 400));
+  }
+
+  res.status(200).json({ message: "Data Updated" });
+});
 
 exports.deletePersonal = catchAsync(async (req, res, next) => {
   const { category } = req.params;
