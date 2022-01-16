@@ -3,7 +3,7 @@ const catchAsync = require("../utils/catchAsync");
 const Password = require("../models/password.model");
 const CryptoWallet = require("../models/CryptoWallet.model");
 const Card = require("../models/Card.model");
-const { decrypt } = require("../utils/encrypt-decrypt");
+const { decrypt, encrypt } = require("../utils/encrypt-decrypt");
 
 const _creation = async (Model, req) => {
   return await Model.create({
@@ -12,15 +12,20 @@ const _creation = async (Model, req) => {
   });
 };
 
-const _updatable = async (Model, id, body) => {
+const _updatable = async (Model, id, req, res, next, body) => {
+  const isValidUser = await Model.findOne({ _id: id, createdBy: req.userId });
+  if (!isValidUser) return next(new AppError("No data found", 401));
+
   await Model.findByIdAndUpdate(id, body);
+
+  res.status(200).json({ message: "Data Updated" });
 };
 
 const _deletion = async (Model, req, res, next) => {
   const { id } = req.params;
 
-  const data = await Model.findById(id);
-  if (!data) return next(new AppError("Data not found"));
+  const data = await Model.findOne({ _id: id, createdBy: req.userId });
+  if (!data) return next(new AppError("No data found"));
 
   await Model.deleteOne({ _id: id });
 
@@ -62,7 +67,7 @@ exports.getAllPersonal = catchAsync(async (req, res, next) => {
   const updatedPasswords = passwords.map((pass) => {
     pass.name = decrypt(pass.name);
     pass.password = decrypt(pass.password);
-    pass.username = decrypt(pass.username);
+    if (pass.username) pass.username = decrypt(pass.username);
     pass.url = decrypt(pass.url);
 
     return pass;
@@ -90,9 +95,6 @@ exports.getAllPersonal = catchAsync(async (req, res, next) => {
     passwords: updatedPasswords,
     cards: updatedCards,
     cryptoWallets: updatedWallets,
-    // passwords,
-    // cards,
-    // wallets,
   });
 });
 
@@ -105,19 +107,41 @@ exports.updatePersonal = catchAsync(async (req, res, next) => {
 
   switch (category.toLowerCase()) {
     case "password":
-      await _updatable(Password, id, req.body);
+      const { password, name, username, url } = req.body;
+
+      await _updatable(Password, id, req, res, next, {
+        ...req.body,
+        password: password && encrypt(password),
+        name: name && encrypt(name),
+        username: username && encrypt(username),
+        url: url && encrypt(url),
+      });
       break;
     case "cryptowallet":
-      await _updatable(CryptoWallet, id, req.body);
+      const { privateAddress, publicAddress, passPhrase } = req.body;
+
+      await _updatable(CryptoWallet, id, req, res, next, {
+        ...req.body,
+        privateAddress: privateAddress && encrypt(privateAddress),
+        publicAddress: publicAddress && encrypt(publicAddress),
+        passPhrase: passPhrase && encrypt(passPhrase),
+      });
       break;
     case "card":
-      await _updatable(Card, id, req.body);
+      const { bankName, providerName, accountHolderName, cardNumber } =
+        req.body;
+
+      await _updatable(Card, id, req, res, next, {
+        ...req.body,
+        bankName: bankName && encrypt(bankName),
+        providerName: providerName && encrypt(providerName),
+        accountHolderName: accountHolderName && encrypt(accountHolderName),
+        cardNumber: cardNumber && encrypt(cardNumber),
+      });
       break;
     default:
       return next(new AppError("Invalid category", 400));
   }
-
-  res.status(200).json({ message: "Data Updated" });
 });
 
 exports.deletePersonal = catchAsync(async (req, res, next) => {
