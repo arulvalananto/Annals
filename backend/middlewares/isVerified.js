@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/AppError");
+const User = require("../models/User.model");
 
 module.exports = catchAsync(async (req, res, next) => {
   let token;
