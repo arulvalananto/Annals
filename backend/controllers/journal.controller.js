@@ -11,7 +11,7 @@ exports.getJournals = catchAsync(async (req, res, next) => {
 exports.addJournal = catchAsync(async (req, res, next) => {
   const { content, location } = req.body;
 
-  var date = new Date(Date.now()).toDateString();
+  const date = new Date(Date.now()).toDateString();
 
   const journal = await Journal.create({
     date,

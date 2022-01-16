@@ -47,6 +47,18 @@ const userSchema = mongoose.Schema(
     resetPasswordCodeFailure: { type: Number, default: 0, select: false },
     passwordLastChangedAt: { type: Date, select: false, default: Date.now() },
     lastLoginAt: { type: Date, select: false, default: Date.now() },
+    loginLogs: {
+      type: [
+        {
+          date: {
+            type: Date,
+            required: true,
+          },
+          times: { type: Number, default: 0 },
+        },
+      ],
+      select: false,
+    },
   },
   {
     toObject: {

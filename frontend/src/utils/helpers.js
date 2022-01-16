@@ -13,7 +13,7 @@ export const errResponse = (err) => {
   toast.error(err.message);
 };
 export const greet = () => {
-  var currentHour = moment().format("HH");
+  const currentHour = moment().format("HH");
 
   if (currentHour >= 3 && currentHour < 12) {
     return "morning";
@@ -21,7 +21,7 @@ export const greet = () => {
     return "afternoon";
   } else if (currentHour >= 15 && currentHour < 20) {
     return "evening";
-  } else if (currentHour >= 20 && currentHour < 3) {
+  } else if (currentHour >= 20 || currentHour < 3) {
     return "night";
   }
 };
