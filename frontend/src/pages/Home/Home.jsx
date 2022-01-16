@@ -1,5 +1,6 @@
-import React, { useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { Tooltip } from "@mui/material";
 import {
   Add,
@@ -15,8 +16,8 @@ import {
 
 import { greet } from "../../utils/helpers";
 import IconButton from "../../components/IconButton";
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
+
+import { fetchDashboardData } from "../../store/actions/common.actions";
 
 const links = [
   {
@@ -38,13 +39,18 @@ const links = [
 
 const Home = () => {
   const { user } = useSelector((state) => state.auth);
+  const { synced, docs } = useSelector((state) => state.common);
 
-  const [isFocusMode, setIsFocusMode] = useState(true);
-  const [focus, setFocus] = useState("");
-  const focusRef = useRef();
+  const dispatch = useDispatch();
+
+  const [isFocusMode, setIsFocusMode] = useState(false);
+  const [initialLoading, setInitialLoading] = useState(true);
+  const [focus, setFocus] = useState(docs?.focus);
 
   useEffect(() => {
-    focusRef.current.focus();
+    if (!synced) dispatch(fetchDashboardData(setInitialLoading, setFocus));
+    else setInitialLoading(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleFocusMode = (val) => setIsFocusMode(val);
@@ -57,6 +63,8 @@ const Home = () => {
   const handleChangeFocus = () => {
     handleFocusMode(false);
   };
+
+  if (initialLoading) return null;
 
   return (
     <div>
@@ -74,17 +82,17 @@ const Home = () => {
         <div className="p-5 xl:w-56 w-full h-32 bg-primary text-white rounded select-none col-span-1">
           <Beenhere />
           <h1 className="capitalize mt-2 text-sm">No of Days used</h1>
-          <p className="text-2xl mt-1">8</p>
+          <p className="text-2xl mt-1">{docs.days}</p>
         </div>
         <div className="p-5 xl:w-56 w-full h-32 bg-secondary text-white rounded select-none col-span-1">
           <MenuBook />
           <h1 className="capitalize mt-2 text-sm">No of journals written</h1>
-          <p className="text-2xl mt-1">24</p>
+          <p className="text-2xl mt-1">{docs.journals}</p>
         </div>
         <div className="p-5 xl:w-56 w-full h-32 bg-tertiary text-black rounded select-none col-span-1">
           <Assignment />
           <h1 className="capitalize mt-2 text-sm">Pending Tasks</h1>
-          <p className="text-2xl mt-1">89</p>
+          <p className="text-2xl mt-1">{docs.tasks}</p>
         </div>
         <div className="p-5 xl:w-56 w-full h-32 bg-moderate text-black rounded col-span-1">
           <h1 className="capitalize text-lg flex items-center gap-3 select-none">
@@ -112,7 +120,6 @@ const Home = () => {
             )}
           </h1>
           <textarea
-            ref={focusRef}
             className="text-sm mt-1 overflow-scroll h-16 cursor-pointer bg-transparent w-full select-none p-1 placeholder-black border-none border-2 focus:border-black outline-none"
             value={focus}
             placeholder="-"

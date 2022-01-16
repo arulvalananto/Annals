@@ -5,6 +5,7 @@ import loaderReducer from "./loader.reducer";
 import journalsReducer from "./journals.reducer";
 import ideasReducer from "./ideas.reducer";
 import personalReducer from "./personal.reducer";
+import commonReducer from "./common.reducer";
 
 export default combineReducers({
   loader: loaderReducer,
@@ -12,4 +13,5 @@ export default combineReducers({
   journals: journalsReducer,
   ideas: ideasReducer,
   personal: personalReducer,
+  common: commonReducer,
 });

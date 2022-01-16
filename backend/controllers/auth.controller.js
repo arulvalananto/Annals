@@ -50,7 +50,20 @@ exports.login = catchAsync(async (req, res, next) => {
 });
 
 exports.getCurrentUser = catchAsync(async (req, res, next) => {
-  const user = await User.findById(req.userId).lean();
+  const today = moment().startOf("day");
+  const condition = (val) =>
+    new Date(val).toDateString() === new Date(Date.now()).toDateString();
+
+  const user = await User.findById(req.userId).select("+loginLogs");
+
+  const hasLog = user.loginLogs.find((log) => condition(log.date));
+
+  if (!hasLog) {
+    user.loginLogs.push({
+      date: today.toDate(),
+    });
+  }
+  await user.save();
 
   res.status(200).json({ user });
 });

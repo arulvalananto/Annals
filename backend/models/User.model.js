@@ -52,9 +52,9 @@ const userSchema = mongoose.Schema(
         {
           date: {
             type: Date,
+            unique: true,
             required: true,
           },
-          times: { type: Number, default: 0 },
         },
       ],
       select: false,
