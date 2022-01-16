@@ -10,7 +10,9 @@ const instance = axios.create({
 
 instance.interceptors.request.use(function (config) {
   const token = localStorage.getItem("token");
+  const secret = sessionStorage.getItem("verified");
   config.headers.Authorization = token ? `Bearer ${token}` : "";
+  config.headers["x-auth-secret"] = secret ? `Bearer ${secret}` : "";
   return config;
 });
 

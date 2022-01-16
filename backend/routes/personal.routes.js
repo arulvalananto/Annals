@@ -7,10 +7,12 @@ const {
   updatePersonal,
 } = require("../controllers/personal.controller");
 const isAuthenticated = require("../middlewares/isAuthenticated");
+const isVerified = require("../middlewares/isVerified");
 
 const router = express.Router();
 
 router.use(isAuthenticated);
+router.use(isVerified);
 
 router.get("/", getAllPersonal);
 router.post("/create", addPersonal);

@@ -20,7 +20,7 @@ app.use(
   cors({
     origin: ["http://localhost:3000", "https://annals.web.app"],
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["authorization", "content-type"],
+    allowedHeaders: ["authorization", "content-type", "x-auth-secret"],
     credentials: true,
   })
 );

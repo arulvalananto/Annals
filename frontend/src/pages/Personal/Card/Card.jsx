@@ -15,7 +15,10 @@ const Card = ({
       <div className="w-12 h-9 absolute top-9 left-2 text-white">
         <Chip className="text-white" />
       </div>
-      <p className="absolute bottom-10 left-2">{cardNumber}</p>
+      <p className="absolute bottom-10 left-2">
+        {cardNumber.slice(0, 4)} {cardNumber.slice(4, 8)}{" "}
+        {cardNumber.slice(8, 12)} {cardNumber.slice(12, 16)}
+      </p>
       <p className="absolute bottom-10 right-2">
         {moment(expiry).format("M")} / {moment(expiry).format("YY")}
       </p>

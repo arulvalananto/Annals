@@ -8,17 +8,18 @@ const passwordValidationSchema = yup.object().shape({
 });
 
 const cryptoWalletValidationSchema = yup.object().shape({
+  name: yup.string().max(256).required(),
   publicAddress: yup.string().max(256).required(),
   privateAddress: yup.string().max(256),
   passPhrase: yup.string().max(256),
 });
 
 const cardValidationSchema = yup.object().shape({
-  bankName: "",
-  providerName: "",
-  cardNumber: "",
-  accountHolderName: "",
-  expiry: "",
+  bankName: yup.string().max(256).required(),
+  providerName: yup.string().max(10).required(),
+  cardNumber: yup.string().max(16).required(),
+  accountHolderName: yup.string().max(20).required(),
+  expiry: yup.date().required(),
 });
 
 const passwordInputs = [
@@ -94,6 +95,7 @@ const cardInputs = [
     type: "text",
     placeholder: "Enter provider name",
     name: "providerName",
+    required: true,
   },
   {
     label: "Card Number",
