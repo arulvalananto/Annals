@@ -1,63 +1,137 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { Assignment, Beenhere, GpsFixed, MenuBook } from "@mui/icons-material";
+import { Tooltip } from "@mui/material";
+import {
+  Add,
+  Assignment,
+  Beenhere,
+  Clear,
+  Done,
+  GpsFixed,
+  MenuBook,
+  History,
+  Notifications,
+} from "@mui/icons-material";
 
 import { greet } from "../../utils/helpers";
-import { useState } from "react";
-import { Tooltip } from "@mui/material";
+import IconButton from "../../components/IconButton";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+
+const links = [
+  {
+    Icon: Add,
+    to: "/journals/add",
+    content: "create new journal",
+  },
+  {
+    Icon: Add,
+    to: "/personal/create",
+    content: "create new personal info",
+  },
+  {
+    Icon: History,
+    to: "/focus/log",
+    content: "History of focus",
+  },
+];
 
 const Home = () => {
   const { user } = useSelector((state) => state.auth);
 
-  const [isFocusMode, setIsFocusMode] = useState(false);
-  const [focus, setFocus] = useState(
-    "Built and implement meeting required for people"
-  );
+  const [isFocusMode, setIsFocusMode] = useState(true);
+  const [focus, setFocus] = useState("");
+  const focusRef = useRef();
 
-  const handleChangeFocus = (e) => setFocus(e.target.value);
+  useEffect(() => {
+    focusRef.current.focus();
+  }, []);
+
+  const handleFocusMode = (val) => setIsFocusMode(val);
+
+  const clearChangeFocus = () => {
+    setFocus("");
+    handleFocusMode(false);
+  };
+
+  const handleChangeFocus = () => {
+    handleFocusMode(false);
+  };
 
   return (
     <div>
-      <div className="h-40 bg-mildgray w-full px-10 py-8">
-        <div>
-          <h1 className="text-xl">
-            Good {greet()}, {user.fullName}
+      <div className="h-40 xl:bg-mildgray bg-transparent w-full p-4 sm:px-10 sm:py-8">
+        <div className="flex items-center justify-between">
+          <h1 className="sm:text-xl">
+            Good {greet()}, {user.fullName.split(" ")[0]}
           </h1>
+          <p className="p-2 rounded-full bg-black flex items-center justify-center cursor-pointer">
+            <Notifications fontSize="0.8rem" />
+          </p>
         </div>
       </div>
-      <div className="flex items-center justify-between py-3 px-6 transform -translate-y-16">
-        <div className="p-5 w-56 h-32 bg-primary text-white rounded select-none">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-2 place-items-center transform -translate-y-16 p-4">
+        <div className="p-5 xl:w-56 w-full h-32 bg-primary text-white rounded select-none col-span-1">
           <Beenhere />
           <h1 className="capitalize mt-2 text-sm">No of Days used</h1>
           <p className="text-2xl mt-1">8</p>
         </div>
-        <div className="p-5 w-56 h-32 bg-secondary text-white rounded select-none">
+        <div className="p-5 xl:w-56 w-full h-32 bg-secondary text-white rounded select-none col-span-1">
           <MenuBook />
           <h1 className="capitalize mt-2 text-sm">No of journals written</h1>
           <p className="text-2xl mt-1">24</p>
         </div>
-        <div className="p-5 w-56 h-32 bg-tertiary text-black rounded select-none">
+        <div className="p-5 xl:w-56 w-full h-32 bg-tertiary text-black rounded select-none col-span-1">
           <Assignment />
           <h1 className="capitalize mt-2 text-sm">Pending Tasks</h1>
           <p className="text-2xl mt-1">89</p>
         </div>
-        <div className="p-5 w-56 h-32 bg-moderate text-black rounded">
-          <h1 className="capitalize text-lg flex items-center gap-3">
+        <div className="p-5 xl:w-56 w-full h-32 bg-moderate text-black rounded col-span-1">
+          <h1 className="capitalize text-lg flex items-center gap-3 select-none">
             Today's Focus{" "}
-            <Tooltip title="Change Focus" placement="top">
-              <GpsFixed
-                onClick={() => setIsFocusMode(!isFocusMode)}
-                className="cursor-pointer"
-              />
-            </Tooltip>
+            {!isFocusMode ? (
+              <Tooltip title="Change Focus" placement="top">
+                <GpsFixed
+                  onClick={() => handleFocusMode(true)}
+                  className="cursor-pointer"
+                />
+              </Tooltip>
+            ) : (
+              <div className="flex items-center gap-2">
+                <Tooltip title="clear focus" placement="top">
+                  <p onClick={clearChangeFocus}>
+                    <IconButton Icon={Clear} fontSize="0.8rem" />
+                  </p>
+                </Tooltip>
+                <Tooltip title="set focus" placement="top">
+                  <p onClick={handleChangeFocus}>
+                    <IconButton Icon={Done} fontSize="0.8rem" />
+                  </p>
+                </Tooltip>
+              </div>
+            )}
           </h1>
           <textarea
-            className="text-sm mt-1 overflow-scroll h-16 cursor-pointer bg-transparent w-full select-none"
+            ref={focusRef}
+            className="text-sm mt-1 overflow-scroll h-16 cursor-pointer bg-transparent w-full select-none p-1 placeholder-black border-none border-2 focus:border-black outline-none"
             value={focus}
-            onChange={handleChangeFocus}
+            placeholder="-"
+            onChange={(e) => setFocus(e.target.value)}
             disabled={!isFocusMode}
           />
         </div>
+      </div>
+
+      <div className="px-5 flex flex-col gap-3 mb-4">
+        {links.map(({ to, content, Icon }) => (
+          <Link
+            to={to}
+            className="flex items-center p-3 rounded bg-mildgray gap-3"
+          >
+            <Icon />
+            <span>{content}</span>
+          </Link>
+        ))}
       </div>
     </div>
   );
