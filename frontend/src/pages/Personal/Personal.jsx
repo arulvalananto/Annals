@@ -43,7 +43,7 @@ const Personal = () => {
   }, []);
 
   return (
-    <div className="p-5">
+    <div className="p-5 mt-5">
       <div className="flex items-center justify-between">
         <div className="bg-bglight px-4 py-2 flex items-center w-full sm:w-96 rounded">
           <Search />

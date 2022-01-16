@@ -9,7 +9,7 @@ const TopBar = () => {
       <img
         src={logo}
         alt="Annals Logo"
-        className="w-24 h-20 object-contain select-none"
+        className="w-24 h-20 object-contain select-none block xl:hidden"
       />
       <div className="shadow rounded block xl:hidden p-2 border-gray">
         <DashboardDrawer />

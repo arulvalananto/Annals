@@ -29,12 +29,12 @@ const Journals = () => {
   }, []);
 
   return (
-    <>
+    <div className="mt-5">
       <Tooltip title="Add" placement="top">
         <Link to="/journals/add">
-          <button className="bg-secondary p-3 rounded-3xl fixed bottom-4 sm:bottom-10 right-4 sm:right-10 z-30 block sm:hidden">
+          <div className="bg-secondary p-3 rounded-3xl fixed bottom-4 sm:bottom-10 right-4 sm:right-10 z-30 block sm:hidden">
             <Add className="transition duration-700 transform hover:scale-110" />
-          </button>
+          </div>
         </Link>
       </Tooltip>
       <div className="text-center w-full h-24 flex items-center justify-center">
@@ -97,7 +97,7 @@ const Journals = () => {
           </p>
         )}
       </div>
-    </>
+    </div>
   );
 };
 

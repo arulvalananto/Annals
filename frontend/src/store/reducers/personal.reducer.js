@@ -21,7 +21,7 @@ const personalSlice = createSlice({
         ...personal,
         docs: {
           ...personal.docs,
-          [category]: [...personal[category], action.payload],
+          [category]: [...personal.docs[category], action.payload],
         },
       };
     },
@@ -32,7 +32,7 @@ const personalSlice = createSlice({
         ...personal,
         docs: {
           ...personal.docs,
-          [category]: personal[category].filter(
+          [category]: personal.docs[category].filter(
             (ele) => ele._id !== action.payload.id
           ),
         },
