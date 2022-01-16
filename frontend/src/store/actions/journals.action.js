@@ -27,10 +27,9 @@ export const addJournal = (content, history) => async (dispatch) => {
     dispatch(setLoading(true));
 
     const result = await axios.post("/journals/add", { content });
-    dispatch(ADDED_JOURNAL(result.data.journals));
+    dispatch(ADDED_JOURNAL(result.data.journal));
 
     toast.success("Journal added");
-
     history.push("/journals");
   } catch (err) {
     errResponse(err);
@@ -43,8 +42,8 @@ export const updateJournal = (content, id, history) => async (dispatch) => {
   try {
     dispatch(setLoading(true));
 
-    const result = await axios.patch(`/journals/update/${id}`, { content });
-    dispatch(UPDATED_JOURNAL({ id, values: result.data.journals }));
+    await axios.patch(`/journals/update/${id}`, { content });
+    dispatch(UPDATED_JOURNAL({ id, content }));
 
     toast.success("Journal updated");
     history.push("/journals");

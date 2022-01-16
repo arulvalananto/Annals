@@ -226,7 +226,7 @@
     -webkit-animation: load1 1s infinite ease-in-out;
     animation: load1 1s infinite ease-in-out;
     width: 0.5em;
-    height: 2em;
+    height: 1em;
   }
   .loader {
     color: #fafafa;
@@ -259,11 +259,11 @@
     80%,
     100% {
       box-shadow: 0 0;
-      height: 2em;
+      height: 1em;
     }
     40% {
       box-shadow: 0 -2em;
-      height: 3em;
+      height: 2em;
     }
   }
   @keyframes load1 {
@@ -271,11 +271,11 @@
     80%,
     100% {
       box-shadow: 0 0;
-      height: 2em;
+      height: 1em;
     }
     40% {
       box-shadow: 0 -2em;
-      height: 3em;
+      height: 2em;
     }
   }
   #notfound {

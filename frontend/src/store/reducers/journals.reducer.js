@@ -11,13 +11,14 @@ const journalSlice = createSlice({
       return { ...journals, docs: action.payload, synced: true };
     },
     ADDED_JOURNAL: (journals, action) => {
+      console.log(action);
       return { ...journals, docs: [...journals.docs, action.payload] };
     },
     UPDATED_JOURNAL: (journals, action) => {
+      const { id, content } = action.payload;
+
       const updatedJournal = journals.docs.map((journal) =>
-        journal === action.payload.id
-          ? { ...journal, ...action.payload.values }
-          : journal
+        journal.id === id ? { ...journal, content } : journal
       );
       return { ...journals, docs: updatedJournal };
     },

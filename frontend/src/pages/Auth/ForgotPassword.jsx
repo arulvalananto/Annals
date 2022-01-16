@@ -97,7 +97,7 @@ const ForgotPassword = () => {
                 "Your token only valid for 10 minutes"
               ) : (
                 <>
-                  <span>Want to go Back?</span>
+                  <span>Want to go back?</span>
                   <Link to="/sign-in" className="text-secondary text-lg ml-1">
                     Login
                   </Link>{" "}

@@ -1,11 +1,11 @@
 import React from "react";
 
-const IconButton = ({ Icon, color = "white" }) => {
+const IconButton = ({ Icon, color = "white", fontSize = "0.8rem" }) => {
   return (
     <div
       className={`transform hover:scale-110 hover:text-${color} cursor-pointer`}
     >
-      <Icon fontSize="0.8rem" />
+      <Icon fontSize={fontSize} />
     </div>
   );
 };
