@@ -24,6 +24,7 @@ exports.getDashboardContent = catchAsync(async (req, res, next) => {
   res.status(200).json({
     days: user.loginLogs.length,
     journals: journals.length,
-    focus: focus.agenda.length ? focus.agenda[focus.agenda.length - 1] : "",
+    focus:
+      focus && focus.agenda.length ? focus.agenda[focus.agenda.length - 1] : "",
   });
 });

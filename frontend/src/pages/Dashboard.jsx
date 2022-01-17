@@ -37,11 +37,11 @@ const Dashboard = () => {
           <TopBar />
           <Suspense fallback={<Loader />}>
             <Switch>
-              {routes.map(({ path, component, exact }) => (
+              {routes.map(({ path, component, exact }, index) => (
                 <Route
                   path={path}
                   component={component}
-                  key={path}
+                  key={index}
                   exact={exact}
                 />
               ))}

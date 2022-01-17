@@ -17,7 +17,10 @@ import {
 import { greet } from "../../utils/helpers";
 import IconButton from "../../components/IconButton";
 
-import { fetchDashboardData } from "../../store/actions/common.actions";
+import {
+  changeFocus,
+  fetchDashboardData,
+} from "../../store/actions/common.actions";
 
 const links = [
   {
@@ -45,10 +48,16 @@ const Home = () => {
 
   const [isFocusMode, setIsFocusMode] = useState(false);
   const [initialLoading, setInitialLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+
   const [focus, setFocus] = useState(docs?.focus);
+  const [initialState, setInitialState] = useState(docs?.focus);
 
   useEffect(() => {
-    if (!synced) dispatch(fetchDashboardData(setInitialLoading, setFocus));
+    if (!synced)
+      dispatch(
+        fetchDashboardData(setInitialLoading, setFocus, setInitialState)
+      );
     else setInitialLoading(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -56,12 +65,13 @@ const Home = () => {
   const handleFocusMode = (val) => setIsFocusMode(val);
 
   const clearChangeFocus = () => {
-    setFocus("");
+    setFocus(initialState);
     handleFocusMode(false);
   };
 
   const handleChangeFocus = () => {
     handleFocusMode(false);
+    dispatch(changeFocus(focus, setIsLoading, setInitialState));
   };
 
   if (initialLoading) return null;
@@ -100,7 +110,9 @@ const Home = () => {
             {!isFocusMode ? (
               <Tooltip title="Change Focus" placement="top">
                 <GpsFixed
-                  onClick={() => handleFocusMode(true)}
+                  onClick={() => {
+                    !isLoading && handleFocusMode(true);
+                  }}
                   className="cursor-pointer"
                 />
               </Tooltip>

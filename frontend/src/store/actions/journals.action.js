@@ -7,6 +7,7 @@ import {
   FETCHED_JOURNALS,
   UPDATED_JOURNAL,
 } from "../reducers/journals.reducer";
+import { UPDATE_JOURNAL_COUNT } from "../reducers/common.reducer";
 import { setLoading, clearLoading } from "./loader.actions";
 
 export const fetchJournals = (handleLoading) => async (dispatch) => {
@@ -28,6 +29,7 @@ export const addJournal = (content, history) => async (dispatch) => {
 
     const result = await axios.post("/journals/add", { content });
     dispatch(ADDED_JOURNAL(result.data.journal));
+    dispatch(UPDATE_JOURNAL_COUNT());
 
     toast.success("Journal added");
     history.push("/journals");

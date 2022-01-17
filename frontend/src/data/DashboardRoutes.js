@@ -1,6 +1,7 @@
 import React from "react";
 
 import Home from "../pages/Home/Home";
+const FocusHistory = React.lazy(() => import("../pages/Focus/FocusHistory"));
 const Journals = React.lazy(() => import("../pages/Journals/Journals"));
 const JournalAdd = React.lazy(() => import("../pages/Journals/JournalAdd"));
 const JournalEdit = React.lazy(() => import("../pages/Journals/JournalEdit"));
@@ -16,6 +17,7 @@ const Ideas = React.lazy(() => import("../pages/Idea/Ideas"));
 const Tasks = React.lazy(() => import("../pages/Task/Tasks"));
 
 const routes = [
+  { path: "/focus/log", component: FocusHistory },
   { path: "/journals/view/:id", component: JournalView },
   { path: "/journals/edit/:id", component: JournalEdit },
   { path: "/journals/add", component: JournalAdd },
