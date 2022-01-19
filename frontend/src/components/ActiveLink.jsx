@@ -22,4 +22,4 @@ const ActiveLink = ({ title, to, Icon }) => {
   );
 };
 
-export default ActiveLink;
+export default React.memo(ActiveLink);

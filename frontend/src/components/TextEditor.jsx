@@ -67,4 +67,4 @@ const TextEditor = ({ mode = "", contentText = "", id = "" }) => {
   );
 };
 
-export default TextEditor;
+export default React.memo(TextEditor);

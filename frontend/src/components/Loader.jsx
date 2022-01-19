@@ -4,4 +4,4 @@ const Loader = () => {
   return <div className="loader">Loading...</div>;
 };
 
-export default Loader;
+export default React.memo(Loader);

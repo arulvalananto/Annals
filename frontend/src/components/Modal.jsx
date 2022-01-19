@@ -20,4 +20,4 @@ const Modal = ({ children, onClose, visible = false }) => {
   );
 };
 
-export default Modal;
+export default React.memo(Modal);

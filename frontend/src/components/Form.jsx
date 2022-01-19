@@ -13,4 +13,4 @@ const Form = ({ initialValues, validationSchema, onSubmit, children }) => {
   );
 };
 
-export default Form;
+export default React.memo(Form);

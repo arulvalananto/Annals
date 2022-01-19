@@ -45,4 +45,4 @@ const MonthPicker = ({ selectedMonth, handleSelectedMonth }) => {
   );
 };
 
-export default MonthPicker;
+export default React.memo(MonthPicker);

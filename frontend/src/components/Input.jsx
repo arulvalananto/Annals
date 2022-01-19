@@ -52,4 +52,4 @@ const Input = ({ type, placeholder, name, className, Icon }) => {
   );
 };
 
-export default Input;
+export default React.memo(Input);

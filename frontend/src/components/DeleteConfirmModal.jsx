@@ -33,4 +33,4 @@ const DeleteConfirmModal = ({ yes, no, visible }) => {
   );
 };
 
-export default DeleteConfirmModal;
+export default React.memo(DeleteConfirmModal);

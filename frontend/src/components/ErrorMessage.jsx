@@ -6,4 +6,4 @@ const ErrorMessage = ({ visible, message }) => {
   return <label className="text-xs text-danger">{message}</label>;
 };
 
-export default ErrorMessage;
+export default React.memo(ErrorMessage);

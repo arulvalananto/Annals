@@ -72,4 +72,4 @@ const Drawer = ({
   );
 };
 
-export default Drawer;
+export default React.memo(Drawer);

@@ -61,4 +61,4 @@ const UpdateIdeaDrawer = ({ selectedId }) => {
   );
 };
 
-export default UpdateIdeaDrawer;
+export default React.memo(UpdateIdeaDrawer);

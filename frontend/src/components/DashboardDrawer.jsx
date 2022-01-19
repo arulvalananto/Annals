@@ -36,4 +36,4 @@ const DashboardDrawer = () => {
   );
 };
 
-export default DashboardDrawer;
+export default React.memo(DashboardDrawer);

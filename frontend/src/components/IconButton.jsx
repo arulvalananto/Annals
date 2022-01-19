@@ -10,4 +10,4 @@ const IconButton = ({ Icon, color = "white", fontSize = "0.8rem" }) => {
   );
 };
 
-export default IconButton;
+export default React.memo(IconButton);

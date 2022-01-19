@@ -91,6 +91,8 @@ exports.getAllPersonal = catchAsync(async (req, res, next) => {
     return wallet;
   });
 
+  console.log("worked");
+
   res.status(200).json({
     passwords: updatedPasswords,
     cards: updatedCards,

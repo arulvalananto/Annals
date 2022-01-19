@@ -40,4 +40,4 @@ const SkeletonLoader = () => {
   );
 };
 
-export default SkeletonLoader;
+export default React.memo(SkeletonLoader);

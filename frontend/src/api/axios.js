@@ -1,10 +1,12 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
-  // "https://annals.herokuapp.com/api/v1/" ||
+  baseURL:
+    process.env.REACT_APP_ENV === "development"
+      ? process.env.REACT_APP_API_URL
+      : "https://annals.herokuapp.com/api/v1/",
   withCredentials: true,
-  timeout: 10000,
+  timeout: 25000,
   timeoutErrorMessage: "Server Down",
 });
 
