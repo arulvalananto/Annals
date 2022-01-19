@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { HighlightOff, ContentPaste, Visibility } from "@mui/icons-material";
 
 import IconButton from "../../../components/IconButton";
@@ -25,14 +26,14 @@ const Password = ({
         </button>
       </div>
       <p className="flex-1 text-center">1 month ago</p>
-      <p className="flex-1 flex item-center justify-center gap-5">
-        <button type="button" onClick={() => console.log("clicked")}>
+      <div className="flex-1 flex item-center justify-center gap-5">
+        <Link to={`/personal/passwords/${_id}`}>
           <IconButton Icon={Visibility} color="moderate" />
-        </button>
+        </Link>
         <button type="button" onClick={() => handleDeleteMode(_id)}>
           <IconButton Icon={HighlightOff} color="danger" />
         </button>
-      </p>
+      </div>
     </div>
   );
 };

@@ -15,6 +15,9 @@ const CryptoWallets = React.lazy(() => import("../pages/Personal/Wallet"));
 const Cards = React.lazy(() => import("../pages/Personal/Card"));
 const Ideas = React.lazy(() => import("../pages/Idea/Ideas"));
 const Tasks = React.lazy(() => import("../pages/Task/Tasks"));
+const ViewPassword = React.lazy(() =>
+  import("../pages/Personal/Password/ViewPassword")
+);
 
 const routes = [
   { path: "/focus/log", component: FocusHistory },
@@ -26,6 +29,7 @@ const routes = [
     component: Journals,
   },
   { path: "/personal/create", component: PersonalCreate },
+  { path: "/personal/passwords/:id", component: ViewPassword },
   { path: "/personal/passwords", component: Passwords },
   { path: "/personal/cryptoWallets", component: CryptoWallets },
   { path: "/personal/cards", component: Cards },

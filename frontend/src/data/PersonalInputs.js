@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-const passwordValidationSchema = yup.object().shape({
+export const passwordValidationSchema = yup.object().shape({
   name: yup.string().max(100).required(),
   username: yup.string().max(100),
   password: yup.string().max(100).required(),
@@ -22,7 +22,7 @@ const cardValidationSchema = yup.object().shape({
   expiry: yup.date().required(),
 });
 
-const passwordInputs = [
+export const passwordInputs = [
   {
     label: "Name",
     type: "text",

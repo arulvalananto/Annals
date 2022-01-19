@@ -93,6 +93,7 @@ const MasterPassword = () => {
           initialValues={{ password: "", confirmPassword: "" }}
           validationSchema={createValidationSchema}
           onSubmit={handleCreate}
+          className="p-2"
         >
           <Form>
             <Input
@@ -110,7 +111,7 @@ const MasterPassword = () => {
             <Button
               title="Submit"
               type="submit"
-              className="bg-tertiary w-96"
+              className="bg-tertiary w-full sm:w-96"
               loading={loading}
             />
           </Form>
@@ -128,12 +129,13 @@ const MasterPassword = () => {
               type="password"
               name="password"
               placeholder="Enter your master password"
+              iconColor="white"
               className="px-4 py-3 text-sm bg-mildgray outline-none transition-all focus:border-secondary border-2 rounded focus:border-opacity-100 w-96 border-gray-700 text-white"
             />
             <Button
               title="Submit"
               type="submit"
-              className="bg-secondary w-96"
+              className="bg-secondary w-full sm:w-96"
               loading={loading}
             />
           </Form>
