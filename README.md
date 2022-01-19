@@ -1,3 +1,3 @@
 # Annals
 
-![alt text](https://github.com/arulvalananto/Annals/main/screenshot.png?raw=true)
+![alt text](https://github.com/arulvalananto/Annals/blob/a95cfbd5632490e9c1ae02cf3238b585741552e8/screenshot.png?raw=true)
