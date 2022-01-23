@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form } from "formik";
 import { useSelector } from "react-redux";
 import { Edit } from "@mui/icons-material";
 import { useHistory, useParams } from "react-router-dom";
-import moment from "moment";
 import toast from "react-hot-toast";
 
 import axios from "../../../api/axios";
@@ -13,31 +12,17 @@ import IconButton from "../../../components/IconButton";
 import Label from "../../../components/Label";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
-import {
-  passwordInputs,
-  passwordValidationSchema,
-} from "../../../data/PersonalInputs";
+import { cardInputs, cardValidationSchema } from "../../../data/PersonalInputs";
 import { errResponse } from "../../../utils/helpers";
-import { selectPassword } from "../../../store/reducers/personal.reducer";
+import { selectCard } from "../../../store/reducers/personal.reducer";
 
-const inputs = [
-  {
-    name: "createdAt",
-    label: "created at",
-  },
-  {
-    name: "updatedAt",
-    label: "modified at",
-  },
-];
-
-const ViewPassword = () => {
+const CardView = () => {
   const { id } = useParams();
   const history = useHistory();
 
-  const data = useSelector(selectPassword(id));
+  const data = useSelector(selectCard(id));
 
-  const [password, setPassword] = useState(data);
+  const [card, setCard] = useState(data);
   const [isEditMode, setIsEditMode] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -45,13 +30,13 @@ const ViewPassword = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setPassword({ ...password, [name]: value });
+    setCard({ ...card, [name]: value });
   };
 
   const handleSubmit = async (values) => {
     try {
       setIsLoading(true);
-      const response = await axios.patch(`/personal/${id}/password`, values);
+      const response = await axios.patch(`/personal/${id}/card`, values);
       if (response.status === 200 && response.data) {
         toast.success(response.data.message);
         handleEditMode();
@@ -68,12 +53,14 @@ const ViewPassword = () => {
     return null;
   }
 
+  console.log(card);
+
   return (
     <div className="p-3 md:p-5">
       <BackButton />
       <div className="flex items-center gap-5">
         <h2 className="font-bold text-3xl my-5 capitalize ">
-          View / Edit Password
+          View / Edit Card
         </h2>
         {!isEditMode && (
           <button type="button" className="" onClick={handleEditMode}>
@@ -84,16 +71,16 @@ const ViewPassword = () => {
       <CustomForm
         className="flex flex-col gap-3"
         initialValues={{
-          name: password?.name,
-          username: password?.username,
-          password: password?.password,
-          url: password?.url,
+          name: card?.name,
+          username: card?.username,
+          password: card?.password,
+          url: card?.url,
         }}
-        validationSchema={passwordValidationSchema}
+        validationSchema={cardValidationSchema}
         onSubmit={handleSubmit}
       >
         <Form>
-          {passwordInputs.map(
+          {cardInputs.map(
             ({ label, required, type, placeholder, name }, index) => (
               <div className="flex flex-col" key={index}>
                 <Label>
@@ -103,7 +90,7 @@ const ViewPassword = () => {
                 <Input
                   type={type}
                   name={name}
-                  value={password[name]}
+                  value={card[name]}
                   placeholder={placeholder}
                   onChange={handleChange}
                   className={`px-4 py-3 text-sm bg-mildgray color-white outline-none transition-all focus:border-2 focus:border-secondary border-opacity-0 rounded focus:border-opacity-100 w-full`}
@@ -113,18 +100,6 @@ const ViewPassword = () => {
               </div>
             )
           )}
-          <div className="flex flex-col gap-3">
-            {inputs.map(({ label, name }, index) => (
-              <div className="flex flex-col" key={index}>
-                <Label className="capitalize">{label}</Label>
-                <p
-                  className={`px-4 py-3 text-sm bg-gray-900 color-white cursor-not-allowed outline-none transition-all focus:border-2 focus:border-secondary border-opacity-0 rounded focus:border-opacity-100 w-full`}
-                >
-                  {moment(password[name]).format("lll")}
-                </p>
-              </div>
-            ))}
-          </div>
           {isEditMode && (
             <div className="flex gap-4">
               <button
@@ -148,4 +123,4 @@ const ViewPassword = () => {
   );
 };
 
-export default ViewPassword;
+export default CardView;

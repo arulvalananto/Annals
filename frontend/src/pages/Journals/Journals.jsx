@@ -8,6 +8,7 @@ import moment from "moment";
 import { fetchJournals } from "../../store/actions/journals.action";
 import SkeletonLoader from "../../components/SkeletonLoader";
 import MonthPicker from "../../components/MonthPicker";
+import { SORT_JOURNAL } from "../../store/reducers/journals.reducer";
 
 const Journals = () => {
   const dispatch = useDispatch();
@@ -15,11 +16,14 @@ const Journals = () => {
   const { docs, synced } = useSelector((state) => state.journals);
 
   const [loading, setLoading] = useState(true);
-
+  const [sortBy, setSortBy] = useState("ascend");
   const [selectedMonth, setSelectedMonth] = useState("");
 
+  const handleSortBy = (e) => {
+    setSortBy(e.target.value);
+    dispatch(SORT_JOURNAL());
+  };
   const handleSelectedMonth = (value) => setSelectedMonth(value);
-
   const handleLoading = (val) => setLoading(val);
 
   useEffect(() => {
@@ -52,9 +56,17 @@ const Journals = () => {
           />
           <Tooltip title="Sort By" placement="top">
             <div className="hidden md:block">
-              <select className="p-2 px-3 rounded bg-mildgray flex items-center justify-center text-sm">
-                <option className="text-sm">Ascending</option>
-                <option className="text-sm">Descending</option>
+              <select
+                onChange={handleSortBy}
+                value={sortBy}
+                className="p-2 px-3 rounded bg-mildgray flex items-center justify-center text-sm"
+              >
+                <option className="text-sm" value="ascend">
+                  Ascending
+                </option>
+                <option className="text-sm" value="descend">
+                  Descending
+                </option>
               </select>
             </div>
           </Tooltip>

@@ -10,8 +10,8 @@ const Password = ({
   handleDeleteMode,
 }) => {
   return (
-    <div className="bg-bgdark flex items-center justify-between p-3 rounded mb-5">
-      <p className="flex-1 text-center">{index + 1}</p>
+    <div className="bg-bgdark flex items-center justify-between p-3 rounded mb-5 text-xs md:text-md lg:text-lg">
+      <p className="flex-1 text-center hidden md:block">{index + 1}</p>
       <p className="flex-1 text-center">{name}</p>
       <p className="flex-1 text-center">{username}</p>
       <div className="flex-1 text-center flex items-center justify-center gap-2">
@@ -25,7 +25,7 @@ const Password = ({
           <IconButton Icon={ContentPaste} />
         </button>
       </div>
-      <p className="flex-1 text-center">1 month ago</p>
+      {/* <p className="flex-1 text-center">1 month ago</p> */}
       <div className="flex-1 flex item-center justify-center gap-5">
         <Link to={`/personal/passwords/${_id}`}>
           <IconButton Icon={Visibility} color="moderate" />

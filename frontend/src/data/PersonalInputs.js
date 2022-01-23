@@ -7,14 +7,14 @@ export const passwordValidationSchema = yup.object().shape({
   url: yup.string().url(),
 });
 
-const cryptoWalletValidationSchema = yup.object().shape({
+export const cryptoWalletValidationSchema = yup.object().shape({
   name: yup.string().max(256).required(),
   publicAddress: yup.string().max(256).required(),
   privateAddress: yup.string().max(256),
   passPhrase: yup.string().max(256),
 });
 
-const cardValidationSchema = yup.object().shape({
+export const cardValidationSchema = yup.object().shape({
   bankName: yup.string().max(256).required(),
   providerName: yup.string().max(10).required(),
   cardNumber: yup.string().max(16).required(),
@@ -82,7 +82,7 @@ const cryptoWalletInputs = [
   },
 ];
 
-const cardInputs = [
+export const cardInputs = [
   {
     label: "Bank Name",
     type: "text",

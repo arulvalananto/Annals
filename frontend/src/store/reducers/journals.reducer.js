@@ -1,3 +1,5 @@
+import moment from "moment";
+
 const { createSlice } = require("@reduxjs/toolkit");
 
 const journalSlice = createSlice({
@@ -30,6 +32,16 @@ const journalSlice = createSlice({
         ),
       };
     },
+    SORT_JOURNAL: (journals, action) => {
+      console.log(journals.docs.reverse());
+
+      return {
+        ...journals,
+        docs: journals.docs.sort(function (left, right) {
+          return moment.utc(left.createdAt).diff(moment.utc(right.createdAt));
+        }),
+      };
+    },
   },
 });
 
@@ -38,6 +50,7 @@ export const {
   DELETED_JOURNAL,
   ADDED_JOURNAL,
   UPDATED_JOURNAL,
+  SORT_JOURNAL,
 } = journalSlice.actions;
 
 export default journalSlice.reducer;

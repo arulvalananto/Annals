@@ -58,13 +58,13 @@ exports.addPersonal = catchAsync(async (req, res, next) => {
 });
 
 exports.getAllPersonal = catchAsync(async (req, res, next) => {
-  const passwords = await Password.find({ createdBy: req.userId }).lean();
-  const cards = await Card.find({ createdBy: req.userId }).lean();
-  const wallets = await CryptoWallet.find({
+  const passwordData = await Password.find({ createdBy: req.userId }).lean();
+  const cardData = await Card.find({ createdBy: req.userId }).lean();
+  const walletData = await CryptoWallet.find({
     createdBy: req.userId,
   }).lean();
 
-  const updatedPasswords = passwords.map((pass) => {
+  const passwords = passwordData.map((pass) => {
     pass.name = decrypt(pass.name);
     pass.password = decrypt(pass.password);
     if (pass.username) pass.username = decrypt(pass.username);
@@ -73,7 +73,7 @@ exports.getAllPersonal = catchAsync(async (req, res, next) => {
     return pass;
   });
 
-  const updatedCards = cards.map((card) => {
+  const cards = cardData.map((card) => {
     card.bankName = decrypt(card.bankName);
     card.providerName = decrypt(card.providerName);
     card.cardNumber = decrypt(card.cardNumber);
@@ -82,7 +82,7 @@ exports.getAllPersonal = catchAsync(async (req, res, next) => {
     return card;
   });
 
-  const updatedWallets = wallets.map((wallet) => {
+  const cryptoWallets = walletData.map((wallet) => {
     wallet.publicAddress = decrypt(wallet.publicAddress);
     if (wallet.privateAddress)
       wallet.privateAddress = decrypt(wallet.privateAddress);
@@ -92,9 +92,9 @@ exports.getAllPersonal = catchAsync(async (req, res, next) => {
   });
 
   res.status(200).json({
-    passwords: updatedPasswords,
-    cards: updatedCards,
-    cryptoWallets: updatedWallets,
+    passwords,
+    cards,
+    cryptoWallets,
   });
 });
 

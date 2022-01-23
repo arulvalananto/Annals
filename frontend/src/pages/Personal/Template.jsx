@@ -7,7 +7,7 @@ import BackButton from "../..//components/BackButton";
 import DeleteConfirmModal from "../../components/DeleteConfirmModal";
 import { deletePersonalData } from "../../store/actions/personal.actions";
 
-const PersonalTemplate = ({ title, value, name, Component }) => {
+const PersonalTemplate = ({ title, name, Component }) => {
   const history = useHistory();
 
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ const PersonalTemplate = ({ title, value, name, Component }) => {
   }
 
   return (
-    <div className="p-1 sm:p-5">
+    <div className="p-3 sm:p-5">
       <BackButton />
       <div className="flex items-center gap-4">
         <h2 className="font-bold text-3xl my-5 capitalize">{title}</h2>

@@ -1,12 +1,10 @@
 import { CircularProgress } from "@mui/material";
 import React from "react";
 
-const Button = ({ title, className, type, loading = false }) => {
+const Button = ({ title, className = "", type, loading = false }) => {
   const style = loading
-    ? "w-full bg-darkgray text-white cursor-not-allowed p-3"
-    : className
-    ? className
-    : "";
+    ? `bg-darkgray text-white cursor-not-allowed p-3 ${className}`
+    : className;
 
   return (
     <button

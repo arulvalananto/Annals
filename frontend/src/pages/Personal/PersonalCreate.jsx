@@ -77,7 +77,7 @@ const PersonalCreate = () => {
                             type={type}
                             name={name}
                             placeholder={placeholder}
-                            className={`px-4 py-3 text-sm bg-mildgray outline-none transition-all border-0 focus:border-2 focus:border-${color} rounded`}
+                            className={`px-4 py-3 text-sm bg-mildgray outline-none transition-all border-0 focus:border-2 focus:border-${color} rounded w-full`}
                             required={required}
                           />
                         </div>

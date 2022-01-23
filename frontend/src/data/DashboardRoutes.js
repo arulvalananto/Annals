@@ -11,13 +11,14 @@ const PersonalCreate = React.lazy(() =>
   import("../pages/Personal/PersonalCreate")
 );
 const Passwords = React.lazy(() => import("../pages/Personal/Password"));
-const CryptoWallets = React.lazy(() => import("../pages/Personal/Wallet"));
-const Cards = React.lazy(() => import("../pages/Personal/Card"));
-const Ideas = React.lazy(() => import("../pages/Idea/Ideas"));
-const Tasks = React.lazy(() => import("../pages/Task/Tasks"));
 const ViewPassword = React.lazy(() =>
   import("../pages/Personal/Password/ViewPassword")
 );
+const Cards = React.lazy(() => import("../pages/Personal/Card"));
+const CardView = React.lazy(() => import("../pages/Personal/Card/CardView"));
+const CryptoWallets = React.lazy(() => import("../pages/Personal/Wallet"));
+const Ideas = React.lazy(() => import("../pages/Idea/Ideas"));
+const Tasks = React.lazy(() => import("../pages/Task/Tasks"));
 
 const routes = [
   { path: "/focus/log", component: FocusHistory },
@@ -32,6 +33,7 @@ const routes = [
   { path: "/personal/passwords/:id", component: ViewPassword },
   { path: "/personal/passwords", component: Passwords },
   { path: "/personal/cryptoWallets", component: CryptoWallets },
+  { path: "/personal/cards/:id", component: CardView },
   { path: "/personal/cards", component: Cards },
   { path: "/personal", component: Personal },
   { path: "/ideas", component: Ideas },
