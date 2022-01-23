@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Form } from "formik";
 import { useSelector } from "react-redux";
 import { Edit } from "@mui/icons-material";
@@ -26,6 +26,8 @@ const CardView = () => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+  useEffect(() => {}, [card]);
+
   const handleEditMode = () => setIsEditMode(!isEditMode);
 
   const handleChange = (e) => {
@@ -36,6 +38,7 @@ const CardView = () => {
   const handleSubmit = async (values) => {
     try {
       setIsLoading(true);
+      console.log(values);
       const response = await axios.patch(`/personal/${id}/card`, values);
       if (response.status === 200 && response.data) {
         toast.success(response.data.message);
@@ -71,34 +74,37 @@ const CardView = () => {
       <CustomForm
         className="flex flex-col gap-3"
         initialValues={{
-          name: card?.name,
-          username: card?.username,
-          password: card?.password,
-          url: card?.url,
+          bankName: card?.bankName,
+          providerName: card?.providerName,
+          cardNumber: card?.cardNumber,
+          accountHolderName: card?.accountHolderName,
+          expiry: card?.expiry,
         }}
         validationSchema={cardValidationSchema}
         onSubmit={handleSubmit}
       >
         <Form>
           {cardInputs.map(
-            ({ label, required, type, placeholder, name }, index) => (
-              <div className="flex flex-col" key={index}>
-                <Label>
-                  {label}
-                  {required && <span className="text-danger ml-1">*</span>}
-                </Label>
-                <Input
-                  type={type}
-                  name={name}
-                  value={card[name]}
-                  placeholder={placeholder}
-                  onChange={handleChange}
-                  className={`px-4 py-3 text-sm bg-mildgray color-white outline-none transition-all focus:border-2 focus:border-secondary border-opacity-0 rounded focus:border-opacity-100 w-full`}
-                  required={required}
-                  disabled={!isEditMode}
-                />
-              </div>
-            )
+            ({ label, required, type, placeholder, name }, index) => {
+              return (
+                <div className="flex flex-col" key={index}>
+                  <Label>
+                    {label}
+                    {required && <span className="text-danger ml-1">*</span>}
+                  </Label>
+                  <Input
+                    type={type}
+                    name={name}
+                    value={card[name]}
+                    placeholder={placeholder}
+                    onChange={handleChange}
+                    className={`px-4 py-3 text-sm bg-mildgray color-white outline-none transition-all focus:border-2 focus:border-secondary border-opacity-0 rounded focus:border-opacity-100 w-full`}
+                    required={required}
+                    disabled={!isEditMode}
+                  />
+                </div>
+              );
+            }
           )}
           {isEditMode && (
             <div className="flex gap-4">

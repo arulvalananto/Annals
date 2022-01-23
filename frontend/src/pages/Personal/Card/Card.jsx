@@ -12,7 +12,7 @@ const Card = ({
 }) => {
   return (
     <div className="relative mt-5 group">
-      <div className="block absolute -top-7 right-0 md:hidden md:group-hover:flex md:group-hover:items-center md:group-hover:gap-4 pb-4">
+      <div className="absolute -top-7 right-0 flex items-center gap-4 pb-4">
         <Link to={`/personal/cards/${_id}`}>
           <IconButton Icon={Edit} color="moderate" />
         </Link>

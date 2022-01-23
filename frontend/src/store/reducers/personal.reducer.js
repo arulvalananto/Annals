@@ -47,9 +47,20 @@ export const { FETCH_PERSONAL_DATA, ADD_PERSONAL_DATA, DELETE_PERSONAL_DATA } =
 
 export default personalSlice.reducer;
 
-export const selectPasswords = (state) => state.personal.docs.passwords;
-export const selectWallets = (state) => state.personal.docs.cryptoWallets;
-export const selectCards = (state) => state.personal.docs.cards;
+const selectPersonal = (state) => state.personal.docs;
+
+export const selectPasswords = createSelector(
+  selectPersonal,
+  (personal) => personal.passwords
+);
+export const selectWallets = createSelector(
+  selectPersonal,
+  (personal) => personal.cryptoWallets
+);
+export const selectCards = createSelector(
+  selectPersonal,
+  (personal) => personal.cards
+);
 
 export const selectPassword = (id) =>
   createSelector(selectPasswords, (passwords) =>
