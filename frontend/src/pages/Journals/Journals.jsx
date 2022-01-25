@@ -7,7 +7,6 @@ import moment from "moment";
 
 import { fetchJournals } from "../../store/actions/journals.action";
 import SkeletonLoader from "../../components/SkeletonLoader";
-import MonthPicker from "../../components/MonthPicker";
 import { SORT_JOURNAL } from "../../store/reducers/journals.reducer";
 
 const Journals = () => {
@@ -17,13 +16,11 @@ const Journals = () => {
 
   const [loading, setLoading] = useState(true);
   const [sortBy, setSortBy] = useState("ascend");
-  const [selectedMonth, setSelectedMonth] = useState("");
 
   const handleSortBy = (e) => {
     setSortBy(e.target.value);
     dispatch(SORT_JOURNAL());
   };
-  const handleSelectedMonth = (value) => setSelectedMonth(value);
   const handleLoading = (val) => setLoading(val);
 
   useEffect(() => {
@@ -50,10 +47,6 @@ const Journals = () => {
               </button>
             </Link>
           </Tooltip>
-          <MonthPicker
-            selectedMonth={selectedMonth}
-            handleSelectedMonth={handleSelectedMonth}
-          />
           <Tooltip title="Sort By" placement="top">
             <div className="hidden md:block">
               <select

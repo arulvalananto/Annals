@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form } from "formik";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Edit } from "@mui/icons-material";
 import { useHistory, useParams } from "react-router-dom";
 import moment from "moment";
@@ -18,7 +18,10 @@ import {
   passwordValidationSchema,
 } from "../../../data/PersonalInputs";
 import { errResponse } from "../../../utils/helpers";
-import { selectPassword } from "../../../store/reducers/personal.reducer";
+import {
+  selectPassword,
+  UPDATE_PERSONAL_DATA,
+} from "../../../store/reducers/personal.reducer";
 
 const inputs = [
   {
@@ -36,6 +39,7 @@ const ViewPassword = () => {
   const history = useHistory();
 
   const data = useSelector(selectPassword(id));
+  const dispatch = useDispatch();
 
   const [password, setPassword] = useState(data);
   const [isEditMode, setIsEditMode] = useState(false);
@@ -53,6 +57,8 @@ const ViewPassword = () => {
       setIsLoading(true);
       const response = await axios.patch(`/personal/${id}/password`, values);
       if (response.status === 200 && response.data) {
+        dispatch(UPDATE_PERSONAL_DATA({ id, category: "password", values }));
+
         toast.success(response.data.message);
         handleEditMode();
       }

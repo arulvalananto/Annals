@@ -1,6 +1,6 @@
 import React from "react";
 import QRCode from "qrcode.react";
-import { ContentPaste, Delete, Edit } from "@mui/icons-material";
+import { ContentPaste, Delete } from "@mui/icons-material";
 
 import IconButton from "../../../components/IconButton";
 
@@ -23,9 +23,6 @@ const Wallet = ({ cryptoWallet, handleDeleteMode }) => {
       <div className="absolute top-4 right-4 flex gap-2">
         <div onClick={() => handleDeleteMode(_id)}>
           <IconButton Icon={Delete} color="danger" />
-        </div>
-        <div>
-          <IconButton Icon={Edit} color="moderate" />
         </div>
       </div>
       {publicAddress && (

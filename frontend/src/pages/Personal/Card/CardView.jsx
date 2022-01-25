@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Form } from "formik";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Edit } from "@mui/icons-material";
 import { useHistory, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
+import moment from "moment";
 
 import axios from "../../../api/axios";
 import BackButton from "../../../components/BackButton";
@@ -14,13 +15,17 @@ import Input from "../../../components/Input";
 import Button from "../../../components/Button";
 import { cardInputs, cardValidationSchema } from "../../../data/PersonalInputs";
 import { errResponse } from "../../../utils/helpers";
-import { selectCard } from "../../../store/reducers/personal.reducer";
+import {
+  selectCard,
+  UPDATE_PERSONAL_DATA,
+} from "../../../store/reducers/personal.reducer";
 
 const CardView = () => {
   const { id } = useParams();
   const history = useHistory();
 
   const data = useSelector(selectCard(id));
+  const dispatch = useDispatch();
 
   const [card, setCard] = useState(data);
   const [isEditMode, setIsEditMode] = useState(false);
@@ -41,6 +46,7 @@ const CardView = () => {
       console.log(values);
       const response = await axios.patch(`/personal/${id}/card`, values);
       if (response.status === 200 && response.data) {
+        dispatch(UPDATE_PERSONAL_DATA({ id, category: "card", values }));
         toast.success(response.data.message);
         handleEditMode();
       }
@@ -92,16 +98,24 @@ const CardView = () => {
                     {label}
                     {required && <span className="text-danger ml-1">*</span>}
                   </Label>
-                  <Input
-                    type={type}
-                    name={name}
-                    value={card[name]}
-                    placeholder={placeholder}
-                    onChange={handleChange}
-                    className={`px-4 py-3 text-sm bg-mildgray color-white outline-none transition-all focus:border-2 focus:border-secondary border-opacity-0 rounded focus:border-opacity-100 w-full`}
-                    required={required}
-                    disabled={!isEditMode}
-                  />
+                  {!isEditMode && type === "month" ? (
+                    <p
+                      className={`px-4 py-3 text-sm bg-gray-900 color-white outline-none transition-all focus:border-2 focus:border-secondary border-opacity-0 rounded focus:border-opacity-100 w-full`}
+                    >
+                      {moment(card[name]).format("MMMM, YYYY")}
+                    </p>
+                  ) : (
+                    <Input
+                      type={type}
+                      name={name}
+                      value={card[name]}
+                      placeholder={placeholder}
+                      onChange={handleChange}
+                      className={`px-4 py-3 text-sm bg-mildgray color-white outline-none transition-all focus:border-2 focus:border-secondary border-opacity-0 rounded focus:border-opacity-100 w-full`}
+                      required={required}
+                      disabled={!isEditMode}
+                    />
+                  )}
                 </div>
               );
             }
