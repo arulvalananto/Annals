@@ -1,17 +1,18 @@
 import {
-  Home as HomeIcon,
-  ImportContacts,
-  Lock,
-  WbIncandescent,
-  Task,
-} from "@mui/icons-material";
+    Home as HomeIcon,
+    ImportContacts,
+    Lock,
+    WbIncandescent,
+    Task,
+} from '@mui/icons-material';
+import { ROUTES } from '../utils/routes';
 
 const menuItems = [
-  { to: "/", Icon: HomeIcon, title: "Dashboard" },
-  { to: "/journals", Icon: ImportContacts, title: "Journals" },
-  { to: "/personal", Icon: Lock, title: "Personal" },
-  { to: "/ideas", Icon: WbIncandescent, title: "Ideas" },
-  { to: "/tasks", Icon: Task, title: "Tasks" },
+    { to: ROUTES.DEFAULT, Icon: HomeIcon, title: 'Dashboard' },
+    { to: ROUTES.JOURNALS, Icon: ImportContacts, title: 'Journals' },
+    { to: ROUTES.PERSONAL, Icon: Lock, title: 'Personal' },
+    { to: ROUTES.IDEAS, Icon: WbIncandescent, title: 'Ideas' },
+    { to: ROUTES.TASKS, Icon: Task, title: 'Tasks' },
 ];
 
 export default menuItems;

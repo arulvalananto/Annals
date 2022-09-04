@@ -1,17 +1,17 @@
-import React from "react";
+import React from 'react';
 
-import PersonalTemplate from "../Template";
-import Passwords from "./Passwords";
+import Passwords from './Passwords';
+import PersonalTemplate from '../Template';
 
 const PasswordTemplate = () => {
-  return (
-    <PersonalTemplate
-      value="passwords"
-      title="Passwords"
-      name="password"
-      Component={Passwords}
-    />
-  );
+    return (
+        <PersonalTemplate
+            value="passwords"
+            title="Passwords"
+            name="password"
+            Component={Passwords}
+        />
+    );
 };
 
 export default PasswordTemplate;
