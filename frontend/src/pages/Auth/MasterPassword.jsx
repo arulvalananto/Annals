@@ -21,23 +21,31 @@ import {
 } from '../../store/actions/auth.actions';
 
 const MasterPassword = () => {
+    const { push } = useHistory();
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.auth);
-    const { push } = useHistory();
 
     const [loading, setLoading] = useState(false);
 
-    const handleCreate = async (values) => {
+    const handleCreate = async (values) =>
         dispatch(generateMasterPassword(values, setLoading, push));
-    };
 
-    const handleVerify = async (values) => {
+    const handleVerify = async (values) =>
         dispatch(verifyMasterPassword(values, setLoading, push));
+
+    const handleLogout = () => {
+        dispatch(logout());
+        push(ROUTES.DEFAULT);
     };
 
-    const renderForm = useCallback(() => {
-        if (!user.hasMasterPassword) {
-            return (
+    return (
+        <div className="w-screen h-screen bg-mildgray  flex flex-col items-center justify-center relative">
+            <img
+                src={logo}
+                alt="Annals logo"
+                className="w-40 h-40 object-cover"
+            />
+            {!user.hasMasterPassword ? (
                 <CustomForm
                     initialValues={{ password: '', confirmPassword: '' }}
                     validationSchema={createMasterPasswordSchema}
@@ -65,9 +73,7 @@ const MasterPassword = () => {
                         />
                     </Form>
                 </CustomForm>
-            );
-        } else {
-            return (
+            ) : (
                 <CustomForm
                     initialValues={{ password: '' }}
                     validationSchema={verifyMasterPasswordSchema}
@@ -89,24 +95,7 @@ const MasterPassword = () => {
                         />
                     </Form>
                 </CustomForm>
-            );
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [user.hasMasterPassword, loading]);
-
-    const handleLogout = () => {
-        dispatch(logout());
-        push(ROUTES.DEFAULT);
-    };
-
-    return (
-        <div className="w-screen h-screen bg-mildgray  flex flex-col items-center justify-center relative">
-            <img
-                src={logo}
-                alt="Annals logo"
-                className="w-40 h-40 object-cover"
-            />
-            {renderForm()}
+            )}
             <Tooltip title="Logout">
                 <button
                     type="button"

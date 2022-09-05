@@ -39,10 +39,7 @@ const ViewPassword = () => {
         dispatch(updatePassword(values, id, setIsLoading, handleEditMode));
     };
 
-    if (!data) {
-        history.push(ROUTES.PERSONAL);
-        return null;
-    }
+    if (!data) history.push(ROUTES.PERSONAL);
 
     return (
         <div className="p-3 md:p-5">

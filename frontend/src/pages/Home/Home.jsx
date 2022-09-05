@@ -13,6 +13,7 @@ import {
 } from '@mui/icons-material';
 
 import { greet } from '../../utils/helpers';
+import Loader from '../../components/Loader';
 import {
     changeFocus,
     fetchDashboardData,
@@ -37,22 +38,19 @@ const Home = () => {
                 fetchDashboardData(setInitialLoading, setFocus, setInitialState)
             );
         else setInitialLoading(false);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const handleFocusMode = (val) => setIsFocusMode(val);
-
     const clearChangeFocus = () => {
+        setIsFocusMode(false);
         setFocus(initialState);
-        handleFocusMode(false);
     };
 
     const handleChangeFocus = () => {
-        handleFocusMode(false);
+        setIsFocusMode(false);
         dispatch(changeFocus(focus, setIsLoading, setInitialState));
     };
 
-    if (initialLoading) return null;
+    if (initialLoading) return <Loader />;
 
     return (
         <div>
@@ -91,7 +89,7 @@ const Home = () => {
                             <Tooltip title="Change Focus" placement="top">
                                 <GpsFixed
                                     onClick={() => {
-                                        !isLoading && handleFocusMode(true);
+                                        !isLoading && setIsFocusMode(true);
                                     }}
                                     className="cursor-pointer"
                                 />
@@ -126,10 +124,10 @@ const Home = () => {
                     />
                 </div>
             </div>
-
             <div className="px-5 flex flex-col gap-3 mb-4">
-                {homeLinks.map(({ to, content, Icon }) => (
+                {homeLinks.map(({ to, content, Icon }, index) => (
                     <Link
+                        key={index}
                         to={to}
                         className="flex items-center p-3 rounded bg-mildgray gap-3"
                     >

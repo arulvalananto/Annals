@@ -13,15 +13,13 @@ import { MESSAGES } from '../../utils/constants';
 import { ROUTES } from '../../utils/routes';
 
 const SignUp = () => {
-    const dispatch = useDispatch();
     const { push } = useHistory();
+    const dispatch = useDispatch();
 
     const [loading, setLoading] = useState(false);
 
-    const handleLoading = (val) => setLoading(val);
-
     const handleSubmit = (values) =>
-        dispatch(register(values, handleLoading, push));
+        dispatch(register(values, setLoading, push));
 
     return (
         <div className="grid grid-cols-6 w-screen h-screen font-poppins select-none">

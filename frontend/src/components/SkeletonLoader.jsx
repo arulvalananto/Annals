@@ -6,8 +6,9 @@ const SkeletonLoader = () => {
         <div className="grid lg:grid-cols-4 xl:place-items-center md:grid-cols-3 sm:grid-cols-2 lg:gap-x-1 gap-x-3 gap-y-5 grid-cols-1 p-3 py-10 pb-40 sm:pb-10">
             {Array(4)
                 .fill(0)
-                .map((val) => (
+                .map((val, index) => (
                     <Skeleton
+                        key={index}
                         animation="wave"
                         sx={{ bgcolor: 'grey.900' }}
                         variant="rectangular"

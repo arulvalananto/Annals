@@ -14,10 +14,7 @@ const JournalView = () => {
 
     const journal = docs.filter((journal) => journal.id === id)[0];
 
-    if (!synced) {
-        push(ROUTES.JOURNALS);
-        return null;
-    }
+    if (!synced) push(ROUTES.JOURNALS);
 
     return (
         <div className="p-5 h-full w-full">

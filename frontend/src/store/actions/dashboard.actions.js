@@ -9,43 +9,44 @@ import { errResponse } from '../../utils/helpers';
 import { API_ENDPOINTS } from '../../api/constants';
 
 export const fetchDashboardData =
-    (loading, setFocus, setInitialState) => async (dispatch) => {
+    (handleLoading, setFocus, setInitialState) => async (dispatch) => {
         try {
             const response = await axios.get(API_ENDPOINTS.DASHBOARD.COMMON);
-            dispatch(FETCH_DASHBOARD(response.data));
 
             setFocus(response.data.focus);
             setInitialState(response.data.focus);
+            handleLoading(false);
+            dispatch(FETCH_DASHBOARD(response.data));
         } catch (error) {
+            handleLoading(false);
             errResponse(error);
-        } finally {
-            loading(false);
         }
     };
 
-export const fetchFocusHistory = (loading) => async (dispatch) => {
+export const fetchFocusHistory = (handleLoading) => async (dispatch) => {
     try {
         const response = await axios.get(API_ENDPOINTS.FOCUS);
+
+        handleLoading(false);
         dispatch(FETCH_FOCUSES(response.data.focuses));
     } catch (error) {
+        handleLoading(false);
         errResponse(error);
-    } finally {
-        loading(false);
     }
 };
 
 export const changeFocus =
-    (agendum, loading, setInitialState) => async (dispatch) => {
+    (agendum, handleLoading, setInitialState) => async (dispatch) => {
         try {
-            loading(true);
+            handleLoading(true);
             await axios.post(API_ENDPOINTS.FOCUS, { agendum });
 
+            handleLoading(false);
+            setInitialState(agendum);
             dispatch(UPDATE_FOCUS(agendum));
             dispatch(UPDATE_FOCUS_LIST(agendum));
-            setInitialState(agendum);
         } catch (error) {
+            handleLoading(false);
             errResponse(error);
-        } finally {
-            loading(false);
         }
     };

@@ -23,7 +23,7 @@ export const fetchPersonalData = (handleLoading) => async (dispatch) => {
 };
 
 export const createPersonalData =
-    (values, handleLoading, push) => async (dispatch) => {
+    (values, handleLoading, navigateTo) => async (dispatch) => {
         try {
             handleLoading(true);
             const response = await axios.post(
@@ -34,7 +34,7 @@ export const createPersonalData =
                 dispatch(ADD_PERSONAL_DATA(values));
 
                 toast.success(`New ${values.category} added`);
-                push(ROUTES.PERSONAL);
+                navigateTo(ROUTES.PERSONAL);
             }
         } catch (err) {
             errResponse(err);

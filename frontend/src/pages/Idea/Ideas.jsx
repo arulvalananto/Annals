@@ -27,8 +27,6 @@ const Ideas = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch]);
 
-    useEffect(() => {}, [docs]);
-
     const clearFields = () => setIdea(initialState);
 
     const handleChange = (e) => {
@@ -64,7 +62,7 @@ const Ideas = () => {
                         onChange={handleChange}
                         placeholder="Type title of idea"
                         type="text"
-                        value={idea.title}
+                        value={idea?.title || ''}
                     />
                     <textarea
                         className={`absolute w-full top-11 left-0 z-10 resize-none text-white bg-bglight outline-none p-4 h-36 shadow-md ${classNames(

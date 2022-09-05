@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { TOKEN_NAME, VERIFICATION_TOKEN_NAME } from './constants';
 
 const instance = axios.create({
     baseURL:
@@ -11,8 +12,8 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use(function (config) {
-    const token = localStorage.getItem('token');
-    const secret = sessionStorage.getItem('verified');
+    const token = localStorage.getItem(TOKEN_NAME);
+    const secret = sessionStorage.getItem(VERIFICATION_TOKEN_NAME);
     config.headers.Authorization = token ? `Bearer ${token}` : '';
     config.headers['x-auth-secret'] = secret ? `Bearer ${secret}` : '';
     return config;

@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect, useState } from 'react';
+import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { LinearProgress } from '@mui/material';
-import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 
 import { ROUTES } from '../utils/routes';
 import TopBar from '../components/TopBar';
@@ -9,30 +9,30 @@ import Loader from '../components/Loader';
 import Sidebar from '../components/Sidebar';
 import routes from '../data/DashboardRoutes';
 import { getCurrentUser } from '../store/actions/auth.actions';
+import { TOKEN_NAME, VERIFICATION_TOKEN_NAME } from '../api/constants';
 
 const Dashboard = () => {
     const { push } = useHistory();
     const dispatch = useDispatch();
     const { isLoading } = useSelector((state) => state.loader);
 
-    const [loading, setLoading] = useState(true);
-
-    const handleLoading = (val) => setLoading(val);
+    const [initialLoading, setInitialLoading] = useState(true);
 
     useEffect(() => {
-        if (localStorage.getItem('token'))
-            dispatch(getCurrentUser(handleLoading));
-        else handleLoading(false);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        if (!sessionStorage.getItem(VERIFICATION_TOKEN_NAME)) {
+            push(ROUTES.MASTER_PASSWORD);
+        } else {
+            if (localStorage.getItem(TOKEN_NAME))
+                dispatch(getCurrentUser(setInitialLoading));
+            else setInitialLoading(false);
+        }
     }, []);
-
-    useEffect(() => {
-        if (!sessionStorage.getItem('verified')) push(ROUTES.MASTER_PASSWORD);
-    });
 
     return (
         <>
-            {(isLoading || loading) && <LinearProgress color="secondary" />}
+            {(isLoading || initialLoading) && (
+                <LinearProgress color="secondary" />
+            )}
             <div className="grid grid-cols-6 w-screen h-screen font-poppins overflow-x-hidden">
                 <Sidebar />
                 <div className="col-span-6 xl:col-span-5 bg-bgdark text-white">

@@ -38,7 +38,7 @@ const Sidebar = () => {
                     <button
                         type="button"
                         className="p-5 py-2 mb-2 rounded-md text-sm hover:bg-primary"
-                        onClick={dispatch(logout())}
+                        onClick={() => dispatch(logout())}
                     >
                         <p className="flex items-center select-none">
                             <ExitToApp size={16} className="mr-3" />

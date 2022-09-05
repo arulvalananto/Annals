@@ -1,3 +1,6 @@
+export const TOKEN_NAME = 'token';
+export const VERIFICATION_TOKEN_NAME = 'verified';
+
 export const API_ENDPOINTS = {
     AUTH: {
         REGISTER: '/auth/register',

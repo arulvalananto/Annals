@@ -21,20 +21,20 @@ const ForgotPassword = () => {
     const [isCodeSent, setIsCodeSent] = useState(false);
     const [isPasswordChanged, setIsPasswordChanged] = useState(false);
 
-    const handleLoading = (val) => setLoading(val);
     const handleIsCodeSent = () => setIsCodeSent(!isCodeSent);
     const handleIsPasswordChanged = () =>
         setIsPasswordChanged(!isPasswordChanged);
 
     const handleForgotPassword = (values, { resetForm }) => {
-        dispatch(forgotPassword(values, handleLoading, handleIsCodeSent));
+        dispatch(forgotPassword(values, setLoading, handleIsCodeSent));
         resetForm();
     };
+
     const handelResetPassword = (values, { resetForm }) => {
         dispatch(
             resetPassword(
                 { code: values.code, password: values.password },
-                handleLoading,
+                setLoading,
                 handleIsPasswordChanged
             )
         );

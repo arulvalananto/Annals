@@ -8,17 +8,16 @@ import BackButton from '../../components/BackButton';
 import { fetchFocusHistory } from '../../store/actions/dashboard.actions';
 
 const FocusHistory = () => {
-    const [initialLoading, setInitialLoading] = useState(true);
-
     const dispatch = useDispatch();
     const {
         focuses: { docs, synced },
     } = useSelector((state) => state.dashboard);
 
+    const [initialLoading, setInitialLoading] = useState(true);
+
     useEffect(() => {
         if (!synced) dispatch(fetchFocusHistory(setInitialLoading));
         else setInitialLoading(false);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     if (initialLoading) return <Loader />;

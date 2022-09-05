@@ -27,8 +27,6 @@ const CardView = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [isEditMode, setIsEditMode] = useState(false);
 
-    useEffect(() => {}, [card]);
-
     const handleEditMode = () => setIsEditMode(!isEditMode);
 
     const handleChange = (e) => {
@@ -40,10 +38,7 @@ const CardView = () => {
         dispatch(updateCard(values, id, setIsLoading, handleEditMode));
     };
 
-    if (!data) {
-        push(ROUTES.PERSONAL);
-        return null;
-    }
+    if (!data) push(ROUTES.PERSONAL);
 
     return (
         <div className="p-3 md:p-5">

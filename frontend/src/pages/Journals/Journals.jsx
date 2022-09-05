@@ -22,10 +22,8 @@ const Journals = () => {
         dispatch(SORT_JOURNAL());
     };
 
-    const handleLoading = (val) => setLoading(val);
-
     useEffect(() => {
-        if (!synced) dispatch(fetchJournals(handleLoading));
+        if (!synced) dispatch(fetchJournals(setLoading));
         else setLoading(false);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

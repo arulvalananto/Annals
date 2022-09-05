@@ -13,15 +13,12 @@ import { login } from '../../store/actions/auth.actions';
 import { ROUTES } from '../../utils/routes';
 
 const SignIn = () => {
-    const dispatch = useDispatch();
     const { push } = useHistory();
+    const dispatch = useDispatch();
 
     const [loading, setLoading] = useState(false);
 
-    const handleLoading = (val) => setLoading(val);
-
-    const handleSubmit = (values) =>
-        dispatch(login(values, handleLoading, push));
+    const handleSubmit = (values) => dispatch(login(values, setLoading, push));
 
     return (
         <div className="grid grid-cols-5 w-screen h-screen font-poppins select-none">

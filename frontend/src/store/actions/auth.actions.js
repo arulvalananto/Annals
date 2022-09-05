@@ -3,7 +3,11 @@ import toast from 'react-hot-toast';
 import axios from '../../api/axios';
 import { ROUTES } from '../../utils/routes';
 import { errResponse } from '../../utils/helpers';
-import { API_ENDPOINTS } from '../../api/constants';
+import {
+    API_ENDPOINTS,
+    TOKEN_NAME,
+    VERIFICATION_TOKEN_NAME,
+} from '../../api/constants';
 import { LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT } from '../reducers/auth.reducer';
 import { MESSAGES } from '../../utils/constants';
 
@@ -16,14 +20,14 @@ export const register =
                 API_ENDPOINTS.AUTH.REGISTER,
                 credentials
             );
-            localStorage.setItem('token', result.data.token);
+            localStorage.setItem(TOKEN_NAME, result.data.token);
 
             toast.success('User registered');
+            handleLoading(false);
             navigateTo(ROUTES.SIGN_IN);
         } catch (err) {
-            errResponse(err);
-        } finally {
             handleLoading(false);
+            errResponse(err);
         }
     };
 
@@ -36,16 +40,16 @@ export const login =
                 API_ENDPOINTS.AUTH.LOGIN,
                 credentials
             );
-            localStorage.setItem('token', result.data.token);
+            localStorage.setItem(TOKEN_NAME, result.data.token);
 
             const response = await axios.get(API_ENDPOINTS.AUTH.CURRENT_USER);
-            dispatch(LOGIN_SUCCESS(response.data.user));
 
+            handleLoading(false);
+            dispatch(LOGIN_SUCCESS(response.data.user));
             navigateTo(ROUTES.DEFAULT);
         } catch (err) {
-            errResponse(err);
-        } finally {
             handleLoading(false);
+            errResponse(err);
         }
     };
 
@@ -53,20 +57,19 @@ export const getCurrentUser = (handleLoading) => async (dispatch) => {
     try {
         const result = await axios.get(API_ENDPOINTS.AUTH.CURRENT_USER);
 
+        handleLoading(false);
         dispatch(LOGIN_SUCCESS(result.data.user));
-        handleLoading(false);
     } catch (err) {
-        dispatch(LOGIN_FAIL());
         handleLoading(false);
-
         errResponse(err);
+        dispatch(LOGIN_FAIL());
     }
 };
 
 export const logout = () => (dispatch) => {
-    localStorage.removeItem('token');
-    if (sessionStorage.getItem('verified'))
-        sessionStorage.removeItem('verified');
+    localStorage.removeItem(TOKEN_NAME);
+    if (sessionStorage.getItem(VERIFICATION_TOKEN_NAME))
+        sessionStorage.removeItem(VERIFICATION_TOKEN_NAME);
     dispatch(LOGOUT());
 };
 
@@ -80,12 +83,12 @@ export const forgotPassword =
                 values
             );
 
+            handleLoading(false);
             toast.success(result.data.message);
             handleIsCodeSent();
         } catch (err) {
-            errResponse(err);
-        } finally {
             handleLoading(false);
+            errResponse(err);
         }
     };
 
@@ -96,16 +99,16 @@ export const resetPassword =
 
             await axios.patch(API_ENDPOINTS.AUTH.RESET_PASSWORD, values);
 
+            handleLoading(false);
             handleIsPasswordChanged();
         } catch (err) {
-            errResponse(err);
-        } finally {
             handleLoading(false);
+            errResponse(err);
         }
     };
 
 export const generateMasterPassword =
-    (values, handleLoading, push) => async (dispatch) => {
+    (values, handleLoading, navigateTo) => async (dispatch) => {
         try {
             handleLoading(true);
 
@@ -118,13 +121,13 @@ export const generateMasterPassword =
             if (response.status !== 201 && !response.data)
                 return toast.error(MESSAGES.SOMETHING_WRONG);
 
+            handleLoading(false);
             sessionStorage.setItem('verified', response.data.token);
-            push(ROUTES.DEFAULT);
+            navigateTo(ROUTES.DEFAULT);
         } catch (err) {
+            handleLoading(false);
             if (err.response) return toast.error(err.response.data.message);
             toast.error(err.message);
-        } finally {
-            handleLoading(false);
         }
     };
 
@@ -142,12 +145,12 @@ export const verifyMasterPassword =
             if (response.status !== 200 && !response.data)
                 return toast.error(MESSAGES.SOMETHING_WRONG);
 
+            handleLoading(false);
             sessionStorage.setItem('verified', response.data.token);
             push(ROUTES.DEFAULT);
         } catch (err) {
+            handleLoading(false);
             if (err.response) return toast.error(err.response.data.message);
             toast.error(err.message);
-        } finally {
-            handleLoading(false);
         }
     };
