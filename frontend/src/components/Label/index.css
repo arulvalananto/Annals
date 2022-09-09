@@ -1,0 +1,7 @@
+@tailwind components;
+
+@layer components {
+  .label {
+    @apply text-xs mb-1 text-gray-600;
+  }
+}

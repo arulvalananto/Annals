@@ -1,0 +1,10 @@
+@tailwind components;
+
+@layer components {
+  .back-button {
+    @apply p-2 bg-tertiary flex items-center justify-center w-10 h-10 text-black rounded transform cursor-pointer hover:scale-90;
+  }
+  .back-button-icon {
+    @apply transform translate-x-1;
+  }
+}

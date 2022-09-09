@@ -1,0 +1,19 @@
+@tailwind components;
+
+@layer components {
+  .description {
+    @apply text-xs text-gray-400 mt-3;
+  }
+  .button-container {
+    @apply flex mt-5 text-sm;
+  }
+  .button {
+    @apply px-4 py-2 rounded shadow;
+  }
+  .cancel {
+    @apply button bg-bgdark;
+  }
+  .delete {
+    @apply button bg-primary ml-2;
+  }
+}

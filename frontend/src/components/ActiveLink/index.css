@@ -1,0 +1,11 @@
+@tailwind components;
+
+
+@layer components {
+  .link {
+    @apply p-5 select-none py-2 mb-3 text-sm rounded-md transition duration-500 ease-in-out hover:bg-primary transform hover:-translate-y-1 hover:scale-110;
+  }
+  .active-link {
+    @apply bg-primary rounded-md;
+  }
+}

@@ -1,0 +1,17 @@
+@tailwind components;
+
+@layer components {
+  .drawer {
+      @apply flex flex-col w-64 font-poppins;
+  }
+  .border-hover:hover {
+      border-left: 5px solid #4b24bf;
+      transition: all 0.4s ease-in;
+  }
+  .drawer-link {
+      @apply p-5 my-3 font-bold flex items-center border-hover;
+  }
+  .logout {
+      @apply p-5 font-bold flex items-center duration-200 border-hover;
+  }
+}

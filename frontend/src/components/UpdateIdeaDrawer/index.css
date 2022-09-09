@@ -1,0 +1,22 @@
+@tailwind components;
+
+@layer components {
+  .drawer {
+    @apply hover:text-yellow-500 transform hover:scale-105 w-10;
+  }
+  .title {
+    @apply p-5 text-3xl font-bold uppercase;
+  }
+  .form-container {
+    @apply flex flex-col p-5 w-64 sm:w-96;
+  }
+  .form-group {
+    @apply flex flex-col mb-4;
+  }
+  .label {
+    @apply text-xs mb-1 text-gray-600;
+  }
+  .input {
+    @apply px-4 py-3 text-sm bg-bgdark outline-none transition-all focus:border-primary border-2 border-opacity-0 rounded focus:border-opacity-100;
+  }
+}
