@@ -1,16 +1,18 @@
 import React from 'react';
-import { Formik } from 'formik';
+import { Formik, Form } from 'formik';
 
-const Form = ({ initialValues, validationSchema, onSubmit, children }) => {
+const CustomForm = (props) => {
+    const { children, className, initialValues, onSubmit, validationSchema } =
+        props;
     return (
         <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={onSubmit}
         >
-            {() => <>{children}</>}
+            {() => <Form className={className}>{children}</Form>}
         </Formik>
     );
 };
 
-export default React.memo(Form);
+export default React.memo(CustomForm);

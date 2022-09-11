@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect, Route } from 'react-router';
 
-import { ROUTES } from '../utils/routes';
+import { ROUTES } from '../utils/constants';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
     const { isLoggedIn } = useSelector((state) => state.auth);

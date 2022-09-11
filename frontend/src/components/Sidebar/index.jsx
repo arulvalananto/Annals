@@ -4,9 +4,9 @@ import { Settings, ExitToApp } from '@mui/icons-material';
 
 import './index.css';
 import ActiveLink from '../ActiveLink';
-import { ROUTES } from '../../utils/routes';
 import logo from '../../assets/logo-title.png';
-import menuItems from '../../data/DashboardDrawerItems';
+import { DRAWER_MENU_ITEMS } from '../../utils/constants';
+import { MESSAGES, ROUTES } from '../../utils/constants';
 import { logout } from '../../store/actions/auth.actions';
 
 const Sidebar = () => {
@@ -17,9 +17,9 @@ const Sidebar = () => {
     return (
         <div className="sidebar-container">
             <div className="sidebar">
-                <img src={logo} alt="Annals Logo" className="logo" />
+                <img src={logo} alt={MESSAGES.LOGO} className="logo" />
                 <div className="link">
-                    {menuItems.map(({ to, Icon, title }) => (
+                    {DRAWER_MENU_ITEMS.map(({ to, Icon, title }) => (
                         <ActiveLink
                             to={to}
                             Icon={Icon}

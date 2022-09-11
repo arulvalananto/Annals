@@ -7,7 +7,7 @@ import {
     DELETE_PERSONAL_DATA,
     UPDATE_PERSONAL_DATA,
 } from '../reducers/personal.reducer';
-import { ROUTES } from '../../utils/routes';
+import { ROUTES } from '../../utils/constants';
 import { errResponse } from '../../utils/helpers';
 import { API_ENDPOINTS } from '../../api/constants';
 

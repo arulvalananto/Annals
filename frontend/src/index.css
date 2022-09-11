@@ -64,9 +64,6 @@
     .flex-center-none {
         @apply flex items-center;
     }
-    .clip-path {
-            clip-path: polygon(0 0, 67% 0, 100% 100%, 0% 100%);
-    }
     .custom-input::-webkit-calendar-picker-indicator {
         background: url('./assets/calender.png') center/80% no-repeat;
         width: 15px;

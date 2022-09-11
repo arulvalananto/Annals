@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 
-import { ROUTES } from '../utils/routes';
+import { ROUTES } from '../utils/constants';
 
 const PublicRoute = ({ component: Component, restricted, ...rest }) => {
     const { isLoggedIn } = useSelector((state) => state.auth);

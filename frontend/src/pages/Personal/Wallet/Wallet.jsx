@@ -2,7 +2,7 @@ import React from 'react';
 import QRCode from 'qrcode.react';
 import { ContentPaste, Delete } from '@mui/icons-material';
 
-import { walletRows } from '../../../utils/constants';
+import { LINKS } from '../../../utils/constants';
 import IconButton from '../../../components/IconButton';
 
 const Wallet = ({ cryptoWallet, handleDeleteMode }) => {
@@ -23,7 +23,7 @@ const Wallet = ({ cryptoWallet, handleDeleteMode }) => {
                     <QRCode value={publicAddress} size={64} level="M" />
                 </>
             )}
-            {walletRows.map(({ title, select }, index) => {
+            {LINKS.WALLET.map(({ title, select }, index) => {
                 return (
                     cryptoWallet[select] && (
                         <div key={index}>

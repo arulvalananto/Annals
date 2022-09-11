@@ -10,7 +10,7 @@ const DeleteConfirmModal = ({ yes, no, visible }) => {
         <Modal onClose={no} visible={visible}>
             <div>
                 <DeleteOutlineSharp fontSize="large" className="mb-3" />
-                <h1 className="text-xl">Are You Sure?</h1>
+                <h1 className="text-xl">{MESSAGES.TO_CONTINUE}</h1>
                 <p className="description">{MESSAGES.DELETE_CONFIRMATION}</p>
                 <div className="button-container">
                     <button className="cancel" type="button" onClick={no}>

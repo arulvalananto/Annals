@@ -18,7 +18,7 @@ import {
     changeFocus,
     fetchDashboardData,
 } from '../../store/actions/dashboard.actions';
-import { homeLinks } from '../../utils/constants';
+import { LINKS } from '../../utils/constants';
 import IconButton from '../../components/IconButton';
 
 const Home = () => {
@@ -125,7 +125,7 @@ const Home = () => {
                 </div>
             </div>
             <div className="px-5 flex flex-col gap-3 mb-4">
-                {homeLinks.map(({ to, content, Icon }, index) => (
+                {LINKS.HOME.map(({ to, content, Icon }, index) => (
                     <Link
                         key={index}
                         to={to}

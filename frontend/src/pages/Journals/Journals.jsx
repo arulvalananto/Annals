@@ -5,10 +5,10 @@ import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { ROUTES } from '../../utils/constants';
 import SkeletonLoader from '../../components/SkeletonLoader';
 import { fetchJournals } from '../../store/actions/journals.action';
 import { SORT_JOURNAL } from '../../store/reducers/journals.reducer';
-import { ROUTES } from '../../utils/routes';
 
 const Journals = () => {
     const dispatch = useDispatch();

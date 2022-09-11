@@ -1,7 +1,6 @@
 import toast from 'react-hot-toast';
 
 import axios from '../../api/axios';
-import { ROUTES } from '../../utils/routes';
 import { errResponse } from '../../utils/helpers';
 import {
     API_ENDPOINTS,
@@ -9,7 +8,7 @@ import {
     VERIFICATION_TOKEN_NAME,
 } from '../../api/constants';
 import { LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT } from '../reducers/auth.reducer';
-import { MESSAGES } from '../../utils/constants';
+import { MESSAGES, ROUTES } from '../../utils/constants';
 
 export const register =
     (credentials, handleLoading, navigateTo) => async (dispatch) => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
 import { Form } from 'formik';
 import { Edit } from '@mui/icons-material';
@@ -7,13 +7,12 @@ import { useHistory, useParams } from 'react-router-dom';
 
 import Label from '../../../components/Label';
 import Input from '../../../components/Input';
-import { ROUTES } from '../../../utils/routes';
 import Button from '../../../components/Button';
+import { ROUTES } from '../../../utils/constants';
 import CustomForm from '../../../components/Form';
 import BackButton from '../../../components/BackButton';
 import IconButton from '../../../components/IconButton';
-import { cardInputs } from '../../../data/PersonalInputs';
-import { cardValidationSchema } from '../../../utils/formSchema';
+import { INPUT_DATA, SCHEMA } from '../../../utils/forms';
 import { updateCard } from '../../../store/actions/personal.actions';
 import { selectCard } from '../../../store/reducers/personal.reducer';
 
@@ -62,11 +61,11 @@ const CardView = () => {
                     accountHolderName: card?.accountHolderName,
                     expiry: card?.expiry,
                 }}
-                validationSchema={cardValidationSchema}
+                validationSchema={SCHEMA.PERSONAL.CARD}
                 onSubmit={handleUpdate}
             >
                 <Form>
-                    {cardInputs.map(
+                    {INPUT_DATA.CARD.map(
                         (
                             { label, required, type, placeholder, name },
                             index

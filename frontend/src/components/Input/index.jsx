@@ -24,7 +24,7 @@ const Input = ({
     const changeType = () => type === 'password' && setShow(!show);
 
     return (
-        <div className="">
+        <div className="input-container">
             <label className="relative">
                 <input
                     type={show ? 'text' : type}

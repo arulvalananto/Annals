@@ -1,0 +1,25 @@
+@tailwind components;
+
+@layer components {
+  .master-password {
+    @apply w-screen h-screen bg-mildgray flex flex-col items-center justify-center relative;
+  }
+  .logo {
+    @apply w-40 h-40 object-cover;
+  }
+  .input {
+    @apply px-4 py-3 text-sm bg-mildgray outline-none transition-all focus:border-tertiary border-2 rounded focus:border-opacity-100 w-96 border-gray-700 text-white;
+  }
+  .input-secondary {
+    @apply px-4 py-3 text-sm bg-mildgray outline-none transition-all focus:border-secondary border-2 rounded focus:border-opacity-100 w-96 border-gray-700 text-white;
+  }
+  .button {
+    @apply bg-tertiary w-full sm:w-96;
+  }
+  .button-secondary {
+    @apply bg-secondary w-full sm:w-96;
+  }
+  .logout {
+    @apply absolute top-0 right-0 text-white rounded text-lg m-5 px-4 py-2 hover:text-danger;
+  }
+}

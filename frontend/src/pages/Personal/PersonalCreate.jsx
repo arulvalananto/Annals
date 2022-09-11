@@ -7,12 +7,12 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 
+import FORM_DATA, { tabs } from '../../utils/forms';
 import Label from '../../components/Label';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import CustomForm from '../../components/Form';
 import BackButton from '../../components/BackButton';
-import panels, { tabs } from '../../data/PersonalInputs';
 import { createPersonalData } from '../../store/actions/personal.actions';
 
 const CustomTab = withStyles({
@@ -50,7 +50,7 @@ const PersonalCreate = () => {
                             ))}
                         </TabList>
                     </Box>
-                    {panels.map(
+                    {FORM_DATA.map(
                         (
                             {
                                 value,

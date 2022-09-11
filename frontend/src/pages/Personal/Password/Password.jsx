@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { HighlightOff, ContentPaste, Visibility } from '@mui/icons-material';
 
-import { ROUTES } from '../../../utils/routes';
+import { ROUTES } from '../../../utils/constants';
 import IconButton from '../../../components/IconButton';
 
 const Password = ({

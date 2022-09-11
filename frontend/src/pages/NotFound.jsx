@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { ROUTES } from '../utils/routes';
-import { MESSAGES } from '../utils/constants';
+import { MESSAGES, ROUTES } from '../utils/constants';
 
 const NotFound = () => {
     return (

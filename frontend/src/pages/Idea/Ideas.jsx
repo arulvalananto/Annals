@@ -9,16 +9,17 @@ import {
     deleteIdea,
 } from '../../store/actions/ideas.action';
 import { classNames } from '../../utils/helpers';
-import { initialState } from '../../utils/constants';
 import UpdateIdeaDrawer from '../../components/UpdateIdeaDrawer';
 import DeleteConfirmModal from '../../components/DeleteConfirmModal';
+
+const INITIAL_STATE = { title: '', content: '' };
 
 const Ideas = () => {
     const dispatch = useDispatch();
     const { docs, synced } = useSelector((state) => state.ideas);
     const { isLoading } = useSelector((state) => state.loader);
 
-    const [idea, setIdea] = useState(initialState?.idea);
+    const [idea, setIdea] = useState(INITIAL_STATE);
     const [isDeleteMode, setIsDeleteMode] = useState(false);
     const [selectedDeleteId, setSelectedDeleteId] = useState('');
 
@@ -27,7 +28,7 @@ const Ideas = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch]);
 
-    const clearFields = () => setIdea(initialState);
+    const clearFields = () => setIdea(INITIAL_STATE);
 
     const handleChange = (e) => {
         const { name, value } = e.target;

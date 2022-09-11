@@ -6,7 +6,7 @@ import { CircularProgress } from '@mui/material';
 import BackButton from '../..//components/BackButton';
 import DeleteConfirmModal from '../../components/DeleteConfirmModal';
 import { deletePersonalData } from '../../store/actions/personal.actions';
-import { ROUTES } from '../../utils/routes';
+import { ROUTES } from '../../utils/constants';
 
 const PersonalTemplate = ({ title, name, Component }) => {
     const { push } = useHistory();

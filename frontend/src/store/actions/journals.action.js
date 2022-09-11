@@ -6,8 +6,7 @@ import {
     FETCHED_JOURNALS,
     UPDATED_JOURNAL,
 } from '../reducers/journals.reducer';
-import { ROUTES } from '../../utils/routes';
-import { MESSAGES } from '../../utils/constants';
+import { MESSAGES, ROUTES } from '../../utils/constants';
 import { errResponse } from '../../utils/helpers';
 import { API_ENDPOINTS } from '../../api/constants';
 import { setLoading, clearLoading } from './loader.actions';

@@ -5,7 +5,7 @@ import { Menu, Logout } from '@mui/icons-material';
 
 import './index.css';
 import Drawer from '../Drawer';
-import menuItems from '../../data/DashboardDrawerItems';
+import { DRAWER_MENU_ITEMS } from '../../utils/constants';
 import { logout } from '../../store/actions/auth.actions';
 
 const DashboardDrawer = () => {
@@ -14,7 +14,7 @@ const DashboardDrawer = () => {
     return (
         <Drawer Icon={Menu}>
             <div className="drawer">
-                {menuItems.map(({ to, Icon, title }) => (
+                {DRAWER_MENU_ITEMS.map(({ to, Icon, title }) => (
                     <Link key={to} to={to} className="drawer-link">
                         <Icon />
                         <p className="ml-3">{title}</p>

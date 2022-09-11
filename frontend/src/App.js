@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Toaster } from 'react-hot-toast';
 
 import Loader from './components/Loader';
-import { ROUTES } from './utils/routes';
 import SignIn from './pages/Auth/SignIn';
 import SignUp from './pages/Auth/SignUp';
 import Dashboard from './pages/Dashboard';
+import { ROUTES } from './utils/constants';
 import Welcome from './pages/Auth/Welcome';
 import { TOKEN_NAME } from './api/constants';
 import PublicRoute from './routes/PublicRoute';

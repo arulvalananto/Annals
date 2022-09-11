@@ -3,8 +3,7 @@ import { Search, Add } from '@mui/icons-material';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { ROUTES } from '../../utils/routes';
-import { personalLinks } from '../../utils/constants';
+import { LINKS, ROUTES } from '../../utils/constants';
 import SkeletonLoader from '../../components/SkeletonLoader';
 import { fetchPersonalData } from '../../store/actions/personal.actions';
 
@@ -49,7 +48,7 @@ const Personal = () => {
                 {initialLoading ? (
                     <SkeletonLoader />
                 ) : (
-                    personalLinks.map(({ title, color, name }, index) => (
+                    LINKS.PERSONAL.map(({ title, color, name }, index) => (
                         <Link
                             key={index}
                             to={`${ROUTES.PERSONAL}/${name}`}

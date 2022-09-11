@@ -3,7 +3,7 @@ import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { Delete, Edit } from '@mui/icons-material';
 
-import { ROUTES } from '../../../utils/routes';
+import { ROUTES } from '../../../utils/constants';
 import IconButton from '../../../components/IconButton';
 import { ReactComponent as Chip } from '../../../assets/credit-card-chip.svg';
 

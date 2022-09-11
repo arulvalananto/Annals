@@ -3,7 +3,7 @@ import moment from 'moment';
 import { useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router';
 
-import { ROUTES } from '../../utils/routes';
+import { ROUTES } from '../../utils/constants';
 import TextEditor from '../../components/TextEditor';
 import BackButton from '../../components/BackButton';
 

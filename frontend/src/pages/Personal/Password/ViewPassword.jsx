@@ -7,14 +7,12 @@ import { useHistory, useParams } from 'react-router-dom';
 
 import Label from '../../../components/Label';
 import Input from '../../../components/Input';
-import { ROUTES } from '../../../utils/routes';
 import Button from '../../../components/Button';
 import CustomForm from '../../../components/Form';
 import IconButton from '../../../components/IconButton';
 import BackButton from '../../../components/BackButton';
-import { viewPasswordInputs } from '../../../utils/constants';
-import { passwordInputs } from '../../../data/PersonalInputs';
-import { passwordValidationSchema } from '../../../utils/formSchema';
+import { LINKS, ROUTES } from '../../../utils/constants';
+import { INPUT_DATA, SCHEMA } from '../../../utils/forms';
 import { updatePassword } from '../../../store/actions/personal.actions';
 import { selectPassword } from '../../../store/reducers/personal.reducer';
 
@@ -62,11 +60,11 @@ const ViewPassword = () => {
                     password: password?.password,
                     url: password?.url,
                 }}
-                validationSchema={passwordValidationSchema}
+                validationSchema={SCHEMA.PERSONAL.PASSWORD}
                 onSubmit={handleSubmit}
             >
                 <Form>
-                    {passwordInputs.map(
+                    {INPUT_DATA.PASSWORD.map(
                         (
                             { label, required, type, placeholder, name },
                             index
@@ -94,7 +92,7 @@ const ViewPassword = () => {
                         )
                     )}
                     <div className="flex flex-col gap-3">
-                        {viewPasswordInputs.map(({ label, name }, index) => (
+                        {LINKS.VIEW_PASSWORD.map(({ label, name }, index) => (
                             <div className="flex flex-col" key={index}>
                                 <Label className="capitalize">{label}</Label>
                                 <p
