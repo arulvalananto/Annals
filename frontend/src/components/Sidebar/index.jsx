@@ -17,8 +17,8 @@ const Sidebar = () => {
     return (
         <div className="sidebar-container">
             <div className="sidebar">
-                <img src={logo} alt={MESSAGES.LOGO} className="logo" />
-                <div className="link">
+                <img src={logo} alt={MESSAGES.LOGO} className="sidebar-logo" />
+                <div className="sidebar-link">
                     {DRAWER_MENU_ITEMS.map(({ to, Icon, title }) => (
                         <ActiveLink
                             to={to}
@@ -28,7 +28,7 @@ const Sidebar = () => {
                         />
                     ))}
                 </div>
-                <div className="link">
+                <div className="sidebar-link">
                     <ActiveLink
                         to={ROUTES.SETTINGS}
                         title="Settings"
@@ -36,10 +36,10 @@ const Sidebar = () => {
                     />
                     <button
                         type="button"
-                        className="logout"
+                        className="sidebar-logout"
                         onClick={handleLogout}
                     >
-                        <p className="logout-icon">
+                        <p className="sidebar-logout-icon">
                             <ExitToApp size={16} className="mr-3" />
                             <span>Log out</span>
                         </p>

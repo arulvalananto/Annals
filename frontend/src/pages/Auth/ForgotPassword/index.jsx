@@ -41,18 +41,25 @@ const ForgotPassword = () => {
             <div className="bg-layer-2"></div>
             <div className="bg-layer-3"></div>
             <div className="bg-layer-4"></div>
-            <div className="forgot-password">
+            <div className="w-screen lg:w-1/2 bg-opacity-90 shadow backdrop-blur-lg fixed top-0 left-0 h-screen z-50 text-white p-10 flex flex-col justify-center">
                 <div>
-                    <img alt={MESSAGES.LOGO} className="logo" src={logo} />
+                    <img
+                        alt={MESSAGES.LOGO}
+                        className="w-24 h-24 mb-10 object-contain"
+                        src={logo}
+                    />
                 </div>
                 {isUpdated ? (
                     <div>
                         <h2 className="text-4xl">
                             {MESSAGES.FORGOT_CHANGE_SUCCESS}
                         </h2>
-                        <p className="navigation-link">
+                        <p className="text-darkgray text-sm mt-4">
                             <span>Redirect to</span>
-                            <Link className="link" to={ROUTES.SIGN_IN}>
+                            <Link
+                                className="text-secondary mx-1"
+                                to={ROUTES.SIGN_IN}
+                            >
                                 Login
                             </Link>
                             ?
@@ -60,7 +67,7 @@ const ForgotPassword = () => {
                     </div>
                 ) : (
                     <>
-                        <h1 className="code-message">
+                        <h1 className="text-white text-4xl sm:text-5xl font-bold mb-4">
                             {isCodeSent
                                 ? MESSAGES.CODE_REQUEST
                                 : MESSAGES.FORGOT_PASSWORD}
@@ -71,7 +78,10 @@ const ForgotPassword = () => {
                             ) : (
                                 <>
                                     <span>Want to go back?</span>
-                                    <Link to={ROUTES.SIGN_IN} className="login">
+                                    <Link
+                                        to={ROUTES.SIGN_IN}
+                                        className="text-secondary text-lg ml-1"
+                                    >
                                         Login
                                     </Link>{' '}
                                 </>
@@ -88,13 +98,13 @@ const ForgotPassword = () => {
                                     type="text"
                                     placeholder="Enter email address"
                                     name="email"
-                                    className="input"
+                                    className="border-2 border-darkgray text-black w-full focus:border-primary"
                                 />
                                 <Button
                                     type="submit"
                                     title="Submit"
                                     loading={loading}
-                                    className="submit"
+                                    className="bg-primary text-white w-full p-3 mt-5"
                                 />
                             </Form>
                         ) : (
@@ -112,25 +122,25 @@ const ForgotPassword = () => {
                                     type="text"
                                     placeholder="Enter Verification Code"
                                     name="code"
-                                    className="input"
+                                    className="border-2 border-darkgray text-black w-full focus:border-primary"
                                 />
                                 <Input
                                     type="password"
                                     placeholder="Enter New Password"
                                     name="password"
-                                    className="input"
+                                    className="border-2 border-darkgray text-black w-full focus:border-primary"
                                 />
                                 <Input
                                     type="password"
                                     placeholder="Re-type New Password"
                                     name="confirmPassword"
-                                    className="input"
+                                    className="border-2 border-darkgray text-black w-full focus:border-primary"
                                 />
                                 <Button
                                     type="submit"
                                     title="Reset"
                                     loading={loading}
-                                    className="reset"
+                                    className="bg-secondary text-white w-full p-3 mt-5"
                                 />
                             </Form>
                         )}

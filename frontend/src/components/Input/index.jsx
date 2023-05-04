@@ -19,7 +19,9 @@ const Input = ({
         useFormikContext();
 
     const condition = type === 'password';
-    const style = `${errors[name] && touched[name] && 'error'} ${className}`;
+    const style = `${
+        errors[name] && touched[name] && 'input-error'
+    } ${className}`;
 
     const changeType = () => type === 'password' && setShow(!show);
 
@@ -39,7 +41,7 @@ const Input = ({
                 {condition && (
                     <IconButton
                         Icon={show ? VisibilityOff : Visibility}
-                        className={`icon text-${iconColor}`}
+                        className={`input-icon text-${iconColor}`}
                         onClick={changeType}
                     />
                 )}

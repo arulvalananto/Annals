@@ -8,8 +8,8 @@ import DashboardDrawer from '../DashboardDrawer';
 const TopBar = () => {
     return (
         <div className="top-bar">
-            <img src={logo} alt={MESSAGES.LOGO} className="logo" />
-            <div className="drawer">
+            <img src={logo} alt={MESSAGES.LOGO} className="top-bar-logo" />
+            <div className="top-bar-drawer">
                 <DashboardDrawer />
             </div>
         </div>

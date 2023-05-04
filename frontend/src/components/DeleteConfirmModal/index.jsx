@@ -11,12 +11,22 @@ const DeleteConfirmModal = ({ yes, no, visible }) => {
             <div>
                 <DeleteOutlineSharp fontSize="large" className="mb-3" />
                 <h1 className="text-xl">{MESSAGES.TO_CONTINUE}</h1>
-                <p className="description">{MESSAGES.DELETE_CONFIRMATION}</p>
-                <div className="button-container">
-                    <button className="cancel" type="button" onClick={no}>
+                <p className="delete-confirm-description">
+                    {MESSAGES.DELETE_CONFIRMATION}
+                </p>
+                <div className="delete-confirm-button-container">
+                    <button
+                        className="delete-confirm-cancel-button"
+                        type="button"
+                        onClick={no}
+                    >
                         Cancel
                     </button>
-                    <button className="delete" type="button" onClick={yes}>
+                    <button
+                        className="delete-confirm-delete-button"
+                        type="button"
+                        onClick={yes}
+                    >
                         Delete
                     </button>
                 </div>

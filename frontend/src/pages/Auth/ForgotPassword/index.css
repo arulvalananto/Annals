@@ -16,31 +16,4 @@
     .bg-layer-4 {
         @apply w-screen lg:w-2/3 h-screen fixed top-0 left-0 lg:bg-bglight clip-path;
     }
-    .forgot-password {
-        @apply w-screen lg:w-1/2 bg-opacity-90 shadow backdrop-blur-lg fixed top-0 left-0 h-screen z-50 text-white p-10 flex flex-col justify-center;
-    }
-    .logo {
-        @apply w-24 h-24 mb-10 object-contain;
-    }
-    .navigation-link {
-        @apply text-darkgray text-sm mt-4;
-    }
-    .link {
-        @apply text-secondary mx-1;
-    }
-    .code-message {
-        @apply text-white text-4xl sm:text-5xl font-bold mb-4;
-    }
-    .login {
-        @apply text-secondary text-lg ml-1;
-    }
-    .input {
-        @apply border-2 border-darkgray text-black w-full focus:border-primary;
-    }
-    .submit {
-        @apply bg-primary text-white w-full p-3 mt-5;
-    }
-    .reset {
-        @apply bg-secondary text-white w-full p-3 mt-5;
-    }
 }

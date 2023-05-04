@@ -4,6 +4,7 @@ import { useHistory } from 'react-router';
 import { CircularProgress } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 
+import './index.css';
 import { MESSAGES } from '../../utils/constants';
 import { addJournal, updateJournal } from '../../store/actions/journals.action';
 
@@ -36,7 +37,7 @@ const TextEditor = ({ mode = '', contentText = '', id = '' }) => {
     return (
         <form onSubmit={mode === 'edit' ? handleUpdate : handleSubmit}>
             <textarea
-                className={`editor ${mode && 'h-screen'}`}
+                className={`custom-text-editor ${mode && 'h-screen'}`}
                 onKeyDown={handleKeyDown}
                 onChange={handleChange}
                 value={content}
@@ -47,7 +48,11 @@ const TextEditor = ({ mode = '', contentText = '', id = '' }) => {
             {mode !== 'view' &&
             content.trim().length > 0 &&
             content.trim() !== contentText ? (
-                <button type="submit" className="submit" disabled={isLoading}>
+                <button
+                    type="submit"
+                    className="custom-text-editor-submit"
+                    disabled={isLoading}
+                >
                     {isLoading ? (
                         <CircularProgress size="20px" color="inherit" />
                     ) : (

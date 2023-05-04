@@ -10,7 +10,7 @@ const ActiveLink = ({ title, to, Icon }) => {
     });
 
     return (
-        <Link to={to} className={`link ${match && 'active-link'}`}>
+        <Link to={to} className={`nav-link ${match && 'active-link'}`}>
             <p className="flex-center-none">
                 <Icon size={16} className="mr-3" />
                 <span>{title}</span>

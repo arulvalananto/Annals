@@ -20,7 +20,10 @@ const DashboardDrawer = () => {
                         <p className="ml-3">{title}</p>
                     </Link>
                 ))}
-                <button onClick={() => dispatch(logout())} className="logout">
+                <button
+                    onClick={() => dispatch(logout())}
+                    className="drawer-logout"
+                >
                     <Logout />
                     <span className="ml-3">Logout</span>
                 </button>

@@ -36,12 +36,19 @@ const Drawer = (props) => {
                 onClose={toggleDrawer}
                 onOpen={toggleDrawer}
             >
-                <button type="button" className="cancel" onClick={toggleDrawer}>
+                <button
+                    type="button"
+                    className="drawer-cancel-button"
+                    onClick={toggleDrawer}
+                >
                     <Clear />
                 </button>
                 <>{children}</>
                 {onSubmit && (
-                    <button className="update" onClick={handleSubmit}>
+                    <button
+                        className="drawer-update-button"
+                        onClick={handleSubmit}
+                    >
                         Update
                     </button>
                 )}

@@ -7,7 +7,11 @@ const Button = ({ title, className = '', type, loading = false }) => {
     const style = loading ? `loading ${className}` : className;
 
     return (
-        <button className={`button ${style}`} type={type} disabled={loading}>
+        <button
+            className={`custom-button ${style}`}
+            type={type}
+            disabled={loading}
+        >
             {loading ? <CircularProgress size="20px" color="inherit" /> : title}
         </button>
     );

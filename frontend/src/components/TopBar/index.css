@@ -4,10 +4,10 @@
   .top-bar {
     @apply flex items-center justify-between xl:justify-around px-4;
   }
-  .logo {
+  .top-bar-logo {
     @apply w-24 h-20 object-contain select-none block xl:hidden;
   }
-  .drawer {
+  .top-bar-drawer {
     @apply shadow rounded block xl:hidden p-2 border-gray-50;
   }
 }

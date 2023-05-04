@@ -27,13 +27,13 @@ const UpdateIdeaDrawer = ({ selectedId }) => {
         <Drawer
             Icon={EditIcon}
             fontSize="14px"
-            className="drawer"
+            className="update-idea-drawer"
             onSubmit={handleUpdate}
         >
-            <h3 className="title">Update Idea</h3>
-            <div className="form-container">
-                <div className="form-group">
-                    <label htmlFor="title" className="label">
+            <h3 className="update-idea-title">Update Idea</h3>
+            <div className="update-idea-form-container">
+                <div className="update-idea-form-group">
+                    <label htmlFor="title" className="update-idea-label">
                         Title
                     </label>
                     <input
@@ -41,15 +41,15 @@ const UpdateIdeaDrawer = ({ selectedId }) => {
                         name="title"
                         value={idea.title}
                         onChange={handleChange}
-                        className="input"
+                        className="update-idea-input"
                     />
                 </div>
-                <div className="form-group">
-                    <label htmlFor="content" className="label">
+                <div className="update-idea-form-group">
+                    <label htmlFor="content" className="update-idea-label">
                         Content
                     </label>
                     <textarea
-                        className="resize-none input"
+                        className="resize-none update-idea-input"
                         value={idea.content}
                         name="content"
                         onChange={handleChange}

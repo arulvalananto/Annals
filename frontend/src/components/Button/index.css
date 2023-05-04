@@ -4,7 +4,7 @@
   .loading {
     @apply bg-darkgray text-white cursor-not-allowed p-3;
   }
-  .button {
+  .custom-button {
     @apply shadow p-2 px-8 rounded rounded-tl-xl rounded-br-xl flex items-center justify-center;
   }
 }
