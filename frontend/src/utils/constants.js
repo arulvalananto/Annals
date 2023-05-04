@@ -2,31 +2,21 @@ import React from 'react';
 import {
     Add,
     History,
-    Home,
+    Home as HomeIcon,
     ImportContacts,
     Lock,
     WbIncandescent,
     Task,
 } from '@mui/icons-material';
 
+import Home from '../pages/Home/Home';
 const FocusHistory = React.lazy(() => import('../pages/Focus/FocusHistory'));
 const Journals = React.lazy(() => import('../pages/Journals/Journals'));
 const JournalAdd = React.lazy(() => import('../pages/Journals/JournalAdd'));
 const JournalEdit = React.lazy(() => import('../pages/Journals/JournalEdit'));
 const JournalView = React.lazy(() => import('../pages/Journals/JournalView'));
-const Personal = React.lazy(() => import('../pages/Personal/Personal'));
-const Passwords = React.lazy(() => import('../pages/Personal/Password'));
-const Cards = React.lazy(() => import('../pages/Personal/Card'));
-const CardView = React.lazy(() => import('../pages/Personal/Card/CardView'));
-const CryptoWallets = React.lazy(() => import('../pages/Personal/Wallet'));
 const Ideas = React.lazy(() => import('../pages/Idea/Ideas'));
 const Tasks = React.lazy(() => import('../pages/Task/Tasks'));
-const ViewPassword = React.lazy(() =>
-    import('../pages/Personal/Password/ViewPassword')
-);
-const PersonalCreate = React.lazy(() =>
-    import('../pages/Personal/PersonalCreate')
-);
 
 export const ROUTES = {
     DEFAULT: '/',
@@ -41,12 +31,6 @@ export const ROUTES = {
     JOURNAL_VIEW: '/journals/view',
     JOURNAL_EDIT: '/journals/edit',
     JOURNAL_ADD: '/journals/add',
-    PERSONAL: '/personal',
-    PERSONAL_CREATE: '/personal/create',
-    PERSONAL_PASSWORD_VIEW: '/personal/passwords',
-    PERSONAL_PASSWORDS: '/personal/passwords',
-    PERSONAL_WALLETS: '/personal/cryptoWallets',
-    PERSONAL_CARDS: '/personal/cards',
     IDEAS: '/ideas',
     TASKS: '/tasks',
     FOCUS: '/focus/log',
@@ -95,25 +79,11 @@ export const LINKS = {
         },
         { Icon: History, to: ROUTES.FOCUS, content: 'History of focus' },
     ],
-    PERSONAL: [
-        { title: 'Passwords', name: 'passwords', color: 'primary' },
-        { title: 'Crypto Wallets', name: 'cryptoWallets', color: 'secondary' },
-        { title: 'Cards', name: 'cards', color: 'tertiary' },
-    ],
-    VIEW_PASSWORD: [
-        { name: 'createdAt', label: 'created at' },
-        { name: 'updatedAt', label: 'modified at' },
-    ],
-    WALLET: [
-        { title: 'private address', select: 'privateAddress' },
-        { title: 'pass phrase', select: 'passPhrase' },
-    ],
 };
 
 export const DRAWER_MENU_ITEMS = [
-    { to: ROUTES.DEFAULT, Icon: Home, title: 'Dashboard' },
+    { to: ROUTES.DEFAULT, Icon: HomeIcon, title: 'Dashboard' },
     { to: ROUTES.JOURNALS, Icon: ImportContacts, title: 'Journals' },
-    { to: ROUTES.PERSONAL, Icon: Lock, title: 'Personal' },
     { to: ROUTES.IDEAS, Icon: WbIncandescent, title: 'Ideas' },
     { to: ROUTES.TASKS, Icon: Task, title: 'Tasks' },
 ];
@@ -124,13 +94,6 @@ export const DASHBOARD_ROUTES = [
     { path: `${ROUTES.JOURNAL_EDIT}/:id`, component: JournalEdit },
     { path: ROUTES.JOURNAL_ADD, component: JournalAdd },
     { path: ROUTES.JOURNALS, component: Journals },
-    { path: ROUTES.PERSONAL_CREATE, component: PersonalCreate },
-    { path: `${ROUTES.PERSONAL_PASSWORD_VIEW}/:id`, component: ViewPassword },
-    { path: ROUTES.PERSONAL_PASSWORDS, component: Passwords },
-    { path: ROUTES.PERSONAL_WALLETS, component: CryptoWallets },
-    { path: `${ROUTES.PERSONAL_CARDS}/:id`, component: CardView },
-    { path: ROUTES.PERSONAL_CARDS, component: Cards },
-    { path: ROUTES.PERSONAL, component: Personal },
     { path: ROUTES.IDEAS, component: Ideas },
     { path: ROUTES.TASKS, component: Tasks },
     { path: ROUTES.DEFAULT, component: Home, exact: true },

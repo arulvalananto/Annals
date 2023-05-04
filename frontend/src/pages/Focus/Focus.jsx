@@ -19,7 +19,10 @@ const Focus = ({ doc: { date, agenda } }) => {
                 {isShrink && (
                     <ul className="select-none">
                         {agenda.map((agendum) => (
-                            <li className="ml-8 mt-2 flex items-center">
+                            <li
+                                key={agendum}
+                                className="ml-8 mt-2 flex items-center"
+                            >
                                 <FilterTiltShift />{' '}
                                 <span className="ml-3">{agendum}</span>
                             </li>

@@ -42,6 +42,7 @@ const UpdateIdeaDrawer = ({ selectedId }) => {
                         value={idea.title}
                         onChange={handleChange}
                         className="update-idea-input"
+                        autoCorrect="false"
                     />
                 </div>
                 <div className="update-idea-form-group">
@@ -49,7 +50,7 @@ const UpdateIdeaDrawer = ({ selectedId }) => {
                         Content
                     </label>
                     <textarea
-                        className="resize-none update-idea-input"
+                        className="resize-none update-idea-input update-idea-textarea"
                         value={idea.content}
                         name="content"
                         onChange={handleChange}

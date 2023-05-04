@@ -2,9 +2,9 @@
 
 @layer components {
     .drawer-cancel-button {
-        @apply px-5 p-2 shadow-sm transform hover:scale-95 hover:text-gray-500;
+        @apply px-5 p-2 shadow-sm transform hover:scale-95 hover:text-gray-500 text-white;
     }
     .drawer-update-button {
-        @apply px-4 py-2 text-sm bg-primary rounded mx-4 transform hover:scale-95;
+        @apply px-4 py-2 text-sm bg-primary rounded mx-4 transform hover:scale-95 text-white;
     }
 }

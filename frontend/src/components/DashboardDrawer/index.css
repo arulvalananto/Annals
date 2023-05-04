@@ -9,9 +9,9 @@
         transition: all 0.4s ease-in;
     }
     .drawer-link {
-        @apply p-5 my-3 font-bold flex items-center drawer-border-hover;
+        @apply p-5 mt-3 font-bold flex items-center drawer-border-hover text-white;
     }
     .drawer-logout {
-        @apply p-5 font-bold flex items-center duration-200 drawer-border-hover;
+        @apply p-5 font-bold flex items-center duration-200 drawer-border-hover text-white;
     }
 }

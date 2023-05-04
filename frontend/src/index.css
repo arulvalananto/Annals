@@ -68,7 +68,7 @@
         background: url('./assets/calender.png') center/80% no-repeat;
         width: 15px;
     }
-    
+
     .card-columns {
         column-count: 1;
         column-gap: 1.5rem;
@@ -364,4 +364,9 @@
             column-count: 1;
         }
     }
+}
+
+.MuiDrawer-paper {
+    background: #000000 !important;
+    border-left: 1px solid #1d1c1c !important;
 }

@@ -15,13 +15,12 @@ const Drawer = (props) => {
         if (event && type === 'keydown' && (key === 'Tab' || key === 'Shift')) {
             return;
         }
-
         setAnchor(!anchor);
     };
 
     const handleSubmit = () => {
         onSubmit();
-        toggleDrawer();
+        setAnchor(false);
     };
 
     return (

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './index.css';
+
 const Modal = ({ children, onClose, visible = false }) => {
     if (!visible) return null;
 

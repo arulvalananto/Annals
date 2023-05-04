@@ -18,7 +18,7 @@ const FocusHistory = () => {
     useEffect(() => {
         if (!synced) dispatch(fetchFocusHistory(setInitialLoading));
         else setInitialLoading(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     if (initialLoading) return <Loader />;
@@ -30,8 +30,8 @@ const FocusHistory = () => {
                 {MESSAGES.FOCUS.TITLE}
             </h2>
             <div className="">
-                {docs.map((doc) => (
-                    <Focus doc={doc} />
+                {docs.map((doc, index) => (
+                    <Focus key={index} doc={doc} />
                 ))}
             </div>
         </div>

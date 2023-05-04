@@ -65,14 +65,14 @@ const Tasks = () => {
                         <Tooltip title="Due date">
                             <div className="p-2 bg-black cursor-pointer text-white rounded flex items-center gap-2">
                                 <AccessAlarmOutlined fontSize="small" />{' '}
-                                21-10-2021
+                                21-10-2023
                             </div>
                         </Tooltip>
                         <input type="checkbox" className="p-2 border-none" />
                     </div>
                     <p className="font-sunrise text-xl">
-                        Import Values from Implemented task and implemented
-                        random text it's not making sound
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Reprehenderit nostrum expedita repellat.
                     </p>
                 </div>
             </div>

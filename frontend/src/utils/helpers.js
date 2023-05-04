@@ -6,7 +6,16 @@ export const classNames = (condition, yes, no) => {
 };
 
 export const errResponse = (err) => {
-    if (err.response) return toast.error(err.response.data.message);
+    console.log();
+    if (err.response) {
+        if (err.response.data.message === 'Already Exist') {
+            return toast.error(
+                'One journal per day, but you can update it anytime! Keep writing!'
+            );
+        } else {
+            return toast.error(err.response.data.message);
+        }
+    }
     toast.error(err.message);
 };
 export const greet = () => {

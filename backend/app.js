@@ -7,9 +7,7 @@ const authRoutes = require('./routes/auth.routes');
 const journalRoutes = require('./routes/journal.routes');
 const ideaRoutes = require('./routes/idea.routes');
 const focusRoutes = require('./routes/focus.routes');
-const personalRoutes = require('./routes/personal.routes');
 const commonRoutes = require('./routes/common.routes');
-const adminRoutes = require('./routes/admin.routes');
 const errorController = require('./controllers/error.controller');
 
 const app = express();
@@ -38,8 +36,6 @@ app.use('/api/v1/common', commonRoutes);
 app.use('/api/v1/journals', journalRoutes);
 app.use('/api/v1/ideas', ideaRoutes);
 app.use('/api/v1/focuses', focusRoutes);
-app.use('/api/v1/personal', personalRoutes);
-app.use('/api/v1/admin', adminRoutes);
 
 app.use('*', (req, res) => {
     res.status(404).json({

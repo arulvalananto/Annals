@@ -20,6 +20,7 @@ import {
 } from '../../store/actions/dashboard.actions';
 import { LINKS } from '../../utils/constants';
 import IconButton from '../../components/IconButton';
+import { toast } from 'react-hot-toast';
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -38,14 +39,27 @@ const Home = () => {
                 fetchDashboardData(setInitialLoading, setFocus, setInitialState)
             );
         else setInitialLoading(false);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    const handleOnChangeFocusText = (e) => {
+        if (e.target.value?.trim()?.length > 50) {
+            return;
+        }
+        setFocus(e.target.value);
+    };
 
     const clearChangeFocus = () => {
         setIsFocusMode(false);
         setFocus(initialState);
     };
 
-    const handleChangeFocus = () => {
+    const handleSubmitFocus = () => {
+        if (focus.trim().length > 50) {
+            toast.error('Focus must be less than 50 characters');
+            return;
+        }
+
         setIsFocusMode(false);
         dispatch(changeFocus(focus, setIsLoading, setInitialState));
     };
@@ -97,31 +111,40 @@ const Home = () => {
                         ) : (
                             <div className="flex items-center gap-2">
                                 <Tooltip title="clear focus" placement="top">
-                                    <p onClick={clearChangeFocus}>
+                                    <div onClick={clearChangeFocus}>
                                         <IconButton
                                             Icon={Clear}
                                             fontSize="0.8rem"
                                         />
-                                    </p>
+                                    </div>
                                 </Tooltip>
                                 <Tooltip title="set focus" placement="top">
-                                    <p onClick={handleChangeFocus}>
+                                    <div onClick={handleSubmitFocus}>
                                         <IconButton
                                             Icon={Done}
                                             fontSize="0.8rem"
                                         />
-                                    </p>
+                                    </div>
                                 </Tooltip>
                             </div>
                         )}
                     </h1>
-                    <textarea
-                        className="text-sm mt-1 overflow-scroll h-16 cursor-pointer bg-transparent w-full select-none p-1 placeholder-black border-none border-2 focus:border-black outline-none"
-                        value={focus}
-                        placeholder="-"
-                        onChange={(e) => setFocus(e.target.value)}
-                        disabled={!isFocusMode}
-                    />
+                    <div className="relative w-100 h-100">
+                        <textarea
+                            className="text-sm mt-1 overflow-scroll h-16 cursor-pointer bg-transparent w-full select-none p-1 placeholder-black border-none border-2 focus:border-black outline-none"
+                            value={focus}
+                            placeholder="-"
+                            onChange={handleOnChangeFocusText}
+                            disabled={!isFocusMode}
+                        />
+                        <p
+                            className={`absolute bottom-0 right-0 text-xs ${
+                                !isFocusMode && 'hidden'
+                            }`}
+                        >
+                            {focus?.trim()?.length} / 50
+                        </p>
+                    </div>
                 </div>
             </div>
             <div className="px-5 flex flex-col gap-3 mb-4">
