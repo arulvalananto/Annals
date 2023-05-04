@@ -25,6 +25,7 @@ const Dashboard = () => {
                 dispatch(getCurrentUser(setInitialLoading));
             else setInitialLoading(false);
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

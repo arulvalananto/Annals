@@ -30,6 +30,7 @@ function App() {
         else setLoading(false);
     };
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(fetchUser, []);
 
     if (loading) return <InitialLoader />;

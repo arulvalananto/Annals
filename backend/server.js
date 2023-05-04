@@ -1,11 +1,5 @@
-require('dotenv').config({ path: './config/.env' });
+require('dotenv').config({ path: '.env' });
 require('./db');
-
-process.on('uncaughtException', (err) => {
-    console.log(err.name);
-    console.log(err.message);
-    console.log(err.stack);
-});
 
 const app = require('./app');
 

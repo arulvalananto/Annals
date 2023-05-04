@@ -35,9 +35,13 @@ const MasterPassword = () => {
     };
 
     return (
-        <div className="master-password">
-            <img src={logo} alt={MESSAGES.LOGO} className="logo" />
-            {!user.hasMasterPassword ? (
+        <div className="w-screen h-screen bg-mildgray flex flex-col items-center justify-center relative">
+            <img
+                src={logo}
+                alt={MESSAGES.LOGO}
+                className="w-40 h-40 object-cover"
+            />
+            {!user?.hasMasterPassword ? (
                 <Form
                     initialValues={{ password: '', confirmPassword: '' }}
                     validationSchema={SCHEMA.CREATE_MASTER_PASSWORD}
@@ -47,19 +51,21 @@ const MasterPassword = () => {
                     <Input
                         type="password"
                         name="password"
+                        iconColor="white"
                         placeholder="master password"
-                        className="input"
+                        className="px-4 py-3 text-sm bg-mildgray outline-none transition-all focus:border-tertiary border-2 rounded focus:border-opacity-100 w-96 border-gray-700 text-white"
                     />
                     <Input
                         type="password"
                         name="confirmPassword"
+                        iconColor="white"
                         placeholder="confirm master password"
-                        className="input"
+                        className="px-4 py-3 text-sm bg-mildgray outline-none transition-all focus:border-tertiary border-2 rounded focus:border-opacity-100 w-96 border-gray-700 text-white"
                     />
                     <Button
                         title="Submit"
                         type="submit"
-                        className="button"
+                        className="bg-tertiary w-full sm:w-96"
                         loading={loading}
                     />
                 </Form>
@@ -74,18 +80,22 @@ const MasterPassword = () => {
                         name="password"
                         placeholder="Enter your master password"
                         iconColor="white"
-                        className="input-secondary"
+                        className="px-4 py-3 text-sm bg-mildgray outline-none transition-all focus:border-secondary border-2 rounded focus:border-opacity-100 w-96 border-gray-700 text-white"
                     />
                     <Button
                         title="Submit"
                         type="submit"
-                        className="button-secondary"
+                        className="bg-secondary w-full sm:w-96"
                         loading={loading}
                     />
                 </Form>
             )}
             <Tooltip title="Logout">
-                <button type="button" onClick={handleLogout} className="logout">
+                <button
+                    type="button"
+                    onClick={handleLogout}
+                    className="absolute top-0 right-0 text-white rounded text-lg m-5 px-4 py-2 hover:text-danger bg-transparent"
+                >
                     <LogoutIcon fontSize="large" />
                 </button>
             </Tooltip>

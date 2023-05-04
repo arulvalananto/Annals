@@ -1,22 +1,22 @@
 @tailwind components;
 
 @layer components {
-  .shake {
-    animation: shake 0.2s ease-in-out;
-    transform: translate3d(0, 0, 0);
-    backface-visibility: hidden;
-    perspective: 1000px;
-  }
-  .input-container {
-    @apply mb-5 flex flex-col;
-  }
-  .input {
-    @apply p-3 rounded outline-none invalid:border-red-500 disabled:cursor-not-allowed disabled:bg-gray-900;
-  }
-  .error {
-    @apply border-2 border-red-500 shake;
-  }
-  .icon {
-    @apply absolute top-1/2 object-contain right-4 transform -translate-x-1/2 -translate-y-1/2;
-  }
+    .shake {
+        animation: shake 0.2s ease-in-out;
+        transform: translate3d(0, 0, 0);
+        backface-visibility: hidden;
+        perspective: 1000px;
+    }
+    .input-container {
+        @apply mb-5 flex flex-col;
+    }
+    .input {
+        @apply p-3 rounded outline-none invalid:border-red-500 disabled:cursor-not-allowed disabled:bg-gray-900;
+    }
+    .error {
+        @apply border-2 border-red-500 shake;
+    }
+    .icon {
+        @apply absolute top-1/2 object-contain right-4 transform -translate-x-1/2 -translate-y-1/2;
+    }
 }

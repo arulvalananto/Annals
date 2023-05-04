@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Lock } from '@mui/icons-material';
 
-import logo from '../../assets/logo.png';
+import logo from '../../../assets/logo.png';
 import Form from '../../../components/Form';
 import { SCHEMA } from '../../../utils/forms';
 import Input from '../../../components/Input';
@@ -20,23 +20,32 @@ const SignIn = () => {
     const handleSubmit = (values) => dispatch(login(values, setLoading, push));
 
     return (
-        <div className="container">
-            <div className="left">
+        <div className="grid grid-cols-5 w-screen h-screen font-poppins select-none">
+            <div className="hidden xl:block col-span-2 bg-primary bg-signin-cover bg-cover p-5">
                 <Link to={ROUTES.WELCOME}>
-                    <img src={logo} alt={MESSAGES.LOGO} className="logo" />
+                    <img
+                        src={logo}
+                        alt={MESSAGES.LOGO}
+                        className="w-16 h-16 object-contain"
+                    />
                 </Link>
             </div>
-            <div className="right">
-                <nav className="header">
+            <div className="col-span-5 xl:col-span-3 bg-white p-3 sm:p-10 w-full h-screen overflow-auto">
+                <nav className="w-full flex items-center justify-end">
                     <span className="mr-5">New User?</span>
                     <Link to={ROUTES.SIGN_UP}>
-                        <Button title="Sign Up" className="link" />
+                        <Button
+                            title="Sign Up"
+                            className="bg-secondary text-white"
+                        />
                     </Link>
                 </nav>
                 <div className="mt-20">
-                    <h1 className="title">Sign In</h1>
-                    <p className="subtitle">Welcome back😍</p>
-                    <div className="form-container">
+                    <h1 className="text-4xl font-bold text-center mb-2 uppercase">
+                        Sign In
+                    </h1>
+                    <p className="text-center text-xl">Welcome back😍</p>
+                    <div className="sm:w-3/4 m-auto mt-10">
                         <Form
                             initialValues={{ email: '', password: '' }}
                             validationSchema={SCHEMA.SIGN_IN}
@@ -46,18 +55,18 @@ const SignIn = () => {
                                 type="email"
                                 name="email"
                                 placeholder="Email Address"
-                                className="input"
+                                className="border-2 border-darkgray bg-gray-50 mb-2 focus:border-primary w-full"
                             />
                             <Input
                                 type="password"
                                 name="password"
                                 placeholder="Password"
-                                className="input"
+                                className="border-2 border-darkgray bg-gray-50 mb-2 focus:border-primary w-full"
                                 Icon={Lock}
                             />
                             <Link
                                 to={ROUTES.FORGOT_PASSWORD}
-                                className="forgot-link"
+                                className="underline text-primary mb-2 flex justify-end outline-none"
                             >
                                 Forgot Password ?{' '}
                             </Link>
@@ -65,7 +74,7 @@ const SignIn = () => {
                                 type="submit"
                                 title="Sign In"
                                 loading={loading}
-                                className="button"
+                                className="bg-primary text-white w-full p-3 mt-5"
                             />
                         </Form>
                     </div>

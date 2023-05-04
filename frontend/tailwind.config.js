@@ -29,7 +29,7 @@ module.exports = {
             backgroundImage: {
                 'signin-cover': "url('./assets/signin_cover.jpg')",
                 'forgotPassword-cover':
-                    "url('./assets/forgotPassword_cover.jpg')",
+                    "url('../../../assets/forgotPassword_cover.jpg')",
             },
             animation: {
                 shake: 'shake 1s ease-in-out',

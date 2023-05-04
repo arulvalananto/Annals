@@ -2,27 +2,31 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, ArrowDownward, ArrowRightAlt } from '@mui/icons-material';
 
-import logo from '../../assets/logo.png';
+import logo from '../../../assets/logo.png';
 import Button from '../../../components/Button';
 import Drawer from '../../../components/Drawer';
 import { MESSAGES, ROUTES } from '../../../utils/constants';
 
 const FEATURES = ['Tasks', 'Journals', 'Passwords', 'Ideas'];
 
-const Landing = () => {
+const Welcome = () => {
     return (
-        <div className="container">
-            <nav className="header">
+        <div className="mt-0 px-10 lg:px-40 font-poppins bg-white select-none">
+            <nav className="flex justify-between items-center px-3 sm:p-0 pt-5">
                 <Link to={ROUTES.WELCOME}>
-                    <img src={logo} alt={MESSAGES.LOGO} className="logo" />
+                    <img
+                        src={logo}
+                        alt={MESSAGES.LOGO}
+                        className="w-14 h-14 object-contain"
+                    />
                 </Link>
-                <div className="link-wrapper">
-                    <div className="link-container">
+                <div className="lg:block hidden">
+                    <div className="flex items-center justify-center gap-4">
                         <Link to={ROUTES.SIGN_IN}>
                             <Button
                                 title="Sign In"
                                 type="button"
-                                className="link"
+                                className="bg-primary mr-4 text-white"
                             />
                         </Link>
                         <Link to={ROUTES.SIGN_UP}>
@@ -30,9 +34,9 @@ const Landing = () => {
                         </Link>
                     </div>
                 </div>
-                <div className="drawer-container">
+                <div className="p-2 shadow rounded hover:opacity-90 block lg:hidden">
                     <Drawer Icon={Menu}>
-                        <div className="drawer-links">
+                        <div className="p-3 flex flex-col w-48 font-poppins">
                             <Link to={ROUTES.SIGN_IN} className="p-5 font-bold">
                                 Sign In <ArrowRightAlt />
                             </Link>
@@ -44,18 +48,29 @@ const Landing = () => {
                 </div>
             </nav>
             <main>
-                <section className="hero-container" id="showcase">
-                    <h1 className="title">Ensures</h1>
-                    <p className="subtitle">Your Safety</p>
+                <section
+                    className="mt-40 mb-20 font-bold text-center"
+                    id="showcase"
+                >
+                    <h1 className="lg:text-6xl text-3xl text-tertiary mb-4">
+                        Ensures
+                    </h1>
+                    <p className="lg:text-8xl text-6xl">Your Safety</p>
                 </section>
-                <div className="popup">
-                    <ArrowDownward fontSize="large" className="popup-animate" />
+                <div className="w-full text-center mt-40">
+                    <ArrowDownward
+                        fontSize="large"
+                        className="animate-bounce w-6 h-6;"
+                    />
                 </div>
-                <section id="features" className="features">
+                <section
+                    id="features"
+                    className="flex flex-col xl:flex-row items-center justify-between mt-80"
+                >
                     {FEATURES.map((feature) => (
-                        <div className="feature-container">
-                            <h1 className="feature-title">{feature}</h1>
-                            <p className="description">{MESSAGES.SAMPLE}</p>
+                        <div className="xl:mr-4" key={feature}>
+                            <h1 className="font-bold text-2xl">{feature}</h1>
+                            <p className="mt-3 break-all">{MESSAGES.SAMPLE}</p>
                         </div>
                     ))}
                 </section>
@@ -64,4 +79,4 @@ const Landing = () => {
     );
 };
 
-export default Landing;
+export default Welcome;

@@ -18,6 +18,7 @@ const FocusHistory = () => {
     useEffect(() => {
         if (!synced) dispatch(fetchFocusHistory(setInitialLoading));
         else setInitialLoading(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     if (initialLoading) return <Loader />;

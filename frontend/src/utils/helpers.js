@@ -6,10 +6,7 @@ export const classNames = (condition, yes, no) => {
 };
 
 export const errResponse = (err) => {
-    if (err.response)
-        return toast.error(err.response.data.message, {
-            duration: '6000',
-        });
+    if (err.response) return toast.error(err.response.data.message);
     toast.error(err.message);
 };
 export const greet = () => {
