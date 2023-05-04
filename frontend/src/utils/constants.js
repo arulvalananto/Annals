@@ -4,7 +4,6 @@ import {
     History,
     Home as HomeIcon,
     ImportContacts,
-    Lock,
     WbIncandescent,
     Task,
 } from '@mui/icons-material';
