@@ -1,72 +1,60 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Menu, ArrowDownward, ArrowRightAlt } from "@mui/icons-material";
-
-import logo from "../../../assets/logo.png";
-import Button from "../../../components/Button";
-import Drawer from "../../../components/Drawer";
-import { MESSAGES, ROUTES } from "../../../utils/constants";
-
-const FEATURES = ["Tasks", "Journals", "Passwords", "Ideas"];
+import logo from "../../../assets/logo.svg";
+import { IoMdLogIn } from "react-icons/io";
+import heroImage from "../../../assets/hero-image.png";
+import { IoMdArrowForward } from "react-icons/io";
 
 const Welcome = () => {
   return (
-    <div className="mt-0 px-10 lg:px-40 font-poppins bg-white select-none">
-      <nav className="flex justify-between items-center px-3 sm:p-0 pt-5">
-        <Link to={ROUTES.WELCOME}>
+    <div className="bg-black w-screen h-screen flex flex-col gap-3 p-5 rounded overflow-auto">
+      <div className="bg-[#CCCCFE] w-full h-full rounded-xl">
+        <div className="flex items-center justify-between p-5 md:px-10 relative">
           <img
             src={logo}
-            alt={MESSAGES.LOGO}
-            className="w-14 h-14 object-contain"
+            alt="Annals Logo"
+            className="w-12 h-12 md:w-24 md:h-24 object-contain"
           />
-        </Link>
-        <div className="lg:block hidden">
-          <div className="flex items-center justify-center gap-4">
-            <Link to={ROUTES.SIGN_IN}>
-              <Button
-                title="Sign In"
-                type="button"
-                className="bg-primary mr-4 text-white"
-              />
-            </Link>
-            <Link to={ROUTES.SIGN_UP}>
-              <Button title="Sign Up" type="button" />
+          <div className="font-poppins">
+            <Link
+              to="/sign-in"
+              className="uppercase bg-black text-[#C4FF59] px-4 md:px-10 py-2 rounded-full flex items-center gap-4"
+            >
+              <IoMdLogIn className="text-md md:text-lg" />
+              <span className="text-xs md:text-lg ">Sign In</span>
             </Link>
           </div>
         </div>
-        <div className="p-2 shadow rounded hover:opacity-90 block lg:hidden">
-          <Drawer Icon={Menu}>
-            <div className="p-3 flex flex-col w-48 font-poppins">
-              <Link to={ROUTES.SIGN_IN} className="p-5 font-bold">
-                Sign In <ArrowRightAlt />
-              </Link>
-              <Link to={ROUTES.SIGN_UP} className="p-5 font-bold">
-                Sign Up <ArrowRightAlt />
+        <div className="md:px-20 flex flex-col md:flex-row items-center md:gap-10 justify-center">
+          <div className="w-[250px] h-[250px] md:w-[750px] md:h-[750px]">
+            <img
+              src={heroImage}
+              alt="hero"
+              className="w-full h-full object-contain"
+            />
+          </div>
+          <div className="flex flex-col gap-2 md:gap-10 items-start">
+            <p className="text-md md:text-xl font-semibold font-rampart">
+              [All-in-one Personal Space]
+            </p>
+            <h1 className="text-2xl md:text-6xl font-bold flex flex-col font-poppins">
+              <span>Start spend</span>
+              <span>time with Annals</span>
+            </h1>
+            <div>
+              <Link
+                to="/sign-in"
+                className="uppercase bg-[#C4FF59] text-black px-4 md:px-10 py-2 text-lg rounded-full flex items-center gap-4"
+              >
+                <span className="font-poppins text-xs md:text-lg ">
+                  Get Started
+                </span>
+                <IoMdArrowForward className="-rotate-45 text-md md:text-lg" />
               </Link>
             </div>
-          </Drawer>
+          </div>
         </div>
-      </nav>
-      <main>
-        <section className="mt-40 mb-20 font-bold text-center" id="showcase">
-          <h1 className="lg:text-6xl text-3xl text-tertiary mb-4">Ensures</h1>
-          <p className="lg:text-8xl text-6xl">Your Safety</p>
-        </section>
-        <div className="w-full text-center mt-40">
-          <ArrowDownward fontSize="large" className="animate-bounce w-6 h-6;" />
-        </div>
-        <section
-          id="features"
-          className="flex flex-col xl:flex-row items-center justify-between mt-80"
-        >
-          {FEATURES.map((feature) => (
-            <div className="xl:mr-4" key={feature}>
-              <h1 className="font-bold text-2xl">{feature}</h1>
-              <p className="mt-3 break-all">{MESSAGES.SAMPLE}</p>
-            </div>
-          ))}
-        </section>
-      </main>
+      </div>
     </div>
   );
 };
