@@ -1,6 +1,11 @@
 const transformMessage = (message) => {
-  if (message.startsWith("E11000")) {
-    return "Already Exist";
+  if (message.startsWith("E11000") && message.includes("Annals.users")) {
+    return "User Already Exist";
+  } else if (
+    message.startsWith("E11000") &&
+    message.includes("Annals.journals")
+  ) {
+    return "One journal per day, but you can update it anytime! Keep writing!";
   }
   return message;
 };

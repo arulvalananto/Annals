@@ -1,22 +1,22 @@
 @tailwind components;
 
 @layer components {
-    .sidebar-container {
-        @apply hidden xl:block col-span-1 bg-bglight p-5 text-white sticky top-0 left-0 w-full h-screen;
-    }
-    .sidebar {
-        @apply flex flex-col justify-between w-full h-full;
-    }
-    .sidebar-logo {
-        @apply w-24 h-20 object-contain select-none;
-    }
-    .sidebar-link {
-        @apply flex flex-col;
-    }
-    .sidebar-logout {
-        @apply p-5 py-2 mb-2 rounded-md text-sm hover:bg-primary;
-    }
-    .sidebar-logout-icon {
-        @apply flex items-center select-none;
-    }
+  .sidebar-container {
+    @apply hidden xl:block col-span-1 bg-bglight p-5 text-white sticky top-0 left-0 w-full h-screen;
+  }
+  .sidebar {
+    @apply flex flex-col justify-between w-full h-full;
+  }
+  .sidebar-logo {
+    @apply w-24 h-20 object-contain select-none;
+  }
+  .sidebar-link {
+    @apply flex flex-col;
+  }
+  .sidebar-logout {
+    @apply p-5 py-2 mb-2 rounded-md text-sm hover:bg-primary;
+  }
+  .sidebar-logout-icon {
+    @apply flex items-center select-none;
+  }
 }

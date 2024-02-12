@@ -13,6 +13,8 @@ exports.getDashboardContent = catchAsync(async (req, res, next) => {
 
   const journals = await Journal.find({ createdBy: req.userId }).lean();
 
+  const ideas = await Journal.find({ createdBy: req.userId }).lean();
+
   // Tasks should be added here
   const focus = await Focus.findOne({
     date: {
@@ -24,6 +26,7 @@ exports.getDashboardContent = catchAsync(async (req, res, next) => {
   res.status(200).json({
     days: user.loginLogs.length,
     journals: journals.length,
+    ideas: ideas.length,
     focus:
       focus && focus.agenda.length ? focus.agenda[focus.agenda.length - 1] : "",
   });
