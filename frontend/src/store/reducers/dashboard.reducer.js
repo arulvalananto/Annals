@@ -9,6 +9,7 @@ const dashboardSlice = createSlice({
             days: 0,
             journals: 0,
             tasks: 0,
+            ideas: 0,
             focus: '',
         },
         focuses: {
